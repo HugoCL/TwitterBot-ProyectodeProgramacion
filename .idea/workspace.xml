@@ -111,7 +111,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/twitter4j-core-4.0.7.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Imagenes" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -121,6 +121,9 @@
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="TestZone" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\arxie\Documents\GitHub Kraken\TwitterBot-ProyectodeProgramacion\src\Imagenes" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -238,7 +241,7 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-      <workItem from="1565634071909" duration="2015000" />
+      <workItem from="1565634071909" duration="4421000" />
     </task>
     <servers />
   </component>
