@@ -111,7 +111,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Imagenes" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/pruebaaaaaa" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -138,7 +138,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main2">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -242,7 +242,8 @@
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1565634071909" duration="4769000" />
-      <workItem from="1565650485913" duration="1316000" />
+      <workItem from="1565650485913" duration="1759000" />
+      <workItem from="1566001805165" duration="3059000" />
     </task>
     <servers />
   </component>
