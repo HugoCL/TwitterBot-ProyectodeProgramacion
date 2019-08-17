@@ -23,44 +23,12 @@ public class TwitterBot {
 
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
-
         AccessToken acceso = new AccessToken(twitterAccessToken, twitterAccessTokenSecret);
-
         twitter.setOAuthAccessToken(acceso);
-
-        ArrayList<Status> statuses = new ArrayList<>();
-        int pageno = 1;
-
-        while(true) {
-            try {
-                System.out.println("getting tweets");
-                int size = statuses.size(); // actual tweets count we got
-                Paging page = new Paging(pageno, 200);
-                statuses.addAll(twitter.getUserTimeline("Ramos Overflow - BOT", page));
-                System.out.println("total got : " + statuses.size());
-
-                if (statuses.size() == size) {
-                    break;
-                } // we did not get new tweets so we have done the job
-                pageno++;
-
-            } catch (
-                    TwitterException e) {
-                System.err.print("Failed to search tweets: " + e.getMessage());
-            }
-        }
-
-        try {
-            for (Status t: statuses) {
-                System.out.println(t.getUser().getName() + ": " + t.getText()+ " " + t.getId());
-                twitter.retweetStatus(t.getId());
-            }
-        } catch (TwitterException e) {
-            System.err.print("Failed to search tweets: " + e.getMessage());
-        }
     }
 
     class Messages{
+
         public String PublicarTweet(String Tweet) throws TwitterException {
             Status status = twitter.updateStatus(Tweet);
             return status.getText();
@@ -70,16 +38,55 @@ public class TwitterBot {
             System.out.println("Se ha enviado un mensaje directo a @"+arroba+" El mensaje fue: "+MD.getText());
         }
     }
+
+
     class Feed{
-        public String ObtenerMensajes() {
-            throw new UnsupportedOperationException("Not supported yet.");
+
+        /***
+         * Permite la obtención de los tweets del timeline de la cuenta ingresada
+         * @return Lista con los tweets.
+         */
+        public ArrayList<Status> ObtenerMensajes()  {
+            ArrayList<Status> statuses = new ArrayList<>();
+            System.out.println("Obteniendo tweets");
+            for(int pageno = 1; true; pageno++) {
+                try {
+                    int size = statuses.size(); // actual tweets count we got
+                    Paging page = new Paging(pageno, 200);
+                    statuses.addAll(twitter.getHomeTimeline(page));
+
+                    if (statuses.size() == size) {
+                        System.out.println("total obtenido: " + statuses.size());
+                        break;
+                    }
+                } catch (TwitterException e) {
+                    System.err.print("Failed to search tweets: " + e.getMessage());
+                }
+                try {
+                    Thread.sleep(1000);
+                }catch(InterruptedException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+            return statuses;
         }
         public void Like() {
             throw new UnsupportedOperationException("Not supported yet.");
         }
-        public void Retweet() {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
 
+        /***
+         * Permite retweetear los tweets en el timline de la cuenta ingresada
+         * @throws TwitterException
+         */
+        public void Retweet() throws TwitterException {
+            ArrayList<Status> statuses = ObtenerMensajes();
+
+            for (Status t: statuses) {
+                System.out.println(t.getUser().getName()+": "+t.getText());
+                if (!t.isRetweeted()) {
+                    twitter.retweetStatus(t.getId());
+                }
+            }
+        }
     }
 }
