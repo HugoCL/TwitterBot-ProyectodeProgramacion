@@ -2,13 +2,16 @@ package Motor;
 
 import twitter4j.TwitterException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main3 {
-    public static void main(String[] args) throws TwitterException {
+    public static void main(String[] args) throws TwitterException, IOException {
         boolean exito = false;
         TwitterBot bot = new TwitterBot();
         bot.inicializarBot();
+        bot.OAuth();
+        /*
         TwitterBot.Messages mensajes = bot.new Messages();
         Scanner entrada = new Scanner(System.in);
         while(!exito){
@@ -24,6 +27,6 @@ public class Main3 {
                 exito = true;
             }
         }
-
+        */
     }
 }
