@@ -13,7 +13,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class Controller {
+public class TwittearController {
 
     private Twitter twitter;
 
