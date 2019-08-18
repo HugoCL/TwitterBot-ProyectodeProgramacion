@@ -2,8 +2,16 @@ package Motor;
 
 import java.io.*;
 
+/***
+ * Clase encargada de la administración de la sesión de una cuenta de Twitter
+ */
 public class adminSesion {
 
+    /***
+     * Método que Serializa la instancia de Twitter, lo que permite guardar todos los tokens de sesion
+     * @param bot Objeto de tipo TwitterBot que posee la instancia ya creada con todos sus parametros
+     * @throws IOException Excepcion en caso de problemas con el fichero
+     */
     public void Serializar(TwitterBot bot) throws IOException {
         FileOutputStream salida = new FileOutputStream("Sesion.out");
         ObjectOutputStream salidaO = new ObjectOutputStream(salida);
@@ -11,6 +19,10 @@ public class adminSesion {
         salidaO.writeObject(bot);
     }
 
+    /***
+     * Metodo que des-serializa la sesion guardada, si es que existiere
+     * @return Retorna la instancia serializada del Bot, null en caso contrario.
+     */
     public TwitterBot desSerializar(){
 
         try

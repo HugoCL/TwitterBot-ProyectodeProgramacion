@@ -6,24 +6,40 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.*;
 
-
+/***
+ * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
+ */
 public class TwitterBot implements Serializable {
 
     private Twitter twitter;
-    private String accessToken;
-    private String accessTokenS;
 
+    /***
+     * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
+     */
     public void inicializarBot() {
+        
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true);
+
+        // Consumer Key del Bot otorgado por la API de Twitter
         cb.setOAuthConsumerKey("y3rodATEKk9OopeZb3bJ49k7L");
         cb.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
+
+        // Se crea la instancia Twitter con los Tokens (Key) del Bot
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
+
     }
 
+    /***
+     * Metodo que permite iniciar sesion con cualquier cuenta de Twitter gracias a la autorizacion mediante OAuth.
+     * @throws TwitterException Excepcion por problemas tecnicos de Twitter
+     * @throws IOException Excepcion por problemas con archivos del programa
+     */
     public void OAuth() throws TwitterException, IOException {
         try{
+
+            //Se obtienen los tokens para solicitar autorizacion
             RequestToken rtoken = twitter.getOAuthRequestToken();
             System.out.println("Obteniendo Request Token para autorización");
             System.out.println("DEBUGEO");
@@ -31,12 +47,19 @@ public class TwitterBot implements Serializable {
             System.out.println("Request token secreto: "+rtoken.getTokenSecret());
             AccessToken atoken = null;
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+            //Ciclo que se realiza mientras no exista un Token que permita usar una cuenta
             while (atoken == null){
-                System.out.println("Abre el siguiente enlace en el navegador para autorizar el bot");
+
+                //Se muestra el URL que permite autorizar al Bot para el uso de la cuenta
+                System.out.println("Abre el siguiente enlace en el navegador para autorizar el Bot");
                 System.out.println(rtoken.getAuthorizationURL());
-                System.out.println("Si se muestra, ingresa el PIN para autorizar la app");
+
+                // Se lee el PIN otorgado por el enlace
+                System.out.println("Ingresa el PIN mostrado en la pagina para autorizar al Bot");
                 String PIN = br.readLine();
 
+                // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
                 try{
                     if (PIN.length() > 0){
                         atoken = twitter.getOAuthAccessToken(rtoken, PIN);
@@ -57,12 +80,14 @@ public class TwitterBot implements Serializable {
                     }
                 }
             }
-            accessToken = atoken.getToken();
-            accessTokenS = atoken.getTokenSecret();
+
+            // Prints de DEBUG para comprobar Token de Acceso
+            String accessToken = atoken.getToken();
+            String accessTokenS = atoken.getTokenSecret();
             System.out.println("Se obtuvo el token de acceso!");
             System.out.println("DEBUGEO");
-            System.out.println("Token de acceso: "+accessToken);
-            System.out.println("Token de acceso secreto: "+accessTokenS);
+            System.out.println("Token de acceso: "+ accessToken);
+            System.out.println("Token de acceso secreto: "+ accessTokenS);
 
         }
         catch (IllegalStateException ie){
@@ -74,17 +99,36 @@ public class TwitterBot implements Serializable {
 
     }
 
-
+    /***
+     * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
+     */
     class Messages{
+        /***
+         * Metodo que publica Tweets de texto simple
+         * @param Tweet String con el Tweet a publicar
+         * @return Retorna el Tweet que fue publicado
+         * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
+         */
         public String PublicarTweet(String Tweet) throws TwitterException {
             Status status = twitter.updateStatus(Tweet);
             return status.getText();
         }
+
+        /***
+         * Metodo que envia MD a personas usando su @.
+         * @param arroba Nombre de usuario al que se le enviara el MD. No se debe incluir el @
+         * @param texto String con el texto a enviar
+         * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
+         */
         public void EnviarMD(String arroba, String texto) throws TwitterException {
             DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
             System.out.println("Se ha enviado un mensaje directo a @"+arroba+" El mensaje fue: "+MD.getText());
         }
     }
+
+    /***
+     * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
+     */
     class Feed{
         public String ObtenerMensajes() {
             throw new UnsupportedOperationException("Not supported yet.");
