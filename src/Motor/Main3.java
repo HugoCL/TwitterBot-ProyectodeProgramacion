@@ -2,13 +2,26 @@ package Motor;
 
 import twitter4j.TwitterException;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Main3 {
-    public static void main(String[] args) throws TwitterException {
+    public static void main(String[] args) throws TwitterException, IOException {
+        TwitterBot bot = null;
         boolean exito = false;
-        TwitterBot bot = new TwitterBot();
-        bot.inicializarBot();
+        adminSesion adm = new adminSesion();
+        TwitterBot botSerializado = adm.desSerializar();
+        if (botSerializado == null){
+            bot = new TwitterBot();
+            bot.inicializarBot();
+            bot.OAuth();
+            adm.Serializar(bot);
+        }
+        else{
+            bot = botSerializado;
+        }
+        TwitterBot.Messages mensajes = bot.new Messages();
+        mensajes.PublicarTweet("Estoy probando la serialización x2");
+        /*
         TwitterBot.Messages mensajes = bot.new Messages();
         Scanner entrada = new Scanner(System.in);
         while(!exito){
@@ -24,6 +37,6 @@ public class Main3 {
                 exito = true;
             }
         }
-
+        */
     }
 }

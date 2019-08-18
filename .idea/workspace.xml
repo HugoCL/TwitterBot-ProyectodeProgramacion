@@ -3,15 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Interfaz/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Interfaz/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Motor/Main3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Motor/Main3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Motor/TwitterBot$Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Motor/TwitterBot$Messages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Motor/TwitterBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/Motor/TwitterBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/TestZone/motorBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion-/TestZone/motorBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/Main3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Main3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/TwitterBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/TwitterBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestZone/motorBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestZone/motorBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/adminSesion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/adminSesion.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,12 +100,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/twitter4j-core-4.0.7.jar!/" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
+    <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
