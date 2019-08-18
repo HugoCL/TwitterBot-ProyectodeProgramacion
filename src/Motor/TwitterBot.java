@@ -4,14 +4,14 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.SQLOutput;
+import java.io.*;
 
-public class TwitterBot {
+
+public class TwitterBot implements Serializable {
 
     private Twitter twitter;
+    private String accessToken;
+    private String accessTokenS;
 
     public void inicializarBot() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -42,7 +42,8 @@ public class TwitterBot {
                         atoken = twitter.getOAuthAccessToken(rtoken, PIN);
                     }
                     else{
-                        atoken = twitter.getOAuthAccessToken(rtoken);
+                        System.out.println("No se ingresó ningún PIN, intente nuevamente");
+                        rtoken = twitter.getOAuthRequestToken();
                     }
                 }
                 catch (TwitterException e){
@@ -50,15 +51,19 @@ public class TwitterBot {
                         System.out.println("Ocurrió un error al intentar obtener el token de acceso");
                     }
                     else{
+                        System.out.println("Ocurrió un problema al intentar obtener el token de acceso por un" +
+                                "error en la entrada");
                         e.printStackTrace();
                     }
                 }
-
             }
+            accessToken = atoken.getToken();
+            accessTokenS = atoken.getTokenSecret();
             System.out.println("Se obtuvo el token de acceso!");
             System.out.println("DEBUGEO");
-            System.out.println("Token de acceso: "+atoken.getToken());
-            System.out.println("Token de acceso secreto: "+atoken.getTokenSecret());
+            System.out.println("Token de acceso: "+accessToken);
+            System.out.println("Token de acceso secreto: "+accessTokenS);
+
         }
         catch (IllegalStateException ie){
             if (!twitter.getAuthorization().isEnabled()){
@@ -68,6 +73,7 @@ public class TwitterBot {
         }
 
     }
+
 
     class Messages{
         public String PublicarTweet(String Tweet) throws TwitterException {
