@@ -39,7 +39,6 @@ public class TwitterBot {
         }
     }
 
-
     class Feed{
 
         /***
@@ -70,12 +69,24 @@ public class TwitterBot {
             }
             return statuses;
         }
-        public void Like() {
-            throw new UnsupportedOperationException("Not supported yet.");
+
+        /***
+         * Permite agregar a faoritos todos los tweets del timeline de la cuenta asociada
+         * @throws TwitterException
+         */
+        public void Like() throws TwitterException {
+            ArrayList<Status> statuses = ObtenerMensajes();
+
+            for (Status t: statuses) {
+                System.out.println(t.getUser().getName()+": "+t.getText());
+                if (!t.isFavorited()) {
+                    twitter.createFavorite(t.getId());
+                }
+            }
         }
 
         /***
-         * Permite retweetear los tweets en el timline de la cuenta ingresada
+         * Permite retweetear todos los tweets en el timline de la cuenta ingresada
          * @throws TwitterException
          */
         public void Retweet() throws TwitterException {

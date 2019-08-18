@@ -10,6 +10,6 @@ public class Main3 {
         TwitterBot bot = new TwitterBot();
         bot.inicializarBot();
 
-        bot.new Feed().Retweet();
+        bot.new Feed().Like();
     }
 }
