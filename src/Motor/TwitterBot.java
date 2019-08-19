@@ -2,13 +2,10 @@ package Motor;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import twitter4j.auth.AccessToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.*;
 import java.util.ArrayList;
-
-public class TwitterBot {
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
@@ -20,14 +17,9 @@ public class TwitterBot implements Serializable {
     /***
      * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
      */
-    private String consumerKey = "y3rodATEKk9OopeZb3bJ49k7L",
-            consumerSecret = "eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0",
-            twitterAccessToken = "1160958881268473856-azR9gn8ajjf1EqlURcy6xjo4LxmjkJ",
-            twitterAccessTokenSecret = "UemukyzySFXAi9jBK9t3TO91tYZfT7cVsxSsPFGnu1i3n",
-            Tweet_ID = "1161699831909429248";
 
     public void inicializarBot() {
-        
+
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true);
 
@@ -35,15 +27,8 @@ public class TwitterBot implements Serializable {
         cb.setOAuthConsumerKey("y3rodATEKk9OopeZb3bJ49k7L");
         cb.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
 
-        // Se crea la instancia Twitter con los Tokens (Key) del Bot
-        cb.setOAuthConsumerKey(consumerKey);
-        cb.setOAuthConsumerSecret(consumerSecret);
-
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
-
-        AccessToken acceso = new AccessToken(twitterAccessToken, twitterAccessTokenSecret);
-        twitter.setOAuthAccessToken(acceso);
     }
 
     /***
@@ -52,19 +37,19 @@ public class TwitterBot implements Serializable {
      * @throws IOException Excepcion por problemas con archivos del programa
      */
     public void OAuth() throws TwitterException, IOException {
-        try{
+        try {
 
             //Se obtienen los tokens para solicitar autorizacion
             RequestToken rtoken = twitter.getOAuthRequestToken();
             System.out.println("Obteniendo Request Token para autorización");
             System.out.println("DEBUGEO");
-            System.out.println("Request token: "+rtoken.getToken());
-            System.out.println("Request token secreto: "+rtoken.getTokenSecret());
+            System.out.println("Request token: " + rtoken.getToken());
+            System.out.println("Request token secreto: " + rtoken.getTokenSecret());
             AccessToken atoken = null;
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
             //Ciclo que se realiza mientras no exista un Token que permita usar una cuenta
-            while (atoken == null){
+            while (atoken == null) {
 
                 //Se muestra el URL que permite autorizar al Bot para el uso de la cuenta
                 System.out.println("Abre el siguiente enlace en el navegador para autorizar el Bot");
@@ -75,20 +60,17 @@ public class TwitterBot implements Serializable {
                 String PIN = br.readLine();
 
                 // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
-                try{
-                    if (PIN.length() > 0){
+                try {
+                    if (PIN.length() > 0) {
                         atoken = twitter.getOAuthAccessToken(rtoken, PIN);
-                    }
-                    else{
+                    } else {
                         System.out.println("No se ingresó ningún PIN, intente nuevamente");
                         rtoken = twitter.getOAuthRequestToken();
                     }
-                }
-                catch (TwitterException e){
-                    if (401 == e.getStatusCode()){
+                } catch (TwitterException e) {
+                    if (401 == e.getStatusCode()) {
                         System.out.println("Ocurrió un error al intentar obtener el token de acceso");
-                    }
-                    else{
+                    } else {
                         System.out.println("Ocurrió un problema al intentar obtener el token de acceso por un" +
                                 "error en la entrada");
                         e.printStackTrace();
@@ -101,12 +83,11 @@ public class TwitterBot implements Serializable {
             String accessTokenS = atoken.getTokenSecret();
             System.out.println("Se obtuvo el token de acceso!");
             System.out.println("DEBUGEO");
-            System.out.println("Token de acceso: "+ accessToken);
-            System.out.println("Token de acceso secreto: "+ accessTokenS);
+            System.out.println("Token de acceso: " + accessToken);
+            System.out.println("Token de acceso secreto: " + accessTokenS);
 
-        }
-        catch (IllegalStateException ie){
-            if (!twitter.getAuthorization().isEnabled()){
+        } catch (IllegalStateException ie) {
+            if (!twitter.getAuthorization().isEnabled()) {
                 System.out.println("No se han configurado los tokens de OAuth");
                 System.exit(-1);
             }
@@ -117,17 +98,16 @@ public class TwitterBot implements Serializable {
     /***
      * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
      */
-    class Messages{
+    class Messages {
         /***
          * Metodo que publica Tweets de texto simple
          * @param Tweet String con el Tweet a publicar
-         * @return Retorna el Tweet que fue publicado
          * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
          */
 
-        public String PublicarTweet(String Tweet) throws TwitterException {
+        public void PublicarTweet(String Tweet) throws TwitterException {
             Status status = twitter.updateStatus(Tweet);
-            return status.getText();
+            status.getText();
         }
 
         /***
@@ -138,7 +118,7 @@ public class TwitterBot implements Serializable {
          */
         public void EnviarMD(String arroba, String texto) throws TwitterException {
             DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
-            System.out.println("Se ha enviado un mensaje directo a @"+arroba+" El mensaje fue: "+MD.getText());
+            System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
         }
     }
 
@@ -146,16 +126,16 @@ public class TwitterBot implements Serializable {
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
 
-    class Feed{
+    class Feed {
 
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
          * @return Lista con los tweets.
          */
-        public ArrayList<Status> ObtenerMensajes()  {
+        public ArrayList<Status> ObtenerMensajes() {
             ArrayList<Status> statuses = new ArrayList<>();
             System.out.println("Obteniendo tweets");
-            for(int pageno = 1; true; pageno++) {
+            for (int pageno = 1; true; pageno++) {
                 try {
                     int size = statuses.size(); // actual tweets count we got
                     Paging page = new Paging(pageno, 200);
@@ -170,7 +150,7 @@ public class TwitterBot implements Serializable {
                 }
                 try {
                     Thread.sleep(1000);
-                }catch(InterruptedException e) {
+                } catch (InterruptedException e) {
                     System.err.println(e.getMessage());
                 }
             }
@@ -184,8 +164,8 @@ public class TwitterBot implements Serializable {
         public void Like() throws TwitterException {
             ArrayList<Status> statuses = ObtenerMensajes();
 
-            for (Status t: statuses) {
-                System.out.println(t.getUser().getName()+": "+t.getText());
+            for (Status t : statuses) {
+                System.out.println(t.getUser().getName() + ": " + t.getText());
                 if (!t.isFavorited()) {
                     twitter.createFavorite(t.getId());
                 }
@@ -199,8 +179,8 @@ public class TwitterBot implements Serializable {
         public void Retweet() throws TwitterException {
             ArrayList<Status> statuses = ObtenerMensajes();
 
-            for (Status t: statuses) {
-                System.out.println(t.getUser().getName()+": "+t.getText());
+            for (Status t : statuses) {
+                System.out.println(t.getUser().getName() + ": " + t.getText());
                 if (!t.isRetweeted()) {
                     twitter.retweetStatus(t.getId());
                 }
