@@ -2,9 +2,13 @@ package Motor;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+import twitter4j.auth.AccessToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.*;
+import java.util.ArrayList;
+
+public class TwitterBot {
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
@@ -16,6 +20,12 @@ public class TwitterBot implements Serializable {
     /***
      * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
      */
+    private String consumerKey = "y3rodATEKk9OopeZb3bJ49k7L",
+            consumerSecret = "eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0",
+            twitterAccessToken = "1160958881268473856-azR9gn8ajjf1EqlURcy6xjo4LxmjkJ",
+            twitterAccessTokenSecret = "UemukyzySFXAi9jBK9t3TO91tYZfT7cVsxSsPFGnu1i3n",
+            Tweet_ID = "1161699831909429248";
+
     public void inicializarBot() {
         
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -26,9 +36,14 @@ public class TwitterBot implements Serializable {
         cb.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
 
         // Se crea la instancia Twitter con los Tokens (Key) del Bot
+        cb.setOAuthConsumerKey(consumerKey);
+        cb.setOAuthConsumerSecret(consumerSecret);
+
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
 
+        AccessToken acceso = new AccessToken(twitterAccessToken, twitterAccessTokenSecret);
+        twitter.setOAuthAccessToken(acceso);
     }
 
     /***
@@ -109,6 +124,7 @@ public class TwitterBot implements Serializable {
          * @return Retorna el Tweet que fue publicado
          * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
          */
+
         public String PublicarTweet(String Tweet) throws TwitterException {
             Status status = twitter.updateStatus(Tweet);
             return status.getText();
@@ -129,16 +145,66 @@ public class TwitterBot implements Serializable {
     /***
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
+
     class Feed{
-        public String ObtenerMensajes() {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-        public void Like() {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-        public void Retweet() {
-            throw new UnsupportedOperationException("Not supported yet.");
+
+        /***
+         * Permite la obtención de los tweets del timeline de la cuenta ingresada
+         * @return Lista con los tweets.
+         */
+        public ArrayList<Status> ObtenerMensajes()  {
+            ArrayList<Status> statuses = new ArrayList<>();
+            System.out.println("Obteniendo tweets");
+            for(int pageno = 1; true; pageno++) {
+                try {
+                    int size = statuses.size(); // actual tweets count we got
+                    Paging page = new Paging(pageno, 200);
+                    statuses.addAll(twitter.getHomeTimeline(page));
+
+                    if (statuses.size() == size) {
+                        System.out.println("total obtenido: " + statuses.size());
+                        break;
+                    }
+                } catch (TwitterException e) {
+                    System.err.print("Failed to search tweets: " + e.getMessage());
+                }
+                try {
+                    Thread.sleep(1000);
+                }catch(InterruptedException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+            return statuses;
         }
 
+        /***
+         * Permite agregar a faoritos todos los tweets del timeline de la cuenta asociada
+         * @throws TwitterException
+         */
+        public void Like() throws TwitterException {
+            ArrayList<Status> statuses = ObtenerMensajes();
+
+            for (Status t: statuses) {
+                System.out.println(t.getUser().getName()+": "+t.getText());
+                if (!t.isFavorited()) {
+                    twitter.createFavorite(t.getId());
+                }
+            }
+        }
+
+        /***
+         * Permite retweetear todos los tweets en el timline de la cuenta ingresada
+         * @throws TwitterException
+         */
+        public void Retweet() throws TwitterException {
+            ArrayList<Status> statuses = ObtenerMensajes();
+
+            for (Status t: statuses) {
+                System.out.println(t.getUser().getName()+": "+t.getText());
+                if (!t.isRetweeted()) {
+                    twitter.retweetStatus(t.getId());
+                }
+            }
+        }
     }
 }
