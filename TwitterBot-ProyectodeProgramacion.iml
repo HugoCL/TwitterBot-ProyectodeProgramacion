@@ -8,11 +8,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="module" module-name="internal-http" />
-    <orderEntry type="module" module-name="internal-async" />
     <orderEntry type="module" module-name="internal-json" />
-    <orderEntry type="module" module-name="main" />
+    <orderEntry type="module" module-name="internal-http" />
     <orderEntry type="module" module-name="test" />
+    <orderEntry type="module" module-name="internal-async" />
+    <orderEntry type="module" module-name="main" />
     <orderEntry type="module" module-name="internal-util" />
     <orderEntry type="module" module-name="internal-logging" />
   </component>
