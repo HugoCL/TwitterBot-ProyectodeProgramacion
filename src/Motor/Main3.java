@@ -1,5 +1,6 @@
 package Motor;
 
+import Interfaz.Main;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ public class Main3 {
         adminSesion adm = new adminSesion();
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
-            bot = new TwitterBot();
+            bot = TwitterBot.getInstance();
             bot.inicializarBot();
             bot.OAuth();
             adm.Serializar(bot);
@@ -19,8 +20,6 @@ public class Main3 {
         else{
             bot = botSerializado;
         }
-        TwitterBot.Messages mensajes = bot.new Messages();
-        mensajes.PublicarTweet("Estoy probando la serialización x2");
         /*
         TwitterBot.Messages mensajes = bot.new Messages();
         Scanner entrada = new Scanner(System.in);

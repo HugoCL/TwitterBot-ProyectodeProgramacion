@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
+<BorderPane fx:id="tweetearBP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -41,7 +41,7 @@
             </Label>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="publicar_tweetBT" mnemonicParsing="false" onAction="#publicarTwitter" prefHeight="48.0" prefWidth="152.0" style="-fx-background-color: #32668E;" text="Publicar Tweet" textFill="WHITE">
+                  <Button fx:id="regresar_tweetBT" mnemonicParsing="false" onAction="#regresar" prefHeight="48.0" prefWidth="152.0" style="-fx-background-color: #32668E;" text="Regresar" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Black" size="15.0" />
                      </font>
@@ -49,7 +49,7 @@
                         <Insets right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="publicar_tweetBT1" mnemonicParsing="false" onAction="#publicarTwitter" prefHeight="48.0" prefWidth="152.0" style="-fx-background-color: #32668E;" text="Publicar Tweet" textFill="WHITE">
+                  <Button fx:id="publicar_tweetBT" mnemonicParsing="false" onAction="#publicar" prefHeight="48.0" prefWidth="152.0" style="-fx-background-color: #32668E;" text="Publicar Tweet" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Black" size="15.0" />
                      </font>
