@@ -11,12 +11,50 @@ import java.util.ArrayList;
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
  */
 public class TwitterBot implements Serializable {
-
+    private static TwitterBot INSTANCE = null;
+    // Private constructor suppresses
+    private TwitterBot(){}
+    // creador sincronizado para protegerse de posibles problemas  multi-hilo
+    // otra prueba para evitar instanciación múltiple
+    private synchronized static void createInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new TwitterBot();
+        }
+    }
+    public static TwitterBot getInstance() {
+        if (INSTANCE == null) createInstance();
+        return INSTANCE;
+    }
     private Twitter twitter;
 
+    /**
+     * Metodos para guardar y obtener el bot junto a sus caracteristicas.
+     */
+    private TwitterBot BOT;
+    public void setBOT(TwitterBot BOT){
+        this.BOT = BOT;
+    }
+    public TwitterBot getBOT(){
+        return BOT;
+    }
     /***
      * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
      */
+    public TwitterBot cargarBot() throws TwitterException, IOException {
+        TwitterBot bot = null;
+        adminSesion adm = new adminSesion();
+        TwitterBot botSerializado = adm.desSerializar();
+        if (botSerializado == null){
+            bot = TwitterBot.getInstance();
+            bot.inicializarBot();
+            bot.OAuth();
+            adm.Serializar(bot);
+        }
+        else{
+            bot = botSerializado;
+        }
+        return bot;
+    }
 
     public void inicializarBot() {
 
@@ -98,7 +136,7 @@ public class TwitterBot implements Serializable {
     /***
      * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
      */
-    class Messages {
+    public class Messages {
         /***
          * Metodo que publica Tweets de texto simple
          * @param Tweet String con el Tweet a publicar

@@ -1,11 +1,18 @@
 package Interfaz;
+import Motor.TwitterBot;
+import Motor.adminSesion;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -13,24 +20,22 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.io.IOException;
+import java.net.URL;
+
 public class TwittearController {
 
-    private Twitter twitter;
+    private TwitterBot bot;
 
     @FXML private Button publicar_tweetBT;
     @FXML private TextArea tweet_TA;
     @FXML private Label caracteres_LB;
 
-    public void initialize(){
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true);
-        cb.setOAuthConsumerKey("y3rodATEKk9OopeZb3bJ49k7L");
-        cb.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
-        cb.setOAuthAccessToken("1160958881268473856-azR9gn8ajjf1EqlURcy6xjo4LxmjkJ");
-        cb.setOAuthAccessTokenSecret("UemukyzySFXAi9jBK9t3TO91tYZfT7cVsxSsPFGnu1i3n");
-        TwitterFactory tf = new TwitterFactory(cb.build());
-        twitter = tf.getInstance();
+    @FXML private BorderPane tweetearBP;
 
+    public void initialize() throws TwitterException, IOException {
+        //Inicializar bot
+        bot = TwitterBot.getInstance().getBOT();
         //Inicio de Ventana
         publicar_tweetBT.setDisable(true);
 
@@ -55,10 +60,22 @@ public class TwittearController {
         else    caracteres_LB.setText("0/280");
 
     }
-    @FXML public String publicarTwitter() throws TwitterException {
+
+    @FXML public void publicar() throws TwitterException {
         String tweet = tweet_TA.getText();
-        Status status = twitter.updateStatus(tweet);
-        System.out.println(tweet);
-        return status.getText();
+        TwitterBot.Messages mensajes = bot.new Messages();
+        mensajes.PublicarTweet(tweet);
+        System.out.println("Tweet: "+ tweet + " enviado con exito...");
+        tweet_TA.setText("");
+        publicar_tweetBT.setDisable(true);
+    }
+    @FXML public void regresar() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        System.out.println("Cargando ventana principal...");
+        URL location = EscenaPrincipalController.class.getResource("EscenaPrincipal.fxml");
+        loader.setLocation(location);
+        AnchorPane newBP = loader.load();
+        Scene scene = new Scene(newBP);
+        ((Stage)tweetearBP.getScene().getWindow()).setScene(scene);
     }
 }
