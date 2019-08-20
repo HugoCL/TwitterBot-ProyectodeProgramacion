@@ -1,16 +1,11 @@
 package Interfaz;
 
-import Motor.TwitterBot;
-import Motor.adminSesion;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import twitter4j.TwitterException;
-
-import java.io.IOException;
 
 public class Main extends Application {
 

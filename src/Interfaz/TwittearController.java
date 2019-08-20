@@ -1,6 +1,5 @@
 package Interfaz;
 import Motor.TwitterBot;
-import Motor.adminSesion;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -14,11 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,9 +28,10 @@ public class TwittearController {
 
     @FXML private BorderPane tweetearBP;
 
-    public void initialize() throws TwitterException, IOException {
+    public void initialize(){
         //Inicializar bot
         bot = TwitterBot.getInstance().getBOT();
+
         //Inicio de Ventana
         publicar_tweetBT.setDisable(true);
 
@@ -69,6 +65,7 @@ public class TwittearController {
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
     }
+
     @FXML public void regresar() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         System.out.println("Cargando ventana principal...");
