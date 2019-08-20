@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="187.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="89.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Logo.jpeg" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </ImageView>
+            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #55ACEE;" text="Publicar &quot;¡Hola Mundo!&quot;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="179.0" style="-fx-background-color: #55ACEE;" text="Publicar &quot;Soy un simple bot :)&quot;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="60.0" style="-fx-background-color: #55ACEE;" text="Publicar &quot;Bot creado por Ramos Overflow&quot;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="60.0" style="-fx-background-color: #55ACEE;" text="Publicar &quot;Hoy el día estará soleado :)&quot;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="45.0" style="-fx-background-color: #55ACEE;" text="Publicar &quot;Saludos Invocadores&quot;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="tweet_TA" maxWidth="-Infinity" prefHeight="215.0" prefWidth="412.0">
+               <VBox.margin>
+                  <Insets top="60.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI" size="11.0" />
+               </font>
+            </TextArea>
+            <Label fx:id="caracteres_LB" prefHeight="17.0" prefWidth="113.0" textAlignment="JUSTIFY">
+               <VBox.margin>
+                  <Insets left="290.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="publicar_tweetBT" mnemonicParsing="false" onAction="#publicarTwitter" prefHeight="48.0" prefWidth="152.0" style="-fx-background-color: #32668E;" text="Publicar Tweet" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="250.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI Black" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
