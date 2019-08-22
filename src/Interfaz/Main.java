@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("InicioSesion.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/InicioSesion.fxml"));
         primaryStage.setTitle("Twitter Bot - Ramos Overflow");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image("/Imagenes/Icono.png"));

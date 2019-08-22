@@ -2,61 +2,38 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="tweetearBP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="127.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Imagenes/Logo.jpeg" />
-               </image>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </ImageView>
-            <JFXTextArea fx:id="tweet_TA" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="415.0">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </JFXTextArea>
-            <Label fx:id="caracteres_LB" alignment="CENTER" prefHeight="17.0" prefWidth="99.0" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Segoe UI" size="17.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <JFXButton onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="17.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="publicar_tweetBT" onAction="#publicar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Publicar Tweet" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="17.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="5.0" />
-                     </HBox.margin>
-                  </JFXButton>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-</BorderPane>
+<AnchorPane fx:id="tweetearAP" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
+   <children>
+      <ImageView fitHeight="127.0" fitWidth="265.0" layoutX="168.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagenes/Logo.jpeg" />
+         </image>
+      </ImageView>
+      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="125.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="415.0" unFocusColor="#3e85c3">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </JFXTextArea>
+      <Label fx:id="caracteres_LB" alignment="CENTER" layoutX="251.0" layoutY="338.0" prefHeight="17.0" prefWidth="99.0" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="regresarBT" layoutX="93.0" layoutY="324.0" onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="publicar_tweetBT" layoutX="358.0" layoutY="324.0" onAction="#publicar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Publicar Tweet" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Bold" size="17.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

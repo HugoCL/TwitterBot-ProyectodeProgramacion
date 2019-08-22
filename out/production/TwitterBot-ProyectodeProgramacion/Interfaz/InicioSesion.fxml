@@ -3,39 +3,44 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="inicioSesionAP" prefHeight="400.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.InicioSesionController">
+<StackPane fx:id="parentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.InicioSesionController">
    <children>
-      <ImageView fitHeight="127.0" fitWidth="265.0" layoutX="70.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Imagenes/Logo.jpeg" />
-         </image>
-      </ImageView>
-      <JFXTextField fx:id="enlaceTF" alignment="CENTER" editable="false" focusColor="#3e85c3" labelFloat="true" layoutX="107.0" layoutY="160.0" prefHeight="25.0" prefWidth="191.0" promptText="Enlace de autorización" unFocusColor="#3e85c3">
-         <font>
-            <Font name="Segoe UI" size="15.0" />
-         </font>
-      </JFXTextField>
-      <JFXButton fx:id="copyBT" layoutX="306.0" layoutY="166.0" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: #3e85c3;" text="Copiar" textFill="WHITE">
-         <font>
-            <Font name="Segoe UI" size="12.0" />
-         </font>
-      </JFXButton>
-      <JFXPasswordField fx:id="pinPF" alignment="CENTER" focusColor="#3e85c3" labelFloat="true" layoutX="107.0" layoutY="216.0" prefHeight="29.0" prefWidth="191.0" promptText="PIN" unFocusColor="#3e85c3">
-         <font>
-            <Font name="Segoe UI" size="15.0" />
-         </font>
-      </JFXPasswordField>
-      <JFXButton layoutX="121.0" layoutY="276.0" onAction="#iniciarSesion" prefHeight="48.0" prefWidth="165.0" style="-fx-background-color: #3e85c3;" text="Iniciar sesión" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </JFXButton>
-      <JFXCheckBox fx:id="noCierreSesionCB" checkedColor="#3e85c3" layoutX="140.0" layoutY="337.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
+      <AnchorPane fx:id="inicioSesionAP" prefHeight="465.0" prefWidth="420.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="85.0" fitWidth="212.0" layoutX="214.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Logo.jpeg" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="copyBT" layoutX="271.0" layoutY="213.0" prefHeight="29.0" prefWidth="91.0" style="-fx-background-color: #3e85c3;" text="Copiar" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXPasswordField fx:id="pinPF" focusColor="#3e85c3" labelFloat="true" layoutX="209.0" layoutY="260.0" prefHeight="29.0" prefWidth="212.0" promptText="PIN" text="asdasd" unFocusColor="#3e85c3">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXButton fx:id="iniciar_sesionBT" layoutX="234.0" layoutY="305.0" onAction="#iniciarSesion" prefHeight="48.0" prefWidth="165.0" style="-fx-background-color: #3e85c3;" text="Iniciar sesión" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXCheckBox fx:id="noCierreSesionCB" checkedColor="#3e85c3" layoutX="253.0" layoutY="366.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
+            <JFXTextArea fx:id="enlaceTA" editable="false" focusColor="#3e85c3" labelFloat="true" layoutX="209.0" layoutY="129.0" prefHeight="65.0" prefWidth="212.0" promptText="Enlace de Autenticación" text="https://api.twitter.com/oauth/authorize?oauth_token=3NqIGQAAAAAA_cqZAAABbLbTH2E" unFocusColor="#3e85c3">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+            </JFXTextArea>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>
