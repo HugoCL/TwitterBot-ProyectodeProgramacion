@@ -24,7 +24,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="E:/Program Files/SceneBuilder/SceneBuilder.exe" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -41,7 +42,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Interfaz.Main" />
       <module name="TwitterBot-ProyectodeProgramacion" />
@@ -55,9 +56,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Motor.Main3" />
+      <module name="TwitterBot-ProyectodeProgramacion" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Motor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main3" />
       </list>
     </recent_temporary>
   </component>
@@ -73,7 +88,11 @@
       <updated>1566260102355</updated>
       <workItem from="1566260107021" duration="533000" />
       <workItem from="1566260668213" duration="8681000" />
-      <workItem from="1566269625702" duration="499000" />
+      <workItem from="1566269625702" duration="1936000" />
+      <workItem from="1566276347184" duration="207000" />
+      <workItem from="1566318269320" duration="118000" />
+      <workItem from="1566357136912" duration="260000" />
+      <workItem from="1566425642644" duration="6798000" />
     </task>
     <servers />
   </component>

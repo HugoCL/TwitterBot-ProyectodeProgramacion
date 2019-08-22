@@ -1,5 +1,6 @@
 package Interfaz;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,10 +16,11 @@ public class EscenaPrincipalController {
 
     @FXML private AnchorPane mainAP;
 
-    @FXML private Button tweetearBT;
-    @FXML private Button retweetearBT;
-    @FXML private Button followBT;
-    @FXML private Button directBT;
+    @FXML private JFXButton tweetearBT;
+    @FXML private JFXButton retweetearBT;
+    @FXML private JFXButton followBT;
+    @FXML private JFXButton directBT;
+    @FXML private JFXButton cerrar_sesionBT;
 
     public void initialize(){
         //Botones desactivados
@@ -37,4 +39,13 @@ public class EscenaPrincipalController {
         ((Stage)mainAP.getScene().getWindow()).setScene(scene);
     }
 
+    @FXML public void cerrarSesion() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        System.out.println("Cargando ventana inicio sesión...");
+        URL location = InicioSesionController.class.getResource("InicioSesion.fxml");
+        loader.setLocation(location);
+        AnchorPane newBP = loader.load();
+        Scene scene = new Scene(newBP);
+        ((Stage)mainAP.getScene().getWindow()).setScene(scene);
+    }
 }
