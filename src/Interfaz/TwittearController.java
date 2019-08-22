@@ -1,5 +1,8 @@
 package Interfaz;
 import Motor.TwitterBot;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextArea;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -22,8 +25,8 @@ public class TwittearController {
 
     private TwitterBot bot;
 
-    @FXML private Button publicar_tweetBT;
-    @FXML private TextArea tweet_TA;
+    @FXML private JFXButton publicar_tweetBT;
+    @FXML private JFXTextArea tweet_TA;
     @FXML private Label caracteres_LB;
 
     @FXML private BorderPane tweetearBP;
@@ -43,7 +46,7 @@ public class TwittearController {
     }
     private void Caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
-            if (tweet_TA.getText().length() >= 280){
+            if (tweet_TA.getText().length() > 280){
                 caracteres_LB.setTextFill(Color.web("#ff0000"));
                 publicar_tweetBT.setDisable(true);
             }
@@ -53,7 +56,10 @@ public class TwittearController {
             }
             caracteres_LB.setText(tweet_TA.getText().length()+"/280");
         }
-        else    caracteres_LB.setText("0/280");
+        else {
+            caracteres_LB.setTextFill(Color.web("#000000"));
+            caracteres_LB.setText("0/280");
+        }
 
     }
 
