@@ -76,7 +76,7 @@ public class TwitterBot implements Serializable {
      * @throws TwitterException Excepcion por problemas tecnicos de Twitter
      * @throws IOException Excepcion por problemas con archivos del programa
      */
-    public void OAuthURL() throws TwitterException, IOException {
+    public String OAuthURL() throws TwitterException, IOException {
         try {
             //Se obtienen los tokens para solicitar autorizacion
             rtoken = twitter.getOAuthRequestToken();
@@ -84,10 +84,7 @@ public class TwitterBot implements Serializable {
             System.out.println("DEBUGEO");
             System.out.println("Request token: " + rtoken.getToken());
             System.out.println("Request token secreto: " + rtoken.getTokenSecret());
-            //Se muestra el URL que permite autorizar al Bot para el uso de la cuenta
-            System.out.println("Abre el siguiente enlace en el navegador para autorizar el Bot");
-            System.out.println(rtoken.getAuthorizationURL());
-
+            return (rtoken.getAuthorizationURL());
         } catch (IllegalStateException ie) {
             if (!twitter.getAuthorization().isEnabled()) {
                 System.out.println("No se han configurado los tokens de OAuth");
