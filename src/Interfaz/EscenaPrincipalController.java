@@ -54,6 +54,7 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void directMessage() throws IOException {
+        //Creación de ventana
         FXMLLoader loader = new FXMLLoader();
 
         URL location = MensajeDirectoController.class.getResource("MensajeDirecto.fxml");
