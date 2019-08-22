@@ -53,7 +53,31 @@ public class EscenaPrincipalController {
         timeline.play();
     }
 
+    @FXML public void retweetear(){
+
+    }
+
+    @FXML public void follow() throws IOException {
+        System.out.println("Cargando ventana para realizar follow...");
+
+        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/Follow.fxml"));
+        Scene scene = tweetearBT.getScene();
+
+        root.translateXProperty().set(scene.getWidth());
+        StackPane parentContainer = (StackPane) scene.getRoot();
+        parentContainer.getChildren().add(root);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(event -> {
+            parentContainer.getChildren().remove(mainAP);
+        });
+        timeline.play();
+    }
     @FXML public void directMessage() throws IOException {
+        //Creación de ventana
         FXMLLoader loader = new FXMLLoader();
 
         URL location = MensajeDirectoController.class.getResource("MensajeDirecto.fxml");

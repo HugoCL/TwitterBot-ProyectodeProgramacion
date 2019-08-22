@@ -39,10 +39,12 @@ public class InicioSesionController {
     }
 
     @FXML public void iniciarSesion() throws TwitterException, IOException {
+        //Inicialiar bot
         TwitterBot bot = TwitterBot.getInstance().cargarBot();
         TwitterBot.getInstance().setBOT(bot);
         System.out.println("Sesión iniciada...");
 
+        //Transición de escenas
         Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/EscenaPrincipal.fxml"));
         Scene scene = iniciar_sesionBT.getScene();
 

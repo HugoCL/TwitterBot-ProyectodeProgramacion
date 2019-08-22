@@ -59,7 +59,6 @@ public class TwittearController {
             caracteres_LB.setTextFill(Color.web("#000000"));
             caracteres_LB.setText("0/280");
         }
-
     }
 
     @FXML public void publicar() throws TwitterException {
