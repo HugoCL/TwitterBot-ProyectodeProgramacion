@@ -6,6 +6,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
@@ -13,9 +14,13 @@ import java.util.ArrayList;
 public class TwitterBot implements Serializable {
     private static TwitterBot INSTANCE = null;
     RequestToken rtoken;
+    public boolean serializacionSesion;
+    public String PIN;
     // Constructor privado
 
-    private TwitterBot(){}
+    private TwitterBot(){
+        serializacionSesion = false;
+    }
     // creador sincronizado para protegerse de posibles problemas  multi-hilo
     // otra prueba para evitar instanciación múltiple
     private synchronized static void createInstance() {
@@ -43,13 +48,16 @@ public class TwitterBot implements Serializable {
      * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
      */
     public TwitterBot cargarBot() throws TwitterException, IOException {
-        TwitterBot bot = null;
-        adminSesion adm = new adminSesion();
+        TwitterBot bot;
+        adminSesion adm = adminSesion.getInstance();
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
             bot = TwitterBot.getInstance();
             bot.inicializarBot();
-            bot.OAuth();
+            System.out.println(bot.OAuthURL());
+            Scanner scan = new Scanner(System.in);
+            String pin = scan.nextLine();
+            bot.OAuthInicio(pin);
             adm.Serializar(bot);
         }
         else{
@@ -80,10 +88,6 @@ public class TwitterBot implements Serializable {
         try {
             //Se obtienen los tokens para solicitar autorizacion
             rtoken = twitter.getOAuthRequestToken();
-            System.out.println("Obteniendo Request Token para autorización");
-            System.out.println("DEBUGEO");
-            System.out.println("Request token: " + rtoken.getToken());
-            System.out.println("Request token secreto: " + rtoken.getTokenSecret());
             return (rtoken.getAuthorizationURL());
         } catch (IllegalStateException ie) {
             if (!twitter.getAuthorization().isEnabled()) {
@@ -91,6 +95,7 @@ public class TwitterBot implements Serializable {
                 System.exit(-1);
             }
         }
+        return null;
     }
 
     public void OAuthInicio(String PIN){
@@ -120,10 +125,6 @@ public class TwitterBot implements Serializable {
         // Prints de DEBUG para comprobar Token de Acceso
         String accessToken = atoken.getToken();
         String accessTokenS = atoken.getTokenSecret();
-        System.out.println("Se obtuvo el token de acceso!");
-        System.out.println("DEBUGEO");
-        System.out.println("Token de acceso: " + accessToken);
-        System.out.println("Token de acceso secreto: " + accessTokenS);
     }
 
     /***

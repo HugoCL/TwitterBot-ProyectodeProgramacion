@@ -1,6 +1,7 @@
 package Interfaz;
 
 import Motor.TwitterBot;
+import Motor.adminSesion;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -19,6 +20,8 @@ import java.io.IOException;
 
 public class InicioSesionController {
 
+    protected TwitterBot bot;
+
     @FXML private JFXTextArea enlaceTA;
     @FXML private JFXPasswordField pinPF;
     @FXML private JFXCheckBox no_cierre_sesionCB;
@@ -28,7 +31,8 @@ public class InicioSesionController {
 
     @FXML private StackPane parentContainer;
 
-    public void initialize(){
+    public void initialize() throws TwitterException, IOException {
+        //Ventana
         parentContainer.setOpacity(0);
         FadeTransition fadeTransition = new FadeTransition();
         fadeTransition.setDuration(Duration.seconds(0.25));
@@ -39,9 +43,8 @@ public class InicioSesionController {
     }
 
     @FXML public void iniciarSesion() throws TwitterException, IOException {
-        //Inicialiar bot
-        TwitterBot bot = TwitterBot.getInstance().cargarBot();
-        TwitterBot.getInstance().setBOT(bot);
+        TwitterBot bot1 = TwitterBot.getInstance().cargarBot();
+        TwitterBot.getInstance().setBOT(bot1);
         System.out.println("Sesión iniciada...");
 
         //Transición de escenas

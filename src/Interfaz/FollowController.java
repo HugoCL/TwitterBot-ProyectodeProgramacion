@@ -21,6 +21,6 @@ public class FollowController {
         System.out.println(nicknameTF.getText());
     }
     public void cerrarVentana(){
-        
+
     }
 }

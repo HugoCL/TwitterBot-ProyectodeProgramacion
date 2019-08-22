@@ -6,7 +6,20 @@ import java.io.*;
  * Clase encargada de la administración de la sesión de una cuenta de Twitter
  */
 public class adminSesion {
-
+    private static adminSesion INSTANCE = null;
+    // Constructor privado
+    private adminSesion(){}
+    // creador sincronizado para protegerse de posibles problemas  multi-hilo
+    // otra prueba para evitar instanciación múltiple
+    private synchronized static void createInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new adminSesion();
+        }
+    }
+    public static adminSesion getInstance() {
+        if (INSTANCE == null) createInstance();
+        return INSTANCE;
+    }
     /***
      * Método que Serializa la instancia de Twitter, lo que permite guardar todos los tokens de sesion
      * @param bot Objeto de tipo TwitterBot que posee la instancia ya creada con todos sus parametros
