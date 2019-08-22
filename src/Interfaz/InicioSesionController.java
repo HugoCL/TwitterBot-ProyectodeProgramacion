@@ -1,28 +1,41 @@
 package Interfaz;
 
 import Motor.TwitterBot;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextArea;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class InicioSesionController {
 
     @FXML private JFXTextArea enlaceTA;
     @FXML private JFXPasswordField pinPF;
-    @FXML private JFXCheckBox noCierreSesionCB;
+    @FXML private JFXCheckBox no_cierre_sesionCB;
+    @FXML private JFXButton iniciar_sesionBT;
 
     @FXML private AnchorPane inicioSesionAP;
 
+    @FXML private StackPane parentContainer;
+
     public void initialize(){
+        parentContainer.setOpacity(0);
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.seconds(0.25));
+        fadeTransition.setNode(parentContainer);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
     }
 
     @FXML public void iniciarSesion() throws TwitterException, IOException {
@@ -30,13 +43,19 @@ public class InicioSesionController {
         TwitterBot.getInstance().setBOT(bot);
         System.out.println("Sesión iniciada...");
 
-        FXMLLoader loader = new FXMLLoader();
-        System.out.println("Cargando ventana principal...");
-        URL location = EscenaPrincipalController.class.getResource("EscenaPrincipal.fxml");
-        loader.setLocation(location);
-        AnchorPane newBP = loader.load();
-        Scene scene = new Scene(newBP);
-        ((Stage)inicioSesionAP.getScene().getWindow()).setScene(scene);
+        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/EscenaPrincipal.fxml"));
+        Scene scene = iniciar_sesionBT.getScene();
 
+        root.translateXProperty().set(scene.getWidth());
+        parentContainer.getChildren().add(root);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(event -> {
+            parentContainer.getChildren().remove(inicioSesionAP);
+        });
+        timeline.play();
     }
 }
