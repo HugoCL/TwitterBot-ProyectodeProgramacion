@@ -38,7 +38,7 @@
             </Label>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Publicar Tweet" textFill="WHITE">
+                  <JFXButton onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Bold" size="17.0" />
                      </font>

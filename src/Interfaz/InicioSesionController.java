@@ -3,22 +3,20 @@ package Interfaz;
 import Motor.TwitterBot;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import twitter4j.TwitterException;
-import twitter4j.auth.RequestToken;
 
 import java.io.IOException;
 import java.net.URL;
 
 public class InicioSesionController {
 
-    @FXML private JFXTextField enlaceTF;
+    @FXML private JFXTextArea enlaceTA;
     @FXML private JFXPasswordField pinPF;
     @FXML private JFXCheckBox noCierreSesionCB;
 

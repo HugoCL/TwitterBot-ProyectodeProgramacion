@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -26,7 +26,6 @@ public class EscenaPrincipalController {
         //Botones desactivados
         retweetearBT.setDisable(true);
         followBT.setDisable(true);
-        directBT.setDisable(true);
     }
 
     @FXML public void tweetear() throws IOException {
@@ -39,6 +38,19 @@ public class EscenaPrincipalController {
         ((Stage)mainAP.getScene().getWindow()).setScene(scene);
     }
 
+    @FXML public void directMessage() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        System.out.println("Cargando ventana para mensajes directos...");
+        URL location = MensajeDirectoController.class.getResource("MensajeDirecto.fxml");
+        loader.setLocation(location);
+        AnchorPane newBP = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(newBP);
+        stage.setScene(scene);
+        stage.setTitle("Twitter Bot - Ramos Overflow");
+        stage.getIcons().add(new Image("Imagenes/Icono.png"));
+        stage.show();
+    }
     @FXML public void cerrarSesion() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         System.out.println("Cargando ventana inicio sesión...");
