@@ -12,7 +12,9 @@ import java.util.ArrayList;
  */
 public class TwitterBot implements Serializable {
     private static TwitterBot INSTANCE = null;
-    // Private constructor suppresses
+    RequestToken rtoken;
+    // Constructor privado
+
     private TwitterBot(){}
     // creador sincronizado para protegerse de posibles problemas  multi-hilo
     // otra prueba para evitar instanciación múltiple
@@ -74,55 +76,17 @@ public class TwitterBot implements Serializable {
      * @throws TwitterException Excepcion por problemas tecnicos de Twitter
      * @throws IOException Excepcion por problemas con archivos del programa
      */
-    public void OAuth() throws TwitterException, IOException {
+    public void OAuthURL() throws TwitterException, IOException {
         try {
-
             //Se obtienen los tokens para solicitar autorizacion
-            RequestToken rtoken = twitter.getOAuthRequestToken();
+            rtoken = twitter.getOAuthRequestToken();
             System.out.println("Obteniendo Request Token para autorización");
             System.out.println("DEBUGEO");
             System.out.println("Request token: " + rtoken.getToken());
             System.out.println("Request token secreto: " + rtoken.getTokenSecret());
-            AccessToken atoken = null;
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-            //Ciclo que se realiza mientras no exista un Token que permita usar una cuenta
-            while (atoken == null) {
-
-                //Se muestra el URL que permite autorizar al Bot para el uso de la cuenta
-                System.out.println("Abre el siguiente enlace en el navegador para autorizar el Bot");
-                System.out.println(rtoken.getAuthorizationURL());
-
-                // Se lee el PIN otorgado por el enlace
-                System.out.println("Ingresa el PIN mostrado en la pagina para autorizar al Bot");
-                String PIN = br.readLine();
-
-                // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
-                try {
-                    if (PIN.length() > 0) {
-                        atoken = twitter.getOAuthAccessToken(rtoken, PIN);
-                    } else {
-                        System.out.println("No se ingresó ningún PIN, intente nuevamente");
-                        rtoken = twitter.getOAuthRequestToken();
-                    }
-                } catch (TwitterException e) {
-                    if (401 == e.getStatusCode()) {
-                        System.out.println("Ocurrió un error al intentar obtener el token de acceso");
-                    } else {
-                        System.out.println("Ocurrió un problema al intentar obtener el token de acceso por un" +
-                                "error en la entrada");
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            // Prints de DEBUG para comprobar Token de Acceso
-            String accessToken = atoken.getToken();
-            String accessTokenS = atoken.getTokenSecret();
-            System.out.println("Se obtuvo el token de acceso!");
-            System.out.println("DEBUGEO");
-            System.out.println("Token de acceso: " + accessToken);
-            System.out.println("Token de acceso secreto: " + accessTokenS);
+            //Se muestra el URL que permite autorizar al Bot para el uso de la cuenta
+            System.out.println("Abre el siguiente enlace en el navegador para autorizar el Bot");
+            System.out.println(rtoken.getAuthorizationURL());
 
         } catch (IllegalStateException ie) {
             if (!twitter.getAuthorization().isEnabled()) {
@@ -130,7 +94,39 @@ public class TwitterBot implements Serializable {
                 System.exit(-1);
             }
         }
+    }
 
+    public void OAuthInicio(String PIN){
+        AccessToken atoken = null;
+        //Ciclo que se realiza mientras no exista un Token que permita usar una cuenta
+        while (atoken == null) {
+
+            // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
+            try {
+                if (PIN.length() > 0) {
+                    atoken = twitter.getOAuthAccessToken(rtoken, PIN);
+                } else {
+                    System.out.println("No se ingresó ningún PIN, intente nuevamente");
+                    rtoken = twitter.getOAuthRequestToken();
+                }
+            } catch (TwitterException e) {
+                if (401 == e.getStatusCode()) {
+                    System.out.println("Ocurrió un error al intentar obtener el token de acceso");
+                } else {
+                    System.out.println("Ocurrió un problema al intentar obtener el token de acceso por un" +
+                            "error en la entrada");
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // Prints de DEBUG para comprobar Token de Acceso
+        String accessToken = atoken.getToken();
+        String accessTokenS = atoken.getTokenSecret();
+        System.out.println("Se obtuvo el token de acceso!");
+        System.out.println("DEBUGEO");
+        System.out.println("Token de acceso: " + accessToken);
+        System.out.println("Token de acceso secreto: " + accessTokenS);
     }
 
     /***
