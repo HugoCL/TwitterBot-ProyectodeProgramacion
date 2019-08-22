@@ -31,6 +31,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -94,7 +95,9 @@
       <workItem from="1566276347184" duration="207000" />
       <workItem from="1566318269320" duration="118000" />
       <workItem from="1566357136912" duration="260000" />
-      <workItem from="1566425642644" duration="16325000" />
+      <workItem from="1566425642644" duration="17110000" />
+      <workItem from="1566480903157" duration="55000" />
+      <workItem from="1566481676120" duration="2496000" />
     </task>
     <servers />
   </component>
