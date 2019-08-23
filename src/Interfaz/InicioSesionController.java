@@ -36,6 +36,7 @@ public class InicioSesionController {
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
             bot = TwitterBot.getInstance();
+            bot.isGuardado = false;
             bot.inicializarBot();
             enlaceTA.setText(bot.OAuthURL());
         }
@@ -45,8 +46,13 @@ public class InicioSesionController {
         if (bot.isGuardado) {
             enlaceTA.setText("Enlace no requerido, sesión iniciada.");
             pinPF.setEditable(false);
+            pinPF.setText(bot.pin);
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
+        }else{
+            bot = TwitterBot.getInstance();
+            bot.inicializarBot();
+            enlaceTA.setText(bot.OAuthURL());
         }
 
         //Ventana
@@ -65,12 +71,17 @@ public class InicioSesionController {
             bot.OAuthInicio(pin);
             if (no_cierre_sesionCB.isSelected()){
                 bot.isGuardado = true;
+                bot.pin = pinPF.getText();
                 adminSesion.getInstance().Serializar(bot);
+                System.out.println("Sesion guardada.");
             }
             TwitterBot.getInstance().setBOT(bot);
         }else {
             if (!no_cierre_sesionCB.isSelected()){
-                adminSesion.getInstance().eliminarSesion();
+                bot.isGuardado = false;
+                adminSesion.getInstance().Serializar(bot);
+                TwitterBot.getInstance().setBOT(bot);
+                System.out.println("Sesion no guardada.");
             }
         }
 

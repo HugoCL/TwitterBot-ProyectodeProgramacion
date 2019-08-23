@@ -50,27 +50,6 @@ public class TwitterBot implements Serializable {
     public TwitterBot getBOT(){
         return BOT;
     }
-    /***
-     * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
-     */
-    public void cargarBot() throws TwitterException, IOException {
-        TwitterBot bot;
-        adminSesion adm = adminSesion.getInstance();
-        TwitterBot botSerializado = adm.desSerializar();
-        if (botSerializado == null){
-            bot = TwitterBot.getInstance();
-            bot.inicializarBot();
-            System.out.println(bot.OAuthURL());
-            Scanner scan = new Scanner(System.in);
-            String pin = scan.nextLine();
-            bot.OAuthInicio(pin);
-            adm.Serializar(bot);
-        }
-        else{
-            bot = botSerializado;
-        }
-        setBOT(bot);
-    }
 
     public void inicializarBot() {
 
@@ -127,10 +106,6 @@ public class TwitterBot implements Serializable {
                 }
             }
         }
-
-        // Prints de DEBUG para comprobar Token de Acceso
-        String accessToken = atoken.getToken();
-        String accessTokenS = atoken.getTokenSecret();
     }
 
     /***
