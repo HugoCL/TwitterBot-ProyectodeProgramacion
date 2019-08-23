@@ -1,6 +1,7 @@
 package Interfaz;
 
 import Motor.TwitterBot;
+import Motor.adminSesion;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -19,6 +20,8 @@ import java.io.IOException;
 
 public class InicioSesionController {
 
+    protected TwitterBot bot;
+
     @FXML private JFXTextArea enlaceTA;
     @FXML private JFXPasswordField pinPF;
     @FXML private JFXCheckBox no_cierre_sesionCB;
@@ -28,7 +31,31 @@ public class InicioSesionController {
 
     @FXML private StackPane parentContainer;
 
-    public void initialize(){
+    public void initialize() throws TwitterException, IOException {
+        adminSesion adm = adminSesion.getInstance();
+        TwitterBot botSerializado = adm.desSerializar();
+        if (botSerializado == null){
+            bot = TwitterBot.getInstance();
+            bot.isGuardado = false;
+            bot.inicializarBot();
+            enlaceTA.setText(bot.OAuthURL());
+        }
+        else{
+            bot = botSerializado;
+        }
+        if (bot.isGuardado) {
+            enlaceTA.setText("Enlace no requerido, sesión iniciada.");
+            pinPF.setEditable(false);
+            pinPF.setText(bot.pin);
+            no_cierre_sesionCB.setSelected(true);
+            TwitterBot.getInstance().setBOT(bot);
+        }else{
+            bot = TwitterBot.getInstance();
+            bot.inicializarBot();
+            enlaceTA.setText(bot.OAuthURL());
+        }
+
+        //Ventana
         parentContainer.setOpacity(0);
         FadeTransition fadeTransition = new FadeTransition();
         fadeTransition.setDuration(Duration.seconds(0.25));
@@ -38,10 +65,26 @@ public class InicioSesionController {
         fadeTransition.play();
     }
 
-    @FXML public void iniciarSesion() throws TwitterException, IOException {
-        //Inicialiar bot
-        TwitterBot bot = TwitterBot.getInstance().cargarBot();
-        TwitterBot.getInstance().setBOT(bot);
+    @FXML public void iniciarSesion() throws IOException {
+        if (!bot.isGuardado){
+            String pin = pinPF.getText();
+            bot.OAuthInicio(pin);
+            if (no_cierre_sesionCB.isSelected()){
+                bot.isGuardado = true;
+                bot.pin = pinPF.getText();
+                adminSesion.getInstance().Serializar(bot);
+                System.out.println("Sesion guardada.");
+            }
+            TwitterBot.getInstance().setBOT(bot);
+        }else {
+            if (!no_cierre_sesionCB.isSelected()){
+                bot.isGuardado = false;
+                adminSesion.getInstance().Serializar(bot);
+                TwitterBot.getInstance().setBOT(bot);
+                System.out.println("Sesion no guardada.");
+            }
+        }
+
         System.out.println("Sesión iniciada...");
 
         //Transición de escenas

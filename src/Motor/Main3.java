@@ -9,12 +9,12 @@ public class Main3 {
     public static void main(String[] args) throws TwitterException, IOException {
         TwitterBot bot = null;
         boolean exito = false;
-        adminSesion adm = new adminSesion();
+        adminSesion adm = adminSesion.getInstance();
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
             bot = TwitterBot.getInstance();
             bot.inicializarBot();
-            bot.OAuth();
+            bot.OAuthURL();
             adm.Serializar(bot);
         }
         else{

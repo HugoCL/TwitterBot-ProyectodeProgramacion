@@ -34,7 +34,7 @@
                   <Font size="16.0" />
                </font>
             </JFXButton>
-            <JFXCheckBox fx:id="noCierreSesionCB" checkedColor="#3e85c3" layoutX="253.0" layoutY="358.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
+            <JFXCheckBox fx:id="no_cierre_sesionCB" checkedColor="#3e85c3" layoutX="253.0" layoutY="358.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
             <JFXTextArea fx:id="enlaceTA" editable="false" focusColor="#3e85c3" labelFloat="true" layoutX="209.0" layoutY="129.0" prefHeight="65.0" prefWidth="212.0" promptText="Enlace de Autenticación" unFocusColor="#3e85c3">
                <font>
                   <Font name="Segoe UI" size="15.0" />

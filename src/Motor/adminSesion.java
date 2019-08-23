@@ -6,7 +6,20 @@ import java.io.*;
  * Clase encargada de la administración de la sesión de una cuenta de Twitter
  */
 public class adminSesion {
-
+    private static adminSesion INSTANCE = null;
+    // Constructor privado
+    private adminSesion(){}
+    // creador sincronizado para protegerse de posibles problemas  multi-hilo
+    // otra prueba para evitar instanciación múltiple
+    private synchronized static void createInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new adminSesion();
+        }
+    }
+    public static adminSesion getInstance() {
+        if (INSTANCE == null) createInstance();
+        return INSTANCE;
+    }
     /***
      * Método que Serializa la instancia de Twitter, lo que permite guardar todos los tokens de sesion
      * @param bot Objeto de tipo TwitterBot que posee la instancia ya creada con todos sus parametros
@@ -48,5 +61,13 @@ public class adminSesion {
             System.out.println("Problema interno con la des-serialización. Clase no encontrada.");
             return null;
         }
+    }
+
+    public void eliminarSesion(){
+        File file = new File("Sesion.out");
+        if (file.delete()){
+            System.out.println("archivo "+file.getName()+" eliminado");
+        }else System.out.println("no se puede borrar "+file.getName());
+
     }
 }

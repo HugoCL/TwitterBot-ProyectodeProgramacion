@@ -6,18 +6,21 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
  */
 public class TwitterBot implements Serializable {
+    /**
+     * Inicio patrón de diseño Singleton
+     */
     private static TwitterBot INSTANCE = null;
-    RequestToken rtoken;
     // Constructor privado
-
-    private TwitterBot(){}
-    // creador sincronizado para protegerse de posibles problemas  multi-hilo
-    // otra prueba para evitar instanciación múltiple
+    private TwitterBot(){
+        isGuardado = false;
+    }
+    // Método para evitar multi-hilos
     private synchronized static void createInstance() {
         if (INSTANCE == null) {
             INSTANCE = new TwitterBot();
@@ -27,7 +30,15 @@ public class TwitterBot implements Serializable {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
+
+    /**
+     * Fin patrón de diseño Singleton
+     */
+
     private Twitter twitter;
+    public boolean isGuardado;
+    public String pin;
+    RequestToken rtoken;
 
     /**
      * Metodos para guardar y obtener el bot junto a sus caracteristicas.
@@ -38,24 +49,6 @@ public class TwitterBot implements Serializable {
     }
     public TwitterBot getBOT(){
         return BOT;
-    }
-    /***
-     * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
-     */
-    public TwitterBot cargarBot() throws TwitterException, IOException {
-        TwitterBot bot = null;
-        adminSesion adm = new adminSesion();
-        TwitterBot botSerializado = adm.desSerializar();
-        if (botSerializado == null){
-            bot = TwitterBot.getInstance();
-            bot.inicializarBot();
-            bot.OAuth();
-            adm.Serializar(bot);
-        }
-        else{
-            bot = botSerializado;
-        }
-        return bot;
     }
 
     public void inicializarBot() {
@@ -80,10 +73,6 @@ public class TwitterBot implements Serializable {
         try {
             //Se obtienen los tokens para solicitar autorizacion
             rtoken = twitter.getOAuthRequestToken();
-            System.out.println("Obteniendo Request Token para autorización");
-            System.out.println("DEBUGEO");
-            System.out.println("Request token: " + rtoken.getToken());
-            System.out.println("Request token secreto: " + rtoken.getTokenSecret());
             return (rtoken.getAuthorizationURL());
         } catch (IllegalStateException ie) {
             if (!twitter.getAuthorization().isEnabled()) {
@@ -91,6 +80,7 @@ public class TwitterBot implements Serializable {
                 System.exit(-1);
             }
         }
+        return null;
     }
 
     public void OAuthInicio(String PIN){
@@ -116,14 +106,6 @@ public class TwitterBot implements Serializable {
                 }
             }
         }
-
-        // Prints de DEBUG para comprobar Token de Acceso
-        String accessToken = atoken.getToken();
-        String accessTokenS = atoken.getTokenSecret();
-        System.out.println("Se obtuvo el token de acceso!");
-        System.out.println("DEBUGEO");
-        System.out.println("Token de acceso: " + accessToken);
-        System.out.println("Token de acceso secreto: " + accessTokenS);
     }
 
     /***
