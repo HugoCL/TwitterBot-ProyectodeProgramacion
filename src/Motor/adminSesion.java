@@ -62,12 +62,4 @@ public class adminSesion {
             return null;
         }
     }
-
-    public void eliminarSesion(){
-        File file = new File("Sesion.out");
-        if (file.delete()){
-            System.out.println("archivo "+file.getName()+" eliminado");
-        }else System.out.println("no se puede borrar "+file.getName());
-
-    }
 }
