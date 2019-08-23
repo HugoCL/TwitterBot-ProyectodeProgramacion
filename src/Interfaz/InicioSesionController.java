@@ -46,6 +46,7 @@ public class InicioSesionController {
             enlaceTA.setText("Enlace no requerido, sesión iniciada.");
             pinPF.setEditable(false);
             no_cierre_sesionCB.setSelected(true);
+            TwitterBot.getInstance().setBOT(bot);
         }
 
         //Ventana
@@ -58,14 +59,19 @@ public class InicioSesionController {
         fadeTransition.play();
     }
 
-    @FXML public void iniciarSesion() throws TwitterException, IOException {
+    @FXML public void iniciarSesion() throws IOException {
         if (!bot.isGuardado){
             String pin = pinPF.getText();
             bot.OAuthInicio(pin);
+            if (no_cierre_sesionCB.isSelected()){
+                bot.isGuardado = true;
+                adminSesion.getInstance().Serializar(bot);
+            }
             TwitterBot.getInstance().setBOT(bot);
         }else {
-            TwitterBot.getInstance().setBOT(bot);
-            System.out.println("Sesión ya iniciada.");
+            if (!no_cierre_sesionCB.isSelected()){
+                adminSesion.getInstance().eliminarSesion();
+            }
         }
 
         System.out.println("Sesión iniciada...");
