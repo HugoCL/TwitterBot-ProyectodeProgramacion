@@ -32,6 +32,22 @@ public class InicioSesionController {
     @FXML private StackPane parentContainer;
 
     public void initialize() throws TwitterException, IOException {
+        adminSesion adm = adminSesion.getInstance();
+        TwitterBot botSerializado = adm.desSerializar();
+        if (botSerializado == null){
+            bot = TwitterBot.getInstance();
+            bot.inicializarBot();
+            enlaceTA.setText(bot.OAuthURL());
+        }
+        else{
+            bot = botSerializado;
+        }
+        if (bot.isGuardado) {
+            enlaceTA.setText("Enlace no requerido, sesión iniciada.");
+            pinPF.setEditable(false);
+            no_cierre_sesionCB.setSelected(true);
+        }
+
         //Ventana
         parentContainer.setOpacity(0);
         FadeTransition fadeTransition = new FadeTransition();
@@ -43,8 +59,15 @@ public class InicioSesionController {
     }
 
     @FXML public void iniciarSesion() throws TwitterException, IOException {
-        TwitterBot bot1 = TwitterBot.getInstance().cargarBot();
-        TwitterBot.getInstance().setBOT(bot1);
+        if (!bot.isGuardado){
+            String pin = pinPF.getText();
+            bot.OAuthInicio(pin);
+            TwitterBot.getInstance().setBOT(bot);
+        }else {
+            TwitterBot.getInstance().setBOT(bot);
+            System.out.println("Sesión ya iniciada.");
+        }
+
         System.out.println("Sesión iniciada...");
 
         //Transición de escenas

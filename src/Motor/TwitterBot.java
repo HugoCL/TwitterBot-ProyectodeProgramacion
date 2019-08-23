@@ -12,17 +12,15 @@ import java.util.Scanner;
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
  */
 public class TwitterBot implements Serializable {
+    /**
+     * Inicio patrón de diseño Singleton
+     */
     private static TwitterBot INSTANCE = null;
-    RequestToken rtoken;
-    public boolean serializacionSesion;
-    public String PIN;
     // Constructor privado
-
     private TwitterBot(){
-        serializacionSesion = false;
+        isGuardado = false;
     }
-    // creador sincronizado para protegerse de posibles problemas  multi-hilo
-    // otra prueba para evitar instanciación múltiple
+    // Método para evitar multi-hilos
     private synchronized static void createInstance() {
         if (INSTANCE == null) {
             INSTANCE = new TwitterBot();
@@ -32,7 +30,15 @@ public class TwitterBot implements Serializable {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
+
+    /**
+     * Fin patrón de diseño Singleton
+     */
+
     private Twitter twitter;
+    public boolean isGuardado;
+    public String pin;
+    RequestToken rtoken;
 
     /**
      * Metodos para guardar y obtener el bot junto a sus caracteristicas.
@@ -47,7 +53,7 @@ public class TwitterBot implements Serializable {
     /***
      * Metodo que inicializa los parametros iniciales del Bot obtenidos de la API de Twitter y crea la instancia del Bot
      */
-    public TwitterBot cargarBot() throws TwitterException, IOException {
+    public void cargarBot() throws TwitterException, IOException {
         TwitterBot bot;
         adminSesion adm = adminSesion.getInstance();
         TwitterBot botSerializado = adm.desSerializar();
@@ -63,7 +69,7 @@ public class TwitterBot implements Serializable {
         else{
             bot = botSerializado;
         }
-        return bot;
+        setBOT(bot);
     }
 
     public void inicializarBot() {
