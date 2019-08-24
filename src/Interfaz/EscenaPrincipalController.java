@@ -1,5 +1,7 @@
 package Interfaz;
 
+import Motor.TwitterBot;
+import Motor.adminSesion;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
@@ -90,7 +92,10 @@ public class EscenaPrincipalController {
         stage.getIcons().add(new Image("Imagenes/Icono.png"));
         stage.show();
     }
-    @FXML public void cerrarSesion(){
+    @FXML public void cerrarSesion() throws IOException {
+        TwitterBot.getInstance().getBOT().isGuardado = false;
+        TwitterBot.getInstance().setBOT(TwitterBot.getInstance().getBOT());
+        adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
         System.out.println("Cerrando sesión...");
 
         Scene scene = cerrar_sesionBT.getScene();
