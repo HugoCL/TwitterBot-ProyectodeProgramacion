@@ -171,17 +171,12 @@ public class TwitterBot implements Serializable {
         }
 
         /***
-         * Permite agregar a faoritos todos los tweets del timeline de la cuenta asociada
+         * @param like Permite agregar a favoritos todos los tweets del timeline de la cuenta asociada
          * @throws TwitterException
          */
-        public void Like() throws TwitterException {
-            ArrayList<Status> statuses = ObtenerMensajes();
-
-            for (Status t : statuses) {
-                System.out.println(t.getUser().getName() + ": " + t.getText());
-                if (!t.isFavorited()) {
-                    twitter.createFavorite(t.getId());
-                }
+        public void Like(Status like) throws TwitterException {
+            if (!like.isFavorited()) {
+                twitter.retweetStatus(like.getId());
             }
         }
 
@@ -189,14 +184,20 @@ public class TwitterBot implements Serializable {
          * Permite retweetear todos los tweets en el timline de la cuenta ingresada
          * @throws TwitterException
          */
-        public void Retweet() throws TwitterException {
-            ArrayList<Status> statuses = ObtenerMensajes();
+        public void Retweet(Status tweet) throws TwitterException {
+            if (!tweet.isRetweeted()) {
+                twitter.retweetStatus(tweet.getId());
+            }
+        }
 
-            for (Status t : statuses) {
-                System.out.println(t.getUser().getName() + ": " + t.getText());
-                if (!t.isRetweeted()) {
-                    twitter.retweetStatus(t.getId());
-                }
+        public void Follow(String name) {
+            try {
+
+                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())   twitter.createFriendship(name);
+                else    System.out.println("Ya sigue al usuario");
+
+            } catch (TwitterException e) {
+                System.err.println("Error al buscar usuario: " + name);
             }
         }
     }
