@@ -111,6 +111,7 @@ public class TwitterBot implements Serializable {
      * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
      */
     public class Messages {
+
         /***
          * Metodo que publica Tweets de texto simple
          * @param Tweet String con el Tweet a publicar
@@ -138,7 +139,7 @@ public class TwitterBot implements Serializable {
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
 
-    class Feed {
+    public class Feed {
 
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
@@ -195,6 +196,33 @@ public class TwitterBot implements Serializable {
                 System.err.println("No se encontro Tweet");
             }
         }
+    }
+
+    /***
+     * Clase interna que se encarga de las funcionalidades referentes a los usuarios
+     */
+    public class Usuario {
+
+        /***
+         * Devuelve una lista con los usuarios que sigue la cuenta activa.
+         * @return Lista de la clase Friend, que contiene la información básica de los usuarios que sigue la cuenta activa
+         */
+        public ArrayList<Friend> getAmigos() {
+            ArrayList<Friend> amigos = new ArrayList<>();
+            long cursor = -1;
+            IDs ids;
+            try {
+                do{
+                    ids = twitter.getFriendsIDs(cursor);
+                    for (long UserId: ids.getIDs()) {
+                        amigos.add(new Friend(twitter.showUser(UserId).getId(), twitter.showUser(UserId).getName(), twitter.showUser(UserId).getScreenName()));
+                    }
+                }while((cursor = ids.getNextCursor()) != 0);
+            } catch (TwitterException e) {
+                e.printStackTrace();
+            }
+            return amigos;
+        }
 
         /***
          * Permite, a través del nombre de usuario, seguir a una cuenta de twitter
@@ -203,7 +231,6 @@ public class TwitterBot implements Serializable {
 
         public void Follow(String name) {
             try {
-
                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())   twitter.createFriendship(name);
                 else    System.out.println("Ya sigue al usuario");
 
