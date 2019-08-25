@@ -6,7 +6,6 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
@@ -112,6 +111,7 @@ public class TwitterBot implements Serializable {
      * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
      */
     public class Messages {
+
         /***
          * Metodo que publica Tweets de texto simple
          * @param Tweet String con el Tweet a publicar
@@ -139,60 +139,98 @@ public class TwitterBot implements Serializable {
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
 
-    class Feed {
+    public class Feed {
 
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
          * @return Lista con los tweets.
          */
-        public ArrayList<Status> ObtenerMensajes() {
-            ArrayList<Status> statuses = new ArrayList<>();
+        public ArrayList<Tweet> ObtenerMensajes() {
+            ArrayList<Tweet> tweets = new ArrayList<>();
             System.out.println("Obteniendo tweets");
-            for (int pageno = 1; true; pageno++) {
-                try {
-                    int size = statuses.size(); // actual tweets count we got
-                    Paging page = new Paging(pageno, 200);
-                    statuses.addAll(twitter.getHomeTimeline(page));
 
-                    if (statuses.size() == size) {
-                        System.out.println("total obtenido: " + statuses.size());
-                        break;
+            try {
+                Paging pagina = new Paging(1, 200);
+                for (int pag = 1; twitter.getHomeTimeline(pagina).size() != 0; pag++) {
+                    for (int i = 0; i < twitter.getHomeTimeline(pagina).size(); i++){
+                        Status status = twitter.getHomeTimeline(pagina).get(i);
+                        tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
                     }
-                } catch (TwitterException e) {
-                    System.err.print("Failed to search tweets: " + e.getMessage());
                 }
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     System.err.println(e.getMessage());
                 }
+            } catch (TwitterException e) {
+                System.err.println("Error buscando tweets");
             }
-            return statuses;
+            return tweets;
         }
 
         /***
-         * @param like Permite agregar a favoritos todos los tweets del timeline de la cuenta asociada
+         * Permite agregar a favoritos todos los tweets del timeline de la cuenta asociada
+         * @param like contiene el tweet a dar like
          * @throws TwitterException
          */
-        public void Like(Status like) throws TwitterException {
-            if (!like.isFavorited()) {
-                twitter.retweetStatus(like.getId());
+        public void Like(long like){
+            try {
+                twitter.createFavorite(like);
+            } catch (TwitterException e) {
+                System.err.println("Error: No se puede dar like");
             }
         }
 
         /***
          * Permite retweetear todos los tweets en el timline de la cuenta ingresada
+         * @param tweet contiene el tweet a dar retweet
          * @throws TwitterException
          */
-        public void Retweet(Status tweet) throws TwitterException {
-            if (!tweet.isRetweeted()) {
-                twitter.retweetStatus(tweet.getId());
+        public void Retweet(long tweet){
+            try {
+                if (!twitter.showStatus(tweet).isRetweetedByMe()) {
+                    twitter.retweetStatus(tweet);
+                } else
+                    System.out.println("Tweet ya tweteado");
+            } catch (TwitterException e) {
+                System.err.println("No se encontro Tweet");
             }
         }
+    }
+
+    /***
+     * Clase interna que se encarga de las funcionalidades referentes a los usuarios
+     */
+    public class Usuario {
+
+        /***
+         * Devuelve una lista con los usuarios que sigue la cuenta activa.
+         * @return Lista de la clase Friend, que contiene la información básica de los usuarios que sigue la cuenta activa
+         */
+        public ArrayList<Friend> getAmigos() {
+            ArrayList<Friend> amigos = new ArrayList<>();
+            long cursor = -1;
+            IDs ids;
+            try {
+                do{
+                    ids = twitter.getFriendsIDs(cursor);
+                    for (long UserId: ids.getIDs()) {
+                        amigos.add(new Friend(twitter.showUser(UserId).getId(), twitter.showUser(UserId).getName(), twitter.showUser(UserId).getScreenName()));
+                    }
+                }while((cursor = ids.getNextCursor()) != 0);
+            } catch (TwitterException e) {
+                e.printStackTrace();
+            }
+            return amigos;
+        }
+
+        /***
+         * Permite, a través del nombre de usuario, seguir a una cuenta de twitter
+         * @param name Cadena con el nombre del usuario a seguir
+         */
 
         public void Follow(String name) {
             try {
-
                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())   twitter.createFriendship(name);
                 else    System.out.println("Ya sigue al usuario");
 
