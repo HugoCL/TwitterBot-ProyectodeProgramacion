@@ -124,10 +124,9 @@ public class TwitterBot implements Serializable {
         }
 
         public void PublicarTweetImagen (String Tweet, File rutaImagen){
-            File imagen = new File(rutaImagen);
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
-                nuevoTweet.setMedia(imagen);
+                nuevoTweet.setMedia(rutaImagen);
                 twitter.updateStatus(nuevoTweet);
                 System.out.println("Tweet con imagen publicado correctamente");
             }
