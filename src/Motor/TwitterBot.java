@@ -123,6 +123,20 @@ public class TwitterBot implements Serializable {
             status.getText();
         }
 
+        public void PublicarTweetImagen (String Tweet, String rutaImagen){
+            File imagen = new File(rutaImagen);
+            try{
+                StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
+                nuevoTweet.setMedia(imagen);
+                twitter.updateStatus(nuevoTweet);
+                System.out.println("Tweet con imagen publicado correctamente");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Ocurrió un error al intentar publicar el Tweet. Revise el tipo de archivo.");
+            }
+        }
+
         /***
          * Metodo que envia MD a personas usando su @.
          * @param arroba Nombre de usuario al que se le enviara el MD. No se debe incluir el @
