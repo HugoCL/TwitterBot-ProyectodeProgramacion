@@ -123,7 +123,7 @@ public class TwitterBot implements Serializable {
             status.getText();
         }
 
-        public void PublicarTweetImagen (String Tweet, String rutaImagen){
+        public void PublicarTweetImagen (String Tweet, File rutaImagen){
             File imagen = new File(rutaImagen);
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
