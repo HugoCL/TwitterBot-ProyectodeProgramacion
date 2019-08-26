@@ -90,11 +90,9 @@ public class TwittearController {
         String tweet = tweet_TA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
         if (nameFile_LB.getText() == ""){
-            System.out.println("Sin archivo agregado");
             mensajes.PublicarTweet(tweet);
         }
         else{
-            System.out.println("Lo contrario a esa wea");
             mensajes.PublicarTweetImagen(tweet, selectedDirectory);
         }
 
