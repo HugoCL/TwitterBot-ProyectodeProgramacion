@@ -95,7 +95,6 @@ public class EscenaPrincipalController {
     }
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().isGuardado = false;
-        TwitterBot.getInstance().setBOT(TwitterBot.getInstance().getBOT());
         adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
         System.out.println("Cerrando sesión...");
 

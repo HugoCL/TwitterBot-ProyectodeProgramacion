@@ -10,17 +10,17 @@
 
 <AnchorPane fx:id="tweetearAP" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
    <children>
-      <ImageView fitHeight="127.0" fitWidth="265.0" layoutX="168.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="76.0" fitWidth="209.0" layoutX="209.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/Logo.jpeg" />
          </image>
       </ImageView>
-      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="125.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="415.0" unFocusColor="#3e85c3">
+      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="97.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="415.0" unFocusColor="#3e85c3">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </JFXTextArea>
-      <Label fx:id="caracteres_LB" alignment="CENTER" layoutX="251.0" layoutY="338.0" prefHeight="17.0" prefWidth="99.0" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="caracteres_LB" alignment="CENTER" layoutX="409.0" layoutY="263.0" prefHeight="17.0" prefWidth="99.0" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Segoe UI" size="17.0" />
          </font>
@@ -35,5 +35,15 @@
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
+      <JFXButton fx:id="addFileBT" layoutX="101.0" layoutY="274.0" onAction="#agregarArchivo" prefHeight="25.0" prefWidth="107.0" style="-fx-border-color: #3e85c3; -fx-border-radius: 8;" text="Agregar Archivo" textFill="#3e85c3">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="nameFile_LB" layoutX="226.0" layoutY="277.0" prefHeight="15.0" prefWidth="150.0" style="-fx-border-color: #3e85c3;">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
