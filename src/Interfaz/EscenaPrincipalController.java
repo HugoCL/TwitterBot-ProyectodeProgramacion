@@ -1,39 +1,47 @@
 package Interfaz;
 
+import Motor.Tweet;
 import Motor.TwitterBot;
 import Motor.adminSesion;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.*;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.text.TableView;
 import java.io.IOException;
 import java.net.URL;
 
 public class EscenaPrincipalController {
 
     @FXML private AnchorPane mainAP;
+    @FXML private AnchorPane secondAP;
 
     @FXML private JFXButton tweetearBT;
-    @FXML private JFXButton retweetearBT;
+    @FXML private JFXButton retweetBT;
     @FXML private JFXButton followBT;
+    @FXML private JFXButton likeBT;
     @FXML private JFXButton directBT;
     @FXML private JFXButton cerrar_sesionBT;
 
+    @FXML private TableView<Tweet> listaTweets_TV;
+
     public void initialize(){
         //Botones desactivados
-        retweetearBT.setDisable(true);
         followBT.setDisable(true);
+        listaTweets_TV.setVisible(false);
+        retweetBT.setVisible(false);
+        likeBT.setVisible(false);
     }
 
     @FXML public void tweetear() throws IOException {
@@ -56,8 +64,10 @@ public class EscenaPrincipalController {
         timeline.play();
     }
 
-    @FXML public void retweetear(){
-
+    @FXML public void timeline(){
+        listaTweets_TV.setVisible(true);
+        retweetBT.setVisible(true);
+        likeBT.setVisible(true);
     }
 
     @FXML public void follow() throws IOException {

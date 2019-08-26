@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,7 +10,25 @@
 
 <AnchorPane fx:id="mainAP" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
    <children>
-      <AnchorPane layoutX="200.0" layoutY="9.0" prefHeight="379.0" prefWidth="394.0" />
+      <AnchorPane fx:id="secondAP" layoutX="200.0" layoutY="9.0" prefHeight="380.0" prefWidth="379.0">
+         <children>
+            <TableView fx:id="listaTweets_TV" layoutY="14.0" prefHeight="315.0" prefWidth="379.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+              <columns>
+                <TableColumn prefWidth="115.0" text="Usuario" />
+                <TableColumn prefWidth="263.0" text="Tweet" />
+              </columns>
+            </TableView>
+            <JFXButton fx:id="retweetBT" layoutX="55.0" layoutY="332.0" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3e85c3;" text="Retweet" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="likeBT" layoutX="238.0" layoutY="332.0" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3e85c3;" text="Like" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="17.0" />
+               </font>
+            </JFXButton>
+         </children></AnchorPane>
       <ImageView fitHeight="94.0" fitWidth="162.0" layoutX="17.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/Logo.jpeg" />
@@ -19,7 +39,7 @@
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="retweetearBT" layoutX="23.0" layoutY="151.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Retweetear" textFill="WHITE">
+      <JFXButton fx:id="timeLineBT" layoutX="23.0" layoutY="151.0" onAction="#timeline" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="TimeLine" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
