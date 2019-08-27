@@ -157,30 +157,30 @@ public class TwitterBot implements Serializable {
      */
 
     public class Feed {
-
+        private ArrayList<Tweet> tweets = new ArrayList<>();
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
          * @return Lista con los tweets.
          */
         public ArrayList<Tweet> ObtenerTweets() {
-            ArrayList<Tweet> tweets = new ArrayList<>();
+            int pageno = 1;
+
             System.out.println("Obteniendo tweets...");
 
-            try {
-                Paging pagina = new Paging(1, 200);
-                for (int pag = 1; twitter.getHomeTimeline(pagina).size() != 0; pag++) {
-                    for (int i = 0; i < twitter.getHomeTimeline(pagina).size(); i++){
-                        Status status = twitter.getHomeTimeline(pagina).get(i);
+            while (true) {
+                try {
+                    int size = tweets.size();
+                    Paging page = new Paging(pageno++, 100);
+                    for (Status status: twitter.getHomeTimeline(page)){
                         tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
                     }
+                    if (tweets.size() == size)
+                        break;
+                }catch(TwitterException e) {
+                    e.printStackTrace();
+                    System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
+                    if (tweets.size() != 0)     return tweets;
                 }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    System.err.println(e.getMessage());
-                }
-            } catch (TwitterException e) {
-                System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
             }
             return tweets;
         }
