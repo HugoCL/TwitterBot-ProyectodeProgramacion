@@ -1,25 +1,25 @@
 package Motor;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /***
  * Clase que alamcena la información básica de un tweet.
  */
 
 public class Tweet {
 
-    private String mensaje;
-
+    private SimpleStringProperty mensaje = new SimpleStringProperty();
+    private SimpleStringProperty nombre = new SimpleStringProperty();
     private long id;
 
-    private String nombre;
-
     public Tweet(String mensaje, long id, String nombre) {
-        this.mensaje = mensaje;
+        this.mensaje = new SimpleStringProperty(mensaje);
         this.id = id;
-        this.nombre = nombre;
+        this.nombre = new SimpleStringProperty(nombre);
     }
 
     public String getMensaje() {
-        return mensaje;
+        return mensaje.get();
     }
 
     public long getId() {
@@ -27,6 +27,6 @@ public class Tweet {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.get();
     }
 }

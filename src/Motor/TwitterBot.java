@@ -143,8 +143,12 @@ public class TwitterBot implements Serializable {
          * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
          */
         public void EnviarMD(String arroba, String texto) throws TwitterException {
-            DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
-            System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
+            try {
+                DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
+                System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
+            }catch (Exception e){
+                System.out.println("Error al enviar mensaje a: @"+arroba+", verifique el ");
+            }
         }
     }
 
@@ -158,9 +162,9 @@ public class TwitterBot implements Serializable {
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
          * @return Lista con los tweets.
          */
-        public ArrayList<Tweet> ObtenerMensajes() {
+        public ArrayList<Tweet> ObtenerTweets() {
             ArrayList<Tweet> tweets = new ArrayList<>();
-            System.out.println("Obteniendo tweets");
+            System.out.println("Obteniendo tweets...");
 
             try {
                 Paging pagina = new Paging(1, 200);
@@ -176,7 +180,7 @@ public class TwitterBot implements Serializable {
                     System.err.println(e.getMessage());
                 }
             } catch (TwitterException e) {
-                System.err.println("Error buscando tweets");
+                System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
             }
             return tweets;
         }
