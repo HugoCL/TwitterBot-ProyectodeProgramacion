@@ -162,9 +162,9 @@ public class TwitterBot implements Serializable {
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
          * @return Lista con los tweets.
          */
-        public ArrayList<Tweet> ObtenerMensajes() {
+        public ArrayList<Tweet> ObtenerTweets() {
             ArrayList<Tweet> tweets = new ArrayList<>();
-            System.out.println("Obteniendo tweets");
+            System.out.println("Obteniendo tweets...");
 
             try {
                 Paging pagina = new Paging(1, 200);
@@ -180,7 +180,7 @@ public class TwitterBot implements Serializable {
                     System.err.println(e.getMessage());
                 }
             } catch (TwitterException e) {
-                System.err.println("Error buscando tweets");
+                System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
             }
             return tweets;
         }

@@ -24,6 +24,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class EscenaPrincipalController {
 
@@ -80,22 +81,26 @@ public class EscenaPrincipalController {
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
         tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
-        for (int i=0; i<10;i++){
-            Tweet newTweet = new Tweet();
-            newTweet.nombre.set("Usuario "+i);
-            newTweet.mensaje.set("Tweet "+i);
+        ArrayList<Tweet> listaTweets = TwitterBot.getInstance().getBOT().new Feed().ObtenerTweets();
+        for (Tweet tweet: listaTweets) {
+            Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
             tweets.add(newTweet);
         }
     }
 
     @FXML public void retweet(){
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
-        System.out.println(selecTweet.getNombre()+" "+selecTweet.getMensaje());
+        if (selecTweet != null){
+            TwitterBot.getInstance().getBOT().new Feed().Retweet(selecTweet.getId());
+        }else System.out.println("No ha seleccionado ningun tweet.");
+
     }
 
     @FXML public void like(){
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
-        System.out.println(selecTweet.getNombre()+" "+selecTweet.getMensaje());
+        if (selecTweet != null){
+            TwitterBot.getInstance().getBOT().new Feed().Like(selecTweet.getId());
+        }else System.out.println("No ha seleccionado ningun tweet.");
     }
 
     @FXML public void follow() throws IOException {
