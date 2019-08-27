@@ -193,6 +193,7 @@ public class TwitterBot implements Serializable {
         public void Like(long like){
             try {
                 twitter.createFavorite(like);
+                System.out.println("Like exitoso.");
             } catch (TwitterException e) {
                 System.err.println("Error: No se puede dar like");
             }
@@ -207,6 +208,7 @@ public class TwitterBot implements Serializable {
             try {
                 if (!twitter.showStatus(tweet).isRetweetedByMe()) {
                     twitter.retweetStatus(tweet);
+                    System.out.println("Retweet exitoso.");
                 } else
                     System.out.println("Tweet ya tweteado");
             } catch (TwitterException e) {
@@ -245,7 +247,6 @@ public class TwitterBot implements Serializable {
          * Permite, a través del nombre de usuario, seguir a una cuenta de twitter
          * @param name Cadena con el nombre del usuario a seguir
          */
-
         public void Follow(String name) {
             try {
                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())   twitter.createFriendship(name);
@@ -254,6 +255,9 @@ public class TwitterBot implements Serializable {
             } catch (TwitterException e) {
                 System.err.println("Error al buscar usuario: " + name);
             }
+        }
+        public String getNombreUsuario() throws TwitterException {
+            return twitter.getScreenName();
         }
     }
 }

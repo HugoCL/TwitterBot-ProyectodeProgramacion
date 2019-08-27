@@ -73,6 +73,9 @@ public class TwittearController {
             caracteres_LB.setText(tweet_TA.getText().length()+"/280");
         }
         else {
+            if (nameFile_LB.getText() != ""){
+                publicar_tweetBT.setDisable(false);
+            }
             caracteres_LB.setTextFill(Color.web("#000000"));
             caracteres_LB.setText("0/280");
         }

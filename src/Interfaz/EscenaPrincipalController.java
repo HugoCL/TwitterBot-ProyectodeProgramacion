@@ -7,10 +7,13 @@ import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import twitter4j.TwitterException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +28,10 @@ public class EscenaPrincipalController {
     @FXML private JFXButton followBT;
     @FXML private JFXButton likeBT;
     @FXML private JFXButton directBT;
+    @FXML private JFXButton timelineBT;
     @FXML private JFXButton cerrar_sesionBT;
+
+    @FXML private Text usernameTX;
 
     //TableView
     @FXML private TableColumn<Tweet, String> usuarioCL;
@@ -36,11 +42,12 @@ public class EscenaPrincipalController {
     //Inner Classes
     TwitterBot.Feed feed = TwitterBot.getInstance().getBOT().new Feed();
 
-    public void initialize(){
+    public void initialize() throws TwitterException {
+        //Obtener nombre de usuario
+        usernameTX.setText(TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
         //Botones desactivados
-        listaTweets_TV.setVisible(false);
-        retweetBT.setVisible(false);
-        likeBT.setVisible(false);
+        timelineBT.setDisable(true);
+        secondAP.setVisible(false);
     }
 
     @FXML public void tweetear() throws IOException {
@@ -49,9 +56,7 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline(){
-        listaTweets_TV.setVisible(true);
-        retweetBT.setVisible(true);
-        likeBT.setVisible(true);
+        secondAP.setVisible(true);
         //Inicializar la tableView
         usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));

@@ -39,11 +39,11 @@ public class InicioSesionController {
             bot = botSerializado;
         }
         if (bot.isGuardado) {
-            enlaceTA.setText("Enlace no requerido, sesión iniciada.");
             pinPF.setEditable(false);
             pinPF.setText(bot.pin);
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
+            enlaceTA.setText("Sesión iniciada con: "+TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
         }else{
             bot = TwitterBot.getInstance();
             bot.inicializarBot();
