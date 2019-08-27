@@ -143,8 +143,12 @@ public class TwitterBot implements Serializable {
          * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
          */
         public void EnviarMD(String arroba, String texto) throws TwitterException {
-            DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
-            System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
+            try {
+                DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
+                System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
+            }catch (Exception e){
+                System.out.println("Error al enviar mensaje a: @"+arroba+", verifique el nombre.");
+            }
         }
     }
 

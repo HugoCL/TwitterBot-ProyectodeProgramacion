@@ -15,7 +15,7 @@
             <Image url="@../Imagenes/Logo.jpeg" />
          </image>
       </ImageView>
-      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="97.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="415.0" unFocusColor="#3e85c3">
+      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="127.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="415.0" promptText="¿Qué está pasando?" unFocusColor="#3e85c3">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>

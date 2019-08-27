@@ -104,7 +104,7 @@ public class TwittearController {
     }
 
     @FXML public void regresar() throws IOException {
-        System.out.println("Cargando ventana para twittear...");
+        System.out.println("Cargando ventana principal...");
 
         Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/EscenaPrincipal.fxml"));
         Scene scene = regresarBT.getScene();

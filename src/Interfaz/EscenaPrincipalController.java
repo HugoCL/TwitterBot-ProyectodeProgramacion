@@ -5,6 +5,7 @@ import Motor.TwitterBot;
 import Motor.adminSesion;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,7 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -34,11 +37,15 @@ public class EscenaPrincipalController {
     @FXML private JFXButton directBT;
     @FXML private JFXButton cerrar_sesionBT;
 
+    //TableView
+    @FXML private TableColumn<Tweet, String> usuarioCL;
+    @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
+    @FXML private ObservableList<Tweet> tweets;
+    @FXML private int posicionTweetEnTabla;
 
     public void initialize(){
         //Botones desactivados
-        followBT.setDisable(true);
         listaTweets_TV.setVisible(false);
         retweetBT.setVisible(false);
         likeBT.setVisible(false);
@@ -68,6 +75,19 @@ public class EscenaPrincipalController {
         listaTweets_TV.setVisible(true);
         retweetBT.setVisible(true);
         likeBT.setVisible(true);
+        //Inicializar la tableView
+        usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
+        tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
+        tweets = FXCollections.observableArrayList();
+        listaTweets_TV.setItems(tweets);
+    }
+
+    @FXML public void retweet(){
+
+    }
+
+    @FXML public void like(){
+
     }
 
     @FXML public void follow() throws IOException {
@@ -90,18 +110,23 @@ public class EscenaPrincipalController {
         timeline.play();
     }
     @FXML public void directMessage() throws IOException {
-        //Creación de ventana
-        FXMLLoader loader = new FXMLLoader();
+        System.out.println("Cargando ventana para mensajes directos...");
 
-        URL location = MensajeDirectoController.class.getResource("MensajeDirecto.fxml");
-        loader.setLocation(location);
-        AnchorPane newBP = loader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(newBP);
-        stage.setScene(scene);
-        stage.setTitle("Twitter Bot - Ramos Overflow");
-        stage.getIcons().add(new Image("Imagenes/Icono.png"));
-        stage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/MensajeDirecto.fxml"));
+        Scene scene = directBT.getScene();
+
+        root.translateXProperty().set(scene.getWidth());
+        StackPane parentContainer = (StackPane) scene.getRoot();
+        parentContainer.getChildren().add(root);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(event -> {
+            parentContainer.getChildren().remove(mainAP);
+        });
+        timeline.play();
     }
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().isGuardado = false;
