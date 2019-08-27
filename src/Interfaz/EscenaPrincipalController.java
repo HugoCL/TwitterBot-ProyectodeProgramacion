@@ -33,6 +33,9 @@ public class EscenaPrincipalController {
     @FXML private TableView<Tweet> listaTweets_TV;
     @FXML private ObservableList<Tweet> tweets;
 
+    //Inner Classes
+    TwitterBot.Feed feed = TwitterBot.getInstance().getBOT().new Feed();
+
     public void initialize(){
         //Botones desactivados
         listaTweets_TV.setVisible(false);
@@ -54,7 +57,7 @@ public class EscenaPrincipalController {
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
         tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
-        ArrayList<Tweet> listaTweets = TwitterBot.getInstance().getBOT().new Feed().ObtenerTweets();
+        ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         for (Tweet tweet: listaTweets) {
             Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
             tweets.add(newTweet);
