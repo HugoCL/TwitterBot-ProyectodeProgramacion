@@ -2,21 +2,13 @@ package Interfaz;
 import Motor.TwitterBot;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import twitter4j.TwitterException;
 
@@ -105,21 +97,6 @@ public class TwittearController {
 
     @FXML public void regresar() throws IOException {
         System.out.println("Cargando ventana principal...");
-
-        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/EscenaPrincipal.fxml"));
-        Scene scene = regresarBT.getScene();
-
-        root.translateXProperty().set(-scene.getWidth());
-        StackPane parentContainer = (StackPane) scene.getRoot();
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(tweetearAP);
-        });
-        timeline.play();
+        Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml",regresarBT,tweetearAP);
     }
 }

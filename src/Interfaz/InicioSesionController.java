@@ -6,14 +6,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextArea;
-import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
@@ -54,15 +49,9 @@ public class InicioSesionController {
             bot.inicializarBot();
             enlaceTA.setText(bot.OAuthURL());
         }
+        //FadeIn
+        Transiciones.Fade.getInstance().in(parentContainer);
 
-        //Ventana
-        parentContainer.setOpacity(0);
-        FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.seconds(0.25));
-        fadeTransition.setNode(parentContainer);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
     }
 
     @FXML public void iniciarSesion() throws IOException {
@@ -84,23 +73,8 @@ public class InicioSesionController {
                 System.out.println("Sesion no guardada.");
             }
         }
-
         System.out.println("Sesión iniciada...");
-
         //Transición de escenas
-        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/EscenaPrincipal.fxml"));
-        Scene scene = iniciar_sesionBT.getScene();
-
-        root.translateXProperty().set(scene.getWidth());
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(inicioSesionAP);
-        });
-        timeline.play();
+        Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }
 }
