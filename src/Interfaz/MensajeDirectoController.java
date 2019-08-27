@@ -56,21 +56,6 @@ public class MensajeDirectoController {
     }
     @FXML public void regresar() throws IOException {
         System.out.println("Cargando ventana principal...");
-
-        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/EscenaPrincipal.fxml"));
-        Scene scene = regresarBT.getScene();
-
-        root.translateXProperty().set(-scene.getWidth());
-        StackPane parentContainer = (StackPane) scene.getRoot();
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(directMessageAP);
-        });
-        timeline.play();
+        Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml", regresarBT, directMessageAP);
     }
 }

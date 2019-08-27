@@ -4,26 +4,15 @@ import Motor.Tweet;
 import Motor.TwitterBot;
 import Motor.adminSesion;
 import com.jfoenix.controls.JFXButton;
-import javafx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class EscenaPrincipalController {
@@ -43,7 +32,6 @@ public class EscenaPrincipalController {
     @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
     @FXML private ObservableList<Tweet> tweets;
-    @FXML private int posicionTweetEnTabla;
 
     public void initialize(){
         //Botones desactivados
@@ -54,22 +42,7 @@ public class EscenaPrincipalController {
 
     @FXML public void tweetear() throws IOException {
         System.out.println("Cargando ventana para twittear...");
-
-        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/Twittear.fxml"));
-        Scene scene = tweetearBT.getScene();
-
-        root.translateXProperty().set(scene.getWidth());
-        StackPane parentContainer = (StackPane) scene.getRoot();
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(mainAP);
-        });
-        timeline.play();
+        Transiciones.Slide.getInstance().left("/Interfaz/Twittear.fxml",tweetearBT,mainAP);
     }
 
     @FXML public void timeline(){
@@ -87,7 +60,6 @@ public class EscenaPrincipalController {
             tweets.add(newTweet);
         }
     }
-
     @FXML public void retweet(){
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
@@ -95,78 +67,24 @@ public class EscenaPrincipalController {
         }else System.out.println("No ha seleccionado ningun tweet.");
 
     }
-
     @FXML public void like(){
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
             TwitterBot.getInstance().getBOT().new Feed().Like(selecTweet.getId());
         }else System.out.println("No ha seleccionado ningun tweet.");
     }
-
     @FXML public void follow() throws IOException {
         System.out.println("Cargando ventana para realizar follow...");
-
-        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/Follow.fxml"));
-        Scene scene = tweetearBT.getScene();
-
-        root.translateXProperty().set(scene.getWidth());
-        StackPane parentContainer = (StackPane) scene.getRoot();
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(mainAP);
-        });
-        timeline.play();
+        Transiciones.Slide.getInstance().left("/Interfaz/Follow.fxml", followBT, mainAP);
     }
     @FXML public void directMessage() throws IOException {
         System.out.println("Cargando ventana para mensajes directos...");
-
-        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/MensajeDirecto.fxml"));
-        Scene scene = directBT.getScene();
-
-        root.translateXProperty().set(scene.getWidth());
-        StackPane parentContainer = (StackPane) scene.getRoot();
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(mainAP);
-        });
-        timeline.play();
+        Transiciones.Slide.getInstance().left("/Interfaz/MensajeDirecto.fxml", directBT, mainAP);
     }
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().isGuardado = false;
         adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
         System.out.println("Cerrando sesión...");
-
-        Scene scene = cerrar_sesionBT.getScene();
-
-        FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.seconds(0.5));
-        StackPane rootPane = (StackPane) scene.getRoot();
-        fadeTransition.setNode(rootPane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/InicioSesion.fxml"));
-                    Scene scene1 = new Scene(root);
-                    Stage stage = (Stage) rootPane.getScene().getWindow();
-                    stage.setScene(scene1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        fadeTransition.play();
+        Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 }
