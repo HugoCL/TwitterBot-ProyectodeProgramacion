@@ -147,7 +147,7 @@ public class TwitterBot implements Serializable {
                 DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
                 System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
             }catch (Exception e){
-                System.out.println("Error al enviar mensaje a: @"+arroba+", verifique el nombre.");
+                System.out.println("Error al enviar mensaje a: @"+arroba+", verifique el ");
             }
         }
     }

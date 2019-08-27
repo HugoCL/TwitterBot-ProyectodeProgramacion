@@ -3,37 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Imagenes/Twitter _ Autorizar una aplicación.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Imagenes/Twitter _ Autorizar una aplicación_files/74tprg8O_mini.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Imagenes/Twitter _ Autorizar una aplicación_files/authorize_page.c4edf9ccaf94a42b6963991691957aaa827aa56b.js.descarga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Imagenes/Twitter _ Autorizar una aplicación_files/base.c03d8aaa91f708e544dab495c1de806582ae1f1f.js.descarga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Imagenes/Twitter _ Autorizar una aplicación_files/tfw-base.3baf723b92aa68729f921c77ca3e3c1315116392.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" afterPath="$PROJECT_DIR$/Sesion.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Follow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Follow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/FollowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/FollowController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirecto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirecto.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Twittear.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Twittear.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Feed.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Feed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Tweet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Tweet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Messages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Usuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Imagenes/Twitter _ Autorizar una aplicación.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Imagenes/Twitter _ Autorizar una aplicación_files/74tprg8O_mini.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Imagenes/Twitter _ Autorizar una aplicación_files/authorize_page.c4edf9ccaf94a42b6963991691957aaa827aa56b.js.descarga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Imagenes/Twitter _ Autorizar una aplicación_files/base.c03d8aaa91f708e544dab495c1de806582ae1f1f.js.descarga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Imagenes/Twitter _ Autorizar una aplicación_files/tfw-base.3baf723b92aa68729f921c77ca3e3c1315116392.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipal.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/Follow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Follow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/FollowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/FollowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/MensajeDirecto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/MensajeDirecto.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/Twittear.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Twittear.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/Tweet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Tweet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/TwitterBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/TwitterBot.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -136,7 +112,7 @@
       <workItem from="1566682512054" duration="2737000" />
       <workItem from="1566783375550" duration="3067000" />
       <workItem from="1566835073058" duration="3338000" />
-      <workItem from="1566861268147" duration="2866000" />
+      <workItem from="1566861268147" duration="4599000" />
     </task>
     <servers />
   </component>

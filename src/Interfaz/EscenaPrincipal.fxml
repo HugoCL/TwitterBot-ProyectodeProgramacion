@@ -18,12 +18,12 @@
                 <TableColumn fx:id="tweetCL" prefWidth="263.0" text="Tweet" />
               </columns>
             </TableView>
-            <JFXButton fx:id="retweetBT" layoutX="45.0" layoutY="340.0" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3e85c3;" text="Retweet" textFill="WHITE">
+            <JFXButton fx:id="retweetBT" layoutX="236.0" layoutY="340.0" onAction="#retweet" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3e85c3;" text="Retweet" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="17.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="likeBT" layoutX="238.0" layoutY="340.0" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3e85c3;" text="Like" textFill="WHITE">
+            <JFXButton fx:id="likeBT" layoutX="50.0" layoutY="340.0" onAction="#like" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3e85c3;" text="Like" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="17.0" />
                </font>

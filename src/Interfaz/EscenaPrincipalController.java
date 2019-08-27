@@ -80,14 +80,22 @@ public class EscenaPrincipalController {
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
         tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
+        for (int i=0; i<10;i++){
+            Tweet newTweet = new Tweet();
+            newTweet.nombre.set("Usuario "+i);
+            newTweet.mensaje.set("Tweet "+i);
+            tweets.add(newTweet);
+        }
     }
 
     @FXML public void retweet(){
-
+        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
+        System.out.println(selecTweet.getNombre()+" "+selecTweet.getMensaje());
     }
 
     @FXML public void like(){
-
+        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
+        System.out.println(selecTweet.getNombre()+" "+selecTweet.getMensaje());
     }
 
     @FXML public void follow() throws IOException {
