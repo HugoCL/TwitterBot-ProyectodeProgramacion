@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="" />
+    <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Follow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Follow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Twittear.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Twittear.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Feed.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Main3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Feed.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Feed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/TwitterBot$Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/TestZone/Main2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/TestZone/motorBot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Transiciones/Slide.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Transiciones/Slide.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/Follow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Follow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/Twittear.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Twittear.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/TwitterBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/TwitterBot.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,17 +41,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProjectId" id="1PfLFj4UWFWmecLkT7riFtbSsFG" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -92,7 +117,16 @@
       <workItem from="1566276347184" duration="207000" />
       <workItem from="1566318269320" duration="118000" />
       <workItem from="1566357136912" duration="260000" />
-      <workItem from="1566425642644" duration="16325000" />
+      <workItem from="1566425642644" duration="17110000" />
+      <workItem from="1566480903157" duration="55000" />
+      <workItem from="1566481676120" duration="3044000" />
+      <workItem from="1566487356408" duration="4302000" />
+      <workItem from="1566593451468" duration="9976000" />
+      <workItem from="1566682512054" duration="2737000" />
+      <workItem from="1566783375550" duration="3067000" />
+      <workItem from="1566835073058" duration="3338000" />
+      <workItem from="1566861268147" duration="9439000" />
+      <workItem from="1566920124870" duration="6205000" />
     </task>
     <servers />
   </component>

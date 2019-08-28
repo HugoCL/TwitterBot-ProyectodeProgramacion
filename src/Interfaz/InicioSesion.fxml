@@ -24,7 +24,7 @@
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </JFXButton>
-            <JFXPasswordField fx:id="pinPF" focusColor="#3e85c3" labelFloat="true" layoutX="209.0" layoutY="260.0" prefHeight="29.0" prefWidth="212.0" promptText="PIN" text="asdasd" unFocusColor="#3e85c3">
+            <JFXPasswordField fx:id="pinPF" focusColor="#3e85c3" labelFloat="true" layoutX="209.0" layoutY="260.0" prefHeight="29.0" prefWidth="212.0" promptText="PIN" unFocusColor="#3e85c3">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>
@@ -34,8 +34,8 @@
                   <Font size="16.0" />
                </font>
             </JFXButton>
-            <JFXCheckBox fx:id="noCierreSesionCB" checkedColor="#3e85c3" layoutX="253.0" layoutY="366.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
-            <JFXTextArea fx:id="enlaceTA" editable="false" focusColor="#3e85c3" labelFloat="true" layoutX="209.0" layoutY="129.0" prefHeight="65.0" prefWidth="212.0" promptText="Enlace de Autenticación" text="https://api.twitter.com/oauth/authorize?oauth_token=3NqIGQAAAAAA_cqZAAABbLbTH2E" unFocusColor="#3e85c3">
+            <JFXCheckBox fx:id="no_cierre_sesionCB" checkedColor="#3e85c3" layoutX="253.0" layoutY="358.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
+            <JFXTextArea fx:id="enlaceTA" editable="false" focusColor="#3e85c3" labelFloat="true" layoutX="209.0" layoutY="129.0" prefHeight="65.0" prefWidth="212.0" promptText="Enlace de Autenticación" unFocusColor="#3e85c3">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>

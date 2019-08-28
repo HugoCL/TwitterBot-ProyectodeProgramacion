@@ -1,23 +1,21 @@
 package Interfaz;
 
 import Motor.TwitterBot;
+import Motor.adminSesion;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextArea;
-import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
 
 public class InicioSesionController {
+
+    protected TwitterBot bot;
 
     @FXML private JFXTextArea enlaceTA;
     @FXML private JFXPasswordField pinPF;
@@ -28,34 +26,55 @@ public class InicioSesionController {
 
     @FXML private StackPane parentContainer;
 
-    public void initialize(){
-        parentContainer.setOpacity(0);
-        FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.seconds(0.25));
-        fadeTransition.setNode(parentContainer);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
+    public void initialize() throws TwitterException, IOException {
+        adminSesion adm = adminSesion.getInstance();
+        TwitterBot botSerializado = adm.desSerializar();
+        if (botSerializado == null){
+            bot = TwitterBot.getInstance();
+            bot.isGuardado = false;
+            bot.inicializarBot();
+            enlaceTA.setText(bot.OAuthURL());
+        }
+        else{
+            bot = botSerializado;
+        }
+        if (bot.isGuardado) {
+            pinPF.setEditable(false);
+            pinPF.setText(bot.pin);
+            no_cierre_sesionCB.setSelected(true);
+            TwitterBot.getInstance().setBOT(bot);
+            enlaceTA.setText("Sesión iniciada con: "+TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
+        }else{
+            bot = TwitterBot.getInstance();
+            bot.inicializarBot();
+            enlaceTA.setText(bot.OAuthURL());
+        }
+        //FadeIn
+        Transiciones.Fade.getInstance().in(parentContainer);
+
     }
 
-    @FXML public void iniciarSesion() throws TwitterException, IOException {
-        TwitterBot bot = TwitterBot.getInstance().cargarBot();
-        TwitterBot.getInstance().setBOT(bot);
+    @FXML public void iniciarSesion() throws IOException {
+        if (!bot.isGuardado){
+            String pin = pinPF.getText();
+            bot.OAuthInicio(pin);
+            if (no_cierre_sesionCB.isSelected()){
+                bot.isGuardado = true;
+                bot.pin = pinPF.getText();
+                adminSesion.getInstance().Serializar(bot);
+                System.out.println("Sesion guardada.");
+            }
+            TwitterBot.getInstance().setBOT(bot);
+        }else {
+            if (!no_cierre_sesionCB.isSelected()){
+                bot.isGuardado = false;
+                adminSesion.getInstance().Serializar(bot);
+                TwitterBot.getInstance().setBOT(bot);
+                System.out.println("Sesion no guardada.");
+            }
+        }
         System.out.println("Sesión iniciada...");
-
-        Parent root = FXMLLoader.load(getClass().getResource("/Interfaz/EscenaPrincipal.fxml"));
-        Scene scene = iniciar_sesionBT.getScene();
-
-        root.translateXProperty().set(scene.getWidth());
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(inicioSesionAP);
-        });
-        timeline.play();
+        //Transición de escenas
+        Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }
 }

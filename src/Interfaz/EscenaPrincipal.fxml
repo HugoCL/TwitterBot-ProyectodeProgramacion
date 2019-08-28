@@ -1,30 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="mainAP" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
    <children>
-      <AnchorPane layoutX="200.0" layoutY="9.0" prefHeight="379.0" prefWidth="394.0" />
-      <ImageView fitHeight="94.0" fitWidth="162.0" layoutX="17.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Imagenes/Logo.jpeg" />
-         </image>
-      </ImageView>
+      <AnchorPane fx:id="secondAP" layoutX="200.0" layoutY="9.0" prefHeight="380.0" prefWidth="379.0">
+         <children>
+            <TableView fx:id="listaTweets_TV" layoutY="78.0" prefHeight="251.0" prefWidth="379.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
+              <columns>
+                <TableColumn fx:id="usuarioCL" editable="false" prefWidth="152.0" sortable="false" text="Usuario" />
+                <TableColumn fx:id="tweetCL" editable="false" prefWidth="226.0" sortable="false" text="Tweet" />
+              </columns>
+            </TableView>
+            <JFXButton fx:id="retweetBT" layoutX="231.0" layoutY="340.0" onAction="#retweet" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #3e85c3;" text="Retweet" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="likeBT" layoutX="39.0" layoutY="340.0" onAction="#like" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #3e85c3;" text="Like" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <Text fill="#3e85c3" layoutX="39.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Últimos Tweets" textAlignment="CENTER" wrappingWidth="302.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="38.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
       <JFXButton fx:id="tweetearBT" layoutX="23.0" layoutY="93.0" onAction="#tweetear" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Tweetear" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="retweetearBT" layoutX="23.0" layoutY="151.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Retweetear" textFill="WHITE">
+      <JFXButton fx:id="timelineBT" layoutX="23.0" layoutY="151.0" onAction="#timeline" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="TimeLine" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="followBT" layoutX="23.0" layoutY="210.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Follow" textFill="WHITE">
+      <JFXButton fx:id="followBT" layoutX="23.0" layoutY="210.0" onAction="#follow" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Follow" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
@@ -39,5 +58,15 @@
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
+      <Text fill="#3e85c3" layoutX="10.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido:" textAlignment="CENTER" wrappingWidth="175.13671875">
+         <font>
+            <Font name="Segoe UI Bold" size="28.0" />
+         </font>
+      </Text>
+      <Text fx:id="usernameTX" fill="#3e85c3" layoutX="10.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="175.13671875">
+         <font>
+            <Font name="Segoe UI Bold" size="21.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
