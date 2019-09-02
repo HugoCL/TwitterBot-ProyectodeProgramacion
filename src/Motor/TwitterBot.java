@@ -3,6 +3,8 @@ import twitter4j.*;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,45 +13,71 @@ import java.util.ArrayList;
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
  */
 public class TwitterBot implements Serializable {
+
     /**
      * Inicio patrón de diseño Singleton
      */
     private static TwitterBot INSTANCE = null;
-    // Constructor privado
+
+    /**
+     * Constructor privado
+     */
     private TwitterBot(){
         isGuardado = false;
     }
-    // Método para evitar multi-hilos
+
+    /**
+     * Método para evitar multi-hilos
+     */
     private synchronized static void createInstance() {
         if (INSTANCE == null) {
             INSTANCE = new TwitterBot();
         }
     }
+
+    /**
+     * Obtener la instancia única de la clase.
+     * @return devuelve la instancia única de la clase TwitterBot
+     */
     public static TwitterBot getInstance() {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
 
     /**
-     * Fin patrón de diseño Singleton
+     * Atributo que tiene el acceso a la API de twitter que sirve para realizar las consultas.
      */
-
     private Twitter twitter;
-    public boolean isGuardado;
-    public String pin;
-    RequestToken rtoken;
+
+    /**
+     * Métodos para guardar y obtener si la sesión está iniciada.
+     */
+    private boolean isGuardado;
+    public void setSesion(boolean isGuardado){this.isGuardado = isGuardado;}
+    public boolean getSesion(){return isGuardado;}
+
+    /**
+     * Métodos para guardar y obtener el pin de sesión.
+     */
+    private String pin;
+    public void setPin(String pin){this.pin = pin;}
+    public String getPin(){return pin;}
+
+    /**
+     * Token utilizado para los métodos de iniciar sesión mediate el OAuth
+     */
+    private RequestToken rtoken;
 
     /**
      * Metodos para guardar y obtener el bot junto a sus caracteristicas.
      */
     private TwitterBot BOT;
-    public void setBOT(TwitterBot BOT){
-        this.BOT = BOT;
-    }
-    public TwitterBot getBOT(){
-        return BOT;
-    }
+    public void setBOT(TwitterBot BOT){this.BOT = BOT;}
+    public TwitterBot getBOT(){return BOT;}
 
+    /**
+     *
+     */
     public void inicializarBot() {
 
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -68,7 +96,7 @@ public class TwitterBot implements Serializable {
      * @throws TwitterException Excepcion por problemas tecnicos de Twitter
      * @throws IOException Excepcion por problemas con archivos del programa
      */
-    public String OAuthURL() throws TwitterException, IOException {
+    public String OAuthURL() throws TwitterException{
         try {
             //Se obtienen los tokens para solicitar autorizacion
             rtoken = twitter.getOAuthRequestToken();
@@ -123,16 +151,34 @@ public class TwitterBot implements Serializable {
             status.getText();
         }
 
-        public void PublicarTweetImagen (String Tweet, File rutaImagen){
+        /***
+         * Método que publica tweets de texto simple e imagenes
+         * @param Tweet mensaje de texto
+         * @param rutaImagen imagen o video a subir
+         */
+        public int PublicarTweetImagen (String Tweet, File rutaImagen){
+            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif");
+            Pattern patronVideo = Pattern.compile("^[^\n]+.mp4|.mov");
+
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
                 nuevoTweet.setMedia(rutaImagen);
                 twitter.updateStatus(nuevoTweet);
                 System.out.println("Tweet con imagen publicado correctamente");
+                return 0;
             }
             catch (Exception e){
+                if (patronImage.matcher(rutaImagen.getName()).find()) {
+                    System.out.println("tamaño de la imagen superado");
+                    return 1;
+                }
+                if (patronVideo.matcher(rutaImagen.getName()).find()) {
+                    System.out.println("tamaño del video superado");
+                    return 2;
+                }
                 e.printStackTrace();
                 System.out.println("Ocurrió un error al intentar publicar el Tweet. Revise el tipo de archivo.");
+                return 3;
             }
         }
 
@@ -155,7 +201,6 @@ public class TwitterBot implements Serializable {
     /***
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
-
     public class Feed {
         private ArrayList<Tweet> tweets = new ArrayList<>();
         /***
@@ -179,9 +224,16 @@ public class TwitterBot implements Serializable {
                 }catch(TwitterException e) {
                     e.printStackTrace();
                     System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
-                    if (tweets.size() != 0)     return tweets;
+                    if (tweets.size() != 0)     return null;
                 }
             }
+            return tweets;
+        }
+
+        /***
+         * @return Deuelve lista con los tweets del timeline.
+         */
+        public ArrayList<Tweet> getTweets() {
             return tweets;
         }
 
