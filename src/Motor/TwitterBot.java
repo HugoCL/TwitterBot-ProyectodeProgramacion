@@ -157,7 +157,6 @@ public class TwitterBot implements Serializable {
          */
         public int PublicarTweetImagen (String Tweet, File rutaImagen){
             Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif$");
-            Pattern patronVideo = Pattern.compile("^[^\n]+.mp4|.mov$");
 
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
@@ -171,13 +170,8 @@ public class TwitterBot implements Serializable {
                     System.out.println("tamaño de la imagen superado");
                     return 1;
                 }
-                if (patronVideo.matcher(rutaImagen.getName()).find()) {
-                    System.out.println("tamaño del video superado");
-                    return 2;
-                }
-                e.printStackTrace();
                 System.out.println("Ocurrió un error al intentar publicar el Tweet. Revise el tipo de archivo.");
-                return 3;
+                return 2;
             }
         }
 
