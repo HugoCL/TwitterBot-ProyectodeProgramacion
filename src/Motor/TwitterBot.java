@@ -285,7 +285,7 @@ public class TwitterBot implements Serializable {
                 do{
                     ids = twitter.getFollowersIDs(cursor);
                     for (long UserId: ids.getIDs()) {
-                        followers.add(new Followers(twitter.showUser(UserId).getId(), twitter.showUser(UserId).getName(), twitter.showUser(UserId).getScreenName()));
+                        followers.add(new Followers(twitter.showUser(UserId).getScreenName()));
                     }
                 }while((cursor = ids.getNextCursor()) != 0);
             } catch (TwitterException e) {

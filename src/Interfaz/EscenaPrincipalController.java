@@ -46,7 +46,6 @@ public class EscenaPrincipalController {
         //Obtener nombre de usuario
         usernameTX.setText(TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
         //Botones desactivados
-        timelineBT.setDisable(true);
         secondAP.setVisible(false);
     }
 

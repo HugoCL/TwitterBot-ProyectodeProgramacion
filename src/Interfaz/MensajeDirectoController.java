@@ -1,13 +1,17 @@
 package Interfaz;
 
+import Motor.Followers;
 import Motor.TwitterBot;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +22,7 @@ import javafx.util.Duration;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MensajeDirectoController {
 
@@ -25,7 +30,7 @@ public class MensajeDirectoController {
     private TwitterBot bot = TwitterBot.getInstance().getBOT();
 
     @FXML private JFXButton regresarBT;
-    @FXML private JFXTextField nicknameTF;
+    @FXML private JFXComboBox<String> followersCB;
     @FXML private JFXTextArea messageTA;
     @FXML private JFXButton enviar_mensajeBT;
 
@@ -37,6 +42,13 @@ public class MensajeDirectoController {
         Timeline timeline = new Timeline(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        //Inicializar ComboBox
+        ObservableList<String> listaFollowers = FXCollections.observableArrayList();
+        followersCB.setItems(listaFollowers);
+        ArrayList<Followers> followers = bot.new Usuario().getFollowers();
+        for (Followers follower : followers){
+            listaFollowers.add(follower.getScreenName());
+        }
     }
 
     public void Caracteres(){
@@ -48,7 +60,7 @@ public class MensajeDirectoController {
         }
     }
     @FXML public void enviarMensaje() throws TwitterException {
-        String arroba = nicknameTF.getText();
+        String arroba = followersCB.getValue();
         String mensaje = messageTA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
         mensajes.EnviarMD(arroba,mensaje);

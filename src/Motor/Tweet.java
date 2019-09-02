@@ -8,8 +8,8 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Tweet {
 
-    private SimpleStringProperty mensaje = new SimpleStringProperty();
-    private SimpleStringProperty nombre = new SimpleStringProperty();
+    private SimpleStringProperty mensaje;
+    private SimpleStringProperty nombre;
     private long id;
 
     public Tweet(String mensaje, long id, String nombre) {
