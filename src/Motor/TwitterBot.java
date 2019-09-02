@@ -13,45 +13,71 @@ import java.util.ArrayList;
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
  */
 public class TwitterBot implements Serializable {
+
     /**
      * Inicio patrón de diseño Singleton
      */
     private static TwitterBot INSTANCE = null;
-    // Constructor privado
+
+    /**
+     * Constructor privado
+     */
     private TwitterBot(){
         isGuardado = false;
     }
-    // Método para evitar multi-hilos
+
+    /**
+     * Método para evitar multi-hilos
+     */
     private synchronized static void createInstance() {
         if (INSTANCE == null) {
             INSTANCE = new TwitterBot();
         }
     }
+
+    /**
+     * Obtener la instancia única de la clase.
+     * @return devuelve la instancia única de la clase TwitterBot
+     */
     public static TwitterBot getInstance() {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
 
     /**
-     * Fin patrón de diseño Singleton
+     * Atributo que tiene el acceso a la API de twitter que sirve para realizar las consultas.
      */
-
     private Twitter twitter;
-    public boolean isGuardado;
-    public String pin;
+
+    /**
+     * Métodos para guardar y obtener si la sesión está iniciada.
+     */
+    private boolean isGuardado;
+    public void setSesion(boolean isGuardado){this.isGuardado = isGuardado;}
+    public boolean getSesion(){return isGuardado;}
+
+    /**
+     * Métodos para guardar y obtener el pin de sesión.
+     */
+    private String pin;
+    public void setPin(String pin){this.pin = pin;}
+    public String getPin(){return pin;}
+
+    /**
+     * Token utilizado para los métodos de iniciar sesión mediate el OAuth
+     */
     private RequestToken rtoken;
 
     /**
      * Metodos para guardar y obtener el bot junto a sus caracteristicas.
      */
     private TwitterBot BOT;
-    public void setBOT(TwitterBot BOT){
-        this.BOT = BOT;
-    }
-    public TwitterBot getBOT(){
-        return BOT;
-    }
+    public void setBOT(TwitterBot BOT){this.BOT = BOT;}
+    public TwitterBot getBOT(){return BOT;}
 
+    /**
+     *
+     */
     public void inicializarBot() {
 
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -70,7 +96,7 @@ public class TwitterBot implements Serializable {
      * @throws TwitterException Excepcion por problemas tecnicos de Twitter
      * @throws IOException Excepcion por problemas con archivos del programa
      */
-    public String OAuthURL() throws TwitterException, IOException {
+    public String OAuthURL() throws TwitterException{
         try {
             //Se obtienen los tokens para solicitar autorizacion
             rtoken = twitter.getOAuthRequestToken();
@@ -175,7 +201,6 @@ public class TwitterBot implements Serializable {
     /***
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
-
     public class Feed {
         private ArrayList<Tweet> tweets = new ArrayList<>();
         /***

@@ -20,7 +20,7 @@ public class FollowController {
 
     public void initialize(){
         //Inicializacion de bot
-        bot = TwitterBot.getInstance();
+        bot = TwitterBot.getInstance().getBOT();
     }
 
     public void seguir(){

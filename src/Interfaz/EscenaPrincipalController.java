@@ -90,7 +90,7 @@ public class EscenaPrincipalController {
         Transiciones.Slide.getInstance().left("/Interfaz/MensajeDirecto.fxml", directBT, mainAP);
     }
     @FXML public void cerrarSesion() throws IOException {
-        TwitterBot.getInstance().getBOT().isGuardado = false;
+        TwitterBot.getInstance().getBOT().setSesion(false);
         adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
         System.out.println("Cerrando sesión...");
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);

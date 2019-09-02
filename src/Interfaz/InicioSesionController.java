@@ -31,16 +31,16 @@ public class InicioSesionController {
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
             bot = TwitterBot.getInstance();
-            bot.isGuardado = false;
+            bot.setSesion(false);
             bot.inicializarBot();
             enlaceTA.setText(bot.OAuthURL());
         }
         else{
             bot = botSerializado;
         }
-        if (bot.isGuardado) {
+        if (bot.getSesion()) {
             pinPF.setEditable(false);
-            pinPF.setText(bot.pin);
+            pinPF.setText(bot.getPin());
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
             enlaceTA.setText("Sesión iniciada con: "+TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
@@ -55,19 +55,19 @@ public class InicioSesionController {
     }
 
     @FXML public void iniciarSesion() throws IOException {
-        if (!bot.isGuardado){
+        if (!bot.getSesion()){
             String pin = pinPF.getText();
             bot.OAuthInicio(pin);
             if (no_cierre_sesionCB.isSelected()){
-                bot.isGuardado = true;
-                bot.pin = pinPF.getText();
+                bot.setSesion(true);
+                bot.setPin(pinPF.getText());
                 adminSesion.getInstance().Serializar(bot);
                 System.out.println("Sesion guardada.");
             }
             TwitterBot.getInstance().setBOT(bot);
         }else {
             if (!no_cierre_sesionCB.isSelected()){
-                bot.isGuardado = false;
+                bot.setSesion(false);
                 adminSesion.getInstance().Serializar(bot);
                 TwitterBot.getInstance().setBOT(bot);
                 System.out.println("Sesion no guardada.");
