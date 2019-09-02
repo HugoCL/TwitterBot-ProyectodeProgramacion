@@ -3,6 +3,8 @@ import twitter4j.*;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class TwitterBot implements Serializable {
     private Twitter twitter;
     public boolean isGuardado;
     public String pin;
-    RequestToken rtoken;
+    private RequestToken rtoken;
 
     /**
      * Metodos para guardar y obtener el bot junto a sus caracteristicas.
@@ -123,16 +125,34 @@ public class TwitterBot implements Serializable {
             status.getText();
         }
 
-        public void PublicarTweetImagen (String Tweet, File rutaImagen){
+        /***
+         * Método que publica tweets de texto simple e imagenes
+         * @param Tweet mensaje de texto
+         * @param rutaImagen imagen o video a subir
+         */
+        public int PublicarTweetImagen (String Tweet, File rutaImagen){
+            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif");
+            Pattern patronVideo = Pattern.compile("^[^\n]+.mp4|.mov");
+
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
                 nuevoTweet.setMedia(rutaImagen);
                 twitter.updateStatus(nuevoTweet);
                 System.out.println("Tweet con imagen publicado correctamente");
+                return 0;
             }
             catch (Exception e){
+                if (patronImage.matcher(rutaImagen.getName()).find()) {
+                    System.out.println("tamaño de la imagen superado");
+                    return 1;
+                }
+                if (patronVideo.matcher(rutaImagen.getName()).find()) {
+                    System.out.println("tamaño del video superado");
+                    return 2;
+                }
                 e.printStackTrace();
                 System.out.println("Ocurrió un error al intentar publicar el Tweet. Revise el tipo de archivo.");
+                return 3;
             }
         }
 
@@ -179,9 +199,16 @@ public class TwitterBot implements Serializable {
                 }catch(TwitterException e) {
                     e.printStackTrace();
                     System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
-                    if (tweets.size() != 0)     return tweets;
+                    if (tweets.size() != 0)     return null;
                 }
             }
+            return tweets;
+        }
+
+        /***
+         * @return Deuelve lista con los tweets del timeline.
+         */
+        public ArrayList<Tweet> getTweets() {
             return tweets;
         }
 
