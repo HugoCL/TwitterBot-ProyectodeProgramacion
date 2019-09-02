@@ -3,7 +3,6 @@ import twitter4j.*;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import java.io.*;
@@ -157,8 +156,8 @@ public class TwitterBot implements Serializable {
          * @param rutaImagen imagen o video a subir
          */
         public int PublicarTweetImagen (String Tweet, File rutaImagen){
-            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif");
-            Pattern patronVideo = Pattern.compile("^[^\n]+.mp4|.mov");
+            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif$");
+            Pattern patronVideo = Pattern.compile("^[^\n]+.mp4|.mov$");
 
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
@@ -278,34 +277,35 @@ public class TwitterBot implements Serializable {
          * Devuelve una lista con los usuarios que sigue la cuenta activa.
          * @return Lista de la clase Friend, que contiene la información básica de los usuarios que sigue la cuenta activa
          */
-        public ArrayList<Friend> getAmigos() {
-            ArrayList<Friend> amigos = new ArrayList<>();
+        public ArrayList<Followers> getFollowers() {
+            ArrayList<Followers> followers = new ArrayList<>();
             long cursor = -1;
             IDs ids;
             try {
                 do{
-                    ids = twitter.getFriendsIDs(cursor);
+                    ids = twitter.getFollowersIDs(cursor);
                     for (long UserId: ids.getIDs()) {
-                        amigos.add(new Friend(twitter.showUser(UserId).getId(), twitter.showUser(UserId).getName(), twitter.showUser(UserId).getScreenName()));
+                        followers.add(new Followers(twitter.showUser(UserId).getId(), twitter.showUser(UserId).getName(), twitter.showUser(UserId).getScreenName()));
                     }
                 }while((cursor = ids.getNextCursor()) != 0);
             } catch (TwitterException e) {
                 e.printStackTrace();
             }
-            return amigos;
+            return followers;
         }
 
         /***
          * Permite, a través del nombre de usuario, seguir a una cuenta de twitter
          * @param name Cadena con el nombre del usuario a seguir
          */
-        public void Follow(String name) {
+        public int Follow(String name) {
             try {
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())   twitter.createFriendship(name);
-                else    System.out.println("Ya sigue al usuario");
+                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())  { twitter.createFriendship(name); return 0; }
+                else  {  System.out.println("Ya sigue al usuario"); return 1; }
 
             } catch (TwitterException e) {
                 System.err.println("Error al buscar usuario: " + name);
+                return 2;
             }
         }
         public String getNombreUsuario() throws TwitterException {
