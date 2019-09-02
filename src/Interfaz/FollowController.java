@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import twitter4j.TwitterException;
 
 import java.io.IOException;
 
@@ -16,14 +17,14 @@ public class FollowController {
 
     @FXML private AnchorPane followAP;
 
-    TwitterBot bot;
+    TwitterBot bot = TwitterBot.getInstance();
 
     public void initialize(){
         //Inicializacion de bot
-        bot = TwitterBot.getInstance();
+        bot = TwitterBot.getInstance().getBOT();
     }
 
-    public void seguir(){
+    public void seguir() throws TwitterException {
         if (nicknameTF.getText().isEmpty()){
             System.out.println("Ingrese algún nombre de usuario.");
         }

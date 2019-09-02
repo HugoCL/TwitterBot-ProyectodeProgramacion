@@ -1,6 +1,6 @@
 package Motor;
 
-public class Friend {
+public class Followers {
 
     private long id;
 
@@ -8,7 +8,7 @@ public class Friend {
 
     private String screenName;
 
-    public Friend(long id, String nombre, String screenName) {
+    public Followers(long id, String nombre, String screenName) {
         this.id = id;
         this.nombre = nombre;
         this.screenName = screenName;

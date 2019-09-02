@@ -91,7 +91,6 @@ public class TwittearController {
             mensajes.PublicarTweetImagen(tweet, selectedDirectory);
         }
 
-        System.out.println("Tweet: "+ tweet + " enviado con exito...");
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");
