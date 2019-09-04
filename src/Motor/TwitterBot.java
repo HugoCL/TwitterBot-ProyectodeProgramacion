@@ -210,6 +210,9 @@ public class TwitterBot implements Serializable {
                 try {
                     int size = tweets.size();
                     Paging page = new Paging(pageno++, 100);
+                    ResponseList<Status> statuses = twitter.getHomeTimeline(page);
+                    if (pageno == 2) tweets.clear();
+
                     for (Status status: twitter.getHomeTimeline(page)){
                         tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
                     }

@@ -37,7 +37,7 @@ public class EscenaPrincipalController {
     @FXML private TableColumn<Tweet, String> usuarioCL;
     @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
-    @FXML private ObservableList<Tweet> tweets;
+    //@FXML private ObservableList<Tweet> tweets;
 
     //Inner Classes
     TwitterBot.Feed feed = TwitterBot.getInstance().getBOT().new Feed();
@@ -59,8 +59,7 @@ public class EscenaPrincipalController {
         //Inicializar la tableView
         usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
-        tweets = FXCollections.observableArrayList();
-        tweets.clear();
+        ObservableList<Tweet> tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         for (Tweet tweet: listaTweets) {

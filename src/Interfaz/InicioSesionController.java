@@ -47,10 +47,12 @@ public class InicioSesionController {
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
             enlaceTA.setText("Sesión iniciada con: "+TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
+            copyBT.setDisable(true);
         }else{
             bot = TwitterBot.getInstance();
             bot.inicializarBot();
             enlaceTA.setText(bot.OAuthURL());
+            copyBT.setDisable(false);
         }
         //FadeIn
         Transiciones.Fade.getInstance().in(parentContainer);
@@ -87,6 +89,5 @@ public class InicioSesionController {
 
         content.putString(enlaceTA.getText());
         clipboard.setContent(content);
-        System.out.println("HOLI");
     }
 }
