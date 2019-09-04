@@ -1,23 +1,15 @@
 package Interfaz;
 
-import Motor.Followers;
 import Motor.TwitterBot;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import twitter4j.TwitterException;
 
@@ -45,9 +37,9 @@ public class MensajeDirectoController {
         //Inicializar ComboBox
         ObservableList<String> listaFollowers = FXCollections.observableArrayList();
         followersCB.setItems(listaFollowers);
-        ArrayList<Followers> followers = bot.new Usuario().getFollowers();
-        for (Followers follower : followers){
-            listaFollowers.add(follower.getScreenName());
+        ArrayList<String> followers = bot.new Usuario().getFollowers();
+        for (String follower : followers){
+            listaFollowers.add(follower);
         }
     }
 

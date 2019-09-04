@@ -60,10 +60,12 @@ public class EscenaPrincipalController {
         usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
         tweets = FXCollections.observableArrayList();
+        tweets.clear();
         listaTweets_TV.setItems(tweets);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         for (Tweet tweet: listaTweets) {
             Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
+            System.out.println(newTweet.getId());
             tweets.add(newTweet);
         }
     }
