@@ -37,7 +37,7 @@ public class EscenaPrincipalController {
     @FXML private TableColumn<Tweet, String> usuarioCL;
     @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
-    @FXML private ObservableList<Tweet> tweets;
+    //@FXML private ObservableList<Tweet> tweets;
 
     //Inner Classes
     TwitterBot.Feed feed = TwitterBot.getInstance().getBOT().new Feed();
@@ -46,7 +46,6 @@ public class EscenaPrincipalController {
         //Obtener nombre de usuario
         usernameTX.setText(TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
         //Botones desactivados
-        timelineBT.setDisable(true);
         secondAP.setVisible(false);
     }
 
@@ -60,11 +59,12 @@ public class EscenaPrincipalController {
         //Inicializar la tableView
         usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
-        tweets = FXCollections.observableArrayList();
+        ObservableList<Tweet> tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         for (Tweet tweet: listaTweets) {
             Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
+            System.out.println(newTweet.getId());
             tweets.add(newTweet);
         }
     }
@@ -90,7 +90,7 @@ public class EscenaPrincipalController {
         Transiciones.Slide.getInstance().left("/Interfaz/MensajeDirecto.fxml", directBT, mainAP);
     }
     @FXML public void cerrarSesion() throws IOException {
-        TwitterBot.getInstance().getBOT().isGuardado = false;
+        TwitterBot.getInstance().getBOT().setSesion(false);
         adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
         System.out.println("Cerrando sesión...");
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
