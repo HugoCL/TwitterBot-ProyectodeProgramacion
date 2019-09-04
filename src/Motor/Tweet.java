@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
  * Clase que alamcena la información básica de un tweet.
  */
 
-public class Tweet {
+public class Tweet{
 
     private SimpleStringProperty mensaje;
     private SimpleStringProperty nombre;

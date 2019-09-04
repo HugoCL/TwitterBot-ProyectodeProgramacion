@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import twitter4j.TwitterException;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 
 import java.io.IOException;
 
@@ -21,6 +23,7 @@ public class InicioSesionController {
     @FXML private JFXPasswordField pinPF;
     @FXML private JFXCheckBox no_cierre_sesionCB;
     @FXML private JFXButton iniciar_sesionBT;
+    @FXML private JFXButton copyBT;
 
     @FXML private AnchorPane inicioSesionAP;
 
@@ -44,10 +47,12 @@ public class InicioSesionController {
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
             enlaceTA.setText("Sesión iniciada con: "+TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
+            copyBT.setDisable(true);
         }else{
             bot = TwitterBot.getInstance();
             bot.inicializarBot();
             enlaceTA.setText(bot.OAuthURL());
+            copyBT.setDisable(false);
         }
         //FadeIn
         Transiciones.Fade.getInstance().in(parentContainer);
@@ -76,5 +81,13 @@ public class InicioSesionController {
         System.out.println("Sesión iniciada...");
         //Transición de escenas
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
+    }
+
+    @FXML public void Copiar() {
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent content = new ClipboardContent();
+
+        content.putString(enlaceTA.getText());
+        clipboard.setContent(content);
     }
 }

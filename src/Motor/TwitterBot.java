@@ -179,14 +179,15 @@ public class TwitterBot implements Serializable {
          * Metodo que envia MD a personas usando su @.
          * @param arroba Nombre de usuario al que se le enviara el MD. No se debe incluir el @
          * @param texto String con el texto a enviar
-         * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
          */
-        public void EnviarMD(String arroba, String texto) throws TwitterException {
+        public boolean EnviarMD(String arroba, String texto){
             try {
                 DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
                 System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
+                return true;
             }catch (Exception e){
                 System.out.println("Error al enviar mensaje a: @"+arroba+", verifique el ");
+                return false;
             }
         }
     }
@@ -209,6 +210,9 @@ public class TwitterBot implements Serializable {
                 try {
                     int size = tweets.size();
                     Paging page = new Paging(pageno++, 100);
+                    ResponseList<Status> statuses = twitter.getHomeTimeline(page);
+                    if (pageno == 2) tweets.clear();
+
                     for (Status status: twitter.getHomeTimeline(page)){
                         tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
                     }
@@ -218,6 +222,7 @@ public class TwitterBot implements Serializable {
                     e.printStackTrace();
                     System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
                     if (tweets.size() != 0)     return null;
+                    break;
                 }
             }
             return tweets;
@@ -235,12 +240,14 @@ public class TwitterBot implements Serializable {
          * @param like contiene el tweet a dar like
          * @throws TwitterException
          */
-        public void Like(long like){
+        public boolean Like(long like){
             try {
                 twitter.createFavorite(like);
                 System.out.println("Like exitoso.");
+                return true;
             } catch (TwitterException e) {
                 System.err.println("Error: No se puede dar like");
+                return false;
             }
         }
 
@@ -249,15 +256,19 @@ public class TwitterBot implements Serializable {
          * @param tweet contiene el tweet a dar retweet
          * @throws TwitterException
          */
-        public void Retweet(long tweet){
+        public int Retweet(long tweet){
             try {
                 if (!twitter.showStatus(tweet).isRetweetedByMe()) {
                     twitter.retweetStatus(tweet);
                     System.out.println("Retweet exitoso.");
-                } else
+                    return 0;
+                } else{
                     System.out.println("Tweet ya tweteado");
+                    return 1;
+                }
             } catch (TwitterException e) {
                 System.err.println("No se encontro Tweet");
+                return 2;
             }
         }
     }
@@ -271,15 +282,15 @@ public class TwitterBot implements Serializable {
          * Devuelve una lista con los usuarios que sigue la cuenta activa.
          * @return Lista de la clase Friend, que contiene la información básica de los usuarios que sigue la cuenta activa
          */
-        public ArrayList<Followers> getFollowers() {
-            ArrayList<Followers> followers = new ArrayList<>();
+        public ArrayList<String> getFollowers() {
+            ArrayList<String> followers = new ArrayList<>();
             long cursor = -1;
             IDs ids;
             try {
                 do{
                     ids = twitter.getFollowersIDs(cursor);
                     for (long UserId: ids.getIDs()) {
-                        followers.add(new Followers(twitter.showUser(UserId).getScreenName()));
+                        followers.add(twitter.showUser(UserId).getScreenName());
                     }
                 }while((cursor = ids.getNextCursor()) != 0);
             } catch (TwitterException e) {
