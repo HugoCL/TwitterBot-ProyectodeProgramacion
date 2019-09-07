@@ -29,7 +29,7 @@ public class InicioSesionController {
 
     @FXML private StackPane parentContainer;
 
-    public void initialize() throws TwitterException, IOException {
+    public void initialize() throws TwitterException {
         adminSesion adm = adminSesion.getInstance();
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
@@ -59,17 +59,21 @@ public class InicioSesionController {
 
     }
 
-    @FXML public void iniciarSesion() throws IOException {
+    @FXML public void iniciarSesion() throws IOException, TwitterException {
+        String respuesta;
         if (!bot.getSesion()){
             String pin = pinPF.getText();
-            bot.OAuthInicio(pin);
-            if (no_cierre_sesionCB.isSelected()){
-                bot.setSesion(true);
-                bot.setPin(pinPF.getText());
-                adminSesion.getInstance().Serializar(bot);
-                System.out.println("Sesion guardada.");
-            }
-            TwitterBot.getInstance().setBOT(bot);
+            respuesta = bot.OAuthInicio(pin);
+            System.out.println(respuesta);
+            if (respuesta.compareTo("PIN Correcto") == 0) {
+                if (no_cierre_sesionCB.isSelected()){
+                    bot.setSesion(true);
+                    bot.setPin(pinPF.getText());
+                    adminSesion.getInstance().Serializar(bot);
+                    System.out.println("Sesion guardada.");
+                }
+                TwitterBot.getInstance().setBOT(bot);
+            } else { this.initialize(); return;}
         }else {
             if (!no_cierre_sesionCB.isSelected()){
                 bot.setSesion(false);
@@ -78,7 +82,7 @@ public class InicioSesionController {
                 System.out.println("Sesion no guardada.");
             }
         }
-        System.out.println("Sesión iniciada...");
+        //System.out.println("Sesión iniciada...");
         //Transición de escenas
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }
