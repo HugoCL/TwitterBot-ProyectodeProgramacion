@@ -74,8 +74,13 @@ public class MensajeDirectoController {
     }
 
     @FXML public void ObtenerUsuario() {
+        String usuario;
         if (followersLV.getSelectionModel().getSelectedItem() != null) {
-            seguidorTA.setText(followersLV.getSelectionModel().getSelectedItem());
+            usuario = followersLV.getSelectionModel().getSelectedItem();
+            seguidorTA.setText(usuario);
+            listView = FXCollections.observableArrayList();
+            listView.add(usuario);
+            followersLV.setItems(listView);
         }
     }
 
