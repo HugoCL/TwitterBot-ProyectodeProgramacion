@@ -82,15 +82,17 @@ public class TwittearController {
     }
 
     @FXML public void publicar() throws TwitterException {
+        String respuesta;
         String tweet = tweet_TA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
         if (nameFile_LB.getText() == ""){
-            mensajes.PublicarTweet(tweet);
+            respuesta = mensajes.PublicarTweet(tweet);
         }
         else{
-            mensajes.PublicarTweetImagen(tweet, selectedDirectory);
+            respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
         }
 
+        System.out.println(respuesta);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");

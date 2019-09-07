@@ -25,13 +25,14 @@ public class FollowController {
     }
 
     public void seguir() throws TwitterException {
+        String respuesta;
         if (nicknameTF.getText().isEmpty()){
             System.out.println("Ingrese algún nombre de usuario.");
         }
         else {
             TwitterBot.Usuario usuario = bot.new Usuario();
-            usuario.Follow(nicknameTF.getText());
-            System.out.println("Se comenzó a seguir exitosamente a: @"+nicknameTF.getText());
+            respuesta = usuario.Follow(nicknameTF.getText());
+            System.out.println(respuesta);
             nicknameTF.setText("");
         }
     }

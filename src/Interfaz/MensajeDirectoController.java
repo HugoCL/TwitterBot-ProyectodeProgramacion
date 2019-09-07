@@ -21,25 +21,40 @@ public class MensajeDirectoController {
     //inicialiar bot
     private TwitterBot bot = TwitterBot.getInstance().getBOT();
 
+    private ArrayList<String> followers;
+
     @FXML private JFXButton regresarBT;
     @FXML private JFXComboBox<String> followersCB;
     @FXML private JFXTextArea messageTA;
+    @FXML private JFXTextArea seguidorTA;
     @FXML private JFXButton enviar_mensajeBT;
 
     @FXML private AnchorPane directMessageAP;
 
     public void initialize(){
         //Caracteres de mensaje
-        KeyFrame frame = new KeyFrame(Duration.millis(100), e -> Caracteres());
+        KeyFrame frame = new KeyFrame(Duration.millis(100), (e -> {
+            Caracteres();
+            Busqueda(seguidorTA.getText());
+        }));
         Timeline timeline = new Timeline(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        //Inicializar ComboBox
-        ObservableList<String> listaFollowers = FXCollections.observableArrayList();
-        followersCB.setItems(listaFollowers);
-        ArrayList<String> followers = bot.new Usuario().getFollowers();
-        for (String follower : followers){
-            listaFollowers.add(follower);
+        followers = bot.new Usuario().getFollowers();
+    }
+    public void Busqueda(String busqueda) {
+        ArrayList<String> resultados = null;
+        boolean tf;
+        if (busqueda.length() != 0) {
+            for (String comparar: followers) {
+                tf = true;
+                for (int i = 0; tf && busqueda.length() > i; i++) {
+                    if (comparar.length() < busqueda.length() && busqueda.charAt(i) == comparar.charAt(i))
+                        tf = false;
+                }
+                if (tf) resultados.add(comparar);
+                if (resultados.size() == 10) break;
+            }
         }
     }
 
