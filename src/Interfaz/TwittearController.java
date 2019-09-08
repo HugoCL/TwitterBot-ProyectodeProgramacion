@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import twitter4j.TwitterException;
 
 import java.io.File;
 import java.io.IOException;
@@ -80,7 +79,7 @@ public class TwittearController {
         }
     }
 
-    @FXML public void publicar() throws TwitterException {
+    @FXML public void publicar(){
         String respuesta;
         String tweet = tweet_TA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();

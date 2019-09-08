@@ -53,7 +53,7 @@ public class EscenaPrincipalController {
         Transiciones.Slide.getInstance().left("/Interfaz/Twittear.fxml",tweetearBT,mainAP);
     }
 
-    @FXML public void timeline() throws IOException {
+    @FXML public void timeline(){
         //Inicializar la tableView
         usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));

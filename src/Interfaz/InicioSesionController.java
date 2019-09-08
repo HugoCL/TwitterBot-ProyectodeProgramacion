@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class InicioSesionController {
 
-    protected TwitterBot bot;
+    private TwitterBot bot;
 
     @FXML private JFXTextArea enlaceTA;
     @FXML private JFXPasswordField pinPF;

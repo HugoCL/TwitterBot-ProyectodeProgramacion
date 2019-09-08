@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import twitter4j.TwitterException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,7 +71,7 @@ public class MensajeDirectoController {
         }
     }
 
-    @FXML public void enviarMensaje() throws TwitterException {
+    @FXML public void enviarMensaje(){
         String arroba = followersLV.getSelectionModel().getSelectedItem();
         String mensaje = messageTA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
