@@ -110,18 +110,16 @@ public class TwitterBot implements Serializable {
 
     public String OAuthInicio(String PIN){
         AccessToken atoken = null;
-        String texto = "\nIntente nuevamente";
-
         // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
         try {
             if (PIN.length() > 0) {
                 atoken = twitter.getOAuthAccessToken(rtoken, PIN);
             } else {
-                return "No se ingresó ningún PIN"+texto;
+                return "PIN no ingresado";
             }
         } catch (TwitterException e) {
             if (401 == e.getStatusCode()) {
-                return "ERROR: PIN Incorrecto" +texto;
+                return "ERROR: PIN Incorrecto";
             }
         }
         return "PIN Correcto";

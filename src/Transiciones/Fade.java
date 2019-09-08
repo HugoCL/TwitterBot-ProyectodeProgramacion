@@ -43,8 +43,7 @@ public class Fade {
         fadeTransition.setToValue(1);
         fadeTransition.play();
     }
-    public void out( String ruta, JFXButton boton){
-
+    public void out(String ruta, JFXButton boton){
         Scene scene = boton.getScene();
         FadeTransition fadeTransition = new FadeTransition();
         fadeTransition.setDuration(Duration.seconds(0.25));
