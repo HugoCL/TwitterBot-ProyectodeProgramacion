@@ -2,25 +2,20 @@ package Interfaz;
 
 import Motor.TwitterBot;
 import com.jfoenix.controls.*;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 import twitter4j.TwitterException;
 
-import javax.xml.soap.Text;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MensajeDirectoController {
 
-    //inicialiar bot
+    //inicializar bot
     private TwitterBot bot = TwitterBot.getInstance().getBOT();
 
     private ArrayList<String> followers;

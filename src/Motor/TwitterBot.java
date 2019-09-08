@@ -75,6 +75,12 @@ public class TwitterBot implements Serializable {
     public TwitterBot getBOT(){return BOT;}
 
     /**
+     * Métodos para guardar y obtener los ultimos tweets del timeline
+     */
+    private ArrayList<Tweet> ultimosTweets;
+    public void setUltimosTweets(ArrayList<Tweet> ultimosTweets){this.ultimosTweets = ultimosTweets;}
+    public ArrayList<Tweet> getUltimosTweets(){return ultimosTweets;}
+    /**
      *
      */
     public void inicializarBot() {
@@ -210,8 +216,9 @@ public class TwitterBot implements Serializable {
                     if (tweets.size() == size)
                         break;
                 }catch(TwitterException e) {
-                    System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
-                    if (tweets.size() != 0)     return null;
+                    if (tweets.size() != 0){
+                        return null;
+                    }
                     return tweets;
                 }
             }
@@ -233,10 +240,8 @@ public class TwitterBot implements Serializable {
         public String Like(long like){
             try {
                 twitter.createFavorite(like);
-                System.out.println("Like exitoso.");
                 return "Like exitoso";
             } catch (TwitterException e) {
-                System.err.println("Error: No se puede dar like");
                 return "Tweet ya likeado";
             }
         }
@@ -250,14 +255,11 @@ public class TwitterBot implements Serializable {
             try {
                 if (!twitter.showStatus(tweet).isRetweetedByMe()) {
                     twitter.retweetStatus(tweet);
-                    System.out.println("Retweet exitoso.");
-                    return "Rewtweet exitoso";
+                    return "Retweet exitoso";
                 } else{
-                    System.out.println("Tweet ya tweteado");
                     return "Tweet ya tweeteado";
                 }
             } catch (TwitterException e) {
-                System.err.println("No se encontro Tweet");
                 return "ERROR: No se encontro Tweet";
             }
         }
