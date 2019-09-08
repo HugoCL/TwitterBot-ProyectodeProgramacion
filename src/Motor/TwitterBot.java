@@ -288,7 +288,10 @@ public class TwitterBot implements Serializable {
             try {
                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()){
                     twitter.createFriendship(name);
-                    return "Se sigue correctamente a @"+name;
+                    if (twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
+                        return "Se sigue correctamente a \n@"+name;
+                    else
+                        return "Cuenta privada: esperar respuesta";
                 }
                 else  {return "ERROR: Ya sigue al usuario:\n@"+name;}
 
