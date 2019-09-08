@@ -14,6 +14,7 @@ import twitter4j.TwitterException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class TwittearController {
 
@@ -88,9 +89,12 @@ public class TwittearController {
             respuesta = mensajes.PublicarTweet(tweet);
         }
         else{
-            respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
+            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif$");
+            if (patronImage.matcher(selectedDirectory.getName()).find())
+                respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
+            else
+                respuesta = mensajes.PublicarTweetVideo(tweet, selectedDirectory);
         }
-
         System.out.println(respuesta);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);

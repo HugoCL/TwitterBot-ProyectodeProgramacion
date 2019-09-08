@@ -18,7 +18,7 @@ public class test {
             bot = botSerializado;
         }
         TwitterBot.Messages mensajes = bot.new Messages();
-        File f = new File("C:\\Users\\Hugo Castro\\Downloads\\3.mp4");
+        File f = new File("C:\\Users\\Kintrox\\Videos\\capture-2.mp4");
         mensajes.PublicarTweetVideo("oof", f);
     }
 

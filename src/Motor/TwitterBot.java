@@ -153,7 +153,7 @@ public class TwitterBot implements Serializable {
          * @param rutaImagen imagen o video a subir
          */
         public String PublicarTweetImagen (String Tweet, File rutaImagen){
-            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif$");
+            Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
 
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
@@ -170,7 +170,7 @@ public class TwitterBot implements Serializable {
         }
 
         public String PublicarTweetVideo (String Tweet, File rutaVideo){
-            Pattern patronImage = Pattern.compile("^[^\n]+.mp4|.avi|.mpeg$");
+            Pattern patronVideo = Pattern.compile("^.+\\.(mp4|MP4|avi|AVI|mpeg|MPEG)$");
 
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
@@ -184,7 +184,7 @@ public class TwitterBot implements Serializable {
                 e.printStackTrace();
             }
             catch (Exception e){
-                if (patronImage.matcher(rutaVideo.getName()).find()) {
+                if (patronVideo.matcher(rutaVideo.getName()).find()) {
                     return "Tamaño del video superado";
                 }
                 return "ERROR: Tipo de archivo de video no admitido";
