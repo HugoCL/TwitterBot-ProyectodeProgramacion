@@ -138,9 +138,13 @@ public class TwitterBot implements Serializable {
          * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
          */
 
-        public String PublicarTweet(String Tweet) throws TwitterException {
-            Status status = twitter.updateStatus(Tweet);
-            return "Tweet publicado correctamente";
+        public String PublicarTweet(String Tweet){
+            try{
+                twitter.updateStatus(Tweet);
+                return "Tweet publicado correctamente";
+            }catch (TwitterException e) {
+                return "ERROR: Tweet duplicado";
+            }
         }
 
         /***
@@ -155,15 +159,12 @@ public class TwitterBot implements Serializable {
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
                 nuevoTweet.setMedia(rutaImagen);
                 twitter.updateStatus(nuevoTweet);
-                System.out.println("Tweet con imagen publicado correctamente");
-                return "Tweet con imagen ya publicado";
+                return "Tweet con imagen publicado correctamente";
             }
             catch (Exception e){
                 if (patronImage.matcher(rutaImagen.getName()).find()) {
-                    System.out.println("tamaño de la imagen superado");
                     return "Tamaño de la imagen superado";
                 }
-                System.out.println("Ocurrió un error al intentar publicar el Tweet. Revise el tipo de archivo.");
                 return "ERROR: Tipo de archivo no admitido";
             }
         }
@@ -179,7 +180,6 @@ public class TwitterBot implements Serializable {
                 System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
                 return "Mensaje enviado correctamente";
             }catch (Exception e){
-                System.out.println("Error al enviar mensaje a: @"+arroba+", verifique el ");
                 return "Usuario no encontrado o no seleccionado";
             }
         }

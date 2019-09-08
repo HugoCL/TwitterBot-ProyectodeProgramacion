@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Label?>
@@ -8,14 +14,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="tweetearAP" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
+<AnchorPane fx:id="tweetearAP" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
    <children>
       <ImageView fitHeight="76.0" fitWidth="209.0" layoutX="209.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/Logo.jpeg" />
          </image>
       </ImageView>
-      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="127.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="415.0" promptText="¿Qué está pasando?" unFocusColor="#3e85c3">
+      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="127.0" maxWidth="-Infinity" minWidth="-Infinity" onKeyReleased="#Caracteres" prefHeight="129.0" prefWidth="415.0" promptText="¿Qué está pasando?" unFocusColor="#3e85c3">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>

@@ -40,10 +40,7 @@ public class MensajeDirectoController {
             public void handle(KeyEvent event) { Busqueda(); }
         });
         //Caracteres de mensaje
-        KeyFrame frame = new KeyFrame(Duration.millis(100), e -> Caracteres());
-        Timeline timeline = new Timeline(frame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        enviar_mensajeBT.setDisable(true);
         followers = bot.new Usuario().getFollowers();
         if (followers.isEmpty()) {seguidorTA.setDisable(true); seguidorTA.setText("NO TIENES SEGUIDORES"); messageTA.setDisable(true);}
     }
@@ -88,7 +85,8 @@ public class MensajeDirectoController {
         String arroba = followersLV.getSelectionModel().getSelectedItem();
         String mensaje = messageTA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
-        mensajes.EnviarMD(arroba,mensaje);
+        String respuesta = mensajes.EnviarMD(arroba,mensaje);
+        System.out.println(respuesta);
         messageTA.setText("");
     }
     @FXML public void regresar() throws IOException {

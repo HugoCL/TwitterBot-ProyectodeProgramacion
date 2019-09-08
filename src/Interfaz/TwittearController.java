@@ -38,13 +38,8 @@ public class TwittearController {
         //Inicio de Ventana
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setVisible(false);
-
-        //Caracteres
-        KeyFrame frame = new KeyFrame(Duration.millis(100), e -> Caracteres());
-        Timeline timeline = new Timeline(frame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-
+        publicar_tweetBT.setDisable(true);
+        
         //Tweet con Imagenes
         directoryChooser.setInitialDirectory(new File("src"));
 
@@ -54,13 +49,14 @@ public class TwittearController {
         try {
             nameFile_LB.setText(selectedDirectory.getAbsolutePath());
             nameFile_LB.setVisible(true);
+            publicar_tweetBT.setDisable(false);
         }
         catch (Exception e){
             System.out.println("Archivo no agregado.");
         }
 
     }
-    private void Caracteres() {
+    public void Caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
             if (tweet_TA.getText().length() > 280){
                 caracteres_LB.setTextFill(Color.web("#ff0000"));
@@ -76,6 +72,7 @@ public class TwittearController {
             if (nameFile_LB.getText() != ""){
                 publicar_tweetBT.setDisable(false);
             }
+            publicar_tweetBT.setDisable(true);
             caracteres_LB.setTextFill(Color.web("#000000"));
             caracteres_LB.setText("0/280");
         }
@@ -96,6 +93,7 @@ public class TwittearController {
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");
+        caracteres_LB.setText("0/280");
         nameFile_LB.setVisible(false);
     }
 
