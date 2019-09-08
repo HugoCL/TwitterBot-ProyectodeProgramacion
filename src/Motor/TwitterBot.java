@@ -169,6 +169,29 @@ public class TwitterBot implements Serializable {
             }
         }
 
+        public String PublicarTweetVideo (String Tweet, File rutaVideo){
+            Pattern patronImage = Pattern.compile("^[^\n]+.mp4|.avi|.mpeg$");
+
+            try{
+                StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
+                InputStream is = new FileInputStream(rutaVideo);
+                UploadedMedia um = twitter.uploadMediaChunked(rutaVideo.getName(), is);
+                nuevoTweet.setMediaIds(um.getMediaId());
+                twitter.updateStatus(nuevoTweet);
+                System.out.println("Video y Tweet publicado correctamente");
+            }
+            catch (FileNotFoundException | TwitterException e) {
+                e.printStackTrace();
+            }
+            catch (Exception e){
+                if (patronImage.matcher(rutaVideo.getName()).find()) {
+                    return "Tamaño del video superado";
+                }
+                return "ERROR: Tipo de archivo de video no admitido";
+            }
+            return "";
+        }
+
         /***
          * Metodo que envia MD a personas usando su @.
          * @param arroba Nombre de usuario al que se le enviara el MD. No se debe incluir el @
