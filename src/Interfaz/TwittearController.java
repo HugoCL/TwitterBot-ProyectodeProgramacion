@@ -39,7 +39,8 @@ public class TwittearController {
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setVisible(false);
         publicar_tweetBT.setDisable(true);
-        
+        caracteres_LB.setText("0/280");
+
         //Tweet con Imagenes
         directoryChooser.setInitialDirectory(new File("src"));
 
@@ -71,10 +72,11 @@ public class TwittearController {
         else {
             if (nameFile_LB.getText() != ""){
                 publicar_tweetBT.setDisable(false);
+                caracteres_LB.setTextFill(Color.web("#000000"));
+                caracteres_LB.setText("0/280");
+            }else {
+                publicar_tweetBT.setDisable(true);
             }
-            publicar_tweetBT.setDisable(true);
-            caracteres_LB.setTextFill(Color.web("#000000"));
-            caracteres_LB.setText("0/280");
         }
     }
 
