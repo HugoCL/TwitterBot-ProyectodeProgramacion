@@ -28,12 +28,12 @@ public class FollowController {
         String respuesta;
         if (nicknameTF.getText().isEmpty()){
             System.out.println("Ingrese algún nombre de usuario.");
-            Dialog.getInstance().error(followBT,"Ingrese algún nombre de usuario.","OK, revisaré",followAP);
+            Dialog.getInstance().info(followBT,"Ingrese algún nombre de usuario.","OK, revisaré",followAP);
         }
         else {
             TwitterBot.Usuario usuario = bot.new Usuario();
             respuesta = usuario.Follow(nicknameTF.getText());
-            Dialog.getInstance().error(followBT,respuesta,"OK, revisaré",followAP);
+            Dialog.getInstance().info(followBT,respuesta,"OK, revisaré",followAP);
             nicknameTF.setText("");
         }
     }

@@ -83,7 +83,7 @@ public class MensajeDirectoController {
         String mensaje = messageTA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
         String respuesta = mensajes.EnviarMD(arroba,mensaje);
-        Dialog.getInstance().error(enviar_mensajeBT,respuesta,"OK, revisaré",directMessageAP);
+        Dialog.getInstance().info(enviar_mensajeBT,respuesta,"OK, revisaré",directMessageAP);
         messageTA.setText("");
     }
     @FXML public void regresar() throws IOException {

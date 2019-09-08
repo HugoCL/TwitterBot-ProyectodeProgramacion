@@ -32,6 +32,7 @@ public class InicioSesionController {
 
     public void initialize() throws TwitterException {
         adminSesion adm = adminSesion.getInstance();
+        pinPF.setText("");
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
             bot = TwitterBot.getInstance();
@@ -74,7 +75,7 @@ public class InicioSesionController {
                 }
                 TwitterBot.getInstance().setBOT(bot);
             } else {
-                Dialog.getInstance().error(iniciar_sesionBT,respuesta,"Ok, revisaré",inicioSesionAP);
+                Dialog.getInstance().info(iniciar_sesionBT,respuesta,"Ok, revisaré",inicioSesionAP);
                 this.initialize();
                 return;}
         }else {
@@ -93,7 +94,7 @@ public class InicioSesionController {
         final ClipboardContent content = new ClipboardContent();
         content.putString(enlaceTA.getText());
         clipboard.setContent(content);
-        Dialog.getInstance().error(copyBT,"Enlace copiado","OK",inicioSesionAP);
+        Dialog.getInstance().info(copyBT,"Enlace copiado","OK",inicioSesionAP);
     }
 
     @FXML public void cerrarPrograma(){

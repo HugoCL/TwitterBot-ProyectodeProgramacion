@@ -75,12 +75,6 @@ public class TwitterBot implements Serializable {
     public TwitterBot getBOT(){return BOT;}
 
     /**
-     * Métodos para guardar y obtener los ultimos tweets del timeline
-     */
-    private ArrayList<Tweet> ultimosTweets;
-    public void setUltimosTweets(ArrayList<Tweet> ultimosTweets){this.ultimosTweets = ultimosTweets;}
-    public ArrayList<Tweet> getUltimosTweets(){return ultimosTweets;}
-    /**
      *
      */
     public void inicializarBot() {
@@ -115,17 +109,16 @@ public class TwitterBot implements Serializable {
     }
 
     public String OAuthInicio(String PIN){
-        AccessToken atoken = null;
         // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
         try {
             if (PIN.length() > 0) {
-                atoken = twitter.getOAuthAccessToken(rtoken, PIN);
+                twitter.getOAuthAccessToken(rtoken, PIN);
             } else {
-                return "PIN no ingresado";
+                return "PIN no ingresado\nVuelva a copiar el enlace de autentificación";
             }
         } catch (TwitterException e) {
             if (401 == e.getStatusCode()) {
-                return "ERROR:\nPIN Incorrecto";
+                return "ERROR: PIN Incorrecto\nVuelva a copiar el enlace de autentificación";
             }
         }
         return "PIN Correcto";
@@ -180,10 +173,10 @@ public class TwitterBot implements Serializable {
          */
         public String EnviarMD(String arroba, String texto){
             try {
-                DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
+                twitter.sendDirectMessage(arroba, texto);
                 return "Mensaje enviado correctamente";
             }catch (Exception e){
-                return "Usuario no encontrado o\nno seleccionado";
+                return "Usuario no encontrado o no seleccionado";
             }
         }
     }
@@ -204,7 +197,6 @@ public class TwitterBot implements Serializable {
                 try {
                     int size = tweets.size();
                     Paging page = new Paging(pageno++, 100);
-                    ResponseList<Status> statuses = twitter.getHomeTimeline(page);
                     if (pageno == 2) tweets.clear();
 
                     for (Status status: twitter.getHomeTimeline(page)){

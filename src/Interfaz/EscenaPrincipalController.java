@@ -20,9 +20,6 @@ import java.util.ArrayList;
 
 public class EscenaPrincipalController {
 
-    //Inicializar bot
-    private TwitterBot bot = TwitterBot.getInstance().getBOT();
-
     @FXML private AnchorPane mainAP;
     @FXML private AnchorPane secondAP;
 
@@ -53,7 +50,6 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void tweetear() throws IOException {
-        System.out.println("Cargando ventana para twittear...");
         Transiciones.Slide.getInstance().left("/Interfaz/Twittear.fxml",tweetearBT,mainAP);
     }
 
@@ -66,9 +62,6 @@ public class EscenaPrincipalController {
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         if (listaTweets != null){
             if (listaTweets.size() != 0){
-                bot.setUltimosTweets(listaTweets);
-                adminSesion.getInstance().Serializar(bot);
-                System.out.println("serializado");
                 for (Tweet tweet: listaTweets) {
                     Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
                     tweets.add(newTweet);
@@ -77,11 +70,10 @@ public class EscenaPrincipalController {
                 secondAP.setVisible(true);
             }
             else{
-                Dialog.getInstance().error(timelineBT,"Refresh muy frecuente\nCargando últimos tweets",
+                Dialog.getInstance().info(timelineBT,"Refresh muy frecuente\nCargando últimos tweets",
                         "OK",mainAP);
-                ArrayList<Tweet> lastTweets = bot.getUltimosTweets();
-                if (lastTweets != null){
-                    for (Tweet tweet: lastTweets) {
+                if (listaTweets.size() != 0){
+                    for (Tweet tweet: listaTweets) {
                         Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
                         tweets.add(newTweet);
                     }
@@ -89,12 +81,12 @@ public class EscenaPrincipalController {
                     secondAP.setVisible(true);
                 }
                 else{
-                    Dialog.getInstance().error(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
+                    Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
                             "OK",mainAP);
                 }
             }
         }else{
-            Dialog.getInstance().error(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
+            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
                     "OK",mainAP);
         }
 
@@ -110,9 +102,9 @@ public class EscenaPrincipalController {
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
             respuesta = TwitterBot.getInstance().getBOT().new Feed().Retweet(selecTweet.getId());
-            Dialog.getInstance().error(retweetBT,respuesta,"OK",mainAP);
+            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
-            Dialog.getInstance().error(retweetBT,"Seleccione algún tweet","OK",mainAP);
+            Dialog.getInstance().info(retweetBT,"Seleccione algún tweet","OK",mainAP);
         }
     }
 
@@ -121,26 +113,23 @@ public class EscenaPrincipalController {
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
             respuesta = TwitterBot.getInstance().getBOT().new Feed().Like(selecTweet.getId());
-            Dialog.getInstance().error(retweetBT,respuesta,"OK",mainAP);
+            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
-            Dialog.getInstance().error(likeBT,"Seleccione algún tweet","OK",mainAP);
+            Dialog.getInstance().info(likeBT,"Seleccione algún tweet","OK",mainAP);
         }
     }
 
     @FXML public void follow() throws IOException {
-        System.out.println("Cargando ventana para realizar follow...");
         Transiciones.Slide.getInstance().left("/Interfaz/Follow.fxml", followBT, mainAP);
     }
 
     @FXML public void directMessage() throws IOException {
-        System.out.println("Cargando ventana para mensajes directos...");
         Transiciones.Slide.getInstance().left("/Interfaz/MensajeDirecto.fxml", directBT, mainAP);
     }
 
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().setSesion(false);
         adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
-        System.out.println("Cerrando sesión...");
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 

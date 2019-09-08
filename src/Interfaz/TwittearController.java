@@ -46,6 +46,7 @@ public class TwittearController {
         directoryChooser.setInitialDirectory(new File("src"));
 
     }
+    
     @FXML private void agregarArchivo(){
         selectedDirectory = directoryChooser.showOpenDialog(tweetearAP.getScene().getWindow());
         try {
@@ -54,7 +55,7 @@ public class TwittearController {
             publicar_tweetBT.setDisable(false);
         }
         catch (Exception e){
-            Dialog.getInstance().error(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
+            Dialog.getInstance().info(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
         }
 
     }
@@ -92,7 +93,7 @@ public class TwittearController {
         else{
             respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
         }
-        Dialog.getInstance().error(addFileBT,respuesta,"OK, revisaré",tweetearAP);
+        Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");
@@ -101,7 +102,6 @@ public class TwittearController {
     }
 
     @FXML public void regresar() throws IOException {
-        System.out.println("Cargando ventana principal...");
         Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml",regresarBT,tweetearAP);
     }
 }

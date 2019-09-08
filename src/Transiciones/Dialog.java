@@ -39,12 +39,12 @@ public class Dialog {
 
     protected BoxBlur boxBlur = new BoxBlur(3,3,3);
 
-    public void error(JFXButton boton, String texto, String botonTexto, AnchorPane AP){
+    public void info(JFXButton boton, String texto, String botonTexto, AnchorPane AP){
         AP.setDisable(true);
         Scene scene = boton.getScene();
         StackPane rootpane = (StackPane) scene.getRoot();
 
-        dialogLayout.setPrefWidth(210);
+        dialogLayout.setPrefWidth(350);
         JFXDialog dialog = new JFXDialog(rootpane,dialogLayout,JFXDialog.DialogTransition.TOP);
 
         button.setText(botonTexto);
@@ -65,8 +65,5 @@ public class Dialog {
             AP.setDisable(false);
         });
         AP.setEffect(boxBlur);
-    }
-    public void info(JFXButton boton, String texto, AnchorPane AP){
-
     }
 }
