@@ -2,11 +2,13 @@ package Motor;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.Serializable;
+
 /***
  * Clase que alamcena la información básica de un tweet.
  */
 
-public class Tweet{
+public class Tweet implements Serializable {
 
     private SimpleStringProperty mensaje;
     private SimpleStringProperty nombre;

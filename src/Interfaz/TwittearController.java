@@ -1,15 +1,13 @@
 package Interfaz;
 import Motor.TwitterBot;
+import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 import twitter4j.TwitterException;
 
 import java.io.File;
@@ -45,6 +43,7 @@ public class TwittearController {
         directoryChooser.setInitialDirectory(new File("src"));
 
     }
+
     @FXML private void agregarArchivo(){
         selectedDirectory = directoryChooser.showOpenDialog(tweetearAP.getScene().getWindow());
         try {
@@ -53,10 +52,11 @@ public class TwittearController {
             publicar_tweetBT.setDisable(false);
         }
         catch (Exception e){
-            System.out.println("Archivo no agregado.");
+            Dialog.getInstance().info(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
         }
 
     }
+
     public void Caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
             if (tweet_TA.getText().length() > 280){
@@ -90,8 +90,7 @@ public class TwittearController {
         else{
             respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
         }
-
-        System.out.println(respuesta);
+        Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");
@@ -100,7 +99,6 @@ public class TwittearController {
     }
 
     @FXML public void regresar() throws IOException {
-        System.out.println("Cargando ventana principal...");
         Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml",regresarBT,tweetearAP);
     }
 }

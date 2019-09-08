@@ -1,26 +1,20 @@
 package Interfaz;
 
 import Motor.TwitterBot;
+import Transiciones.Dialog;
 import com.jfoenix.controls.*;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 import twitter4j.TwitterException;
 
-import javax.xml.soap.Text;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MensajeDirectoController {
 
-    //inicialiar bot
+    //inicializar bot
     private TwitterBot bot = TwitterBot.getInstance().getBOT();
 
     private ArrayList<String> followers;
@@ -35,14 +29,15 @@ public class MensajeDirectoController {
     @FXML private AnchorPane directMessageAP;
 
     public void initialize(){
-        seguidorTA.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) { Busqueda(); }
-        });
+        seguidorTA.setOnKeyReleased(event -> Busqueda());
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
         followers = bot.new Usuario().getFollowers();
-        if (followers.isEmpty()) {seguidorTA.setDisable(true); seguidorTA.setText("NO TIENES SEGUIDORES"); messageTA.setDisable(true);}
+        if (followers.isEmpty()) {
+            seguidorTA.setDisable(true);
+            seguidorTA.setText("NO TIENES SEGUIDORES");
+            messageTA.setDisable(true);
+        }
     }
 
     public void Busqueda() {
@@ -62,12 +57,8 @@ public class MensajeDirectoController {
     }
 
     public void Caracteres(){
-        if (!messageTA.getText().isEmpty()) {
-            enviar_mensajeBT.setDisable(false);
-        }
-        else {
-            enviar_mensajeBT.setDisable(true);
-        }
+        if (!messageTA.getText().isEmpty()) {enviar_mensajeBT.setDisable(false);}
+        else {enviar_mensajeBT.setDisable(true);}
     }
 
     @FXML public void ObtenerUsuario() {
@@ -86,11 +77,10 @@ public class MensajeDirectoController {
         String mensaje = messageTA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
         String respuesta = mensajes.EnviarMD(arroba,mensaje);
-        System.out.println(respuesta);
+        Dialog.getInstance().info(enviar_mensajeBT,respuesta,"OK, revisaré",directMessageAP);
         messageTA.setText("");
     }
     @FXML public void regresar() throws IOException {
-        System.out.println("Cargando ventana principal...");
         Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml", regresarBT, directMessageAP);
     }
 }

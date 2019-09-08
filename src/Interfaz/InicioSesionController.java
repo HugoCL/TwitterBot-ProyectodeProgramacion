@@ -2,6 +2,7 @@ package Interfaz;
 
 import Motor.TwitterBot;
 import Motor.adminSesion;
+import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -31,6 +32,7 @@ public class InicioSesionController {
 
     public void initialize() throws TwitterException {
         adminSesion adm = adminSesion.getInstance();
+        pinPF.setText("");
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
             bot = TwitterBot.getInstance();
@@ -64,25 +66,24 @@ public class InicioSesionController {
         if (!bot.getSesion()){
             String pin = pinPF.getText();
             respuesta = bot.OAuthInicio(pin);
-            System.out.println(respuesta);
             if (respuesta.compareTo("PIN Correcto") == 0) {
                 if (no_cierre_sesionCB.isSelected()){
                     bot.setSesion(true);
                     bot.setPin(pinPF.getText());
                     adminSesion.getInstance().Serializar(bot);
-                    System.out.println("Sesion guardada.");
                 }
                 TwitterBot.getInstance().setBOT(bot);
-            } else { this.initialize(); return;}
+            } else {
+                Dialog.getInstance().info(iniciar_sesionBT,respuesta,"Ok, revisaré",inicioSesionAP);
+                this.initialize();
+                return;}
         }else {
             if (!no_cierre_sesionCB.isSelected()){
                 bot.setSesion(false);
                 adminSesion.getInstance().Serializar(bot);
                 TwitterBot.getInstance().setBOT(bot);
-                System.out.println("Sesion no guardada.");
             }
         }
-        //System.out.println("Sesión iniciada...");
         //Transición de escenas
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }
@@ -90,8 +91,13 @@ public class InicioSesionController {
     @FXML public void Copiar() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();
-
         content.putString(enlaceTA.getText());
         clipboard.setContent(content);
+        Dialog.getInstance().info(copyBT,"Enlace copiado","OK",inicioSesionAP);
+    }
+
+    @FXML public void cerrarPrograma(){
+        System.out.println("Finalizando programa...");
+        System.exit(0);
     }
 }
