@@ -64,7 +64,6 @@ public class EscenaPrincipalController {
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         for (Tweet tweet: listaTweets) {
             Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
-            System.out.println(newTweet.getId());
             tweets.add(newTweet);
         }
     }
