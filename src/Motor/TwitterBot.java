@@ -125,7 +125,7 @@ public class TwitterBot implements Serializable {
             }
         } catch (TwitterException e) {
             if (401 == e.getStatusCode()) {
-                return "ERROR: PIN Incorrecto";
+                return "ERROR:\nPIN Incorrecto";
             }
         }
         return "PIN Correcto";
@@ -147,7 +147,7 @@ public class TwitterBot implements Serializable {
                 twitter.updateStatus(Tweet);
                 return "Tweet publicado correctamente";
             }catch (TwitterException e) {
-                return "ERROR: Tweet duplicado";
+                return "ERROR:\nTweet duplicado";
             }
         }
 
@@ -163,13 +163,13 @@ public class TwitterBot implements Serializable {
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
                 nuevoTweet.setMedia(rutaImagen);
                 twitter.updateStatus(nuevoTweet);
-                return "Tweet con imagen publicado correctamente";
+                return "Tweet publicado correctamente";
             }
             catch (Exception e){
                 if (patronImage.matcher(rutaImagen.getName()).find()) {
                     return "Tamaño de la imagen superado";
                 }
-                return "ERROR: Tipo de archivo no admitido";
+                return "ERROR:\nTipo de archivo no admitido";
             }
         }
 
@@ -181,10 +181,9 @@ public class TwitterBot implements Serializable {
         public String EnviarMD(String arroba, String texto){
             try {
                 DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
-                System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
                 return "Mensaje enviado correctamente";
             }catch (Exception e){
-                return "Usuario no encontrado o no seleccionado";
+                return "Usuario no encontrado o\nno seleccionado";
             }
         }
     }
@@ -200,8 +199,6 @@ public class TwitterBot implements Serializable {
          */
         public ArrayList<Tweet> ObtenerTweets() {
             int pageno = 1;
-
-            System.out.println("Obteniendo tweets...");
 
             while (true) {
                 try {
@@ -260,7 +257,7 @@ public class TwitterBot implements Serializable {
                     return "Tweet ya tweeteado";
                 }
             } catch (TwitterException e) {
-                return "ERROR: No se encontro Tweet";
+                return "ERROR:\nNo se encontro Tweet";
             }
         }
     }
@@ -297,12 +294,14 @@ public class TwitterBot implements Serializable {
          */
         public String Follow(String name) {
             try {
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())  { twitter.createFriendship(name); return "Se sigue correctamente a @"+name; }
-                else  {  System.out.println("Ya sigue al usuario"); return "ERROR: Ya sigue al usuario: @"+name; }
+                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()){
+                    twitter.createFriendship(name);
+                    return "Se sigue correctamente a @"+name;
+                }
+                else  {return "ERROR: Ya sigue al usuario:\n@"+name;}
 
             } catch (TwitterException e) {
-                System.err.println("No se encuentra al usuario @: " + name);
-                return "No se encuentra al usuario @: " + name;
+                return "No se encuentra al usuario:\n@" + name;
             }
         }
         public String getNombreUsuario() throws TwitterException {

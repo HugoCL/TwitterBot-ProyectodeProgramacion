@@ -68,6 +68,7 @@ public class EscenaPrincipalController {
             if (listaTweets.size() != 0){
                 bot.setUltimosTweets(listaTweets);
                 adminSesion.getInstance().Serializar(bot);
+                System.out.println("serializado");
                 for (Tweet tweet: listaTweets) {
                     Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
                     tweets.add(newTweet);
@@ -88,12 +89,12 @@ public class EscenaPrincipalController {
                     secondAP.setVisible(true);
                 }
                 else{
-                    Dialog.getInstance().error(timelineBT,"No hay ultimos mensajes\nIntentelo más tarde",
+                    Dialog.getInstance().error(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
                             "OK",mainAP);
                 }
             }
         }else{
-            Dialog.getInstance().error(timelineBT,"No hay ultimos mensajes\nIntentelo más tarde",
+            Dialog.getInstance().error(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
                     "OK",mainAP);
         }
 

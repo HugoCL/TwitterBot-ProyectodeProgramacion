@@ -1,5 +1,6 @@
 package Interfaz;
 import Motor.TwitterBot;
+import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.animation.KeyFrame;
@@ -53,10 +54,11 @@ public class TwittearController {
             publicar_tweetBT.setDisable(false);
         }
         catch (Exception e){
-            System.out.println("Archivo no agregado.");
+            Dialog.getInstance().error(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
         }
 
     }
+
     public void Caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
             if (tweet_TA.getText().length() > 280){
@@ -90,8 +92,7 @@ public class TwittearController {
         else{
             respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
         }
-
-        System.out.println(respuesta);
+        Dialog.getInstance().error(addFileBT,respuesta,"OK, revisaré",tweetearAP);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");
