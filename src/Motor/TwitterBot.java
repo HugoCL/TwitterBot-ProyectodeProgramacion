@@ -150,7 +150,7 @@ public class TwitterBot implements Serializable {
          * @param rutaImagen imagen o video a subir
          */
         public String PublicarTweetImagen (String Tweet, File rutaImagen){
-            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif$");
+            Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
 
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
@@ -246,7 +246,7 @@ public class TwitterBot implements Serializable {
                     twitter.retweetStatus(tweet);
                     return "Retweet exitoso";
                 } else{
-                    return "Tweet ya tweeteado";
+                    return "Tweet ya retweeteado";
                 }
             } catch (TwitterException e) {
                 return "ERROR:\nNo se encontro Tweet";
@@ -288,14 +288,21 @@ public class TwitterBot implements Serializable {
             try {
                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()){
                     twitter.createFriendship(name);
-                    return "Se sigue correctamente a @"+name;
+                    return "Se sigue correctamente a\n @"+name;
                 }
                 else  {return "ERROR: Ya sigue al usuario:\n@"+name;}
 
             } catch (TwitterException e) {
-                return "No se encuentra al usuario:\n@" + name;
+                try {
+                    if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
+                        return "Espere respuesta de \n@"+name;
+                } catch (TwitterException ex) {
+                    return "No se encuentra al usuario:\n@" + name;
+                }
             }
+            return "";
         }
+
         public String getNombreUsuario() throws TwitterException {
             return twitter.getScreenName();
         }
