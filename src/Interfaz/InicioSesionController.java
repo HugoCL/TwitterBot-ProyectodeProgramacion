@@ -71,7 +71,6 @@ public class InicioSesionController {
                     bot.setSesion(true);
                     bot.setPin(pinPF.getText());
                     adminSesion.getInstance().Serializar(bot);
-                    System.out.println("Sesion guardada.");
                 }
                 TwitterBot.getInstance().setBOT(bot);
             } else {

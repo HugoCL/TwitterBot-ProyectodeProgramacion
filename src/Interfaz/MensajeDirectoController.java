@@ -5,9 +5,7 @@ import Transiciones.Dialog;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import twitter4j.TwitterException;
 
@@ -59,12 +57,8 @@ public class MensajeDirectoController {
     }
 
     public void Caracteres(){
-        if (!messageTA.getText().isEmpty()) {
-            enviar_mensajeBT.setDisable(false);
-        }
-        else {
-            enviar_mensajeBT.setDisable(true);
-        }
+        if (!messageTA.getText().isEmpty()) {enviar_mensajeBT.setDisable(false);}
+        else {enviar_mensajeBT.setDisable(true);}
     }
 
     @FXML public void ObtenerUsuario() {
