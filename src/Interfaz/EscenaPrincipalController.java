@@ -150,4 +150,9 @@ public class EscenaPrincipalController {
         followBT.setDisable(bool);
         directBT.setDisable(bool);
     }
+
+    @FXML public void cerrarPrograma(){
+        System.out.println("Finalizando programa...");
+        System.exit(0);
+    }
 }

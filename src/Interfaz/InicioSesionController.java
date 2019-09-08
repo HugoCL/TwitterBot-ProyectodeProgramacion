@@ -82,7 +82,6 @@ public class InicioSesionController {
                 bot.setSesion(false);
                 adminSesion.getInstance().Serializar(bot);
                 TwitterBot.getInstance().setBOT(bot);
-                System.out.println("Sesion no guardada.");
             }
         }
         //Transición de escenas
@@ -95,5 +94,10 @@ public class InicioSesionController {
         content.putString(enlaceTA.getText());
         clipboard.setContent(content);
         Dialog.getInstance().error(copyBT,"Enlace copiado","OK",inicioSesionAP);
+    }
+
+    @FXML public void cerrarPrograma(){
+        System.out.println("Finalizando programa...");
+        System.exit(0);
     }
 }
