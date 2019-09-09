@@ -286,11 +286,15 @@ public class TwitterBot implements Serializable {
          */
         public String Follow(String name) {
             try {
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()){
+                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
                     twitter.createFriendship(name);
+                    if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
+                        return "Espere respuesta de \n@"+name;
                     return "Se sigue correctamente a\n @"+name;
                 }
-                else  {return "ERROR: Ya sigue al usuario:\n@"+name;}
+                else if(twitter.getScreenName().equals(name))
+                    return "ERROR: \nNo puedes seguirte a ti mismo";
+                else  return "ERROR: Ya sigue al usuario:\n@"+name;
 
             } catch (TwitterException e) {
                 try {

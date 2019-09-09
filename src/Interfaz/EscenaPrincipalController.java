@@ -29,7 +29,6 @@ public class EscenaPrincipalController {
     @FXML private JFXButton likeBT;
     @FXML private JFXButton directBT;
     @FXML private JFXButton timelineBT;
-    @FXML private JFXButton cerrarTimelineBT;
     @FXML private JFXButton cerrar_sesionBT;
 
     @FXML private Text usernameTX;

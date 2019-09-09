@@ -46,7 +46,7 @@ public class MensajeDirectoController {
         for (String comparar: followers) {
             tf = true;
             for (int i = 0; tf && busqueda.length() > i; i++) {
-                if (comparar.length() < busqueda.length() || busqueda.charAt(i) != comparar.charAt(i))
+                if (comparar.length() < busqueda.length() || busqueda.toLowerCase().charAt(i) != comparar.toLowerCase().charAt(i))
                     tf = false;
             }
             if (tf && busqueda.length() != 0) listView.add(comparar);
