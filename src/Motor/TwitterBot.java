@@ -75,7 +75,7 @@ public class TwitterBot implements Serializable {
     public TwitterBot getBOT(){return BOT;}
 
     /**
-     *
+     *  Metodo que configura la instancia de Twitter, usando las Keys de la API asociados al programa
      */
     public void inicializarBot() {
 
@@ -107,6 +107,12 @@ public class TwitterBot implements Serializable {
         }
         return null;
     }
+
+    /***
+     * Método que permite autorizar al Bot el uso de la cuenta del usuario que inició sesión
+     * @param PIN Secuencia de numeros de autorización otorgado por Twitter para confirmar el accecso
+     * @return Retorna un String con el estado de la autorización
+     */
 
     public String OAuthInicio(String PIN){
         // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
