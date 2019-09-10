@@ -213,10 +213,12 @@ public class TwitterBot implements Serializable {
                     if(e.getErrorCode()== 429){
                         return backupTweets;
                     }
+                    backupTweets.clear();
                     backupTweets = tweets;
                     return tweets;
                 }
             }
+            backupTweets.clear();
             backupTweets = tweets;
             return tweets;
         }
