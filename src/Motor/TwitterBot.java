@@ -211,6 +211,7 @@ public class TwitterBot implements Serializable {
                         return null;
                     }
                     if(e.getErrorCode()== 429){
+                        return backupTweets;
                     }
                     backupTweets = tweets;
                     return tweets;
