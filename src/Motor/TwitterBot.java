@@ -192,7 +192,7 @@ public class TwitterBot implements Serializable {
      */
     public class Feed {
 
-        private ArrayList<Tweet> backupTweets;
+        private ArrayList<Tweet> backupTweets = new ArrayList<>();
         private ArrayList<Tweet> tweets = new ArrayList<>();
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
