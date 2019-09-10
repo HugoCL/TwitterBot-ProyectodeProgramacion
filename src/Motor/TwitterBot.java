@@ -185,6 +185,8 @@ public class TwitterBot implements Serializable {
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
     public class Feed {
+
+        private ArrayList<Tweet> backupTweets;
         private ArrayList<Tweet> tweets = new ArrayList<>();
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
@@ -208,9 +210,16 @@ public class TwitterBot implements Serializable {
                     if (tweets.size() != 0){
                         return null;
                     }
+                    if(e.getErrorCode()== 429){
+                        return backupTweets;
+                    }
+                    backupTweets.clear();
+                    backupTweets = tweets;
                     return tweets;
                 }
             }
+            backupTweets.clear();
+            backupTweets = tweets;
             return tweets;
         }
 
