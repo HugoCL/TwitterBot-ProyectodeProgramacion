@@ -192,7 +192,7 @@ public class TwitterBot implements Serializable {
      */
     public class Feed {
 
-        private ArrayList<Tweet> backupTweets = new ArrayList<>();
+        private ArrayList<Tweet> backupTweets;
         private ArrayList<Tweet> tweets = new ArrayList<>();
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
@@ -200,27 +200,25 @@ public class TwitterBot implements Serializable {
          */
         public ArrayList<Tweet> ObtenerTweets() {
             int pageno = 1;
-
             while (true) {
                 try {
                     int size = tweets.size();
                     Paging page = new Paging(pageno++, 100);
                     if (pageno == 2) tweets.clear();
 
-                    for (Status status: twitter.getHomeTimeline(page)){
+                    for (Status status : twitter.getHomeTimeline(page)) {
                         tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
                     }
                     if (tweets.size() == size)
                         break;
-                }catch(TwitterException e) {
-                    if(e.getErrorCode()== 88){
+                } catch (TwitterException e) {
+                    if (e.getErrorCode() == 88) {
                         return backupTweets;
                     }
-                    return backupTweets;
                 }
             }
             backupTweets.clear();
-            backupTweets = tweets;
+            backupTweets = new ArrayList<>(tweets);
             return tweets;
         }
 
