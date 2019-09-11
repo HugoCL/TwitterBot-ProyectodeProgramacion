@@ -118,8 +118,10 @@ public class TwittearController {
             respuesta = "ERROR: Revise el tipo de archivo";
         Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
         imagenTweet.setImage(null);
+        tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");
+        caracteres_LB.setText("0/280");
     }
 
     @FXML public void regresar() throws IOException {
