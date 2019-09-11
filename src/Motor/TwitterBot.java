@@ -213,6 +213,9 @@ public class TwitterBot implements Serializable {
                     if (tweets.size() == size)
                         break;
                 }catch(TwitterException e) {
+                    if (tweets.size() != 0){
+                        return null;
+                    }
                     if(e.getErrorCode()== 88){
                         return backupTweets;
                     }

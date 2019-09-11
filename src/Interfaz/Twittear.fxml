@@ -1,34 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="tweetearAP" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
+<AnchorPane fx:id="tweetearAP" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.TwittearController">
    <children>
-      <ImageView fitHeight="76.0" fitWidth="209.0" layoutX="209.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Imagenes/Logo.jpeg" />
-         </image>
-      </ImageView>
-      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="93.0" layoutY="127.0" maxWidth="-Infinity" minWidth="-Infinity" onKeyReleased="#Caracteres" prefHeight="129.0" prefWidth="415.0" promptText="¿Qué está pasando?" unFocusColor="#3e85c3">
+      <JFXTextArea fx:id="tweet_TA" focusColor="#3e85c3" labelFloat="true" layoutX="44.0" layoutY="102.0" maxWidth="-Infinity" minWidth="-Infinity" onKeyReleased="#Caracteres" prefHeight="150.0" prefWidth="305.0" promptText="¿Qué está pasando?" unFocusColor="#3e85c3">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </JFXTextArea>
-      <Label fx:id="caracteres_LB" alignment="CENTER" layoutX="409.0" layoutY="263.0" prefHeight="17.0" prefWidth="99.0" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="caracteres_LB" alignment="CENTER" layoutX="147.0" layoutY="263.0" prefHeight="17.0" prefWidth="99.0" style="-fx-border-color: #3e85c3; -fx-border-radius: 8;" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font name="Segoe UI" size="17.0" />
+            <Font name="Segoe UI" size="14.0" />
          </font>
       </Label>
       <JFXButton fx:id="regresarBT" layoutX="93.0" layoutY="324.0" onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
@@ -41,15 +30,20 @@
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="addFileBT" layoutX="101.0" layoutY="274.0" onAction="#agregarArchivo" prefHeight="25.0" prefWidth="107.0" style="-fx-border-color: #3e85c3; -fx-border-radius: 8;" text="Agregar Archivo" textFill="#3e85c3">
+      <JFXButton fx:id="addFileBT" layoutX="425.0" layoutY="262.0" onAction="#agregarArchivo" prefHeight="25.0" prefWidth="107.0" style="-fx-border-color: #3e85c3; -fx-border-radius: 8;" text="Agregar Archivo" textFill="#3e85c3">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font>
       </JFXButton>
-      <Label fx:id="nameFile_LB" layoutX="217.0" layoutY="262.0" prefHeight="50.0" prefWidth="175.0" style="-fx-border-color: #3e85c3;" textFill="GREY" wrapText="true">
+      <Text fill="#3e85c3" layoutX="157.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tweetear" textAlignment="CENTER" wrappingWidth="305.13671875">
          <font>
-            <Font name="Segoe UI" size="12.0" />
+            <Font name="Segoe UI Bold" size="38.0" />
          </font>
-      </Label>
+      </Text>
+      <Label alignment="CENTER" layoutX="377.0" layoutY="102.0" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #3e85c3;">
+         <graphic>
+            <ImageView fx:id="imagenTweet" fitHeight="144.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Label>
+      <Label fx:id="nameFile_LB" layoutX="463.0" layoutY="296.0" />
    </children>
 </AnchorPane>
