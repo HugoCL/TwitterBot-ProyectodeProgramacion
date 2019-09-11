@@ -69,18 +69,8 @@ public class EscenaPrincipalController {
                 secondAP.setVisible(true);
             }
             else{
-                if (listaTweets.size() != 0){
-                    for (Tweet tweet: listaTweets) {
-                        Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
-                        tweets.add(newTweet);
-                    }
-                    botonesMain(true);
-                    secondAP.setVisible(true);
-                }
-                else{
-                    Dialog.getInstance().info(timelineBT,"Refresh muy frecuente, intente más tarde",
-                            "OK",mainAP);
-                }
+                Dialog.getInstance().info(timelineBT,"Refresh muy frecuente, intente más tarde",
+                        "OK",mainAP);
             }
         }else{
             Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
