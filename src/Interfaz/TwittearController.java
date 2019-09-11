@@ -24,6 +24,7 @@ public class TwittearController {
     @FXML private JFXTextArea tweet_TA;
     @FXML private Label caracteres_LB;
     @FXML private ImageView imagenTweet;
+    @FXML private Label archivoLB;
     @FXML private Label nameFile_LB;
 
     @FXML private AnchorPane tweetearAP;
@@ -50,6 +51,12 @@ public class TwittearController {
     @FXML private void agregarArchivo(){
         selectedFile = fileChooser.showOpenDialog(tweetearAP.getScene().getWindow());
         try {
+            /**
+             * Si el nameFile_LB, es el label donde muestras la ruta, si es seleccionado un video pones
+             * archivoLB.setDisable(true) , pero si es seleccionada una imagen o gif, hay que poner
+             * nameFile_LB.setDisable(true). Ahí cacha las expresiones regulares para hacerlo, terminaré de ver
+             * lo que está haciendo el Hugo.
+             */
             nameFile_LB.setText(selectedFile.getAbsolutePath());
             Image image = new Image("file:"+selectedFile.getAbsolutePath());
             imagenTweet.setImage(image);
