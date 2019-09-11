@@ -13,6 +13,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class TwittearController {
 
@@ -29,6 +30,7 @@ public class TwittearController {
 
     @FXML private AnchorPane tweetearAP;
 
+    Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
     private FileChooser fileChooser = new FileChooser();
     private File selectedFile;
 
@@ -51,16 +53,18 @@ public class TwittearController {
     @FXML private void agregarArchivo(){
         selectedFile = fileChooser.showOpenDialog(tweetearAP.getScene().getWindow());
         try {
-            /**
-             * Si el nameFile_LB, es el label donde muestras la ruta, si es seleccionado un video pones
-             * archivoLB.setDisable(true) , pero si es seleccionada una imagen o gif, hay que poner
-             * nameFile_LB.setDisable(true). Ahí cacha las expresiones regulares para hacerlo, terminaré de ver
-             * lo que está haciendo el Hugo.
-             */
             nameFile_LB.setText(selectedFile.getAbsolutePath());
-            Image image = new Image("file:"+selectedFile.getAbsolutePath());
-            imagenTweet.setImage(image);
-            publicar_tweetBT.setDisable(false);
+            if (patronImage.matcher(selectedFile.getName()).find()){
+                archivoLB.setVisible(true);
+                nameFile_LB.setVisible(false);
+                Image image = new Image("file:"+selectedFile.getAbsolutePath());
+                imagenTweet.setImage(image);
+                publicar_tweetBT.setDisable(false);
+            }else {
+                archivoLB.setVisible(false);
+                nameFile_LB.setVisible(true);
+            }
+
         }
         catch (Exception e){
             Dialog.getInstance().info(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
