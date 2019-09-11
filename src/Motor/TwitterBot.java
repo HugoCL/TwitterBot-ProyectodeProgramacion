@@ -1,9 +1,8 @@
 package Motor;
+
 import twitter4j.*;
-import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
-import java.util.regex.Pattern;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -185,10 +184,10 @@ public class TwitterBot implements Serializable {
                 System.out.println("Video y Tweet publicado correctamente");
             }
             catch (TwitterException te){
-                if (te.getErrorCode() == 187){
+                System.out.println(te.getErrorCode());
+                if (te.getErrorCode() == 187)
                     return "El texto del Tweet ya se ha publicado anteriormente.";
-                }
-                return "Ruta no encontrada";
+                return "Video sobrepasa peso(15MB) o duracion(140s)";
             }
             return "Video y Tweet Publicado correctamente";
         }
