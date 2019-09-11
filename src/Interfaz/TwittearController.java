@@ -105,10 +105,10 @@ public class TwittearController {
         if (nameFile_LB.getText() == ""){
             respuesta = mensajes.PublicarTweet(tweet);
         }
-        else if(patronImage.matcher(selectedDirectory.getName()).find()){
-            respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
-        }else if(patronVideo.matcher(selectedDirectory.getName()).find())
-            respuesta = mensajes.PublicarTweetVideo(tweet, selectedDirectory);
+        else if(patronImage.matcher(selectedFile.getName()).find()){
+            respuesta = mensajes.PublicarTweetImagen(tweet, selectedFile);
+        }else if(patronVideo.matcher(selectedFile.getName()).find())
+            respuesta = mensajes.PublicarTweetVideo(tweet, selectedFile);
         else
             respuesta = "ERROR: Revise el tipo de archivo";
         Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
