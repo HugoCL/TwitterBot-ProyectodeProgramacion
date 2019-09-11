@@ -213,15 +213,26 @@ public class TwitterBot implements Serializable {
      */
     public class Feed {
 
-        private ArrayList<Tweet> backupTweets;
+        private ArrayList<Tweet> backupTweets = new ArrayList<>();
         private ArrayList<Tweet> tweets = new ArrayList<>();
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
          * @return Lista con los tweets.
          */
-        public ArrayList<Tweet> ObtenerTweets() {
+        public ArrayList<Tweet> ObtenerTweets() throws IOException {
             int pageno = 1;
             boolean exito = false;
+            try{
+                FileInputStream fis = new FileInputStream("TweetBackup.txt");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                backupTweets = (ArrayList<Tweet>) ois.readObject();
+            } catch (ClassNotFoundException e) {
+                System.out.println("Ocurrió un error al tratar de des-serializar");
+                e.printStackTrace();
+            }
+            catch (FileNotFoundException f){
+                System.out.println("No se encontró el archivo");
+            }
             while (true) {
                 try {
                     int size = tweets.size();
@@ -237,6 +248,7 @@ public class TwitterBot implements Serializable {
                     }
                 } catch (TwitterException e) {
                     if (e.getErrorCode() == 88) {
+                        System.out.println("Use el backup");
                         return backupTweets;
                     }
                 }
@@ -245,6 +257,16 @@ public class TwitterBot implements Serializable {
                 backupTweets.clear();
             }
             backupTweets = new ArrayList<>(tweets);
+            try{
+                FileOutputStream fos = new FileOutputStream("TweetBackup.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(backupTweets);
+            }
+            catch (Exception e){
+                System.out.println("Ocurrió un error al serializar los Tweets");
+                e.printStackTrace();
+            }
+
             return tweets;
         }
 
