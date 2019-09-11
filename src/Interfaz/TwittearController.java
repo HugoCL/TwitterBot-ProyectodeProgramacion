@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -22,12 +24,15 @@ public class TwittearController {
     @FXML private JFXButton addFileBT;
     @FXML private JFXTextArea tweet_TA;
     @FXML private Label caracteres_LB;
+    @FXML private ImageView imagenTweet;
+    @FXML private Label archivoLB;
     @FXML private Label nameFile_LB;
 
     @FXML private AnchorPane tweetearAP;
 
-    private FileChooser directoryChooser = new FileChooser();
-    private File selectedDirectory;
+    Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
+    private FileChooser fileChooser = new FileChooser();
+    private File selectedFile;
 
     public void initialize(){
         //Inicializar bot
@@ -40,16 +45,26 @@ public class TwittearController {
         caracteres_LB.setText("0/280");
 
         //Tweet con Imagenes
-        directoryChooser.setInitialDirectory(new File("src"));
+        fileChooser.setInitialDirectory(new File("src"));
+        fileChooser.setTitle("Buscar Archivo");
 
     }
 
     @FXML private void agregarArchivo(){
-        selectedDirectory = directoryChooser.showOpenDialog(tweetearAP.getScene().getWindow());
+        selectedFile = fileChooser.showOpenDialog(tweetearAP.getScene().getWindow());
         try {
-            nameFile_LB.setText(selectedDirectory.getAbsolutePath());
-            nameFile_LB.setVisible(true);
-            publicar_tweetBT.setDisable(false);
+            nameFile_LB.setText(selectedFile.getAbsolutePath());
+            if (patronImage.matcher(selectedFile.getName()).find()){
+                archivoLB.setVisible(true);
+                nameFile_LB.setVisible(false);
+                Image image = new Image("file:"+selectedFile.getAbsolutePath());
+                imagenTweet.setImage(image);
+                publicar_tweetBT.setDisable(false);
+            }else {
+                archivoLB.setVisible(false);
+                nameFile_LB.setVisible(true);
+            }
+
         }
         catch (Exception e){
             Dialog.getInstance().info(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
@@ -97,11 +112,11 @@ public class TwittearController {
         else
             respuesta = "ERROR: Revise el tipo de archivo";
         Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
+        imagenTweet.setImage(null);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setText("");
         caracteres_LB.setText("0/280");
-        nameFile_LB.setVisible(false);
     }
 
     @FXML public void regresar() throws IOException {
