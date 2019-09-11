@@ -55,14 +55,15 @@ public class TwittearController {
         try {
             nameFile_LB.setText(selectedFile.getAbsolutePath());
             if (patronImage.matcher(selectedFile.getName()).find()){
-                archivoLB.setVisible(true);
-                nameFile_LB.setVisible(false);
                 Image image = new Image("file:"+selectedFile.getAbsolutePath());
                 imagenTweet.setImage(image);
+                archivoLB.setVisible(true);
+                nameFile_LB.setVisible(false);
                 publicar_tweetBT.setDisable(false);
             }else {
                 archivoLB.setVisible(false);
                 nameFile_LB.setVisible(true);
+                publicar_tweetBT.setDisable(false);
             }
 
         }
