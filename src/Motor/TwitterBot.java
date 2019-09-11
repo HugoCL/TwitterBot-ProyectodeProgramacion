@@ -140,6 +140,7 @@ public class TwitterBot implements Serializable {
                 twitter.updateStatus(Tweet);
                 return "Tweet publicado correctamente";
             }catch (TwitterException e) {
+                System.out.println(e.getStatusCode());
                 return "ERROR:\nTweet duplicado";
             }
         }
@@ -150,7 +151,6 @@ public class TwitterBot implements Serializable {
          * @param rutaImagen imagen o video a subir
          */
         public String PublicarTweetImagen (String Tweet, File rutaImagen){
-            Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
 
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
@@ -159,10 +159,7 @@ public class TwitterBot implements Serializable {
                 return "Tweet publicado correctamente";
             }
             catch (Exception e){
-                if (patronImage.matcher(rutaImagen.getName()).find()) {
-                    return "Tamaño de la imagen superado";
-                }
-                return "ERROR:\nTipo de archivo no admitido";
+                return "Tamaño de la imagen superado";
             }
         }
 
@@ -175,11 +172,11 @@ public class TwitterBot implements Serializable {
                 twitter.updateStatus(nuevoTweet);
                 System.out.println("Video y Tweet publicado correctamente");
             }
-            catch (FileNotFoundException | TwitterException e) {
-                e.printStackTrace();
+            catch (TwitterException e) {
+                return "Tamaño o duración del video superado";
             }
             catch (Exception e){
-                return "Tamaño del video superado";
+                return "Ruta no enontrada";
             }
             return "Video y Tweet Publicado correctamente";
         }
