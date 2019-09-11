@@ -164,7 +164,8 @@ public class TwitterBot implements Serializable {
                 twitter.updateStatus(nuevoTweet);
                 return "Tweet publicado correctamente";
             }
-            catch (Exception e){
+            catch (TwitterException e){
+                if(e.getErrorCode() == 187) return "Tweet Duplicado";
                 return "Tamaño de la imagen superado";
             }
         }
@@ -172,17 +173,22 @@ public class TwitterBot implements Serializable {
         public String PublicarTweetVideo (String Tweet, File rutaVideo){
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
-                InputStream is = new FileInputStream(rutaVideo);
+                InputStream is = null;
+                try {
+                    is = new FileInputStream(rutaVideo);
+                } catch (FileNotFoundException e) {
+                    return "Archivo invalido. Revise la ruta y/o el archivo";
+                }
                 UploadedMedia um = twitter.uploadMediaChunked(rutaVideo.getName(), is);
                 nuevoTweet.setMediaIds(um.getMediaId());
                 twitter.updateStatus(nuevoTweet);
                 System.out.println("Video y Tweet publicado correctamente");
             }
-            catch (TwitterException e) {
-                return "Tamaño o duración del video superado";
-            }
-            catch (Exception e){
-                return "Ruta no enontrada";
+            catch (TwitterException te){
+                if (te.getErrorCode() == 187){
+                    return "El texto del Tweet ya se ha publicado anteriormente.";
+                }
+                return "Ruta no encontrada";
             }
             return "Video y Tweet Publicado correctamente";
         }
@@ -215,6 +221,7 @@ public class TwitterBot implements Serializable {
          */
         public ArrayList<Tweet> ObtenerTweets() {
             int pageno = 1;
+            boolean exito = false;
             while (true) {
                 try {
                     int size = tweets.size();
@@ -224,15 +231,19 @@ public class TwitterBot implements Serializable {
                     for (Status status : twitter.getHomeTimeline(page)) {
                         tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
                     }
-                    if (tweets.size() == size)
+                    if (tweets.size() == size){
+                        exito = true;
                         break;
+                    }
                 } catch (TwitterException e) {
                     if (e.getErrorCode() == 88) {
                         return backupTweets;
                     }
                 }
             }
-            backupTweets.clear();
+            if (!backupTweets.isEmpty() && exito) {
+                backupTweets.clear();
+            }
             backupTweets = new ArrayList<>(tweets);
             return tweets;
         }
