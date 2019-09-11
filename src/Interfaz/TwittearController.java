@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class TwittearController {
 
@@ -80,15 +81,21 @@ public class TwittearController {
     }
 
     @FXML public void publicar(){
+        Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
+        Pattern patronVideo = Pattern.compile("^.+\\.(mp4|MP4)$");
+
         String respuesta;
         String tweet = tweet_TA.getText();
         TwitterBot.Messages mensajes = bot.new Messages();
         if (nameFile_LB.getText() == ""){
             respuesta = mensajes.PublicarTweet(tweet);
         }
-        else{
+        else if(patronImage.matcher(selectedDirectory.getName()).find()){
             respuesta = mensajes.PublicarTweetImagen(tweet, selectedDirectory);
-        }
+        }else if(patronVideo.matcher(selectedDirectory.getName()).find())
+            respuesta = mensajes.PublicarTweetVideo(tweet, selectedDirectory);
+        else
+            respuesta = "ERROR: Revise el tipo de archivo";
         Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);
