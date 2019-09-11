@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="directMessageAP" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.MensajeDirectoController">
    <children>
-      <JFXTextArea fx:id="messageTA" focusColor="#3e85c3" layoutX="131.0" layoutY="135.0" prefHeight="170.0" prefWidth="338.0" unFocusColor="#3e85c3">
+      <JFXTextArea fx:id="messageTA" focusColor="#3e85c3" layoutX="206.0" layoutY="135.0" onKeyReleased="#Caracteres" prefHeight="170.0" prefWidth="338.0" unFocusColor="#3e85c3">
          <font>
             <Font name="Segoe UI" size="13.0" />
          </font></JFXTextArea>
-      <JFXButton fx:id="enviar_mensajeBT" layoutX="319.0" layoutY="320.0" onAction="#enviarMensaje" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Enviar Mensaje" textFill="WHITE">
+      <JFXButton fx:id="enviar_mensajeBT" layoutX="417.0" layoutY="320.0" onAction="#enviarMensaje" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Enviar Mensaje" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
@@ -23,11 +24,15 @@
             <Font name="Segoe UI Bold" size="38.0" />
          </font>
       </Text>
-      <JFXButton fx:id="regresarBT" layoutX="131.0" layoutY="320.0" onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
+      <JFXButton fx:id="regresarBT" layoutX="189.0" layoutY="320.0" onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXComboBox fx:id="followersCB" focusColor="#3e85c3" labelFloat="true" layoutX="181.0" layoutY="96.0" prefHeight="25.0" prefWidth="238.0" promptText="Nombres de Usuarios" unFocusColor="#3e85c3" />
+      <JFXTextField fx:id="seguidorTA" focusColor="#3e85c3" labelFloat="true" layoutX="25.0" layoutY="123.0" prefHeight="25.0" prefWidth="150.0" promptText="Ingrese Usuario" unFocusColor="#3e85c3">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font></JFXTextField>
+      <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#ObtenerUsuario" prefHeight="214.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

@@ -1,9 +1,8 @@
 package Motor;
+
 import twitter4j.*;
-import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
-import java.util.regex.Pattern;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ public class TwitterBot implements Serializable {
     public TwitterBot getBOT(){return BOT;}
 
     /**
-     *
+     *  Metodo que configura la instancia de Twitter, usando las Keys de la API asociados al programa
      */
     public void inicializarBot() {
 
@@ -93,14 +92,13 @@ public class TwitterBot implements Serializable {
     /***
      * Metodo que permite iniciar sesion con cualquier cuenta de Twitter gracias a la autorizacion mediante OAuth.
      * @throws TwitterException Excepcion por problemas tecnicos de Twitter
-     * @throws IOException Excepcion por problemas con archivos del programa
      */
-    public String OAuthURL() throws TwitterException{
+    public String OAuthURL() {
         try {
             //Se obtienen los tokens para solicitar autorizacion
             rtoken = twitter.getOAuthRequestToken();
             return (rtoken.getAuthorizationURL());
-        } catch (IllegalStateException ie) {
+        } catch (TwitterException ie) {
             if (!twitter.getAuthorization().isEnabled()) {
                 System.out.println("No se han configurado los tokens de OAuth");
                 System.exit(-1);
@@ -109,29 +107,26 @@ public class TwitterBot implements Serializable {
         return null;
     }
 
-    public void OAuthInicio(String PIN){
-        AccessToken atoken = null;
-        //Ciclo que se realiza mientras no exista un Token que permita usar una cuenta
-        while (atoken == null) {
+    /***
+     * Método que permite autorizar al Bot el uso de la cuenta del usuario que inició sesión
+     * @param PIN Secuencia de numeros de autorización otorgado por Twitter para confirmar el accecso
+     * @return Retorna un String con el estado de la autorización
+     */
 
-            // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
-            try {
-                if (PIN.length() > 0) {
-                    atoken = twitter.getOAuthAccessToken(rtoken, PIN);
-                } else {
-                    System.out.println("No se ingresó ningún PIN, intente nuevamente");
-                    rtoken = twitter.getOAuthRequestToken();
-                }
-            } catch (TwitterException e) {
-                if (401 == e.getStatusCode()) {
-                    System.out.println("Ocurrió un error al intentar obtener el token de acceso");
-                } else {
-                    System.out.println("Ocurrió un problema al intentar obtener el token de acceso por un" +
-                            "error en la entrada");
-                    e.printStackTrace();
-                }
+    public String OAuthInicio(String PIN){
+        // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
+        try {
+            if (PIN.length() > 0) {
+                twitter.getOAuthAccessToken(rtoken, PIN);
+            } else {
+                return "PIN no ingresado\nVuelva a copiar el enlace de autentificación";
+            }
+        } catch (TwitterException e) {
+            if (401 == e.getStatusCode()) {
+                return "ERROR: PIN Incorrecto\nVuelva a copiar el enlace de autentificación";
             }
         }
+        return "PIN Correcto";
     }
 
     /***
@@ -145,9 +140,14 @@ public class TwitterBot implements Serializable {
          * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
          */
 
-        public void PublicarTweet(String Tweet) throws TwitterException {
-            Status status = twitter.updateStatus(Tweet);
-            status.getText();
+        public String PublicarTweet(String Tweet){
+            try{
+                twitter.updateStatus(Tweet);
+                return "Tweet publicado correctamente";
+            }catch (TwitterException e) {
+                System.out.println(e.getStatusCode());
+                return "ERROR:\nTweet duplicado";
+            }
         }
 
         /***
@@ -155,24 +155,41 @@ public class TwitterBot implements Serializable {
          * @param Tweet mensaje de texto
          * @param rutaImagen imagen o video a subir
          */
-        public int PublicarTweetImagen (String Tweet, File rutaImagen){
-            Pattern patronImage = Pattern.compile("^[^\n]+.jp(e)?g|.png|.gif$");
+        public String PublicarTweetImagen (String Tweet, File rutaImagen){
 
             try{
                 StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
                 nuevoTweet.setMedia(rutaImagen);
                 twitter.updateStatus(nuevoTweet);
-                System.out.println("Tweet con imagen publicado correctamente");
-                return 0;
+                return "Tweet publicado correctamente";
             }
-            catch (Exception e){
-                if (patronImage.matcher(rutaImagen.getName()).find()) {
-                    System.out.println("tamaño de la imagen superado");
-                    return 1;
+            catch (TwitterException e){
+                if(e.getErrorCode() == 187) return "Tweet Duplicado";
+                return "Tamaño de la imagen superado";
+            }
+        }
+
+        public String PublicarTweetVideo (String Tweet, File rutaVideo){
+            try{
+                StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
+                InputStream is = null;
+                try {
+                    is = new FileInputStream(rutaVideo);
+                } catch (FileNotFoundException e) {
+                    return "Archivo invalido. Revise la ruta y/o el archivo";
                 }
-                System.out.println("Ocurrió un error al intentar publicar el Tweet. Revise el tipo de archivo.");
-                return 2;
+                UploadedMedia um = twitter.uploadMediaChunked(rutaVideo.getName(), is);
+                nuevoTweet.setMediaIds(um.getMediaId());
+                twitter.updateStatus(nuevoTweet);
+                System.out.println("Video y Tweet publicado correctamente");
             }
+            catch (TwitterException te){
+                System.out.println(te.getErrorCode());
+                if (te.getErrorCode() == 187)
+                    return "El texto del Tweet ya se ha publicado anteriormente.";
+                return "Video sobrepasa peso(15MB) o duracion(140s)";
+            }
+            return "Video y Tweet Publicado correctamente";
         }
 
         /***
@@ -180,14 +197,12 @@ public class TwitterBot implements Serializable {
          * @param arroba Nombre de usuario al que se le enviara el MD. No se debe incluir el @
          * @param texto String con el texto a enviar
          */
-        public boolean EnviarMD(String arroba, String texto){
+        public String EnviarMD(String arroba, String texto){
             try {
-                DirectMessage MD = twitter.sendDirectMessage(arroba, texto);
-                System.out.println("Se ha enviado un mensaje directo a @" + arroba + " El mensaje fue: " + MD.getText());
-                return true;
+                twitter.sendDirectMessage(arroba, texto);
+                return "Mensaje enviado correctamente";
             }catch (Exception e){
-                System.out.println("Error al enviar mensaje a: @"+arroba+", verifique el ");
-                return false;
+                return "Usuario no encontrado o no seleccionado";
             }
         }
     }
@@ -196,6 +211,8 @@ public class TwitterBot implements Serializable {
      * Segunda clase interna que se encarga de las funciones relacionadas a contenidos externos
      */
     public class Feed {
+
+        private ArrayList<Tweet> backupTweets = new ArrayList<>();
         private ArrayList<Tweet> tweets = new ArrayList<>();
         /***
          * Permite la obtención de los tweets del timeline de la cuenta ingresada
@@ -203,28 +220,30 @@ public class TwitterBot implements Serializable {
          */
         public ArrayList<Tweet> ObtenerTweets() {
             int pageno = 1;
-
-            System.out.println("Obteniendo tweets...");
-
+            boolean exito = false;
             while (true) {
                 try {
                     int size = tweets.size();
                     Paging page = new Paging(pageno++, 100);
-                    ResponseList<Status> statuses = twitter.getHomeTimeline(page);
                     if (pageno == 2) tweets.clear();
 
-                    for (Status status: twitter.getHomeTimeline(page)){
+                    for (Status status : twitter.getHomeTimeline(page)) {
                         tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
                     }
-                    if (tweets.size() == size)
+                    if (tweets.size() == size){
+                        exito = true;
                         break;
-                }catch(TwitterException e) {
-                    e.printStackTrace();
-                    System.err.println("Refresh muy frecuente, intente nuevamente más tarde.");
-                    if (tweets.size() != 0)     return null;
-                    break;
+                    }
+                } catch (TwitterException e) {
+                    if (e.getErrorCode() == 88) {
+                        return backupTweets;
+                    }
                 }
             }
+            if (!backupTweets.isEmpty() && exito) {
+                backupTweets.clear();
+            }
+            backupTweets = new ArrayList<>(tweets);
             return tweets;
         }
 
@@ -240,14 +259,12 @@ public class TwitterBot implements Serializable {
          * @param like contiene el tweet a dar like
          * @throws TwitterException
          */
-        public boolean Like(long like){
+        public String Like(long like){
             try {
                 twitter.createFavorite(like);
-                System.out.println("Like exitoso.");
-                return true;
+                return "Like exitoso";
             } catch (TwitterException e) {
-                System.err.println("Error: No se puede dar like");
-                return false;
+                return "Tweet ya likeado";
             }
         }
 
@@ -256,19 +273,16 @@ public class TwitterBot implements Serializable {
          * @param tweet contiene el tweet a dar retweet
          * @throws TwitterException
          */
-        public int Retweet(long tweet){
+        public String Retweet(long tweet){
             try {
                 if (!twitter.showStatus(tweet).isRetweetedByMe()) {
                     twitter.retweetStatus(tweet);
-                    System.out.println("Retweet exitoso.");
-                    return 0;
+                    return "Retweet exitoso";
                 } else{
-                    System.out.println("Tweet ya tweteado");
-                    return 1;
+                    return "Tweet ya retweeteado";
                 }
             } catch (TwitterException e) {
-                System.err.println("No se encontro Tweet");
-                return 2;
+                return "ERROR:\nNo se encontro Tweet";
             }
         }
     }
@@ -303,16 +317,29 @@ public class TwitterBot implements Serializable {
          * Permite, a través del nombre de usuario, seguir a una cuenta de twitter
          * @param name Cadena con el nombre del usuario a seguir
          */
-        public int Follow(String name) {
+        public String Follow(String name) {
             try {
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())  { twitter.createFriendship(name); return 0; }
-                else  {  System.out.println("Ya sigue al usuario"); return 1; }
+                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
+                    twitter.createFriendship(name);
+                    if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
+                        return "Espere respuesta de \n@"+name;
+                    return "Se sigue correctamente a\n @"+name;
+                }
+                else if(twitter.getScreenName().equals(name))
+                    return "ERROR: \nNo puedes seguirte a ti mismo";
+                else  return "ERROR: Ya sigue al usuario:\n@"+name;
 
             } catch (TwitterException e) {
-                System.err.println("Error al buscar usuario: " + name);
-                return 2;
+                try {
+                    if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
+                        return "Espere respuesta de \n@"+name;
+                } catch (TwitterException ex) {
+                    return "No se encuentra al usuario:\n@" + name;
+                }
             }
+            return "";
         }
+
         public String getNombreUsuario() throws TwitterException {
             return twitter.getScreenName();
         }
