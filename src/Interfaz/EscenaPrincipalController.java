@@ -1,5 +1,6 @@
 package Interfaz;
 
+import Motor.Cadenas;
 import Motor.Tweet;
 import Motor.TwitterBot;
 import Motor.adminSesion;
@@ -38,6 +39,7 @@ public class EscenaPrincipalController {
     @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
 
+    private ArrayList<Tweet> tweetsHash = new ArrayList<>();
     //Inner Classes
     TwitterBot.Feed feed = TwitterBot.getInstance().getBOT().new Feed();
 
@@ -59,6 +61,10 @@ public class EscenaPrincipalController {
         ObservableList<Tweet> tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
+        tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
+        for (Tweet tweet: tweetsHash)
+            System.out.println(tweet.getMensaje());
+
         if (listaTweets != null){
             if (listaTweets.size() != 0){
                 for (Tweet tweet: listaTweets) {

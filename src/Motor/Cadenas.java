@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Cadenas {
 
     public static ArrayList<Tweet> BuscarTweetsHash (ArrayList<Tweet> tweets) {
-        ArrayList<Tweet> aux = null;
+        ArrayList<Tweet> aux = new ArrayList<>();
         Pattern patron = Pattern.compile("(.*\\s#.+)|(^#.+)");
         for (Tweet tweet: tweets)
             if (patron.matcher(tweet.getMensaje()).find())
