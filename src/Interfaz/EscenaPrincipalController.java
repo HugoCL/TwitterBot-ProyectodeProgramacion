@@ -1,9 +1,6 @@
 package Interfaz;
 
-import Motor.Cadenas;
-import Motor.Tweet;
-import Motor.TwitterBot;
-import Motor.adminSesion;
+import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -14,6 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import twitter4j.Status;
+import twitter4j.StatusUpdate;
+import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
@@ -41,11 +41,11 @@ public class EscenaPrincipalController {
 
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
     //Inner Classes
-    TwitterBot.Feed feed = TwitterBot.getInstance().getBOT().new Feed();
+    Feed feed = new Feed();
 
     public void initialize() throws TwitterException {
         //Obtener nombre de usuario
-        usernameTX.setText(TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
+        usernameTX.setText(new Usuario().getNombreUsuario());
         //Botones desactivados
         secondAP.setVisible(false);
     }
@@ -62,8 +62,6 @@ public class EscenaPrincipalController {
         listaTweets_TV.setItems(tweets);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
-        for (Tweet tweet: tweetsHash)
-            System.out.println(tweet.getMensaje());
 
         if (listaTweets != null){
             if (listaTweets.size() != 0){
@@ -94,7 +92,7 @@ public class EscenaPrincipalController {
         String respuesta;
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
-            respuesta = TwitterBot.getInstance().getBOT().new Feed().Retweet(selecTweet.getId());
+            respuesta = new Feed().Retweet(selecTweet.getId());
             Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
             Dialog.getInstance().info(retweetBT,"Seleccione algún tweet","OK",mainAP);
@@ -105,7 +103,7 @@ public class EscenaPrincipalController {
         String respuesta;
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
-            respuesta = TwitterBot.getInstance().getBOT().new Feed().Like(selecTweet.getId());
+            respuesta = new Feed().Like(selecTweet.getId());
             Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
             Dialog.getInstance().info(likeBT,"Seleccione algún tweet","OK",mainAP);

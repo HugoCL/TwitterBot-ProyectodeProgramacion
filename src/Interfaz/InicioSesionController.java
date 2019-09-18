@@ -1,6 +1,7 @@
 package Interfaz;
 
 import Motor.TwitterBot;
+import Motor.Usuario;
 import Motor.adminSesion;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
@@ -48,7 +49,7 @@ public class InicioSesionController {
             pinPF.setText(bot.getPin());
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
-            enlaceTA.setText("Sesión iniciada con: "+TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
+            enlaceTA.setText("Sesión iniciada con: "+new Usuario().getNombreUsuario());
             copyBT.setDisable(true);
         }else{
             bot = TwitterBot.getInstance();

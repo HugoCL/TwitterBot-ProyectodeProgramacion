@@ -1,4 +1,5 @@
 package Interfaz;
+import Motor.Messages;
 import Motor.TwitterBot;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
@@ -17,8 +18,6 @@ import java.util.regex.Pattern;
 
 public class TwittearController {
 
-    private TwitterBot bot;
-
     @FXML private JFXButton publicar_tweetBT;
     @FXML private JFXButton regresarBT;
     @FXML private JFXButton addFileBT;
@@ -35,8 +34,6 @@ public class TwittearController {
     private File selectedFile;
 
     public void initialize(){
-        //Inicializar bot
-        bot = TwitterBot.getInstance().getBOT();
 
         //Inicio de Ventana
         publicar_tweetBT.setDisable(true);
@@ -107,7 +104,7 @@ public class TwittearController {
 
         String respuesta;
         String tweet = tweet_TA.getText();
-        TwitterBot.Messages mensajes = bot.new Messages();
+        Messages mensajes = new Messages();
         if (nameFile_LB.getText() == ""){
             respuesta = mensajes.PublicarTweet(tweet);
         }

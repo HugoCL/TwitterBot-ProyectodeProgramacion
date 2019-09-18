@@ -1,6 +1,8 @@
 package Interfaz;
 
+import Motor.Messages;
 import Motor.TwitterBot;
+import Motor.Usuario;
 import Transiciones.Dialog;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
@@ -12,9 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MensajeDirectoController {
-
-    //inicializar bot
-    private TwitterBot bot = TwitterBot.getInstance().getBOT();
 
     private ArrayList<String> followers;
     private ObservableList<String> listView;
@@ -31,7 +30,7 @@ public class MensajeDirectoController {
         seguidorTA.setOnKeyReleased(event -> Busqueda());
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
-        followers = bot.new Usuario().getFollowers();
+        followers = new Usuario().getFollowers();
         if (followers.isEmpty()) {
             seguidorTA.setDisable(true);
             seguidorTA.setText("NO TIENES SEGUIDORES");
@@ -74,7 +73,7 @@ public class MensajeDirectoController {
     @FXML public void enviarMensaje(){
         String arroba = followersLV.getSelectionModel().getSelectedItem();
         String mensaje = messageTA.getText();
-        TwitterBot.Messages mensajes = bot.new Messages();
+        Messages mensajes = new Messages();
         String respuesta = mensajes.EnviarMD(arroba,mensaje);
         Dialog.getInstance().info(enviar_mensajeBT,respuesta,"OK, revisaré",directMessageAP);
         messageTA.setText("");
