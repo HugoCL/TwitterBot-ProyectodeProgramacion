@@ -1,6 +1,5 @@
 package Interfaz;
 import Motor.Messages;
-import Motor.TwitterBot;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -29,7 +28,7 @@ public class TwittearController {
 
     @FXML private AnchorPane tweetearAP;
 
-    Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
+    private Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
     private FileChooser fileChooser = new FileChooser();
     private File selectedFile;
 

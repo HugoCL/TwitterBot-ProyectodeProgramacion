@@ -1,9 +1,14 @@
 package Motor;
 
+import twitter4j.HashtagEntity;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Cadenas {
+    private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
 
     public static ArrayList<Tweet> BuscarTweetsHash (ArrayList<Tweet> tweets) {
         ArrayList<Tweet> aux = new ArrayList<>();
@@ -11,17 +16,18 @@ public class Cadenas {
         for (Tweet tweet: tweets)
             if (patron.matcher(tweet.getMensaje()).find())
                 aux.add(tweet);
+        if (!aux.isEmpty())
+            ContestarHashTag(aux);
         return aux;
     }
 
-    public static String[] BuscarTextoHash(String tweet) {
-        String[] aux = tweet.split(" ");
-        String[] hashs = new String[160];
-        int i = 0;
-        for (String world: aux)
-            if(world.charAt(0) == '#')
-                hashs[i++] = world;
-        return hashs;
+    private static void ContestarHashTag(ArrayList<Tweet> tweets) {
+        try {
+            for (Tweet tweet: tweets)
+                for (HashtagEntity hashtagEntity : twitter.showStatus(tweet.getId()).getHashtagEntities())
+                    System.out.println(hashtagEntity.getText());
+        } catch (TwitterException e) {
+            System.out.println(e.getErrorMessage());
+        }
     }
-
 }
