@@ -132,6 +132,4 @@ public class TwitterBot implements Serializable {
     public Twitter getTwitter() {
         return twitter;
     }
-
-
 }
