@@ -5,10 +5,13 @@ import Motor.TwitterBot;
 import Motor.Usuario;
 import Transiciones.Dialog;
 import com.jfoenix.controls.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,7 +30,10 @@ public class MensajeDirectoController {
     @FXML private AnchorPane directMessageAP;
 
     public void initialize(){
-        seguidorTA.setOnKeyReleased(event -> Busqueda());
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> Caracteres()), new KeyFrame(Duration.millis(100), e -> Busqueda()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
         followers = new Usuario().getFollowers();
