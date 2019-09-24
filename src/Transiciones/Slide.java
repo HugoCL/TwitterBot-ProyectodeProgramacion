@@ -54,6 +54,7 @@ public class Slide {
     public void left(String ruta, JFXButton boton, AnchorPane anchorPane) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(ruta));
         Scene scene = boton.getScene();
+        scene.getStylesheets().add(getClass().getResource("/Estilo/EstiloListView.css").toExternalForm());
 
         root.translateXProperty().set(scene.getWidth());
         StackPane parentContainer = (StackPane) scene.getRoot();

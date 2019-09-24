@@ -3,6 +3,7 @@ package Interfaz;
 import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,8 +40,12 @@ public class EscenaPrincipalController {
     @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
 
+    @FXML private JFXListView<String> listaTweets_LV;
+
+    private ObservableList<String> listview = FXCollections.observableArrayList("holi", "hola");
+
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
-    //Inner Classes
+    //Classes
     Feed feed = new Feed();
 
     public void initialize() throws TwitterException {
@@ -55,8 +60,15 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline(){
+
+        listaTweets_LV.getStyleClass().add("list-view");
+        listaTweets_LV.setItems(listview);
+        listaTweets_LV.setCellFactory(param -> new CustomCell());
+        botonesMain(true);
+        secondAP.setVisible(true);
+
         //Inicializar la tableView
-        usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
+         /*usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
         ObservableList<Tweet> tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
@@ -79,7 +91,7 @@ public class EscenaPrincipalController {
         }else{
             Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
                     "OK",mainAP);
-        }
+        }*/
 
     }
 
