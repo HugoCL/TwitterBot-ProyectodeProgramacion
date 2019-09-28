@@ -32,13 +32,25 @@
 .buttton{
     -fx-background-color: gray;
 }
-
-.GrayHeart-buttton{
+/*Retweet*/
+.RetweetGray-button{
     -fx-background-color: white;
 }
 
-.GrayHeart-buttton:hover{
-    -jfx-border-color: red;
+.RetweetGray-button .jfx-rippler{
+    -jfx-rippler-fill: #2ECC71;
+}
+
+.RetweetGreen-button{
+    -fx-background-color: #2ECC71;
+}
+
+.RetweetGreen-button .jfx-rippler{
+    -jfx-rippler-fill: gray;
+}
+/*Corazon*/
+.GrayHeart-buttton{
+    -fx-background-color: white;
 }
 
 .GrayHeart-buttton .jfx-rippler{

@@ -21,18 +21,10 @@ public class CustomCell extends ListCell<Tweet> {
     private ImageView imagen;
     private GridPane pane ;
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
-    private boolean tf = false;
+    private boolean tf = false, tf1 = false;
 
     public CustomCell() {
         super();
-
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-
-            }
-        });
 
         like_BT = new JFXButton();
         like_BT.setGraphic(new ImageView(new Image("Imagenes/heart.png", 20,20,false,true)));
@@ -49,13 +41,28 @@ public class CustomCell extends ListCell<Tweet> {
                 }else{
                     like_BT.getStyleClass().set(2, "GrayHeart-buttton");System.out.println(tf);
                     tf = false;
-
                 }
             }
         });
 
         retweet_BT = new JFXButton();
+        retweet_BT.getStyleClass().add("RetweetGray-button");
         retweet_BT.setGraphic(new ImageView(new Image("Imagenes/retweet.png", 20,20,false, true)));
+
+        retweet_BT.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (!tf1){
+                    retweet_BT.getStyleClass().set(2, "RetweetGreen-button");System.out.println(tf1);
+                    tf1 = true;
+
+                }else{
+                    retweet_BT.getStyleClass().set(2, "RetweetGray-button");System.out.println(tf1);
+                    tf1 = false;
+
+                }
+            }
+        });
 
         name = new Label();
         name.getStyleClass().add("label");
