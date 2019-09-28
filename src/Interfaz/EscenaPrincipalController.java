@@ -59,7 +59,7 @@ public class EscenaPrincipalController {
 
     @FXML public void timeline(){
 
-        listaTweets_LV.getStyleClass().add("list-view");
+        listaTweets_LV.getStyleClass().add("list");
         listaTweets_LV.setItems(listview);
         listaTweets_LV.setCellFactory(param -> new CustomCell());
 

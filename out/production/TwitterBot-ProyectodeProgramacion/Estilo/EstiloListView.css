@@ -1,27 +1,27 @@
-.text-area {
+.text {
     -fx-background-insets: 0;
     -fx-background-color: transparent, white, transparent, white;
     -fx-border-color: lightgray;
     -fx-border-radius: 5px;
 }
 
-.text-area .content {
+.text .content {
     -fx-background-color: transparent, white, transparent, white;
 }
 
-.text-area:focused .content {
+.text:focused .content {
     -fx-background-color: transparent, white, transparent, white;
 }
 
-.list-view{
+.list{
     -fx-background-color: white;
 }
 
-.list-view .list-cell{
+.list .list-cell{
     -fx-background-color: white;
 }
 
-.list-view .list-cell:focused{
+.list .list-cell:focused{
     -fx-background-color: transparent;
 }
 

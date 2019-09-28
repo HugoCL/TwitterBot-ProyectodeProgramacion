@@ -64,7 +64,7 @@ public class CustomCell extends ListCell<Tweet> {
         mensaje.setEditable(false);
         mensaje.setMaxSize(300, 100);
         mensaje.setWrapText(true);
-        mensaje.getStyleClass().add("text-area");
+        mensaje.getStyleClass().add("text");
 
         imagen = new ImageView();
 
