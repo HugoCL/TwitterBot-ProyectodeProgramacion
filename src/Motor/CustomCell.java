@@ -7,10 +7,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 public class CustomCell extends ListCell<Tweet> {
     private JFXButton like_BT;
@@ -21,27 +21,22 @@ public class CustomCell extends ListCell<Tweet> {
     private ImageView imagen;
     private GridPane pane ;
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
+    private long idTweet;
     private boolean tf = false, tf1 = false;
 
     public CustomCell() {
         super();
-
+        Feed feed = new Feed();
         like_BT = new JFXButton();
         like_BT.setGraphic(new ImageView(new Image("Imagenes/heart.png", 20,20,false,true)));
         like_BT.getStyleClass().add("GrayHeart-buttton");
         like_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Action: "+getItem().getMensaje());
-                System.out.println(like_BT.getStyleClass().get(2));
-                if (!tf){
-                    like_BT.getStyleClass().set(2, "RedHeart-buttton");System.out.println(tf);
-                    tf = true;
-
-                }else{
-                    like_BT.getStyleClass().set(2, "GrayHeart-buttton");System.out.println(tf);
-                    tf = false;
-                }
+                if(feed.Like(idTweet).equals("Like exitoso"))
+                    like_BT.getStyleClass().set(2, "RedHeart-buttton");
+                else
+                    like_BT.getStyleClass().set(2, "GrayHeart-buttton");
             }
         });
 
@@ -52,16 +47,11 @@ public class CustomCell extends ListCell<Tweet> {
         retweet_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!tf1){
-                    retweet_BT.getStyleClass().set(2, "RetweetGreen-button");System.out.println(tf1);
-                    tf1 = true;
-
-                }else{
-                    retweet_BT.getStyleClass().set(2, "RetweetGray-button");System.out.println(tf1);
-                    tf1 = false;
-
+                if (feed.Retweet(idTweet).equals("Retweet exitoso"))
+                    retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
+                else
+                    retweet_BT.getStyleClass().set(2, "RetweetGray-button");
                 }
-            }
         });
 
         name = new Label();
@@ -95,14 +85,25 @@ public class CustomCell extends ListCell<Tweet> {
         super.updateItem(item, empty);
         setEditable(false);
         if (item != null) {
+            idTweet = item.getId();
             name.setText(item.getNombre());
             imagen.setImage(new Image(item.getImagen()));
             mensaje.setText(item.getMensaje());
-            //De esta manera se obitiene la imagen de perfil del usuario
-            //twitter.showStatus(item.getId()).getUser().getProfileImageURL();
+            revisarLikeRetweet(idTweet);
             setGraphic(pane);
         } else {
             setGraphic(null);
+        }
+    }
+
+    private void revisarLikeRetweet(long id) {
+        try {
+            if(twitter.showStatus(id).isRetweetedByMe())
+                retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
+            if(twitter.showStatus(id).isFavorited())
+                like_BT.getStyleClass().set(2, "RedHeart-buttton");
+        } catch (TwitterException e) {
+            System.out.println("No se encuentra tweet");
         }
     }
 }

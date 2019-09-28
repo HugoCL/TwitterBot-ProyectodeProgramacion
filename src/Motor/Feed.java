@@ -59,10 +59,15 @@ public class Feed {
      */
     public String Like(long like){
         try {
-            twitter.createFavorite(like);
-            return "Like exitoso";
+            if(!twitter.showStatus(like).isFavorited()) {
+                twitter.createFavorite(like);
+                return "Like exitoso";
+            } else{
+                twitter.destroyFavorite(like);
+                return "Tweet ya likeado";
+            }
         } catch (TwitterException e) {
-            return "Tweet ya likeado";
+            return "ERROR:\nNo se encontro Tweet";
         }
     }
 
@@ -77,6 +82,7 @@ public class Feed {
                 twitter.retweetStatus(tweet);
                 return "Retweet exitoso";
             } else{
+                twitter.unRetweetStatus(tweet);
                 return "Tweet ya retweeteado";
             }
         } catch (TwitterException e) {
