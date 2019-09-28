@@ -25,7 +25,8 @@ public class Feed {
                 if (pageno == 2) tweets.clear();
 
                 for (Status status : twitter.getHomeTimeline(page)) {
-                    tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
+                    tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(),
+                            status.getUser().getMiniProfileImageURL()));
                 }
                 if (tweets.size() == size){
                     exito = true;

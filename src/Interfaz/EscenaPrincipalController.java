@@ -38,11 +38,11 @@ public class EscenaPrincipalController {
 
     @FXML private JFXListView<Tweet> listaTweets_LV;
 
-    private ObservableList<Tweet> listview = FXCollections.observableArrayList(new Tweet("Mensaje para algo 0sdasd00000", 1, "Nicolas")
-            , new Tweet("Otra porqueria de mensaje algo más sofisticado para que el texto se divida de una manera más legible", 2, "Ariel"));
+    private ObservableList<Tweet> listview = FXCollections.observableArrayList();
 
 
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
+
     //Classes
     private Feed feed = new Feed();
 
@@ -62,22 +62,16 @@ public class EscenaPrincipalController {
         listaTweets_LV.getStyleClass().add("list-view");
         listaTweets_LV.setItems(listview);
         listaTweets_LV.setCellFactory(param -> new CustomCell());
-        botonesMain(true);
-        secondAP.setVisible(true);
 
-        //Inicializar la tableView
-         /*usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
-        tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
-        ObservableList<Tweet> tweets = FXCollections.observableArrayList();
-        listaTweets_TV.setItems(tweets);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
-        tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
+
+        //tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
 
         if (listaTweets != null){
             if (listaTweets.size() != 0){
                 for (Tweet tweet: listaTweets) {
-                    Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
-                    tweets.add(newTweet);
+                    Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre(),tweet.getImagen());
+                    listview.add(newTweet);
                 }
                 botonesMain(true);
                 secondAP.setVisible(true);
@@ -89,8 +83,7 @@ public class EscenaPrincipalController {
         }else{
             Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
                     "OK",mainAP);
-        }*/
-
+        }
     }
 
     @FXML public void cerrarTimeline(){
