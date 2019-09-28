@@ -40,9 +40,11 @@ public class EscenaPrincipalController {
     @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
 
-    @FXML private JFXListView<String> listaTweets_LV;
+    @FXML private JFXListView<Tweet> listaTweets_LV;
 
-    private ObservableList<String> listview = FXCollections.observableArrayList("holi", "hola");
+    private ObservableList<Tweet> listview = FXCollections.observableArrayList(new Tweet("Mensaje para algo 0sdasd00000", 1, "Nicolas")
+            , new Tweet("Otra porqueria de mensaje algo más sofisticado para que el texto se divida de una manera más legible", 2, "Ariel"));
+
 
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
     //Classes
