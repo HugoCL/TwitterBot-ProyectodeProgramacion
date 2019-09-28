@@ -3,18 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" afterPath="$PROJECT_DIR$/Sesion.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesion.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CustomCell$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CustomCell$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CustomCell$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CustomCell$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CustomCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CustomCell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Feed.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Feed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Tweet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Tweet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/InicioSesion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/InicioSesion.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/CustomCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/CustomCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/Tweet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Tweet.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

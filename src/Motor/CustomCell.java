@@ -1,4 +1,5 @@
 package Motor;
+import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import twitter4j.Twitter;
@@ -22,9 +24,8 @@ public class CustomCell extends ListCell<Tweet> {
     private GridPane pane ;
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private long idTweet;
-    private boolean tf = false, tf1 = false;
 
-    public CustomCell() {
+    public CustomCell(AnchorPane mainAP) {
         super();
         Feed feed = new Feed();
         like_BT = new JFXButton();
@@ -33,10 +34,14 @@ public class CustomCell extends ListCell<Tweet> {
         like_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(feed.Like(idTweet).equals("Like exitoso"))
+                if(feed.Like(idTweet).equals("Like exitoso")){
                     like_BT.getStyleClass().set(2, "RedHeart-buttton");
-                else
+                    Dialog.getInstance().info(like_BT,"Like exitoso","OK",mainAP);
+                }
+                else{
                     like_BT.getStyleClass().set(2, "GrayHeart-buttton");
+                    Dialog.getInstance().info(like_BT,"Like quitado","OK",mainAP);
+                }
             }
         });
 
@@ -47,11 +52,15 @@ public class CustomCell extends ListCell<Tweet> {
         retweet_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (feed.Retweet(idTweet).equals("Retweet exitoso"))
+                if (feed.Retweet(idTweet).equals("Retweet exitoso")){
                     retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
-                else
-                    retweet_BT.getStyleClass().set(2, "RetweetGray-button");
+                    Dialog.getInstance().info(like_BT,"Retweet exitoso","OK",mainAP);
                 }
+                else{
+                    retweet_BT.getStyleClass().set(2, "RetweetGray-button");
+                    Dialog.getInstance().info(like_BT,"Retweet quitado","OK",mainAP);
+                }
+            }
         });
 
         name = new Label();

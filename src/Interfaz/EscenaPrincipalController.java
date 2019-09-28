@@ -61,7 +61,7 @@ public class EscenaPrincipalController {
 
         listaTweets_LV.getStyleClass().add("list");
         listaTweets_LV.setItems(listview);
-        listaTweets_LV.setCellFactory(param -> new CustomCell());
+        listaTweets_LV.setCellFactory(param -> new CustomCell(mainAP));
 
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
 
