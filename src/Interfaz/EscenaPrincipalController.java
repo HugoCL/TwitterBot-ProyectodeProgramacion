@@ -9,12 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import twitter4j.Status;
-import twitter4j.StatusUpdate;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
@@ -48,7 +44,7 @@ public class EscenaPrincipalController {
 
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
     //Classes
-    Feed feed = new Feed();
+    private Feed feed = new Feed();
 
     public void initialize() throws TwitterException {
         //Obtener nombre de usuario
@@ -134,7 +130,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().setSesion(false);
-        adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
+        AdminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 

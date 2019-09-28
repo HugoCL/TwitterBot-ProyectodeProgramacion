@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Motor;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -13,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import twitter4j.Twitter;
 
 public class CustomCell extends ListCell<Tweet> {
     private JFXButton actionBtn;
@@ -21,6 +17,7 @@ public class CustomCell extends ListCell<Tweet> {
     private TextArea mensaje;
     private Label imagen;
     private GridPane pane ;
+    private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private boolean tf = false;
 
     public CustomCell() {
@@ -84,6 +81,8 @@ public class CustomCell extends ListCell<Tweet> {
             name.setText(item.getNombre());
             imagen.setText(item.getId()+"");
             mensaje.setText(item.getMensaje());
+            //De esta manera se obitiene la imagen de perfil del usuario
+            //twitter.showStatus(item.getId()).getUser().getProfileImageURL();
             setGraphic(pane);
         } else {
             setGraphic(null);

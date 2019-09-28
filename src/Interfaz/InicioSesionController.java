@@ -2,7 +2,7 @@ package Interfaz;
 
 import Motor.TwitterBot;
 import Motor.Usuario;
-import Motor.adminSesion;
+import Motor.AdminSesion;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -32,7 +32,7 @@ public class InicioSesionController {
     @FXML private StackPane parentContainer;
 
     public void initialize() throws TwitterException {
-        adminSesion adm = adminSesion.getInstance();
+        AdminSesion adm = AdminSesion.getInstance();
         pinPF.setText("");
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
@@ -71,7 +71,7 @@ public class InicioSesionController {
                 if (no_cierre_sesionCB.isSelected()){
                     bot.setSesion(true);
                     bot.setPin(pinPF.getText());
-                    adminSesion.getInstance().Serializar(bot);
+                    AdminSesion.getInstance().Serializar(bot);
                 }
                 TwitterBot.getInstance().setBOT(bot);
             } else {
@@ -81,7 +81,7 @@ public class InicioSesionController {
         }else {
             if (!no_cierre_sesionCB.isSelected()){
                 bot.setSesion(false);
-                adminSesion.getInstance().Serializar(bot);
+                AdminSesion.getInstance().Serializar(bot);
                 TwitterBot.getInstance().setBOT(bot);
             }
         }

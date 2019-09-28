@@ -5,18 +5,18 @@ import java.io.*;
 /***
  * Clase encargada de la administración de la sesión de una cuenta de Twitter
  */
-public class adminSesion {
-    private static adminSesion INSTANCE = null;
+public class AdminSesion {
+    private static AdminSesion INSTANCE = null;
     // Constructor privado
-    private adminSesion(){}
+    private AdminSesion(){}
     // creador sincronizado para protegerse de posibles problemas  multi-hilo
     // otra prueba para evitar instanciación múltiple
     private synchronized static void createInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new adminSesion();
+            INSTANCE = new AdminSesion();
         }
     }
-    public static adminSesion getInstance() {
+    public static AdminSesion getInstance() {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
