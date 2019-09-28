@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -16,7 +17,7 @@ public class CustomCell extends ListCell<Tweet> {
     private Label name;
     private Label numero;
     private TextArea mensaje;
-    private Label imagen;
+    private ImageView imagen;
     private GridPane pane ;
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private boolean tf = false;
@@ -65,7 +66,7 @@ public class CustomCell extends ListCell<Tweet> {
         mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text-area");
 
-        imagen = new Label("hola");
+        imagen = new ImageView();
 
         pane = new GridPane();
 
@@ -84,7 +85,7 @@ public class CustomCell extends ListCell<Tweet> {
         setEditable(false);
         if (item != null) {
             name.setText(item.getNombre());
-            imagen.setLabelFor(new ImageView(item.getImagen()));
+            imagen.setImage(new Image(item.getImagen()));
             mensaje.setText(item.getMensaje());
             //De esta manera se obitiene la imagen de perfil del usuario
             //twitter.showStatus(item.getId()).getUser().getProfileImageURL();

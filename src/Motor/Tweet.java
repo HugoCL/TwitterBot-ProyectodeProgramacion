@@ -15,15 +15,11 @@ public class Tweet implements Serializable {
     private SimpleStringProperty imagen;
     private long id;
 
-    public Tweet(String mensaje, long id, String nombre) {
-        this.mensaje = new SimpleStringProperty(mensaje);
-        this.id = id;
-        this.nombre = new SimpleStringProperty(nombre);
-    }
     public Tweet(String mensaje, long id, String nombre, String imagen) {
         this.mensaje = new SimpleStringProperty(mensaje);
         this.id = id;
         this.nombre = new SimpleStringProperty(nombre);
+        this.imagen = new SimpleStringProperty(imagen);
     }
 
     public String getMensaje() {
