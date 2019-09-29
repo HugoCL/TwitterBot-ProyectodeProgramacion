@@ -13,16 +13,8 @@
     -fx-background-color: transparent, white, transparent, white;
 }
 
-.list{
+.grid{
     -fx-background-color: white;
-}
-
-.list .list-cell{
-    -fx-background-color: white;
-}
-
-.list .list-cell:focused{
-    -fx-background-color: transparent;
 }
 
 .label {

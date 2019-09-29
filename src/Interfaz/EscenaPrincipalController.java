@@ -3,13 +3,10 @@ package Interfaz;
 import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import twitter4j.TwitterException;
 
@@ -22,24 +19,15 @@ public class EscenaPrincipalController {
     @FXML private AnchorPane secondAP;
 
     @FXML private JFXButton tweetearBT;
-    @FXML private JFXButton retweetBT;
     @FXML private JFXButton followBT;
-    @FXML private JFXButton likeBT;
     @FXML private JFXButton directBT;
     @FXML private JFXButton timelineBT;
     @FXML private JFXButton cerrar_sesionBT;
 
     @FXML private Text usernameTX;
 
-    //TableView
-    @FXML private TableColumn<Tweet, String> usuarioCL;
-    @FXML private TableColumn<Tweet, String> tweetCL;
-    @FXML private TableView<Tweet> listaTweets_TV;
-
-    @FXML private JFXListView<Tweet> listaTweets_LV;
-
-    private ObservableList<Tweet> listview = FXCollections.observableArrayList();
-
+    @FXML private VBox vbox = new VBox(10);
+    @FXML private ScrollPane scroll = new ScrollPane();
 
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
 
@@ -51,6 +39,8 @@ public class EscenaPrincipalController {
         usernameTX.setText(new Usuario().getNombreUsuario());
         //Botones desactivados
         secondAP.setVisible(false);
+
+        scroll.getStyleClass().add("text");
     }
 
     @FXML public void tweetear() throws IOException {
@@ -58,21 +48,16 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline(){
-
-        listaTweets_LV.getStyleClass().add("list");
-        listaTweets_LV.setItems(listview);
-        listaTweets_LV.setCellFactory(param -> new CustomCell(mainAP));
-
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
-
+        System.out.println(listaTweets.size());
         //tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
 
         if (listaTweets != null){
             if (listaTweets.size() != 0){
                 for (Tweet tweet: listaTweets) {
-                    Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre(),tweet.getImagen());
-                    listview.add(newTweet);
+                    vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
                 }
+                scroll.setContent(vbox);
                 botonesMain(true);
                 secondAP.setVisible(true);
             }
@@ -89,28 +74,6 @@ public class EscenaPrincipalController {
     @FXML public void cerrarTimeline(){
         botonesMain(false);
         secondAP.setVisible(false);
-    }
-
-    @FXML public void retweet(){
-        String respuesta;
-        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
-        if (selecTweet != null){
-            respuesta = new Feed().Retweet(selecTweet.getId());
-            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
-        }else {
-            Dialog.getInstance().info(retweetBT,"Seleccione algún tweet","OK",mainAP);
-        }
-    }
-
-    @FXML public void like(){
-        String respuesta;
-        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
-        if (selecTweet != null){
-            respuesta = new Feed().Like(selecTweet.getId());
-            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
-        }else {
-            Dialog.getInstance().info(likeBT,"Seleccione algún tweet","OK",mainAP);
-        }
     }
 
     @FXML public void follow() throws IOException {
