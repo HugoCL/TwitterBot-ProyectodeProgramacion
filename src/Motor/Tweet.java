@@ -1,7 +1,5 @@
 package Motor;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import java.io.Serializable;
 
 /***
@@ -10,20 +8,20 @@ import java.io.Serializable;
 
 public class Tweet implements Serializable {
 
-    private SimpleStringProperty mensaje;
-    private SimpleStringProperty nombre;
-    private SimpleStringProperty imagen;
+    private String mensaje;
+    private String nombre;
+    private String imagen;
     private long id;
 
     public Tweet(String mensaje, long id, String nombre, String imagen) {
-        this.mensaje = new SimpleStringProperty(mensaje);
+        this.mensaje = mensaje;
         this.id = id;
-        this.nombre = new SimpleStringProperty(nombre);
-        this.imagen = new SimpleStringProperty(imagen);
+        this.nombre = nombre;
+        this.imagen = imagen;
     }
 
     public String getMensaje() {
-        return mensaje.get();
+        return mensaje;
     }
 
     public long getId() {
@@ -31,10 +29,10 @@ public class Tweet implements Serializable {
     }
 
     public String getNombre() {
-        return nombre.get();
+        return nombre;
     }
 
     public String getImagen() {
-        return imagen.get();
+        return imagen;
     }
 }
