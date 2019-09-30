@@ -77,7 +77,7 @@ public class InicioSesionController {
                 if (no_cierre_sesionCB.isSelected()){
                     bot.setSesion(true);
                     bot.setPin(pinPF.getText());
-                    AdminSesion.getInstance().Serializar(bot);
+                    AdminSesion.getInstance().serializar(bot);
                 }
                 TwitterBot.getInstance().setBOT(bot);
             } else {
@@ -87,7 +87,7 @@ public class InicioSesionController {
         }else {
             if (!no_cierre_sesionCB.isSelected()){
                 bot.setSesion(false);
-                AdminSesion.getInstance().Serializar(bot);
+                AdminSesion.getInstance().serializar(bot);
                 TwitterBot.getInstance().setBOT(bot);
             }
         }
@@ -95,7 +95,7 @@ public class InicioSesionController {
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }
 
-    @FXML public void Copiar() {
+    @FXML public void copiar() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();
         content.putString(enlace);
@@ -104,10 +104,9 @@ public class InicioSesionController {
         Dialog.getInstance().info(copyBT,"Enlace copiado","OK",inicioSesionAP);
     }
 
-    @FXML public void cerrarSesion() throws IOException, TwitterException {
-        bot.setSesion(false);
-        AdminSesion.getInstance().Serializar(bot);
-        TwitterBot.getInstance().setBOT(bot);
-        this.initialize();
+    @FXML public void cerrarPrograma(){
+        System.out.println("Finalizando programa...");
+        // SE NECESITA CAMBIAR ESTE SYS.EXIT
+        System.exit(0);
     }
 }

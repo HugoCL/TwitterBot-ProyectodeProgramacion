@@ -4,7 +4,8 @@ import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -76,6 +77,28 @@ public class EscenaPrincipalController {
         secondAP.setVisible(false);
     }
 
+    @FXML public void retweet(){
+        String respuesta;
+        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
+        if (selecTweet != null){
+            respuesta = new Feed().retweet(selecTweet.getId());
+            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
+        }else {
+            Dialog.getInstance().info(retweetBT,"Seleccione algún tweet","OK",mainAP);
+        }
+    }
+
+    @FXML public void like(){
+        String respuesta;
+        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
+        if (selecTweet != null){
+            respuesta = new Feed().like(selecTweet.getId());
+            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
+        }else {
+            Dialog.getInstance().info(likeBT,"Seleccione algún tweet","OK",mainAP);
+        }
+    }
+
     @FXML public void follow() throws IOException {
         Transiciones.Slide.getInstance().left("/Interfaz/Follow.fxml", followBT, mainAP);
     }
@@ -86,7 +109,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().setSesion(false);
-        AdminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
+        AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 
@@ -99,6 +122,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarPrograma(){
         System.out.println("Finalizando programa...");
+        //SE NECESITA CAMBIAR ESTE SYS.EXIT
         System.exit(0);
     }
 }

@@ -1,7 +1,6 @@
 package Interfaz;
 
 import Motor.Messages;
-import Motor.TwitterBot;
 import Motor.Usuario;
 import Transiciones.Dialog;
 import com.jfoenix.controls.*;
@@ -30,7 +29,7 @@ public class MensajeDirectoController {
     @FXML private AnchorPane directMessageAP;
 
     public void initialize(){
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> Caracteres()), new KeyFrame(Duration.millis(100), e -> Busqueda()));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -44,7 +43,7 @@ public class MensajeDirectoController {
         }
     }
 
-    public void Busqueda() {
+    public void busqueda() {
         listView = FXCollections.observableArrayList();
         String busqueda = seguidorTA.getText();
         boolean tf;
@@ -60,12 +59,12 @@ public class MensajeDirectoController {
         followersLV.setItems(listView);
     }
 
-    public void Caracteres(){
+    public void caracteres(){
         if (!messageTA.getText().isEmpty()) {enviar_mensajeBT.setDisable(false);}
         else {enviar_mensajeBT.setDisable(true);}
     }
 
-    @FXML public void ObtenerUsuario() {
+    @FXML public void obtenerUsuario() {
         String usuario;
         if (followersLV.getSelectionModel().getSelectedItem() != null) {
             usuario = followersLV.getSelectionModel().getSelectedItem();

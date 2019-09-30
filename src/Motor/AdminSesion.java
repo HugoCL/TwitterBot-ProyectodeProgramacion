@@ -25,7 +25,7 @@ public class AdminSesion {
      * @param bot Objeto de tipo TwitterBot que posee la instancia ya creada con todos sus parametros
      * @throws IOException Excepcion en caso de problemas con el fichero
      */
-    public void Serializar(TwitterBot bot) throws IOException {
+    public void serializar(TwitterBot bot) throws IOException {
         FileOutputStream salida = new FileOutputStream("Sesion.out");
         ObjectOutputStream salidaO = new ObjectOutputStream(salida);
 

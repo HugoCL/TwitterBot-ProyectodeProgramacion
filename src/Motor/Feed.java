@@ -15,7 +15,7 @@ public class Feed {
      * Permite la obtención de los tweets del timeline de la cuenta ingresada
      * @return Lista con los tweets.
      */
-    public ArrayList<Tweet> ObtenerTweets() {
+    public ArrayList<Tweet> obtenerTweets() {
         int pageno = 1;
         boolean exito = false;
         while (true) {
@@ -57,7 +57,7 @@ public class Feed {
      * @param like contiene el tweet a dar like
      * @throws TwitterException
      */
-    public String Like(long like){
+    public String like(long like){
         try {
             if(!twitter.showStatus(like).isFavorited()) {
                 twitter.createFavorite(like);
@@ -76,7 +76,7 @@ public class Feed {
      * @param tweet contiene el tweet a dar retweet
      * @throws TwitterException
      */
-    public String Retweet(long tweet){
+    public String retweet(long tweet){
         try {
             if (!twitter.showStatus(tweet).isRetweetedByMe()) {
                 twitter.retweetStatus(tweet);
