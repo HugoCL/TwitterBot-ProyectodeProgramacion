@@ -37,6 +37,6 @@
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font></JFXTextField>
-      <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#ObtenerUsuario" prefHeight="214.0" prefWidth="150.0" />
+      <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#obtenerUsuario" prefHeight="214.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

@@ -9,12 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import twitter4j.Status;
-import twitter4j.StatusUpdate;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
@@ -104,7 +100,7 @@ public class EscenaPrincipalController {
         String respuesta;
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
-            respuesta = new Feed().Retweet(selecTweet.getId());
+            respuesta = new Feed().retweet(selecTweet.getId());
             Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
             Dialog.getInstance().info(retweetBT,"Seleccione algún tweet","OK",mainAP);
@@ -115,7 +111,7 @@ public class EscenaPrincipalController {
         String respuesta;
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
-            respuesta = new Feed().Like(selecTweet.getId());
+            respuesta = new Feed().like(selecTweet.getId());
             Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
             Dialog.getInstance().info(likeBT,"Seleccione algún tweet","OK",mainAP);
@@ -132,7 +128,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().setSesion(false);
-        adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
+        AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 
@@ -145,6 +141,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarPrograma(){
         System.out.println("Finalizando programa...");
+        //SE NECESITA CAMBIAR ESTE SYS.EXIT
         System.exit(0);
     }
 }

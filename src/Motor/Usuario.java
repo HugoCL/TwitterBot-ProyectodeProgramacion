@@ -37,7 +37,7 @@ public class Usuario {
      * Permite, a través del nombre de usuario, seguir a una cuenta de twitter
      * @param name Cadena con el nombre del usuario a seguir
      */
-    public String Follow(String name) {
+    public String follow(String name) {
         try {
             if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
                 twitter.createFriendship(name);

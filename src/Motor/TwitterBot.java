@@ -101,6 +101,7 @@ public class TwitterBot implements Serializable {
         } catch (TwitterException ie) {
             if (!twitter.getAuthorization().isEnabled()) {
                 System.out.println("No se han configurado los tokens de OAuth");
+                // SE NECESITA ELIMINAR ESTE SYS.EXIT
                 System.exit(-1);
             }
         }

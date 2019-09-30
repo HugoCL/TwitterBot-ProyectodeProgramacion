@@ -4,7 +4,6 @@ import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -48,7 +47,7 @@ public class TwittearController {
         publicar_tweetBT.setDisable(true);
         caracteres_LB.setText("0/280");
 
-        KeyFrame frame = new KeyFrame(Duration.millis(100), e -> Caracteres());
+        KeyFrame frame = new KeyFrame(Duration.millis(100), e -> caracteres());
         Timeline timeline = new Timeline(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -87,7 +86,7 @@ public class TwittearController {
 
     }
 
-    public void Caracteres() {
+    public void caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
             if (tweet_TA.getText().length() > 280){
                 caracteres_LB.setTextFill(Color.web("#ff0000"));
@@ -100,7 +99,7 @@ public class TwittearController {
             caracteres_LB.setText(tweet_TA.getText().length()+"/280");
         }
         else {
-            if (nameFile_LB.getText() != ""){
+            if (!nameFile_LB.getText().equals("")){
                 publicar_tweetBT.setDisable(false);
                 caracteres_LB.setTextFill(Color.web("#000000"));
             }else {
@@ -117,7 +116,7 @@ public class TwittearController {
         String respuesta;
         String tweet = tweet_TA.getText();
         Messages mensajes = new Messages();
-        if (nameFile_LB.getText() == ""){
+        if (nameFile_LB.getText().equals("")){
             respuesta = mensajes.PublicarTweet(tweet);
         }
         else if(patronImage.matcher(selectedFile.getName()).find()){
