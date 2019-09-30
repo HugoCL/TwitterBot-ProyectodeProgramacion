@@ -1,6 +1,6 @@
 package Interfaz;
 
-import Motor.TwitterBot;
+import Motor.Usuario;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -17,11 +17,7 @@ public class FollowController {
 
     @FXML private AnchorPane followAP;
 
-    TwitterBot bot = TwitterBot.getInstance();
-
     public void initialize(){
-        //Inicializacion de bot
-        bot = TwitterBot.getInstance().getBOT();
     }
 
     public void seguir(){
@@ -31,8 +27,8 @@ public class FollowController {
             Dialog.getInstance().info(followBT,"Ingrese algún nombre de usuario.","OK, revisaré",followAP);
         }
         else {
-            TwitterBot.Usuario usuario = bot.new Usuario();
-            respuesta = usuario.Follow(nicknameTF.getText());
+            Usuario usuario = new Usuario();
+            respuesta = usuario.follow(nicknameTF.getText());
             Dialog.getInstance().info(followBT,respuesta,"OK, revisaré",followAP);
             nicknameTF.setText("");
         }

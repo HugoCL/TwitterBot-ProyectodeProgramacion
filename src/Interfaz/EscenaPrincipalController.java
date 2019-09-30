@@ -1,16 +1,14 @@
 package Interfaz;
 
-import Motor.Tweet;
-import Motor.TwitterBot;
-import Motor.adminSesion;
+import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import twitter4j.TwitterException;
@@ -38,12 +36,17 @@ public class EscenaPrincipalController {
     @FXML private TableColumn<Tweet, String> tweetCL;
     @FXML private TableView<Tweet> listaTweets_TV;
 
-    //Inner Classes
-    TwitterBot.Feed feed = TwitterBot.getInstance().getBOT().new Feed();
+    @FXML private JFXListView<String> listaTweets_LV;
+
+    private ObservableList<String> listview = FXCollections.observableArrayList("holi", "hola");
+
+    private ArrayList<Tweet> tweetsHash = new ArrayList<>();
+    //Classes
+    Feed feed = new Feed();
 
     public void initialize() throws TwitterException {
         //Obtener nombre de usuario
-        usernameTX.setText(TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
+        usernameTX.setText(new Usuario().getNombreUsuario());
         //Botones desactivados
         secondAP.setVisible(false);
     }
@@ -53,12 +56,21 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline(){
+
+        listaTweets_LV.getStyleClass().add("list-view");
+        listaTweets_LV.setItems(listview);
+        listaTweets_LV.setCellFactory(param -> new CustomCell());
+        botonesMain(true);
+        secondAP.setVisible(true);
+
         //Inicializar la tableView
-        usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
+         /*usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
         tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
         ObservableList<Tweet> tweets = FXCollections.observableArrayList();
         listaTweets_TV.setItems(tweets);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
+        tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
+
         if (listaTweets != null){
             if (listaTweets.size() != 0){
                 for (Tweet tweet: listaTweets) {
@@ -75,7 +87,7 @@ public class EscenaPrincipalController {
         }else{
             Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
                     "OK",mainAP);
-        }
+        }*/
 
     }
 
@@ -88,7 +100,7 @@ public class EscenaPrincipalController {
         String respuesta;
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
-            respuesta = TwitterBot.getInstance().getBOT().new Feed().Retweet(selecTweet.getId());
+            respuesta = new Feed().retweet(selecTweet.getId());
             Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
             Dialog.getInstance().info(retweetBT,"Seleccione algún tweet","OK",mainAP);
@@ -99,7 +111,7 @@ public class EscenaPrincipalController {
         String respuesta;
         Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
         if (selecTweet != null){
-            respuesta = TwitterBot.getInstance().getBOT().new Feed().Like(selecTweet.getId());
+            respuesta = new Feed().like(selecTweet.getId());
             Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
         }else {
             Dialog.getInstance().info(likeBT,"Seleccione algún tweet","OK",mainAP);
@@ -116,7 +128,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().setSesion(false);
-        adminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
+        AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 
@@ -129,6 +141,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarPrograma(){
         System.out.println("Finalizando programa...");
+        //SE NECESITA CAMBIAR ESTE SYS.EXIT
         System.exit(0);
     }
 }

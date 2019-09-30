@@ -1,20 +1,21 @@
 package Interfaz;
 
-import Motor.TwitterBot;
+import Motor.Messages;
+import Motor.Usuario;
 import Transiciones.Dialog;
 import com.jfoenix.controls.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MensajeDirectoController {
-
-    //inicializar bot
-    private TwitterBot bot = TwitterBot.getInstance().getBOT();
 
     private ArrayList<String> followers;
     private ObservableList<String> listView;
@@ -28,10 +29,13 @@ public class MensajeDirectoController {
     @FXML private AnchorPane directMessageAP;
 
     public void initialize(){
-        seguidorTA.setOnKeyReleased(event -> Busqueda());
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
-        followers = bot.new Usuario().getFollowers();
+        followers = new Usuario().getFollowers();
         if (followers.isEmpty()) {
             seguidorTA.setDisable(true);
             seguidorTA.setText("NO TIENES SEGUIDORES");
@@ -39,7 +43,7 @@ public class MensajeDirectoController {
         }
     }
 
-    public void Busqueda() {
+    public void busqueda() {
         listView = FXCollections.observableArrayList();
         String busqueda = seguidorTA.getText();
         boolean tf;
@@ -55,12 +59,12 @@ public class MensajeDirectoController {
         followersLV.setItems(listView);
     }
 
-    public void Caracteres(){
+    public void caracteres(){
         if (!messageTA.getText().isEmpty()) {enviar_mensajeBT.setDisable(false);}
         else {enviar_mensajeBT.setDisable(true);}
     }
 
-    @FXML public void ObtenerUsuario() {
+    @FXML public void obtenerUsuario() {
         String usuario;
         if (followersLV.getSelectionModel().getSelectedItem() != null) {
             usuario = followersLV.getSelectionModel().getSelectedItem();
@@ -74,7 +78,7 @@ public class MensajeDirectoController {
     @FXML public void enviarMensaje(){
         String arroba = followersLV.getSelectionModel().getSelectedItem();
         String mensaje = messageTA.getText();
-        TwitterBot.Messages mensajes = bot.new Messages();
+        Messages mensajes = new Messages();
         String respuesta = mensajes.EnviarMD(arroba,mensaje);
         Dialog.getInstance().info(enviar_mensajeBT,respuesta,"OK, revisaré",directMessageAP);
         messageTA.setText("");

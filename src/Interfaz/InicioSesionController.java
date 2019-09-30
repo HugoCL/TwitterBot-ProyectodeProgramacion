@@ -1,7 +1,8 @@
 package Interfaz;
 
 import Motor.TwitterBot;
-import Motor.adminSesion;
+import Motor.Usuario;
+import Motor.AdminSesion;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -31,7 +32,7 @@ public class InicioSesionController {
     @FXML private StackPane parentContainer;
 
     public void initialize() throws TwitterException {
-        adminSesion adm = adminSesion.getInstance();
+        AdminSesion adm = AdminSesion.getInstance();
         pinPF.setText("");
         TwitterBot botSerializado = adm.desSerializar();
         if (botSerializado == null){
@@ -48,7 +49,7 @@ public class InicioSesionController {
             pinPF.setText(bot.getPin());
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
-            enlaceTA.setText("Sesión iniciada con: "+TwitterBot.getInstance().getBOT().new Usuario().getNombreUsuario());
+            enlaceTA.setText("Sesión iniciada con: "+new Usuario().getNombreUsuario());
             copyBT.setDisable(true);
         }else{
             bot = TwitterBot.getInstance();
@@ -70,7 +71,7 @@ public class InicioSesionController {
                 if (no_cierre_sesionCB.isSelected()){
                     bot.setSesion(true);
                     bot.setPin(pinPF.getText());
-                    adminSesion.getInstance().Serializar(bot);
+                    AdminSesion.getInstance().serializar(bot);
                 }
                 TwitterBot.getInstance().setBOT(bot);
             } else {
@@ -80,7 +81,7 @@ public class InicioSesionController {
         }else {
             if (!no_cierre_sesionCB.isSelected()){
                 bot.setSesion(false);
-                adminSesion.getInstance().Serializar(bot);
+                AdminSesion.getInstance().serializar(bot);
                 TwitterBot.getInstance().setBOT(bot);
             }
         }
@@ -88,7 +89,7 @@ public class InicioSesionController {
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }
 
-    @FXML public void Copiar() {
+    @FXML public void copiar() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();
         content.putString(enlaceTA.getText());
@@ -98,6 +99,7 @@ public class InicioSesionController {
 
     @FXML public void cerrarPrograma(){
         System.out.println("Finalizando programa...");
+        // SE NECESITA CAMBIAR ESTE SYS.EXIT
         System.exit(0);
     }
 }
