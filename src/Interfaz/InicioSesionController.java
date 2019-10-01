@@ -81,7 +81,7 @@ public class InicioSesionController {
                 }
                 TwitterBot.getInstance().setBOT(bot);
             } else {
-                Dialog.getInstance().info(iniciar_sesionBT,respuesta,"Ok, revisaré",inicioSesionAP);
+                Dialog.getInstance().info(iniciar_sesionBT,respuesta,inicioSesionAP);
                 this.initialize();
                 return;}
         }else {
@@ -101,7 +101,7 @@ public class InicioSesionController {
         content.putString(enlace);
         clipboard.setContent(content);
         copyBT.setDisable(true);
-        Dialog.getInstance().info(copyBT,"Enlace copiado","OK",inicioSesionAP);
+        Dialog.getInstance().info(copyBT,"Enlace copiado",inicioSesionAP);
     }
 
     @FXML public void cerrarSesion() throws IOException, TwitterException {

@@ -42,19 +42,19 @@ public class Usuario {
             if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
                 twitter.createFriendship(name);
                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
-                    return "Espere respuesta de \n@"+name;
-                return "Se sigue correctamente a\n @"+name;
+                    return "Espere respuesta de @"+name;
+                return "Se sigue correctamente a @"+name;
             }
             else if(twitter.getScreenName().equals(name))
-                return "ERROR: \nNo puedes seguirte a ti mismo";
-            else  return "ERROR: Ya sigue al usuario:\n@"+name;
+                return "ERROR: No puedes seguirte a ti mismo";
+            else  return "ERROR: Ya sigue al usuario: @"+name;
 
         } catch (TwitterException e) {
             try {
                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
-                    return "Espere respuesta de \n@"+name;
+                    return "Espere respuesta de @"+name;
             } catch (TwitterException ex) {
-                return "No se encuentra al usuario:\n@" + name;
+                return "No se encuentra al usuario: @"+name;
             }
         }
         return "";

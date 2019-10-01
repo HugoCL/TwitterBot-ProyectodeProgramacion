@@ -62,12 +62,10 @@ public class EscenaPrincipalController {
                 secondAP.setVisible(true);
             }
             else{
-                Dialog.getInstance().info(timelineBT,"Refresh muy frecuente, intente más tarde",
-                        "OK",mainAP);
+                Dialog.getInstance().info(timelineBT,"Refresh muy frecuente, intente más tarde",mainAP);
             }
         }else{
-            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
-                    "OK",mainAP);
+            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",mainAP);
         }
     }
 

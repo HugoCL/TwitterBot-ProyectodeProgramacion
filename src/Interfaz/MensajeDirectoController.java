@@ -81,7 +81,7 @@ public class MensajeDirectoController {
         String mensaje = messageTA.getText();
         Messages mensajes = new Messages();
         String respuesta = mensajes.EnviarMD(arroba,mensaje);
-        Dialog.getInstance().info(enviar_mensajeBT,respuesta,"OK, revisaré",directMessageAP);
+        Dialog.getInstance().info(enviar_mensajeBT,respuesta,directMessageAP);
         messageTA.setText("");
     }
     @FXML public void regresar() throws IOException {

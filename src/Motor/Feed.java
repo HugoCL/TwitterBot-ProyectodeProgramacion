@@ -67,7 +67,7 @@ public class Feed {
                 return "Tweet ya likeado";
             }
         } catch (TwitterException e) {
-            return "ERROR:\nNo se encontro Tweet";
+            return "ERROR: No se encontro Tweet";
         }
     }
 
@@ -86,7 +86,7 @@ public class Feed {
                 return "Tweet ya retweeteado";
             }
         } catch (TwitterException e) {
-            return "ERROR:\nNo se encontro Tweet";
+            return "ERROR: No se encontro Tweet";
         }
     }
 }
