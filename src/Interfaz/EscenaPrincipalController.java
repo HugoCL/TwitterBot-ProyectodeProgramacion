@@ -26,7 +26,6 @@ public class EscenaPrincipalController {
 
     @FXML private Text usernameTX;
 
-    @FXML private VBox vbox = new VBox(10);
     @FXML private ScrollPane scroll = new ScrollPane();
 
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
@@ -47,25 +46,30 @@ public class EscenaPrincipalController {
         Transiciones.Slide.getInstance().left("/Interfaz/Twittear.fxml",tweetearBT,mainAP);
     }
 
-    @FXML public void timeline(){
+    @FXML public void timeline() throws IOException {
+        VBox vbox = new VBox(10);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
-        System.out.println(listaTweets.size());
-        //tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
-
-        if (listaTweets != null){
-            if (listaTweets.size() != 0){
-                for (Tweet tweet: listaTweets) {
+        if (listaTweets.size() != 0){
+            for (Tweet tweet: listaTweets) {
+                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
+            }
+            scroll.setContent(vbox);
+            botonesMain(true);
+            secondAP.setVisible(true);
+        }
+        else{
+            ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
+            if (serializados != null){
+                for (Tweet tweet: serializados) {
                     vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
                 }
                 scroll.setContent(vbox);
                 botonesMain(true);
                 secondAP.setVisible(true);
             }
-            else{
-                Dialog.getInstance().info(timelineBT,"Refresh muy frecuente, intente más tarde",mainAP);
+            else {
+                Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, Intentelo más tarde",mainAP);
             }
-        }else{
-            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, Intentelo más tarde",mainAP);
         }
     }
 

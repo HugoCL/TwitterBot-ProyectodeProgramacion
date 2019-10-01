@@ -5,9 +5,11 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Feed {
+public class Feed implements Serializable {
     private Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private ArrayList<Tweet> backupTweets = new ArrayList<>();
     private ArrayList<Tweet> tweets = new ArrayList<>();
@@ -15,7 +17,7 @@ public class Feed {
      * Permite la obtención de los tweets del timeline de la cuenta ingresada
      * @return Lista con los tweets.
      */
-    public ArrayList<Tweet> ObtenerTweets() {
+    public ArrayList<Tweet> ObtenerTweets() throws IOException {
         int pageno = 1;
         boolean exito = false;
         while (true) {
@@ -42,6 +44,7 @@ public class Feed {
             backupTweets.clear();
         }
         backupTweets = new ArrayList<>(tweets);
+        AdminBackup.getInstance().serializar(backupTweets);
         return tweets;
     }
 
