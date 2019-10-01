@@ -29,11 +29,11 @@ public class CellVBox {
             public void handle(ActionEvent event) {
                 if(feed.Like(item.getId()).equals("Like exitoso")){
                     like_BT.getStyleClass().set(2, "RedHeart-buttton");
-                    Dialog.getInstance().info(like_BT,"Like exitoso","OK",mainAP);
+                    Dialog.getInstance().info(like_BT,"Like exitoso",mainAP);
                 }
                 else{
                     like_BT.getStyleClass().set(2, "GrayHeart-buttton");
-                    Dialog.getInstance().info(like_BT,"Like quitado","OK",mainAP);
+                    Dialog.getInstance().info(like_BT,"Like quitado",mainAP);
                 }
             }
         });
@@ -47,11 +47,11 @@ public class CellVBox {
             public void handle(ActionEvent event) {
                 if (feed.Retweet(item.getId()).equals("Retweet exitoso")){
                     retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
-                    Dialog.getInstance().info(like_BT,"Retweet exitoso","OK",mainAP);
+                    Dialog.getInstance().info(like_BT,"Retweet exitoso",mainAP);
                 }
                 else{
                     retweet_BT.getStyleClass().set(2, "RetweetGray-button");
-                    Dialog.getInstance().info(like_BT,"Retweet quitado","OK",mainAP);
+                    Dialog.getInstance().info(like_BT,"Retweet quitado",mainAP);
                 }
             }
         });

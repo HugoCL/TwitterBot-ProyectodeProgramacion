@@ -65,7 +65,7 @@ public class EscenaPrincipalController {
                 Dialog.getInstance().info(timelineBT,"Refresh muy frecuente, intente más tarde",mainAP);
             }
         }else{
-            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",mainAP);
+            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, Intentelo más tarde",mainAP);
         }
     }
 
