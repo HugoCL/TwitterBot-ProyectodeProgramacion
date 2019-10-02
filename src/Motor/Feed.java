@@ -5,9 +5,11 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Feed {
+public class Feed implements Serializable {
     private Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private ArrayList<Tweet> backupTweets = new ArrayList<>();
     private ArrayList<Tweet> tweets = new ArrayList<>();
@@ -15,7 +17,7 @@ public class Feed {
      * Permite la obtención de los tweets del timeline de la cuenta ingresada
      * @return Lista con los tweets.
      */
-    public ArrayList<Tweet> obtenerTweets() {
+    public ArrayList<Tweet> ObtenerTweets() throws IOException {
         int pageno = 1;
         boolean exito = false;
         while (true) {
@@ -25,7 +27,8 @@ public class Feed {
                 if (pageno == 2) tweets.clear();
 
                 for (Status status : twitter.getHomeTimeline(page)) {
-                    tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName()));
+                    tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(),
+                            status.getUser().getMiniProfileImageURL()));
                 }
                 if (tweets.size() == size){
                     exito = true;
@@ -41,6 +44,7 @@ public class Feed {
             backupTweets.clear();
         }
         backupTweets = new ArrayList<>(tweets);
+        AdminBackup.getInstance().serializar(backupTweets);
         return tweets;
     }
 
@@ -58,10 +62,15 @@ public class Feed {
      */
     public String like(long like){
         try {
-            twitter.createFavorite(like);
-            return "Like exitoso";
+            if(!twitter.showStatus(like).isFavorited()) {
+                twitter.createFavorite(like);
+                return "Like exitoso";
+            } else{
+                twitter.destroyFavorite(like);
+                return "Tweet ya likeado";
+            }
         } catch (TwitterException e) {
-            return "Tweet ya likeado";
+            return "ERROR: No se encontro Tweet";
         }
     }
 
@@ -76,10 +85,11 @@ public class Feed {
                 twitter.retweetStatus(tweet);
                 return "Retweet exitoso";
             } else{
+                twitter.unRetweetStatus(tweet);
                 return "Tweet ya retweeteado";
             }
         } catch (TwitterException e) {
-            return "ERROR:\nNo se encontro Tweet";
+            return "ERROR: No se encontro Tweet";
         }
     }
 }

@@ -24,12 +24,12 @@ public class FollowController {
         String respuesta;
         if (nicknameTF.getText().isEmpty()){
             System.out.println("Ingrese algún nombre de usuario.");
-            Dialog.getInstance().info(followBT,"Ingrese algún nombre de usuario.","OK, revisaré",followAP);
+            Dialog.getInstance().info(followBT,"Ingrese algún nombre de usuario.",followAP);
         }
         else {
             Usuario usuario = new Usuario();
-            respuesta = usuario.follow(nicknameTF.getText());
-            Dialog.getInstance().info(followBT,respuesta,"OK, revisaré",followAP);
+            respuesta = usuario.Follow(nicknameTF.getText());
+            Dialog.getInstance().info(followBT,respuesta,followAP);
             nicknameTF.setText("");
         }
     }

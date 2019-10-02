@@ -76,7 +76,7 @@ public class TwittearController {
 
         }
         catch (Exception e){
-            Dialog.getInstance().info(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
+            Dialog.getInstance().info(addFileBT,"Archivo no agregado.",tweetearAP);
             imagenTweet.setImage(null);
             tweet_TA.setText("");
             publicar_tweetBT.setDisable(true);
@@ -125,7 +125,7 @@ public class TwittearController {
             respuesta = mensajes.PublicarTweetVideo(tweet, selectedFile);
         else
             respuesta = "ERROR: Revise el tipo de archivo";
-        Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
+        Dialog.getInstance().info(addFileBT,respuesta,tweetearAP);
         imagenTweet.setImage(null);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);

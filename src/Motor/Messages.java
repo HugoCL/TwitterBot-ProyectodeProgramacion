@@ -29,7 +29,7 @@ public class Messages {
             return "Tweet publicado correctamente";
         }catch (TwitterException e) {
             System.out.println(e.getStatusCode());
-            return "ERROR:\nTweet duplicado";
+            return "ERROR: Tweet duplicado";
         }
     }
 

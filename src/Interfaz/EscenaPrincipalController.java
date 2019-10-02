@@ -3,13 +3,10 @@ package Interfaz;
 import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import twitter4j.TwitterException;
 
@@ -22,100 +19,64 @@ public class EscenaPrincipalController {
     @FXML private AnchorPane secondAP;
 
     @FXML private JFXButton tweetearBT;
-    @FXML private JFXButton retweetBT;
     @FXML private JFXButton followBT;
-    @FXML private JFXButton likeBT;
     @FXML private JFXButton directBT;
     @FXML private JFXButton timelineBT;
     @FXML private JFXButton cerrar_sesionBT;
 
     @FXML private Text usernameTX;
 
-    //TableView
-    @FXML private TableColumn<Tweet, String> usuarioCL;
-    @FXML private TableColumn<Tweet, String> tweetCL;
-    @FXML private TableView<Tweet> listaTweets_TV;
-
-    @FXML private JFXListView<String> listaTweets_LV;
-
-    private ObservableList<String> listview = FXCollections.observableArrayList("holi", "hola");
+    @FXML private ScrollPane scroll = new ScrollPane();
 
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
+
     //Classes
-    Feed feed = new Feed();
+    private Feed feed = new Feed();
 
     public void initialize() throws TwitterException {
         //Obtener nombre de usuario
         usernameTX.setText(new Usuario().getNombreUsuario());
         //Botones desactivados
         secondAP.setVisible(false);
+
+        scroll.getStyleClass().add("scroll");
     }
 
     @FXML public void tweetear() throws IOException {
         Transiciones.Slide.getInstance().left("/Interfaz/Twittear.fxml",tweetearBT,mainAP);
     }
 
-    @FXML public void timeline(){
-
-        listaTweets_LV.getStyleClass().add("list-view");
-        listaTweets_LV.setItems(listview);
-        listaTweets_LV.setCellFactory(param -> new CustomCell());
-        botonesMain(true);
-        secondAP.setVisible(true);
-
-        //Inicializar la tableView
-         /*usuarioCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("nombre"));
-        tweetCL.setCellValueFactory(new PropertyValueFactory<Tweet,String>("mensaje"));
-        ObservableList<Tweet> tweets = FXCollections.observableArrayList();
-        listaTweets_TV.setItems(tweets);
+    @FXML public void timeline() throws IOException {
+        VBox vbox = new VBox(1);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
-        tweetsHash = Cadenas.BuscarTweetsHash(listaTweets);
-
-        if (listaTweets != null){
-            if (listaTweets.size() != 0){
-                for (Tweet tweet: listaTweets) {
-                    Tweet newTweet = new Tweet(tweet.getMensaje(),tweet.getId(),tweet.getNombre());
-                    tweets.add(newTweet);
+        if (listaTweets.size() != 0){
+            for (Tweet tweet: listaTweets) {
+                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
+            }
+            scroll.setContent(vbox);
+            botonesMain(true);
+            secondAP.setVisible(true);
+        }
+        else{
+            ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
+            if (serializados != null && serializados.size() != 0){
+                System.out.println("ya");
+                for (Tweet tweet: serializados) {
+                    vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
                 }
+                scroll.setContent(vbox);
                 botonesMain(true);
                 secondAP.setVisible(true);
             }
-            else{
-                Dialog.getInstance().info(timelineBT,"Refresh muy frecuente, intente más tarde",
-                        "OK",mainAP);
+            else {
+                Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, Intentelo más tarde",mainAP);
             }
-        }else{
-            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes,\nIntentelo más tarde",
-                    "OK",mainAP);
-        }*/
-
+        }
     }
 
     @FXML public void cerrarTimeline(){
         botonesMain(false);
         secondAP.setVisible(false);
-    }
-
-    @FXML public void retweet(){
-        String respuesta;
-        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
-        if (selecTweet != null){
-            respuesta = new Feed().retweet(selecTweet.getId());
-            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
-        }else {
-            Dialog.getInstance().info(retweetBT,"Seleccione algún tweet","OK",mainAP);
-        }
-    }
-
-    @FXML public void like(){
-        String respuesta;
-        Tweet selecTweet = listaTweets_TV.getSelectionModel().getSelectedItem();
-        if (selecTweet != null){
-            respuesta = new Feed().like(selecTweet.getId());
-            Dialog.getInstance().info(retweetBT,respuesta,"OK",mainAP);
-        }else {
-            Dialog.getInstance().info(likeBT,"Seleccione algún tweet","OK",mainAP);
-        }
     }
 
     @FXML public void follow() throws IOException {
@@ -128,7 +89,8 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().setSesion(false);
-        AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
+        AdminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
+        AdminBackup.getInstance().serializar(new ArrayList<>());
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 

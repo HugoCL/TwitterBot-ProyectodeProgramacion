@@ -1,13 +1,35 @@
-.list-view{
-    -fx-background-color: white;
+.text {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5px;
 }
 
-.list-view .list-cell{
-    -fx-background-color: white;
+.text .content {
+    -fx-background-color: transparent, white, transparent, white;
 }
 
-.list-view .list-cell:focused{
-    -fx-background-color: transparent;
+.text:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+
+.scroll {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.scroll .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.scroll:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+
+.grid{
+    -fx-background-color: white;
 }
 
 .label {
@@ -17,10 +39,25 @@
 .buttton{
     -fx-background-color: gray;
 }
+/*Retweet*/
+.RetweetGray-button{
+    -fx-background-color: white;
+}
 
+.RetweetGray-button .jfx-rippler{
+    -jfx-rippler-fill: #2ECC71;
+}
+
+.RetweetGreen-button{
+    -fx-background-color: #2ECC71;
+}
+
+.RetweetGreen-button .jfx-rippler{
+    -jfx-rippler-fill: gray;
+}
+/*Corazon*/
 .GrayHeart-buttton{
-    -fx-shape: "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z";
-    -fx-background-color: #c3c3c3;
+    -fx-background-color: white;
 }
 
 .GrayHeart-buttton .jfx-rippler{
@@ -28,8 +65,7 @@
 }
 
 .RedHeart-buttton{
-    -fx-shape: "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z";
-    -fx-background-color: red;
+    -fx-background-color: lightcoral;
 }
 
 .RedHeart-buttton .jfx-rippler{
