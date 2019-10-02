@@ -28,6 +28,9 @@ public class EscenaPrincipalController {
 
     @FXML private ScrollPane scroll = new ScrollPane();
 
+    private ArrayList<Tweet> serializados;
+    private boolean isSerializado;
+
     private ArrayList<Tweet> tweetsHash = new ArrayList<>();
 
     //Classes
@@ -50,6 +53,7 @@ public class EscenaPrincipalController {
         VBox vbox = new VBox(1);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         if (listaTweets.size() != 0){
+            isSerializado = false;
             for (Tweet tweet: listaTweets) {
                 vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
             }
@@ -58,7 +62,8 @@ public class EscenaPrincipalController {
             secondAP.setVisible(true);
         }
         else{
-            ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
+            serializados = AdminBackup.getInstance().deserializar();
+            isSerializado = true;
             if (serializados != null && serializados.size() != 0){
                 for (Tweet tweet: serializados) {
                     vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
@@ -73,7 +78,10 @@ public class EscenaPrincipalController {
         }
     }
 
-    @FXML public void cerrarTimeline(){
+    @FXML public void cerrarTimeline() throws IOException {
+        if (isSerializado){
+            AdminBackup.getInstance().serializar(serializados);
+        }
         botonesMain(false);
         secondAP.setVisible(false);
     }

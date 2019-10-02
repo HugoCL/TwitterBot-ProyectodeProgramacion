@@ -67,7 +67,7 @@ public class Feed implements Serializable {
                 return "Like exitoso";
             } else{
                 twitter.destroyFavorite(like);
-                return "Tweet ya likeado";
+                return "Like quitado";
             }
         } catch (TwitterException e) {
             return "ERROR: No se encontro Tweet";
@@ -86,7 +86,7 @@ public class Feed implements Serializable {
                 return "Retweet exitoso";
             } else{
                 twitter.unRetweetStatus(tweet);
-                return "Tweet ya retweeteado";
+                return "Retweet quitado";
             }
         } catch (TwitterException e) {
             return "ERROR: No se encontro Tweet";

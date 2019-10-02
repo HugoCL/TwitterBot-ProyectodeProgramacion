@@ -27,13 +27,14 @@ public class CellVBox {
         like_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(feed.like(item.getId()).equals("Like exitoso")){
+                String respuesta = feed.like(item.getId());
+                if(respuesta.equals("Like exitoso")){
                     like_BT.getStyleClass().set(2, "RedHeart-buttton");
-                    Dialog.getInstance().info(like_BT,"Like exitoso",mainAP);
+                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
                 }
                 else{
                     like_BT.getStyleClass().set(2, "GrayHeart-buttton");
-                    Dialog.getInstance().info(like_BT,"Like quitado",mainAP);
+                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
                 }
             }
         });
@@ -45,13 +46,14 @@ public class CellVBox {
         retweet_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (feed.retweet(item.getId()).equals("Retweet exitoso")){
+                String respuesta = feed.retweet(item.getId());
+                if (respuesta.equals("Retweet exitoso")){
                     retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
-                    Dialog.getInstance().info(like_BT,"Retweet exitoso",mainAP);
+                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
                 }
                 else{
                     retweet_BT.getStyleClass().set(2, "RetweetGray-button");
-                    Dialog.getInstance().info(like_BT,"Retweet quitado",mainAP);
+                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
                 }
             }
         });
