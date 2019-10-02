@@ -28,7 +28,7 @@ public class FollowController {
         }
         else {
             Usuario usuario = new Usuario();
-            respuesta = usuario.Follow(nicknameTF.getText());
+            respuesta = usuario.follow(nicknameTF.getText());
             Dialog.getInstance().info(followBT,respuesta,followAP);
             nicknameTF.setText("");
         }

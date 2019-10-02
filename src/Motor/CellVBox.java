@@ -27,7 +27,7 @@ public class CellVBox {
         like_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(feed.Like(item.getId()).equals("Like exitoso")){
+                if(feed.like(item.getId()).equals("Like exitoso")){
                     like_BT.getStyleClass().set(2, "RedHeart-buttton");
                     Dialog.getInstance().info(like_BT,"Like exitoso",mainAP);
                 }
@@ -45,7 +45,7 @@ public class CellVBox {
         retweet_BT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (feed.Retweet(item.getId()).equals("Retweet exitoso")){
+                if (feed.retweet(item.getId()).equals("Retweet exitoso")){
                     retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
                     Dialog.getInstance().info(like_BT,"Retweet exitoso",mainAP);
                 }

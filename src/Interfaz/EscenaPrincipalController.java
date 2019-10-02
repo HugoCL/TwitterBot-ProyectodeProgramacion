@@ -60,7 +60,6 @@ public class EscenaPrincipalController {
         else{
             ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
             if (serializados != null && serializados.size() != 0){
-                System.out.println("ya");
                 for (Tweet tweet: serializados) {
                     vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
                 }
@@ -89,7 +88,7 @@ public class EscenaPrincipalController {
 
     @FXML public void cerrarSesion() throws IOException {
         TwitterBot.getInstance().getBOT().setSesion(false);
-        AdminSesion.getInstance().Serializar(TwitterBot.getInstance().getBOT());
+        AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
         AdminBackup.getInstance().serializar(new ArrayList<>());
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }

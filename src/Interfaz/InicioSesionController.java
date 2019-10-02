@@ -79,7 +79,7 @@ public class InicioSesionController {
                 if (no_cierre_sesionCB.isSelected()){
                     bot.setSesion(true);
                     bot.setPin(pinPF.getText());
-                    AdminSesion.getInstance().Serializar(bot);
+                    AdminSesion.getInstance().serializar(bot);
                 }
                 TwitterBot.getInstance().setBOT(bot);
             } else {
@@ -89,7 +89,7 @@ public class InicioSesionController {
         }else {
             if (!no_cierre_sesionCB.isSelected()){
                 bot.setSesion(false);
-                AdminSesion.getInstance().Serializar(bot);
+                AdminSesion.getInstance().serializar(bot);
                 TwitterBot.getInstance().setBOT(bot);
             }
         }
@@ -108,7 +108,7 @@ public class InicioSesionController {
 
     @FXML public void cerrarSesion() throws IOException, TwitterException {
         bot.setSesion(false);
-        AdminSesion.getInstance().Serializar(bot);
+        AdminSesion.getInstance().serializar(bot);
         TwitterBot.getInstance().setBOT(bot);
         AdminBackup.getInstance().serializar(new ArrayList<>());
         this.initialize();
