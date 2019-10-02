@@ -1,8 +1,10 @@
 package Interfaz;
-import Motor.TwitterBot;
+import Motor.Messages;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,14 +12,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class TwittearController {
-
-    private TwitterBot bot;
 
     @FXML private JFXButton publicar_tweetBT;
     @FXML private JFXButton regresarBT;
@@ -30,19 +31,26 @@ public class TwittearController {
 
     @FXML private AnchorPane tweetearAP;
 
-    Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
+    private Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
     private FileChooser fileChooser = new FileChooser();
     private File selectedFile;
 
     public void initialize(){
-        //Inicializar bot
-        bot = TwitterBot.getInstance().getBOT();
+        fileChooser.setTitle("Buscar");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG, PNG, GIF, MP4", "*.jpg", "*.png", "*.gif*", ".mp4")
+        );
 
         //Inicio de Ventana
         publicar_tweetBT.setDisable(true);
         nameFile_LB.setVisible(false);
         publicar_tweetBT.setDisable(true);
         caracteres_LB.setText("0/280");
+
+        KeyFrame frame = new KeyFrame(Duration.millis(100), e -> caracteres());
+        Timeline timeline = new Timeline(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
 
         //Tweet con Imagenes
         fileChooser.setInitialDirectory(new File("src"));
@@ -68,7 +76,7 @@ public class TwittearController {
 
         }
         catch (Exception e){
-            Dialog.getInstance().info(addFileBT,"Archivo no agregado.","OK, revisaré",tweetearAP);
+            Dialog.getInstance().info(addFileBT,"Archivo no agregado.",tweetearAP);
             imagenTweet.setImage(null);
             tweet_TA.setText("");
             publicar_tweetBT.setDisable(true);
@@ -78,7 +86,7 @@ public class TwittearController {
 
     }
 
-    public void Caracteres() {
+    public void caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
             if (tweet_TA.getText().length() > 280){
                 caracteres_LB.setTextFill(Color.web("#ff0000"));
@@ -91,13 +99,13 @@ public class TwittearController {
             caracteres_LB.setText(tweet_TA.getText().length()+"/280");
         }
         else {
-            if (nameFile_LB.getText() != ""){
+            if (!nameFile_LB.getText().equals("")){
                 publicar_tweetBT.setDisable(false);
                 caracteres_LB.setTextFill(Color.web("#000000"));
-                caracteres_LB.setText("0/280");
             }else {
                 publicar_tweetBT.setDisable(true);
             }
+            caracteres_LB.setText("0/280");
         }
     }
 
@@ -107,8 +115,8 @@ public class TwittearController {
 
         String respuesta;
         String tweet = tweet_TA.getText();
-        TwitterBot.Messages mensajes = bot.new Messages();
-        if (nameFile_LB.getText() == ""){
+        Messages mensajes = new Messages();
+        if (nameFile_LB.getText().equals("")){
             respuesta = mensajes.PublicarTweet(tweet);
         }
         else if(patronImage.matcher(selectedFile.getName()).find()){
@@ -117,7 +125,7 @@ public class TwittearController {
             respuesta = mensajes.PublicarTweetVideo(tweet, selectedFile);
         else
             respuesta = "ERROR: Revise el tipo de archivo";
-        Dialog.getInstance().info(addFileBT,respuesta,"OK, revisaré",tweetearAP);
+        Dialog.getInstance().info(addFileBT,respuesta,tweetearAP);
         imagenTweet.setImage(null);
         tweet_TA.setText("");
         publicar_tweetBT.setDisable(true);

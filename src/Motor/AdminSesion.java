@@ -5,18 +5,18 @@ import java.io.*;
 /***
  * Clase encargada de la administración de la sesión de una cuenta de Twitter
  */
-public class adminSesion {
-    private static adminSesion INSTANCE = null;
+public class AdminSesion {
+    private static AdminSesion INSTANCE = null;
     // Constructor privado
-    private adminSesion(){}
+    private AdminSesion(){}
     // creador sincronizado para protegerse de posibles problemas  multi-hilo
     // otra prueba para evitar instanciación múltiple
     private synchronized static void createInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new adminSesion();
+            INSTANCE = new AdminSesion();
         }
     }
-    public static adminSesion getInstance() {
+    public static AdminSesion getInstance() {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
@@ -25,7 +25,7 @@ public class adminSesion {
      * @param bot Objeto de tipo TwitterBot que posee la instancia ya creada con todos sus parametros
      * @throws IOException Excepcion en caso de problemas con el fichero
      */
-    public void Serializar(TwitterBot bot) throws IOException {
+    public void serializar(TwitterBot bot) throws IOException {
         FileOutputStream salida = new FileOutputStream("Sesion.out");
         ObjectOutputStream salidaO = new ObjectOutputStream(salida);
 

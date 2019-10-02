@@ -3,7 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" afterPath="$PROJECT_DIR$/Sesion.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Feed.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Feed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/CellVBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/CellVBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/Feed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Feed.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="XSLT Stylesheet" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -31,6 +41,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Universidad/Semestre 4/Algoritmos/Tarea 1 - Primos Relativos/PrimosRelativos" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -118,6 +129,8 @@
       <workItem from="1568071384812" duration="211000" />
       <workItem from="1568156172506" duration="937000" />
       <workItem from="1568166969716" duration="3951000" />
+      <workItem from="1569691458542" duration="5639000" />
+      <workItem from="1569963685999" duration="3489000" />
     </task>
     <servers />
   </component>

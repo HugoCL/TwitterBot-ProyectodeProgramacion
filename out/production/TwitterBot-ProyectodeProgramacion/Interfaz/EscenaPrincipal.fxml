@@ -1,42 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainAP" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
+<AnchorPane fx:id="mainAP" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
    <children>
       <AnchorPane fx:id="secondAP" layoutX="200.0" layoutY="55.0" prefHeight="319.0" prefWidth="379.0">
          <children>
-            <Text fill="#3e85c3" layoutX="39.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Últimos Tweets" textAlignment="CENTER" wrappingWidth="302.0">
+            <Text fill="#3e85c3" layoutX="39.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Últimos Tweets" textAlignment="CENTER" wrappingWidth="302.0">
                <font>
                   <Font name="Segoe UI Bold" size="38.0" />
                </font>
             </Text>
-            <TableView fx:id="listaTweets_TV" layoutX="1.0" layoutY="47.0" prefHeight="230.0" prefWidth="379.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="47.0">
-              <columns>
-                <TableColumn fx:id="usuarioCL" editable="false" prefWidth="152.0" sortable="false" text="Usuario" />
-                <TableColumn fx:id="tweetCL" editable="false" prefWidth="226.0" sortable="false" text="Tweet" />
-              </columns>
-            </TableView>
-            <JFXButton fx:id="retweetBT" layoutX="102.0" layoutY="296.0" onAction="#retweet" prefHeight="34.0" prefWidth="92.0" style="-fx-background-color: #3e85c3;" text="Retweet" textFill="WHITE">
-               <font>
-                  <Font name="Segoe UI Bold" size="17.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="likeBT" layoutY="296.0" onAction="#like" prefHeight="34.0" prefWidth="92.0" style="-fx-background-color: #3e85c3;" text="Like" textFill="WHITE">
-               <font>
-                  <Font name="Segoe UI Bold" size="17.0" />
-               </font>
-            </JFXButton>
             <JFXButton fx:id="cerrarTimelineBT" layoutX="269.0" layoutY="296.0" onAction="#cerrarTimeline" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #3e85c3;" text="Cerrar" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="17.0" />
                </font>
             </JFXButton>
+            <ScrollPane fx:id="scroll" layoutX="20.0" layoutY="31.0" prefHeight="257.0" prefWidth="344.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="322.0">
+                     <children>
+                        <VBox fx:id="vbox" layoutY="3.0" prefHeight="245.0" prefWidth="321.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children></AnchorPane>
       <JFXButton fx:id="tweetearBT" layoutX="23.0" layoutY="93.0" onAction="#tweetear" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Tweetear" textFill="WHITE">
          <font>

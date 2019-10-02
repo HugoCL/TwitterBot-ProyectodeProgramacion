@@ -1,0 +1,73 @@
+.text {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5px;
+}
+
+.text .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+
+.scroll {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.scroll .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.scroll:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+
+.grid{
+    -fx-background-color: white;
+}
+
+.label {
+    -fx-text-fill: black;
+}
+
+.buttton{
+    -fx-background-color: gray;
+}
+/*Retweet*/
+.RetweetGray-button{
+    -fx-background-color: white;
+}
+
+.RetweetGray-button .jfx-rippler{
+    -jfx-rippler-fill: #2ECC71;
+}
+
+.RetweetGreen-button{
+    -fx-background-color: #2ECC71;
+}
+
+.RetweetGreen-button .jfx-rippler{
+    -jfx-rippler-fill: gray;
+}
+/*Corazon*/
+.GrayHeart-buttton{
+    -fx-background-color: white;
+}
+
+.GrayHeart-buttton .jfx-rippler{
+    -jfx-rippler-fill: red;
+}
+
+.RedHeart-buttton{
+    -fx-background-color: lightcoral;
+}
+
+.RedHeart-buttton .jfx-rippler{
+    -jfx-rippler-fill: gray;
+}
