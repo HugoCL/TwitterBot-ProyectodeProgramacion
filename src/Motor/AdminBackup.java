@@ -46,7 +46,7 @@ public class AdminBackup {
 
         catch(IOException ex)
         {
-            System.out.println("Archivo no encontrado. No se puede recuperar la sesión");
+            System.out.println("Archivo no encontrado. No se puede recuperar últimos tweets");
             return null;
         }
 

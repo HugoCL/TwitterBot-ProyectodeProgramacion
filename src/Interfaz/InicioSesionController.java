@@ -1,5 +1,6 @@
 package Interfaz;
 
+import Motor.AdminBackup;
 import Motor.TwitterBot;
 import Motor.Usuario;
 import Motor.AdminSesion;
@@ -16,6 +17,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class InicioSesionController {
 
@@ -108,6 +110,7 @@ public class InicioSesionController {
         bot.setSesion(false);
         AdminSesion.getInstance().Serializar(bot);
         TwitterBot.getInstance().setBOT(bot);
+        AdminBackup.getInstance().serializar(new ArrayList<>());
         this.initialize();
     }
 }
