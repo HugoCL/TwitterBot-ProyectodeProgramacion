@@ -63,8 +63,8 @@ public class CellVBox {
 
         TextArea mensaje = new TextArea(item.getMensaje());
         mensaje.setEditable(false);
-        mensaje.setMinSize(300, 100);
-        mensaje.setMaxSize(300, 200);
+        mensaje.setMinSize(325, 100);
+        mensaje.setMaxSize(325, 100);
         mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
 

@@ -13,6 +13,21 @@
     -fx-background-color: transparent, white, transparent, white;
 }
 
+
+.scroll {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.scroll .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.scroll:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+
 .grid{
     -fx-background-color: white;
 }

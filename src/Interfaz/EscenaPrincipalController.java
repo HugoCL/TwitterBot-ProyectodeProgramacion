@@ -39,7 +39,7 @@ public class EscenaPrincipalController {
         //Botones desactivados
         secondAP.setVisible(false);
 
-        scroll.getStyleClass().add("text");
+        scroll.getStyleClass().add("scroll");
     }
 
     @FXML public void tweetear() throws IOException {
@@ -47,7 +47,7 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline() throws IOException {
-        VBox vbox = new VBox(10);
+        VBox vbox = new VBox(1);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         if (listaTweets.size() != 0){
             for (Tweet tweet: listaTweets) {
