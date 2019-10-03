@@ -52,10 +52,11 @@ public class EscenaPrincipalController {
     @FXML public void timeline() throws IOException {
         VBox vbox = new VBox(1);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
+        System.out.println(listaTweets.size());
         if (listaTweets.size() != 0){
             isSerializado = false;
             for (Tweet tweet: listaTweets) {
-                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
+                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox));
             }
             scroll.setContent(vbox);
             botonesMain(true);
@@ -66,7 +67,7 @@ public class EscenaPrincipalController {
             isSerializado = true;
             if (serializados != null && serializados.size() != 0){
                 for (Tweet tweet: serializados) {
-                    vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
+                    vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox));
                 }
                 scroll.setContent(vbox);
                 botonesMain(true);

@@ -18,7 +18,7 @@ public class CellVBox {
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
 
-    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP) {
+    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, VBox vbox) {
         GridPane pane = new GridPane();
 
         JFXButton like_BT = new JFXButton();
@@ -49,16 +49,27 @@ public class CellVBox {
                 String respuesta = feed.retweet(item.getId());
                 if (respuesta.equals("Retweet exitoso")){
                     retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
-                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
+                    Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
                 }
                 else{
                     retweet_BT.getStyleClass().set(2, "RetweetGray-button");
-                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
+                    Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
                 }
             }
         });
 
         revisarLikeRetweet(item.getId(), retweet_BT, like_BT);
+
+        JFXButton delete = new JFXButton("Borrar");
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String respuesta = new Messages().deleteTweet(item.getId());
+                Dialog.getInstance().info(delete, respuesta, mainAP);
+                if (respuesta.equals("Mensaje Eliminado"))
+                    vbox.getChildren().remove(pane);
+            }
+        });
 
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
@@ -74,9 +85,10 @@ public class CellVBox {
 
         pane.add(imagen, 0, 0);
         pane.add(name, 1, 0);
-        pane.add(mensaje, 0, 1, 2, 1);
+        pane.add(mensaje, 0, 1, 3, 1);
         pane.add(retweet_BT, 0, 2);
         pane.add(like_BT, 1, 2);
+        pane.add(delete, 2, 2);
 
         pane.getStyleClass().add("grid");
         return pane;

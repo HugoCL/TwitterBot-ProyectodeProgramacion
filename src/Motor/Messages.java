@@ -17,11 +17,22 @@ public class Messages {
 
     private Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
 
+
+    public String deleteTweet(long id) {
+        try{
+            twitter.destroyStatus(id);
+            return "Mensaje Eliminado";
+        } catch (TwitterException e) {
+            return "No se pudo eliminar mensaje\n" + e.getErrorMessage();
+        }
+    }
+
     /***
      * Metodo que publica Tweets de texto simple
      * @param Tweet String con el Tweet a publicar
      * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
      */
+
 
     public String PublicarTweet(String Tweet){
         try{
