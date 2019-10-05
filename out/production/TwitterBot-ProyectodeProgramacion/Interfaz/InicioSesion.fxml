@@ -19,11 +19,7 @@
                   <Image url="@../Imagenes/Logo.jpeg" />
                </image>
             </ImageView>
-<<<<<<< HEAD
             <JFXButton fx:id="copyBT" layoutX="214.0" layoutY="140.0" onAction="#copiar" prefHeight="48.0" prefWidth="204.0" style="-fx-background-color: #3e85c3;" text="Copiar Enlace" textFill="WHITE">
-=======
-            <JFXButton fx:id="copyBT" layoutX="214.0" layoutY="140.0" onAction="#Copiar" prefHeight="48.0" prefWidth="204.0" style="-fx-background-color: #3e85c3;" text="Copiar Enlace" textFill="WHITE">
->>>>>>> HashtagActions
                <font>
                   <Font name="Segoe UI Bold" size="18.0" />
                </font>

@@ -12,7 +12,7 @@ public class HashtagActions {
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
 
 
-    private static void HashTagActions(ArrayList<Tweet> tweets) {
+    public void HashTagActions(ArrayList<Tweet> tweets) {
         Usuario user = new Usuario();
         Feed feed = new Feed();
         try {

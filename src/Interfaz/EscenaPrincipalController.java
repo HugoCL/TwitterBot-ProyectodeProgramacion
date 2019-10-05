@@ -51,9 +51,11 @@ public class EscenaPrincipalController {
 
     @FXML public void timeline() throws IOException {
         VBox vbox = new VBox(1);
+        HashtagActions hash = new HashtagActions();
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
         if (listaTweets.size() != 0){
             isSerializado = false;
+            hash.HashTagActions(listaTweets);
             for (Tweet tweet: listaTweets) {
                 vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
             }
@@ -65,6 +67,7 @@ public class EscenaPrincipalController {
             serializados = AdminBackup.getInstance().deserializar();
             isSerializado = true;
             if (serializados != null && serializados.size() != 0){
+                hash.HashTagActions(serializados);
                 for (Tweet tweet: serializados) {
                     vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
                 }
