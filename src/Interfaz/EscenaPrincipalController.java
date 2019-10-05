@@ -50,14 +50,16 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline() throws IOException {
-        VBox vbox = new VBox(1);
+        VBox vbox = new VBox(4);
         ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
-        System.out.println(listaTweets.size());
         if (listaTweets.size() != 0){
             isSerializado = false;
             for (Tweet tweet: listaTweets) {
+                new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
                 vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox));
+                System.out.println("------------------------------------");
             }
+
             scroll.setContent(vbox);
             botonesMain(true);
             secondAP.setVisible(true);

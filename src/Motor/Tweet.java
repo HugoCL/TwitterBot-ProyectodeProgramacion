@@ -10,14 +10,20 @@ public class Tweet implements Serializable {
 
     private String mensaje;
     private String nombre;
+    private String screenName;
     private String imagen;
     private long id;
 
-    public Tweet(String mensaje, long id, String nombre, String imagen) {
+    public Tweet(String mensaje, long id, String nombre, String screenName, String imagen) {
         this.mensaje = mensaje;
         this.id = id;
         this.nombre = nombre;
+        this.screenName = screenName;
         this.imagen = imagen;
+    }
+
+    public String getScreenName() {
+        return screenName;
     }
 
     public String getMensaje() {

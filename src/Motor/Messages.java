@@ -1,14 +1,12 @@
 package Motor;
 
-import twitter4j.StatusUpdate;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.UploadedMedia;
+import twitter4j.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 
 /***
  * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
@@ -17,6 +15,27 @@ public class Messages {
 
     private Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
 
+    public void screenNameRespuesta(String user, long id) {
+        try {
+            Query query = new Query("to:" + user);
+            query.setSinceId(id);
+            QueryResult results;
+
+            do {
+                results = twitter.search(query);
+                System.out.println("Results: " + results.getTweets().size());
+                List<Status> tweets = results.getTweets();
+                System.out.println(twitter.showStatus(id).getText());
+                for (Status tweet : tweets)
+                    if (tweet.getInReplyToStatusId() == id)
+                    System.out.println("\tR.-" + tweet.getUser().getScreenName()+": "+tweet.getText());
+            } while ((query = results.nextQuery()) != null);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
     public String deleteTweet(long id) {
         try{
