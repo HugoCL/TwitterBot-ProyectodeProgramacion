@@ -10,9 +10,7 @@ public class HashtagActions {
 
 
     public void HashTagActions(ArrayList<Tweet> tweets) {
-        Usuario user = new Usuario();
         Feed feed = new Feed();
-        Messages messages = new Messages();
         try {
             for (Tweet tweet: tweets)
                 for (HashtagEntity hashtagEntity : twitter.showStatus(tweet.getId()).getHashtagEntities())
@@ -23,36 +21,33 @@ public class HashtagActions {
                             if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
                                 twitter.createFriendship(name);
                                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()){
-                                    StatusUpdate statusUpdate = new StatusUpdate("Espere respuesta de @"+name);
+                                    StatusUpdate statusUpdate = new StatusUpdate("Acción automatizada -> Espere respuesta de @"+name);
                                     statusUpdate.setInReplyToStatusId(statusFollow.getId());
                                     twitter.updateStatus(statusUpdate);
                                 }
-                                StatusUpdate statusUpdate = new StatusUpdate("Se sigue correctamente a @"+name);
+                                StatusUpdate statusUpdate = new StatusUpdate("Acción automatizada -> Se sigue correctamente a @"+name);
                                 statusUpdate.setInReplyToStatusId(statusFollow.getId());
                                 twitter.updateStatus(statusUpdate);
                             }
                             else if(twitter.getScreenName().equals(name)){
-                                StatusUpdate statusUpdate = new StatusUpdate("ERROR: No se pudo realizar la acción por # (No puedes seguirte a ti mismo)");
+                                StatusUpdate statusUpdate = new StatusUpdate("Acción automatizada -> ERROR: No se pudo realizar la acción por # (No puedes seguirte a ti mismo)");
                                 statusUpdate.setInReplyToStatusId(statusFollow.getId());
                                 twitter.updateStatus(statusUpdate);
                             }
                             else{
-                                StatusUpdate statusUpdate = new StatusUpdate("Ya se siguia al usuario: @"+name.);
+                                StatusUpdate statusUpdate = new StatusUpdate("Acción automatizada -> Ya se siguia a @"+name);
                                 statusUpdate.setInReplyToStatusId(statusFollow.getId());
                                 twitter.updateStatus(statusUpdate);
-
                             }
-
                         } catch (TwitterException e) {
                             try {
                                 if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()){
-                                    StatusUpdate statusUpdate = new StatusUpdate("Espere respuesta de @"+name);
+                                    StatusUpdate statusUpdate = new StatusUpdate("Acción automatizada -> Espere respuesta de @"+name);
                                     statusUpdate.setInReplyToStatusId(statusFollow.getId());
                                     twitter.updateStatus(statusUpdate);
                                 }
-                                    
                             } catch (TwitterException ex) {
-                                StatusUpdate statusUpdate = new StatusUpdate("No se encuentra al usuario: @"+name);
+                                StatusUpdate statusUpdate = new StatusUpdate("Acción automatizada -> No se encuentra a @"+name);
                                 statusUpdate.setInReplyToStatusId(statusFollow.getId());
                                 twitter.updateStatus(statusUpdate);
                             }
@@ -60,7 +55,23 @@ public class HashtagActions {
                     }
                     else if (hashtagEntity.getText().equalsIgnoreCase("darlike")){
                         Status statusLike = twitter.showStatus(tweet.getId());
-                        feed.like(statusLike.getId());
+                        try {
+                            if(!twitter.showStatus(statusLike.getId()).isFavorited()) {
+                                twitter.createFavorite(statusLike.getId());
+                                StatusUpdate statusUpdate = new StatusUpdate("Se ha dado like exitosamente @"+statusLike.getUser().getScreenName());
+                                statusUpdate.setInReplyToStatusId(statusLike.getId());
+                                twitter.updateStatus(statusUpdate);
+                            } else{
+                                twitter.destroyFavorite(statusLike.getId());
+                                StatusUpdate statusUpdate = new StatusUpdate("Se ha quitado el like exitosamente @"+statusLike.getUser().getScreenName());
+                                statusUpdate.setInReplyToStatusId(statusLike.getId());
+                                twitter.updateStatus(statusUpdate);
+                            }
+                        } catch (TwitterException e) {
+                            StatusUpdate statusUpdate = new StatusUpdate("Ups, ocurrió un error al intentar realizar el like @"+statusLike.getUser().getScreenName());
+                            statusUpdate.setInReplyToStatusId(statusLike.getId());
+                            twitter.updateStatus(statusUpdate);
+                        }
                     }
                     else if (hashtagEntity.getText().equalsIgnoreCase("retwittear")){
                         Status statusRetweet = twitter.showStatus(tweet.getId());
