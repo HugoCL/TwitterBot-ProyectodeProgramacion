@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,9 +19,8 @@ public class CellVBox {
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
 
-    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP) {
+    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
         GridPane pane = new GridPane();
-
         JFXButton like_BT = new JFXButton();
         like_BT.setGraphic(new ImageView(new Image("Imagenes/heart.png", 20,20,false,true)));
         like_BT.getStyleClass().add("GrayHeart-buttton");
@@ -65,12 +65,12 @@ public class CellVBox {
 
         TextArea mensaje = new TextArea(item.getMensaje());
         mensaje.setEditable(false);
-        mensaje.setMinSize(325, 100);
-        mensaje.setMaxSize(325, 100);
+        mensaje.setPrefSize(scroll.getPrefWidth()-30, 70);
         mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
 
         ImageView imagen = new ImageView(new Image(item.getImagen()));
+        imagen.getStyleClass().add("imagen");
 
         pane.add(imagen, 0, 0);
         pane.add(name, 1, 0);

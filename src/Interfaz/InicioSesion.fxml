@@ -10,37 +10,37 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="parentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.InicioSesionController">
+<StackPane fx:id="parentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.InicioSesionController">
    <children>
       <AnchorPane fx:id="inicioSesionAP" prefHeight="465.0" prefWidth="420.0" style="-fx-background-color: white;">
          <children>
-            <ImageView fitHeight="85.0" fitWidth="212.0" layoutX="214.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="124.0" fitWidth="303.0" layoutX="201.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagenes/Logo.jpeg" />
                </image>
             </ImageView>
-            <JFXButton fx:id="copyBT" layoutX="214.0" layoutY="140.0" onAction="#copiar" prefHeight="48.0" prefWidth="204.0" style="-fx-background-color: #3e85c3;" text="Copiar Enlace" textFill="WHITE">
+            <JFXButton fx:id="copyBT" layoutX="232.0" layoutY="179.0" onAction="#copiar" prefHeight="56.0" prefWidth="236.0" style="-fx-background-color: #3e85c3;" text="Copiar Enlace" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="18.0" />
                </font>
             </JFXButton>
-            <JFXPasswordField fx:id="pinPF" focusColor="#3e85c3" labelFloat="true" layoutX="188.0" layoutY="233.0" prefHeight="48.0" prefWidth="258.0" promptText="PIN" unFocusColor="#3e85c3">
+            <JFXPasswordField fx:id="pinPF" focusColor="#3e85c3" labelFloat="true" layoutX="220.0" layoutY="283.0" prefHeight="48.0" prefWidth="258.0" promptText="PIN" unFocusColor="#3e85c3">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton fx:id="iniciar_sesionBT" layoutX="215.0" layoutY="298.0" onAction="#iniciarSesion" prefHeight="48.0" prefWidth="204.0" style="-fx-background-color: #3e85c3;" text="Iniciar sesión" textFill="WHITE">
+            <JFXButton fx:id="iniciar_sesionBT" layoutX="232.0" layoutY="356.0" onAction="#iniciarSesion" prefHeight="56.0" prefWidth="236.0" style="-fx-background-color: #3e85c3;" text="Iniciar sesión" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXCheckBox fx:id="no_cierre_sesionCB" checkedColor="#3e85c3" layoutX="253.0" layoutY="358.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
-            <JFXButton fx:id="cerrarBT" layoutX="474.0" layoutY="14.0" onAction="#cerrarSesion" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #3e85c3;" text="Cerrar Sesión" textFill="WHITE">
+            <JFXCheckBox fx:id="no_cierre_sesionCB" checkedColor="#3e85c3" layoutX="286.0" layoutY="421.0" prefHeight="27.0" prefWidth="126.0" text="No cerrar sesión" />
+            <JFXButton fx:id="cerrarBT" layoutX="570.0" layoutY="14.0" onAction="#cerrarSesion" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #3e85c3;" text="Cerrar Sesión" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
             </JFXButton>
-            <Label fx:id="infoLB" alignment="CENTER" layoutX="199.0" layoutY="136.0" prefHeight="56.0" prefWidth="236.0" textAlignment="CENTER" textFill="#3e85c3" wrapText="true">
+            <Label fx:id="infoLB" alignment="CENTER" layoutX="232.0" layoutY="179.0" prefHeight="56.0" prefWidth="236.0" textAlignment="CENTER" textFill="#3e85c3" wrapText="true">
                <font>
                   <Font name="Segoe UI Bold" size="21.0" />
                </font>
