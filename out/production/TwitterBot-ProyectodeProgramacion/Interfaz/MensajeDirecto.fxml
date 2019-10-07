@@ -1,42 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="directMessageAP" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.MensajeDirectoController">
+<AnchorPane fx:id="directMessageAP" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.MensajeDirectoController">
    <children>
-      <JFXTextArea fx:id="messageTA" focusColor="#3e85c3" layoutX="206.0" layoutY="135.0" prefHeight="170.0" prefWidth="338.0" unFocusColor="#3e85c3">
+      <JFXTextArea fx:id="messageTA" focusColor="#3e85c3" layoutX="206.0" layoutY="354.0" prefHeight="36.0" prefWidth="400.0" unFocusColor="#3e85c3">
          <font>
-            <Font name="Segoe UI" size="13.0" />
+            <Font name="Segoe UI" size="14.0" />
          </font></JFXTextArea>
-      <JFXButton fx:id="enviar_mensajeBT" layoutX="417.0" layoutY="320.0" onAction="#enviarMensaje" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Enviar Mensaje" textFill="WHITE">
+      <JFXButton fx:id="enviar_mensajeBT" layoutX="617.0" layoutY="354.0" onAction="#enviarMensaje" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: lightgray; -fx-border-radius: 5;" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
-      <Text fill="#3e85c3" layoutX="147.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direct Messages" textAlignment="CENTER" wrappingWidth="305.13671875">
+      <Text fill="#3e85c3" layoutX="197.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direct Messages" textAlignment="CENTER" wrappingWidth="305.13671875">
          <font>
             <Font name="Segoe UI Bold" size="38.0" />
          </font>
       </Text>
-      <JFXButton fx:id="regresarBT" layoutX="189.0" layoutY="320.0" onAction="#regresar" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
+      <JFXButton fx:id="regresarBT" layoutX="490.0" layoutY="420.0" onAction="#regresar" prefHeight="51.0" prefWidth="183.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
       <JFXTextField fx:id="seguidorTA" focusColor="#3e85c3" labelFloat="true" layoutX="25.0" layoutY="123.0" prefHeight="25.0" prefWidth="150.0" promptText="Ingrese Usuario" unFocusColor="#3e85c3">
          <font>
-            <Font name="Segoe UI" size="12.0" />
+            <Font name="Segoe UI" size="14.0" />
          </font></JFXTextField>
-      <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#obtenerUsuario" prefHeight="214.0" prefWidth="150.0" />
+      <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#obtenerUsuario" prefHeight="241.0" prefWidth="150.0" />
+      <ScrollPane layoutX="206.0" layoutY="123.0" prefHeight="227.0" prefWidth="450.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -43,7 +43,7 @@ public class EscenaPrincipalController {
         usernameTX.setText(new Usuario().getNombreUsuario());
         //Botones desactivados
         secondAP.setVisible(false);
-        //
+        //Cargar botones
         tweetearBT.setGraphic(new ImageView(new Image("/Imagenes/tweet.png",50,50,false, true)));
         timelineBT.setGraphic(new ImageView(new Image("/Imagenes/home.png",50,50,false, true)));
         followBT.setGraphic(new ImageView(new Image("/Imagenes/follow.png",50,50,false, true)));

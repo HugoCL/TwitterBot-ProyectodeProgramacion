@@ -14,7 +14,7 @@
    <children>
       <AnchorPane fx:id="inicioSesionAP" prefHeight="465.0" prefWidth="420.0" style="-fx-background-color: white;">
          <children>
-            <ImageView fitHeight="124.0" fitWidth="303.0" layoutX="201.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="125.0" fitWidth="310.0" layoutX="199.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagenes/Logo.jpeg" />
                </image>
