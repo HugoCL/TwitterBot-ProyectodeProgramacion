@@ -23,12 +23,11 @@ public class Messages {
 
             do {
                 results = twitter.search(query);
-                System.out.println("Results: " + results.getTweets().size());
                 List<Status> tweets = results.getTweets();
-                System.out.println(twitter.showStatus(id).getText());
                 for (Status tweet : tweets)
-                    if (tweet.getInReplyToStatusId() == id)
-                    System.out.println("\tR.-" + tweet.getUser().getScreenName()+": "+tweet.getText());
+                    if (tweet.getInReplyToStatusId() == id) {
+                        //hacerAlgo
+                    }
             } while ((query = results.nextQuery()) != null);
 
         } catch (Exception e) {

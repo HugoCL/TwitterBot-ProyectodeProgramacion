@@ -15,9 +15,10 @@ import javafx.scene.layout.VBox;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-public class CellVBox {
+public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
+
 
     public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, VBox vbox) {
         GridPane pane = new GridPane();

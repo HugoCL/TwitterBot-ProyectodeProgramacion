@@ -28,8 +28,9 @@ public class MensajeDirectoController {
 
     @FXML private AnchorPane directMessageAP;
 
+    private Timeline timeline;
     public void initialize(){
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
+        timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -84,6 +85,7 @@ public class MensajeDirectoController {
         messageTA.setText("");
     }
     @FXML public void regresar() throws IOException {
+        timeline.stop();
         Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml", regresarBT, directMessageAP);
     }
 }
