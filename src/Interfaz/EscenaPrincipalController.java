@@ -4,9 +4,6 @@ import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -14,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
@@ -28,14 +24,14 @@ public class EscenaPrincipalController {
     @FXML private JFXButton tweetearBT;
     @FXML private JFXButton followBT;
     @FXML private JFXButton directBT;
-    @FXML private JFXButton timelineBT;
+    @FXML private static JFXButton timelineBT;
     @FXML private JFXButton cerrar_sesionBT;
 
     @FXML private Text usernameTX;
 
     @FXML private ScrollPane scroll = new ScrollPane();
 
-    @FXML private JFXSpinner spinner;
+    @FXML private static JFXSpinner spinner;
 
     private static ArrayList<Tweet> serializados;
     private static boolean isSerializado;
@@ -60,9 +56,8 @@ public class EscenaPrincipalController {
         followBT.setGraphic(new ImageView(new Image("/Imagenes/follow.png",50,50,false, true)));
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
         cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
-        scroll.getStylesheets().add("/Estilo/EstiloListView.css");
+        scroll.getStyleClass().add("scroll");
         if(!tf){
-            tf = true;
             timelineBT.setDisable(true);
             cargarScroll();
         }
@@ -117,7 +112,7 @@ public class EscenaPrincipalController {
     private void cargarScroll() {
         new Thread(()->{
             spinner.setVisible(true);
-
+            tf = true;
             while(true){
                 vbox = new VBox(4);
                 listaTweets = new ArrayList<>();

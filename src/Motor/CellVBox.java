@@ -91,9 +91,9 @@ public class CellVBox extends Thread{
 
         pane.add(imagen, 0, 0);
         pane.add(name, 1, 0);
-        pane.add(separador, 0, 1, 2, 1);
-        pane.add(mensaje, 0, 2, 2, 1);
-        pane.add(separador2, 0, 3, 2, 1);
+        pane.add(separador, 0, 1, 3, 1);
+        pane.add(mensaje, 0, 2, 3, 1);
+        pane.add(separador2, 0, 3, 3, 1);
         pane.add(retweet_BT, 0, 4);
         pane.add(like_BT, 1, 4);
         pane.add(delete, 2, 4);
