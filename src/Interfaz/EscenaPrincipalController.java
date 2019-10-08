@@ -5,6 +5,8 @@ import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -41,8 +43,13 @@ public class EscenaPrincipalController {
         usernameTX.setText(new Usuario().getNombreUsuario());
         //Botones desactivados
         secondAP.setVisible(false);
-
-        scroll.getStyleClass().add("scroll");
+        //Cargar botones
+        tweetearBT.setGraphic(new ImageView(new Image("/Imagenes/tweet.png",50,50,false, true)));
+        timelineBT.setGraphic(new ImageView(new Image("/Imagenes/home.png",50,50,false, true)));
+        followBT.setGraphic(new ImageView(new Image("/Imagenes/follow.png",50,50,false, true)));
+        directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
+        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
+        scroll.getStylesheets().add("/Estilo/EstiloListView.css");
     }
 
     @FXML public void tweetear() throws IOException {
@@ -55,7 +62,7 @@ public class EscenaPrincipalController {
         if (listaTweets.size() != 0){
             isSerializado = false;
             for (Tweet tweet: listaTweets) {
-                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
+                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP,scroll));
             }
             scroll.setContent(vbox);
             botonesMain(true);
@@ -66,7 +73,7 @@ public class EscenaPrincipalController {
             isSerializado = true;
             if (serializados != null && serializados.size() != 0){
                 for (Tweet tweet: serializados) {
-                    vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP));
+                    vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP,scroll));
                 }
                 scroll.setContent(vbox);
                 botonesMain(true);
@@ -106,11 +113,5 @@ public class EscenaPrincipalController {
         timelineBT.setDisable(bool);
         followBT.setDisable(bool);
         directBT.setDisable(bool);
-    }
-
-    @FXML public void cerrarPrograma(){
-        System.out.println("Finalizando programa...");
-        //SE NECESITA CAMBIAR ESTE SYS.EXIT
-        System.exit(0);
     }
 }
