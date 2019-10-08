@@ -21,6 +21,7 @@ public class CellVBox {
 
     public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
         GridPane pane = new GridPane();
+        pane.setPrefWidth(scroll.getPrefWidth()-16);
         JFXButton like_BT = new JFXButton();
         like_BT.setGraphic(new ImageView(new Image("Imagenes/heart.png", 20,20,false,true)));
         like_BT.getStyleClass().add("GrayHeart-buttton");
@@ -65,18 +66,23 @@ public class CellVBox {
 
         TextArea mensaje = new TextArea(item.getMensaje());
         mensaje.setEditable(false);
-        mensaje.setPrefSize(scroll.getPrefWidth()-30, 70);
+        mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
         mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
 
         ImageView imagen = new ImageView(new Image(item.getImagen()));
         imagen.getStyleClass().add("imagen");
 
+        Label separador = new Label();
+        Label separador2 = new Label();
+
         pane.add(imagen, 0, 0);
         pane.add(name, 1, 0);
-        pane.add(mensaje, 0, 1, 2, 1);
-        pane.add(retweet_BT, 0, 2);
-        pane.add(like_BT, 1, 2);
+        pane.add(separador, 0, 1, 2, 1);
+        pane.add(mensaje, 0, 2, 2, 1);
+        pane.add(separador2, 0, 3, 2, 1);
+        pane.add(retweet_BT, 0, 4);
+        pane.add(like_BT, 1, 4);
 
         pane.getStyleClass().add("grid");
         return pane;
