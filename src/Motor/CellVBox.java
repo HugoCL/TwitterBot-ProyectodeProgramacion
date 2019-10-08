@@ -64,6 +64,12 @@ public class CellVBox extends Thread{
 
         JFXButton delete = new JFXButton();
         delete.setGraphic(new ImageView(new Image("Imagenes/delete.png", 20,20,false, true)));
+        try {
+            if (!item.getScreenName().equals(twitter.getScreenName()))
+                delete.setDisable(true);
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -73,6 +79,7 @@ public class CellVBox extends Thread{
                     vbox.getChildren().remove(pane);
             }
         });
+
 
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
