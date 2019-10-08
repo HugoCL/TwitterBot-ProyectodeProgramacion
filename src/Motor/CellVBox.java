@@ -62,7 +62,7 @@ public class CellVBox extends Thread{
 
         revisarLikeRetweet(item.getId(), retweet_BT, like_BT);
 
-        JFXButton delete = new JFXButton("Borrar");
+        JFXButton delete = new JFXButton();
         delete.setGraphic(new ImageView(new Image("Imagenes/delete.png", 20,20,false, true)));
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
