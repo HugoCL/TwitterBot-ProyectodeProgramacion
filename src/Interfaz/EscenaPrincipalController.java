@@ -102,6 +102,7 @@ public class EscenaPrincipalController {
         TwitterBot.getInstance().getBOT().setSesion(false);
         AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
         AdminBackup.getInstance().serializar(new ArrayList<>());
+        vbox = new VBox();
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 
