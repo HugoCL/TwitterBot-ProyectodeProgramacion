@@ -63,6 +63,7 @@ public class CellVBox extends Thread{
         revisarLikeRetweet(item.getId(), retweet_BT, like_BT);
 
         JFXButton delete = new JFXButton("Borrar");
+        delete.setGraphic(new ImageView(new Image("Imagenes/delete.png", 20,20,false, true)));
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -95,7 +96,7 @@ public class CellVBox extends Thread{
         pane.add(separador2, 0, 3, 2, 1);
         pane.add(retweet_BT, 0, 4);
         pane.add(like_BT, 1, 4);
-        pane.add(delete, 2, 2);
+        pane.add(delete, 2, 4);
         GridPane.setHalignment(delete, HPos.RIGHT);
 
         pane.getStyleClass().add("grid");
