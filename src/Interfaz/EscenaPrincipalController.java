@@ -117,7 +117,6 @@ public class EscenaPrincipalController {
     private void cargarScroll() {
         new Thread(()->{
             spinner.setVisible(true);
-            int i = 0;
 
             while(true){
                 vbox = new VBox(4);
@@ -128,7 +127,7 @@ public class EscenaPrincipalController {
                         isSerializado = false;
                         for (Tweet tweet: listaTweets) {
                             //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
-                            vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox));
+                            vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox, scroll));
                         }
                     }
                     else{
@@ -136,7 +135,7 @@ public class EscenaPrincipalController {
                         isSerializado = true;
                         if (serializados != null && serializados.size() != 0){
                             for (Tweet tweet: serializados) {
-                                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox));
+                                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox, scroll));
                             }
                         }
                     }
