@@ -4,6 +4,7 @@ import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -33,6 +34,8 @@ public class EscenaPrincipalController {
 
     @FXML private JFXSpinner spinner;
 
+    private Thread hilo;
+    private Thread visivilidades;
     private static ArrayList<Tweet> serializados;
     private static boolean isSerializado;
 
@@ -43,11 +46,15 @@ public class EscenaPrincipalController {
 
     //Classes
     private Feed feed = new Feed();
+    private boolean ejecutar;
+    private boolean excuteV;
 
     public void initialize() throws TwitterException {
 
         //Obtener nombre de usuario
         usernameTX.setText(new Usuario().getNombreUsuario());
+        ejecutar = true;
+        excuteV = true;
         //Botones desactivados
         secondAP.setVisible(false);
         //Cargar botones
@@ -57,16 +64,26 @@ public class EscenaPrincipalController {
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
         cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
         scroll.getStyleClass().add("scroll");
-        if(!inicioCarga)
-            cargarScroll();
-        if(!finCarga){
-            timelineBT.setDisable(true);
-            spinner.setVisible(true);
+        visivilidades = new Thread(()->{
+            while (excuteV){
+                if (!finCarga){
+                    spinner.setVisible(true);
+                    timelineBT.setDisable(true);
+                }else{
+                    spinner.setVisible(false);
+                    timelineBT.setDisable(false);
+                }
+            }
+        });
+        visivilidades.start();
+        if(!inicioCarga){
+            hilo = new Thread(this::cargarScroll);
+            hilo.start();
         }
-
     }
 
     @FXML public void tweetear() throws IOException {
+        excuteV = false;
         Transiciones.Slide.getInstance().left("/Interfaz/Twittear.fxml",tweetearBT,mainAP);
     }
 
@@ -91,10 +108,13 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void follow() throws IOException {
+        excuteV = false;
         Transiciones.Slide.getInstance().left("/Interfaz/Follow.fxml", followBT, mainAP);
+
     }
 
     @FXML public void directMessage() throws IOException {
+        excuteV = false;
         Transiciones.Slide.getInstance().left("/Interfaz/MensajeDirecto.fxml", directBT, mainAP);
     }
 
@@ -103,6 +123,10 @@ public class EscenaPrincipalController {
         AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
         AdminBackup.getInstance().serializar(new ArrayList<>());
         vbox = new VBox();
+        ejecutar = false;
+        excuteV = false;
+        inicioCarga = false;
+        finCarga = false;
         Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
     }
 
@@ -115,41 +139,43 @@ public class EscenaPrincipalController {
 
     private void cargarScroll() {
         spinner.setVisible(true);
-        new Thread(()->{
-            inicioCarga = true;
-            while(true){
-                vbox = new VBox(4);
-                listaTweets = new ArrayList<>();
-                try {
-                    listaTweets = feed.ObtenerTweets();
-                    if (listaTweets.size() != 0){
-                        isSerializado = false;
-                        for (Tweet tweet: listaTweets) {
-                            //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
+        timelineBT.setDisable(true);
+        inicioCarga = true;
+        while(ejecutar){
+            vbox = new VBox(4);
+            listaTweets = new ArrayList<>();
+            try {
+                listaTweets = feed.ObtenerTweets();
+                System.out.println(listaTweets.size());
+                if (listaTweets.size() != 0){
+                    isSerializado = false;
+                    for (int i = 0; ejecutar && i < listaTweets.size(); i++) {
+                        System.out.println(i);
+                        //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
+                        vbox.getChildren().add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, vbox, scroll));
+                    }
+                }
+                else{
+                    serializados = AdminBackup.getInstance().deserializar();
+                    isSerializado = true;
+                    int i = 0;
+                    if (serializados != null && serializados.size() != 0){
+                        for (Tweet tweet: serializados) {
+                            System.out.println(i++);
                             vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox, scroll));
                         }
                     }
-                    else{
-                        serializados = AdminBackup.getInstance().deserializar();
-                        isSerializado = true;
-                        if (serializados != null && serializados.size() != 0){
-                            for (Tweet tweet: serializados) {
-                                vbox.getChildren().add(CellVBox.crearGridPane(tweet, mainAP, vbox, scroll));
-                            }
-                        }
-                    }
-                    finCarga = true;
-                    spinner.setVisible(false);
-                    timelineBT.setDisable(false);
-                    try {
-                        Thread.sleep(300000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }).start();
+
+            finCarga = true;
+            try {
+                Thread.sleep(300000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
