@@ -24,14 +24,14 @@ public class EscenaPrincipalController {
     @FXML private JFXButton tweetearBT;
     @FXML private JFXButton followBT;
     @FXML private JFXButton directBT;
-    @FXML private static JFXButton timelineBT;
+    @FXML private JFXButton timelineBT;
     @FXML private JFXButton cerrar_sesionBT;
 
     @FXML private Text usernameTX;
 
     @FXML private ScrollPane scroll = new ScrollPane();
 
-    @FXML private static JFXSpinner spinner;
+    @FXML private JFXSpinner spinner;
 
     private static ArrayList<Tweet> serializados;
     private static boolean isSerializado;
@@ -39,7 +39,7 @@ public class EscenaPrincipalController {
     private static ArrayList<Tweet> listaTweets;
 
     private static VBox vbox;
-    private static boolean tf;
+    private static boolean inicioCarga, finCarga;
 
     //Classes
     private Feed feed = new Feed();
@@ -57,10 +57,13 @@ public class EscenaPrincipalController {
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
         cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
         scroll.getStyleClass().add("scroll");
-        if(!tf){
-            timelineBT.setDisable(true);
+        if(!inicioCarga)
             cargarScroll();
+        if(!finCarga){
+            timelineBT.setDisable(true);
+            spinner.setVisible(true);
         }
+
     }
 
     @FXML public void tweetear() throws IOException {
@@ -110,9 +113,9 @@ public class EscenaPrincipalController {
     }
 
     private void cargarScroll() {
+        spinner.setVisible(true);
         new Thread(()->{
-            spinner.setVisible(true);
-            tf = true;
+            inicioCarga = true;
             while(true){
                 vbox = new VBox(4);
                 listaTweets = new ArrayList<>();
@@ -134,6 +137,7 @@ public class EscenaPrincipalController {
                             }
                         }
                     }
+                    finCarga = true;
                     spinner.setVisible(false);
                     timelineBT.setDisable(false);
                     try {
