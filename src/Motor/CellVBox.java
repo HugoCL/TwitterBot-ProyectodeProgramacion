@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,10 +20,9 @@ public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
 
-
     public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, VBox vbox) {
         GridPane pane = new GridPane();
-
+        pane.setPrefWidth(scroll.getPrefWidth()-16);
         JFXButton like_BT = new JFXButton();
         like_BT.setGraphic(new ImageView(new Image("Imagenes/heart.png", 20,20,false,true)));
         like_BT.getStyleClass().add("GrayHeart-buttton");
@@ -78,18 +78,23 @@ public class CellVBox extends Thread{
 
         TextArea mensaje = new TextArea(item.getMensaje());
         mensaje.setEditable(false);
-        mensaje.setMinSize(325, 100);
-        mensaje.setMaxSize(325, 100);
+        mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
         mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
 
         ImageView imagen = new ImageView(new Image(item.getImagen()));
+        imagen.getStyleClass().add("imagen");
+
+        Label separador = new Label();
+        Label separador2 = new Label();
 
         pane.add(imagen, 0, 0);
         pane.add(name, 1, 0);
-        pane.add(mensaje, 0, 1, 3, 1);
-        pane.add(retweet_BT, 0, 2);
-        pane.add(like_BT, 1, 2);
+        pane.add(separador, 0, 1, 2, 1);
+        pane.add(mensaje, 0, 2, 2, 1);
+        pane.add(separador2, 0, 3, 2, 1);
+        pane.add(retweet_BT, 0, 4);
+        pane.add(like_BT, 1, 4);
         pane.add(delete, 2, 2);
         GridPane.setHalignment(delete, HPos.RIGHT);
 

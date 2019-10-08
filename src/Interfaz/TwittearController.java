@@ -37,7 +37,9 @@ public class TwittearController {
     private Timeline timeline;
 
     public void initialize(){
-        fileChooser.setTitle("Buscar");
+        publicar_tweetBT.setGraphic(new ImageView(new Image("/Imagenes/tweet.png",40,40,false, true)));
+        addFileBT.setGraphic(new ImageView(new Image("/Imagenes/add.png",25,25,false, true)));
+
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG, PNG, GIF, MP4", "*.jpg", "*.png", "*.gif*", ".mp4")
         );

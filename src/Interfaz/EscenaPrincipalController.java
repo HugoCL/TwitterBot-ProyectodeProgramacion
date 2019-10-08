@@ -9,6 +9,8 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -52,7 +54,13 @@ public class EscenaPrincipalController {
         usernameTX.setText(new Usuario().getNombreUsuario());
         //Botones desactivados
         secondAP.setVisible(false);
-        scroll.getStyleClass().add("scroll");
+        //Cargar botones
+        tweetearBT.setGraphic(new ImageView(new Image("/Imagenes/tweet.png",50,50,false, true)));
+        timelineBT.setGraphic(new ImageView(new Image("/Imagenes/home.png",50,50,false, true)));
+        followBT.setGraphic(new ImageView(new Image("/Imagenes/follow.png",50,50,false, true)));
+        directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
+        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
+        scroll.getStylesheets().add("/Estilo/EstiloListView.css");
         if(!tf){
             tf = true;
             timelineBT.setDisable(true);
@@ -144,11 +152,5 @@ public class EscenaPrincipalController {
                 }
             }
         }).start();
-    }
-
-    @FXML public void cerrarPrograma(){
-        System.out.println("Finalizando programa...");
-        //SE NECESITA CAMBIAR ESTE SYS.EXIT
-        System.exit(0);
     }
 }
