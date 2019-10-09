@@ -40,7 +40,7 @@ public class Feed implements Serializable {
                 }
             }
         }
-        if (!backupTweets.isEmpty() && exito) {
+        if (!backupTweets.isEmpty()) {
             backupTweets.clear();
         }
         backupTweets = new ArrayList<>(tweets);

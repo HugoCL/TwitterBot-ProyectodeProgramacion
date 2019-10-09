@@ -84,7 +84,7 @@ public class Messages {
     public String PublicarTweetVideo (String Tweet, File rutaVideo){
         try{
             StatusUpdate nuevoTweet = new StatusUpdate(Tweet);
-            InputStream is = null;
+            InputStream is;
             try {
                 is = new FileInputStream(rutaVideo);
             } catch (FileNotFoundException e) {
