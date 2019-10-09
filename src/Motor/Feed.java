@@ -27,7 +27,7 @@ public class Feed implements Serializable {
                 if (pageno == 2) tweets.clear();
 
                 for (Status status : twitter.getHomeTimeline(page)) {
-                    tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(),
+                    tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(), status.getUser().getScreenName(),
                             status.getUser().getMiniProfileImageURL()));
                 }
                 if (tweets.size() == size){
@@ -40,7 +40,7 @@ public class Feed implements Serializable {
                 }
             }
         }
-        if (!backupTweets.isEmpty() && exito) {
+        if (!backupTweets.isEmpty()) {
             backupTweets.clear();
         }
         backupTweets = new ArrayList<>(tweets);

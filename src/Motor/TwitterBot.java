@@ -1,11 +1,12 @@
 package Motor;
 
-import twitter4j.*;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado

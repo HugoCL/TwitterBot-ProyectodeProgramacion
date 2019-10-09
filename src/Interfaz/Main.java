@@ -1,11 +1,13 @@
 package Interfaz;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
@@ -16,6 +18,12 @@ public class Main extends Application {
         primaryStage.setTitle("Twitter Bot - Ramos Overflow");
         primaryStage.getIcons().add(new Image("/Imagenes/Icono.png"));
         primaryStage.resizableProperty().setValue(Boolean.FALSE);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
         primaryStage.show();
     }
 

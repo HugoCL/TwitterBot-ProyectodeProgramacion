@@ -9,6 +9,8 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -28,8 +30,10 @@ public class MensajeDirectoController {
 
     @FXML private AnchorPane directMessageAP;
 
+    private Timeline timeline;
     public void initialize(){
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
+        enviar_mensajeBT.setGraphic(new ImageView(new Image("/Imagenes/sendMessage.png",20,20,false, true)));
+        timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -84,6 +88,7 @@ public class MensajeDirectoController {
         messageTA.setText("");
     }
     @FXML public void regresar() throws IOException {
+        timeline.stop();
         Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml", regresarBT, directMessageAP);
     }
 }

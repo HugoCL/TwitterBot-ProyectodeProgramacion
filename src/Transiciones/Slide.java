@@ -19,6 +19,8 @@ public class Slide {
      * Inicio patrón de diseño Singleton
      */
     private static Slide INSTANCE = null;
+    private static Scene scene;
+    private  static Parent root;
     // Constructor privado
     private Slide(){}
     // Método para evitar multi-hilos
@@ -52,8 +54,8 @@ public class Slide {
         timeline.play();
     }
     public void left(String ruta, JFXButton boton, AnchorPane anchorPane) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(ruta));
-        Scene scene = boton.getScene();
+        root = FXMLLoader.load(getClass().getResource(ruta));
+        scene = boton.getScene();
         scene.getStylesheets().add(getClass().getResource("/Estilo/EstiloListView.css").toExternalForm());
 
         root.translateXProperty().set(scene.getWidth());
