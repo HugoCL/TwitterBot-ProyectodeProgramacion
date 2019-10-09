@@ -56,7 +56,6 @@ public class EscenaPrincipalController {
         usernameTX.setText(new Usuario().getNombreUsuario());
         ejecutar = true;
         excuteV = true;
-        vbox = new VBox(4);
         aux = new VBox();
         //Botones desactivados
         secondAP.setVisible(false);
@@ -143,6 +142,7 @@ public class EscenaPrincipalController {
         spinner.setVisible(true);
         timelineBT.setDisable(true);
         inicioCarga = true;
+        vbox = new VBox(4);
         while(ejecutar){
             aux = new VBox();
             listaTweets = new ArrayList<>();
