@@ -39,8 +39,8 @@ public class InicioSesionController {
         AdminSesion adm = AdminSesion.getInstance();
         pinPF.setText("");
         TwitterBot botSerializado = adm.desSerializar();
+        bot = TwitterBot.getInstance();
         if (botSerializado == null){
-            bot = TwitterBot.getInstance();
             bot.setSesion(false);
             bot.inicializarBot();
         }
@@ -57,9 +57,6 @@ public class InicioSesionController {
             cerrarBT.setVisible(true);
             copyBT.setVisible(false);
         }else{
-            bot = TwitterBot.getInstance();
-            bot.inicializarBot();
-            enlace = bot.OAuthURL();
             pinPF.setEditable(true);
             infoLB.setVisible(false);
             cerrarBT.setVisible(false);
@@ -98,11 +95,13 @@ public class InicioSesionController {
     }
 
     @FXML public void copiar() {
+        bot.inicializarBot();
+        enlace = bot.OAuthURL();
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();
         content.putString(enlace);
         clipboard.setContent(content);
-        copyBT.setDisable(true);
+
         Dialog.getInstance().info(copyBT,"Enlace copiado",inicioSesionAP);
     }
 

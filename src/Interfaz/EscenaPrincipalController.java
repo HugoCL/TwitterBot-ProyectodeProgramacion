@@ -164,14 +164,14 @@ public class EscenaPrincipalController {
                             aux.getChildren().add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
                         }
                     }
-                    else {
-                        Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, intentelo más tarde",mainAP);
-                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            vbox.getChildren().addAll(aux.getChildren());
+            if (!tweetearBT.isDisable()){
+                vbox = new VBox(4);
+                vbox.getChildren().addAll(aux.getChildren());
+            }
             finCarga = true;
             try {
                 Thread.sleep(300000);

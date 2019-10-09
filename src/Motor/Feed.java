@@ -23,7 +23,7 @@ public class Feed implements Serializable {
         while (true) {
             try {
                 int size = tweets.size();
-                Paging page = new Paging(pageno++, 100);
+                Paging page = new Paging(pageno++, 2);
                 if (pageno == 2) tweets.clear();
 
                 for (Status status : twitter.getHomeTimeline(page)) {
