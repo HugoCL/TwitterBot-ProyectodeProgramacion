@@ -10,7 +10,6 @@ public class HashtagActions {
 
 
     public void HashTagActions(ArrayList<Tweet> tweets) {
-        Feed feed = new Feed();
         try {
             for (Tweet tweet: tweets)
                 for (HashtagEntity hashtagEntity : twitter.showStatus(tweet.getId()).getHashtagEntities())
