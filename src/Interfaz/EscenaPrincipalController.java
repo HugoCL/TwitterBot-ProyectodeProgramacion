@@ -6,12 +6,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import twitter4j.TwitterException;
@@ -44,6 +42,7 @@ public class EscenaPrincipalController {
     private static ArrayList<Tweet> listaTweets;
 
     private static VBox vbox;
+    private static VBox aux;
     private static boolean inicioCarga, finCarga;
 
     //Classes
@@ -52,11 +51,13 @@ public class EscenaPrincipalController {
     private boolean excuteV;
 
     public void initialize() throws TwitterException {
+
         //Obtener nombre de usuario
         usernameTX.setText(new Usuario().getNombreUsuario());
         ejecutar = true;
         excuteV = true;
         vbox = new VBox(4);
+        aux = new VBox();
         //Botones desactivados
         secondAP.setVisible(false);
         //Cargar botones
@@ -124,7 +125,7 @@ public class EscenaPrincipalController {
         TwitterBot.getInstance().getBOT().setSesion(false);
         AdminSesion.getInstance().serializar(TwitterBot.getInstance().getBOT());
         AdminBackup.getInstance().serializar(new ArrayList<>());
-        vbox = new VBox(4);
+        vbox = new VBox();
         ejecutar = false;
         excuteV = false;
         inicioCarga = false;
@@ -144,7 +145,7 @@ public class EscenaPrincipalController {
         timelineBT.setDisable(true);
         inicioCarga = true;
         while(ejecutar){
-            VBox box = new VBox();
+            aux = new VBox();
             listaTweets = new ArrayList<>();
             try {
                 listaTweets = feed.ObtenerTweets();
@@ -153,8 +154,7 @@ public class EscenaPrincipalController {
                     isSerializado = false;
                     for (int i = 0; ejecutar && i < listaTweets.size(); i++) {
                         //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
-                        box.getChildren().add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, vbox, scroll));
-                        System.out.println(box.getChildren().size());
+                        aux.getChildren().add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, vbox, scroll));
                     }
                 }
                 else{
@@ -162,15 +162,14 @@ public class EscenaPrincipalController {
                     isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
-                            box.getChildren().add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
-                            System.out.println(box.getChildren().size());
+                            aux.getChildren().add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
                         }
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            cloneVbox(box);
+            vbox.getChildren().addAll(aux.getChildren());
             finCarga = true;
             try {
                 Thread.sleep(300000);
@@ -178,12 +177,5 @@ public class EscenaPrincipalController {
                 e.printStackTrace();
             }
         }
-        System.out.println("fin");
-    }
-
-    private void cloneVbox(VBox box) {
-        vbox = new VBox(4);
-        int N = box.getChildren().size();
-        vbox.getChildren().addAll(box.getChildren());
     }
 }
