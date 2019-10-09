@@ -25,9 +25,11 @@ public class HashtagActions {
                                     statusUpdate.setInReplyToStatusId(statusFollow.getId());
                                     twitter.updateStatus(statusUpdate);
                                 }
-                                StatusUpdate statusUpdate = new StatusUpdate("Se está siguiendo correctamente a @"+name);
-                                statusUpdate.setInReplyToStatusId(statusFollow.getId());
-                                twitter.updateStatus(statusUpdate);
+                                else {
+                                    StatusUpdate statusUpdate = new StatusUpdate("Se está siguiendo correctamente a @" + name);
+                                    statusUpdate.setInReplyToStatusId(statusFollow.getId());
+                                    twitter.updateStatus(statusUpdate);
+                                }
                             }
                             else if(twitter.getScreenName().equals(name)){
                                 StatusUpdate statusUpdate = new StatusUpdate("ERROR: No se pudo realizar la acción por # (No puedes seguirte a ti mismo)");
@@ -62,8 +64,7 @@ public class HashtagActions {
                                 statusUpdate.setInReplyToStatusId(statusLike.getId());
                                 twitter.updateStatus(statusUpdate);
                             } else{
-                                twitter.destroyFavorite(statusLike.getId());
-                                StatusUpdate statusUpdate = new StatusUpdate("Se ha quitado el like exitosamente @"+statusLike.getUser().getScreenName());
+                                StatusUpdate statusUpdate = new StatusUpdate("Ya se había dado like anteriormente a este Tweet @"+statusLike.getUser().getScreenName());
                                 statusUpdate.setInReplyToStatusId(statusLike.getId());
                                 twitter.updateStatus(statusUpdate);
                             }
@@ -82,8 +83,7 @@ public class HashtagActions {
                                 statusUpdate.setInReplyToStatusId(statusRetweet.getId());
                                 twitter.updateStatus(statusUpdate);
                             } else{
-                                twitter.unRetweetStatus(statusRetweet.getId());
-                                StatusUpdate statusUpdate = new StatusUpdate("Se ha quitado el retweet exitosamente @"+statusRetweet.getUser().getScreenName());
+                                StatusUpdate statusUpdate = new StatusUpdate("Ya se había retwitteado este Tweet anteriormente @"+statusRetweet.getUser().getScreenName());
                                 statusUpdate.setInReplyToStatusId(statusRetweet.getId());
                                 twitter.updateStatus(statusUpdate);
                             }
