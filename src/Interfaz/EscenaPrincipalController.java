@@ -98,7 +98,7 @@ public class EscenaPrincipalController {
             secondAP.setVisible(true);
         }
         else {
-            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, Intentelo más tarde",mainAP);
+            Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, intentelo más tarde",mainAP);
         }
     }
 
@@ -135,7 +135,6 @@ public class EscenaPrincipalController {
 
     private void botonesMain(boolean bool){
         tweetearBT.setDisable(bool);
-        timelineBT.setDisable(bool);
         followBT.setDisable(bool);
         directBT.setDisable(bool);
     }
@@ -164,6 +163,9 @@ public class EscenaPrincipalController {
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
                             aux.getChildren().add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
                         }
+                    }
+                    else {
+                        Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, intentelo más tarde",mainAP);
                     }
                 }
             } catch (IOException e) {
