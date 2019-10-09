@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Estilo/EstiloListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Estilo/EstiloListView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Estilo/EstiloListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estilo/EstiloListView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/CellVBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/CellVBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" afterPath="$PROJECT_DIR$/Sesion.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,6 +128,7 @@
       <workItem from="1569691458542" duration="5639000" />
       <workItem from="1569963685999" duration="3489000" />
       <workItem from="1570483183881" duration="8967000" />
+      <workItem from="1570495169780" duration="953000" />
     </task>
     <servers />
   </component>

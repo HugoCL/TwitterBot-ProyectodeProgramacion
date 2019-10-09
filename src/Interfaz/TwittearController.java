@@ -34,6 +34,7 @@ public class TwittearController {
     private Pattern patronImage = Pattern.compile("^.+\\.(jp(e)?g|JP(E)?G|gif|GIF|png|PNG)$");
     private FileChooser fileChooser = new FileChooser();
     private File selectedFile;
+    private Timeline timeline;
 
     public void initialize(){
         publicar_tweetBT.setGraphic(new ImageView(new Image("/Imagenes/tweet.png",40,40,false, true)));
@@ -50,7 +51,7 @@ public class TwittearController {
         caracteres_LB.setText("0/280");
 
         KeyFrame frame = new KeyFrame(Duration.millis(100), e -> caracteres());
-        Timeline timeline = new Timeline(frame);
+        timeline = new Timeline(frame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -136,6 +137,7 @@ public class TwittearController {
     }
 
     @FXML public void regresar() throws IOException {
+        timeline.stop();
         Transiciones.Slide.getInstance().right("/Interfaz/EscenaPrincipal.fxml",regresarBT,tweetearAP);
     }
 }

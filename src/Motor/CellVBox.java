@@ -4,6 +4,7 @@ import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -15,11 +16,11 @@ import javafx.scene.layout.VBox;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-public class CellVBox {
+public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
 
-    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
+    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, VBox vbox, ScrollPane scroll) {
         GridPane pane = new GridPane();
         pane.setPrefWidth(scroll.getPrefWidth()-16);
         JFXButton like_BT = new JFXButton();
@@ -50,16 +51,35 @@ public class CellVBox {
                 String respuesta = feed.retweet(item.getId());
                 if (respuesta.equals("Retweet exitoso")){
                     retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
-                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
+                    Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
                 }
                 else{
                     retweet_BT.getStyleClass().set(2, "RetweetGray-button");
-                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
+                    Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
                 }
             }
         });
 
         revisarLikeRetweet(item.getId(), retweet_BT, like_BT);
+
+        JFXButton delete = new JFXButton();
+        delete.setGraphic(new ImageView(new Image("Imagenes/delete.png", 20,20,false, true)));
+        try {
+            if (!item.getScreenName().equals(twitter.getScreenName()))
+                delete.setDisable(true);
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String respuesta = new Messages().deleteTweet(item.getId());
+                Dialog.getInstance().info(delete, respuesta, mainAP);
+                if (respuesta.equals("Mensaje Eliminado"))
+                    vbox.getChildren().remove(pane);
+            }
+        });
+
 
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
@@ -78,11 +98,13 @@ public class CellVBox {
 
         pane.add(imagen, 0, 0);
         pane.add(name, 1, 0);
-        pane.add(separador, 0, 1, 2, 1);
-        pane.add(mensaje, 0, 2, 2, 1);
-        pane.add(separador2, 0, 3, 2, 1);
+        pane.add(separador, 0, 1, 3, 1);
+        pane.add(mensaje, 0, 2, 3, 1);
+        pane.add(separador2, 0, 3, 3, 1);
         pane.add(retweet_BT, 0, 4);
         pane.add(like_BT, 1, 4);
+        pane.add(delete, 2, 4);
+        GridPane.setHalignment(delete, HPos.RIGHT);
 
         pane.getStyleClass().add("grid");
         return pane;
