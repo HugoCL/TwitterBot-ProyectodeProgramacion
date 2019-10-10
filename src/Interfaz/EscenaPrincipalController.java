@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +17,7 @@ import twitter4j.TwitterException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class EscenaPrincipalController {
 
@@ -42,21 +44,19 @@ public class EscenaPrincipalController {
     private static ArrayList<Tweet> listaTweets;
 
     private static VBox vbox;
-    private static VBox aux;
+    private static ArrayList<Node> aux;
     private static boolean inicioCarga, finCarga;
 
     //Classes
     private Feed feed = new Feed();
-    private boolean ejecutar;
+    private static boolean ejecutar, reloadTimeline;
     private boolean excuteV;
 
     public void initialize() throws TwitterException {
-
         //Obtener nombre de usuario
         usernameTX.setText(new Usuario().getNombreUsuario());
         ejecutar = true;
         excuteV = true;
-        aux = new VBox();
         //Botones desactivados
         secondAP.setVisible(false);
         //Cargar botones
@@ -90,6 +90,13 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline() {
+        if(reloadTimeline){
+            vbox = new VBox(4);
+            for (Node nodo: aux)
+                vbox.getChildren().addAll(nodo);
+        }
+        System.out.println("aux->>"+aux.size());
+        System.out.println(vbox.getChildren().size());
         if (vbox.getChildren().size() != 0){
             scroll.setContent(vbox);
             scroll.setVisible(true);
@@ -139,13 +146,15 @@ public class EscenaPrincipalController {
     }
 
     private void cargarScroll() {
+        System.out.println("inicio");
         spinner.setVisible(true);
         timelineBT.setDisable(true);
         inicioCarga = true;
         vbox = new VBox(4);
         while(ejecutar){
-            aux = new VBox();
+            aux = new ArrayList<>();
             listaTweets = new ArrayList<>();
+            reloadTimeline = false;
             try {
                 listaTweets = feed.ObtenerTweets();
                 System.out.println(listaTweets.size());
@@ -153,7 +162,7 @@ public class EscenaPrincipalController {
                     isSerializado = false;
                     for (int i = 0; ejecutar && i < listaTweets.size(); i++) {
                         //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
-                        aux.getChildren().add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, vbox, scroll));
+                        aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, vbox, scroll));
                     }
                 }
                 else{
@@ -161,23 +170,23 @@ public class EscenaPrincipalController {
                     isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
-                            aux.getChildren().add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
+                            aux.add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
                         }
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (!tweetearBT.isDisable()){
-                vbox = new VBox(4);
-                vbox.getChildren().addAll(aux.getChildren());
-            }
+            reloadTimeline = true;
             finCarga = true;
-            try {
-                Thread.sleep(300000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            for (int i = 0; ejecutar && i < 300000;i++){
+                try {
+                    Thread.sleep(1 );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        System.out.println("fin");
     }
 }
