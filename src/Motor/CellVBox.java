@@ -1,5 +1,6 @@
 package Motor;
 
+import Interfaz.EscenaPrincipalController;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -20,7 +21,7 @@ public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
 
-    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, VBox vbox, ScrollPane scroll) {
+    public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
         GridPane pane = new GridPane();
         pane.setPrefWidth(scroll.getPrefWidth()-16);
         JFXButton like_BT = new JFXButton();
@@ -75,6 +76,8 @@ public class CellVBox extends Thread{
             public void handle(ActionEvent event) {
                 String respuesta = new Messages().deleteTweet(item.getId());
                 Dialog.getInstance().info(delete, respuesta, mainAP);
+                VBox vbox = EscenaPrincipalController.getVbox();
+                System.out.println("vbox->"+vbox.getChildren().size());
                 if (respuesta.equals("Mensaje Eliminado"))
                     vbox.getChildren().remove(pane);
             }

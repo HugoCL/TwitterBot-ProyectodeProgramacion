@@ -90,10 +90,11 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline() {
-        if(reloadTimeline){
+        if(reloadTimeline && !aux.isEmpty()){
             vbox = new VBox(4);
             for (Node nodo: aux)
                 vbox.getChildren().addAll(nodo);
+            aux.clear();
         }
         System.out.println("aux->>"+aux.size());
         System.out.println(vbox.getChildren().size());
@@ -145,6 +146,9 @@ public class EscenaPrincipalController {
         directBT.setDisable(bool);
     }
 
+    public static VBox getVbox() {
+        return vbox;
+    }
     private void cargarScroll() {
         System.out.println("inicio");
         spinner.setVisible(true);
@@ -162,7 +166,7 @@ public class EscenaPrincipalController {
                     isSerializado = false;
                     for (int i = 0; ejecutar && i < listaTweets.size(); i++) {
                         //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
-                        aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, vbox, scroll));
+                        aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
                     }
                 }
                 else{
@@ -170,7 +174,7 @@ public class EscenaPrincipalController {
                     isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
-                            aux.add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
+                            aux.add(CellVBox.crearGridPane(serializados.get(i), mainAP, scroll));
                         }
                     }
                 }
