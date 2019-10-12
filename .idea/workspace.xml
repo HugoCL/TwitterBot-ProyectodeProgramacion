@@ -23,8 +23,8 @@
       <list>
         <option value="FxmlFile" />
         <option value="XSLT Stylesheet" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>

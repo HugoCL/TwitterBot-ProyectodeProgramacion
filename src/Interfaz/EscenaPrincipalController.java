@@ -96,8 +96,6 @@ public class EscenaPrincipalController {
                 vbox.getChildren().addAll(nodo);
             aux.clear();
         }
-        System.out.println("aux->>"+aux.size());
-        System.out.println(vbox.getChildren().size());
         if (vbox.getChildren().size() != 0){
             scroll.setContent(vbox);
             scroll.setVisible(true);

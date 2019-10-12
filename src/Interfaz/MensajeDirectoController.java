@@ -1,5 +1,6 @@
 package Interfaz;
 
+import Motor.MensajesDirectos;
 import Motor.Messages;
 import Motor.Usuario;
 import Transiciones.Dialog;
@@ -32,14 +33,14 @@ public class MensajeDirectoController {
 
     private Timeline timeline;
     public void initialize(){
+        followers = new Usuario().getFollowers();
         enviar_mensajeBT.setGraphic(new ImageView(new Image("/Imagenes/sendMessage.png",20,20,false, true)));
         timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
+        new MensajesDirectos().construirConversacion();
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
-        followers = new Usuario().getFollowers();
         if (followers.isEmpty()) {
             seguidorTA.setDisable(true);
             seguidorTA.setText("NO TIENES SEGUIDORES");
