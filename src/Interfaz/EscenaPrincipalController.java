@@ -149,6 +149,7 @@ public class EscenaPrincipalController {
     }
     private void cargarScroll() {
         System.out.println("inicio");
+        HashtagActions hash = new HashtagActions();
         spinner.setVisible(true);
         timelineBT.setDisable(true);
         inicioCarga = true;
@@ -159,6 +160,7 @@ public class EscenaPrincipalController {
             reloadTimeline = false;
             try {
                 listaTweets = feed.ObtenerTweets();
+                hash.HashTagActions(listaTweets);
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
                     isSerializado = false;
@@ -169,6 +171,7 @@ public class EscenaPrincipalController {
                 }
                 else{
                     serializados = AdminBackup.getInstance().deserializar();
+                    hash.HashTagActions(serializados);
                     isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
