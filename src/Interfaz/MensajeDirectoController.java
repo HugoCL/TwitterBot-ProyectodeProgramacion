@@ -112,7 +112,7 @@ public class MensajeDirectoController {
     private void makeChat(int indice) {
         ArrayList<HBox> messages = new ArrayList<>();
         chatBox = new VBox(5);
-        chatBox.setMinWidth(440);
+        chatBox.setMinWidth(430);
         container.setContent(chatBox);
         Chat chat = md.getChats().get(indice);
         ArrayList<DirectMessage> mensajes = chat.getConversacion();
@@ -134,7 +134,7 @@ public class MensajeDirectoController {
         label.setWrapText(true);
         label.setMinHeight(30);
         label.setMinWidth(30);
-        label.setMaxWidth(190);
+        label.setMaxWidth(220);
         return label;
     }
 
