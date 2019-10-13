@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="directMessageAP" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.MensajeDirectoController">
+<AnchorPane fx:id="directMessageAP" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.MensajeDirectoController">
    <children>
       <JFXTextArea fx:id="messageTA" focusColor="#3e85c3" layoutX="206.0" layoutY="354.0" prefHeight="36.0" prefWidth="400.0" unFocusColor="#3e85c3">
          <font>
@@ -35,10 +40,7 @@
             <Font name="Segoe UI" size="14.0" />
          </font></JFXTextField>
       <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#obtenerUsuario" prefHeight="241.0" prefWidth="150.0" />
-      <ScrollPane layoutX="206.0" layoutY="123.0" prefHeight="227.0" prefWidth="450.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
+      <ScrollPane fx:id="container" layoutX="206.0" layoutY="123.0" prefHeight="227.0" prefWidth="450.0" />
+      <JFXButton fx:id="mostrar" layoutX="25.0" layoutY="415.0" onAction="#mostrarChat" prefHeight="31.0" prefWidth="150.0" text="Mostrar Chat" />
    </children>
 </AnchorPane>

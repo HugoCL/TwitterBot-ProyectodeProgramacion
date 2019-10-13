@@ -12,7 +12,11 @@ public class MensajesDirectos {
 
     private static ArrayList<Chat> chats;
 
-    public void construirConversacion() {
+    public MensajesDirectos () {
+        construirConversacion();
+    }
+
+    private void construirConversacion() {
         DirectMessageList list;
         chats = new ArrayList<>();
         try {
@@ -31,17 +35,15 @@ public class MensajesDirectos {
         } catch (TwitterException e) {
             System.out.println("No hay chat disponible");
         }
-
-        for (Chat chat : chats){
-            System.out.println("---------------------");
-            ArrayList<DirectMessage> conversacion = chat.getConversacion();
-            for (int i = conversacion.size()-1; i >= 0; i--) System.out.println(conversacion.get(i).getText());
-        }
     }
 
-    private int idCoversation(long id) {
+    public int idCoversation(long id) {
         for (int i = 0; i < chats.size(); i++)
             if (chats.get(i).getUser() == id) return i;
         return -1;
+    }
+
+    public ArrayList<Chat> getChats() {
+        return chats;
     }
 }
