@@ -19,7 +19,6 @@ public class Feed implements Serializable {
      */
     public ArrayList<Tweet> ObtenerTweets() throws IOException {
         int pageno = 1;
-        boolean exito = false;
         while (true) {
             try {
                 int size = tweets.size();
@@ -30,8 +29,7 @@ public class Feed implements Serializable {
                     tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(), status.getUser().getScreenName(),
                             status.getUser().getMiniProfileImageURL()));
                 }
-                if (tweets.size() == size || tweets.size() >= 100){
-                    exito = true;
+                if (tweets.size() == size){
                     break;
                 }
             } catch (TwitterException e) {
@@ -58,7 +56,6 @@ public class Feed implements Serializable {
     /***
      * Permite agregar a favoritos todos los tweets del timeline de la cuenta asociada
      * @param like contiene el tweet a dar like
-     * @throws TwitterException
      */
     public String like(long like){
         try {
@@ -77,7 +74,6 @@ public class Feed implements Serializable {
     /***
      * Permite retweetear todos los tweets en el timline de la cuenta ingresada
      * @param tweet contiene el tweet a dar retweet
-     * @throws TwitterException
      */
     public String retweet(long tweet){
         try {

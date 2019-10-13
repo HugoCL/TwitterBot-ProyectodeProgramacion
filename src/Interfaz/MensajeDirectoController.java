@@ -47,15 +47,17 @@ public class MensajeDirectoController {
         }
     }
 
-    public void busqueda() {
+    private void busqueda() {
         listView = FXCollections.observableArrayList();
         String busqueda = seguidorTA.getText();
         boolean tf;
         for (String comparar: followers) {
             tf = true;
-            for (int i = 0; tf && busqueda.length() > i; i++) {
-                if (comparar.length() < busqueda.length() || busqueda.toLowerCase().charAt(i) != comparar.toLowerCase().charAt(i))
+            for (int i = 0; busqueda.length() > i; i++) {
+                if (comparar.length() < busqueda.length() || busqueda.toLowerCase().charAt(i) != comparar.toLowerCase().charAt(i)) {
                     tf = false;
+                    break;
+                }
             }
             if (tf && busqueda.length() != 0) listView.add(comparar);
             if (listView.size() == 10) break;
@@ -63,7 +65,7 @@ public class MensajeDirectoController {
         followersLV.setItems(listView);
     }
 
-    public void caracteres(){
+    private void caracteres(){
         if (!messageTA.getText().isEmpty()) {enviar_mensajeBT.setDisable(false);}
         else {enviar_mensajeBT.setDisable(true);}
     }

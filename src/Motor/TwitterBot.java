@@ -92,7 +92,6 @@ public class TwitterBot implements Serializable {
 
     /***
      * Metodo que permite iniciar sesion con cualquier cuenta de Twitter gracias a la autorizacion mediante OAuth.
-     * @throws TwitterException Excepcion por problemas tecnicos de Twitter
      */
     public String OAuthURL() {
         try {

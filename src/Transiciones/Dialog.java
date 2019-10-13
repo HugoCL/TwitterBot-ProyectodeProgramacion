@@ -33,10 +33,11 @@ public class Dialog {
     /**
      * Fin patrón de diseño Singleton
      */
-    @FXML protected JFXDialogLayout dialogLayout = new JFXDialogLayout();
+    @FXML
+    private JFXDialogLayout dialogLayout = new JFXDialogLayout();
     @FXML protected JFXButton button = new JFXButton();
 
-    protected BoxBlur boxBlur = new BoxBlur(3,3,3);
+    private BoxBlur boxBlur = new BoxBlur(3,3,3);
 
     public void info(JFXButton boton, String texto, AnchorPane AP){
         AP.setDisable(true);

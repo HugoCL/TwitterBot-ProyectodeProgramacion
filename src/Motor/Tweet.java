@@ -26,7 +26,7 @@ public class Tweet implements Serializable {
         return screenName;
     }
 
-    public String getMensaje() {
+    String getMensaje() {
         return mensaje;
     }
 
@@ -34,11 +34,11 @@ public class Tweet implements Serializable {
         return id;
     }
 
-    public String getNombre() {
+    String getNombre() {
         return nombre;
     }
 
-    public String getImagen() {
+    String getImagen() {
         return imagen;
     }
 }

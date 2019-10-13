@@ -36,7 +36,7 @@ public class Messages {
 
     }
 
-    public String deleteTweet(long id) {
+    String deleteTweet(long id) {
         try{
             twitter.destroyStatus(id);
             return "Mensaje Eliminado";
@@ -48,7 +48,6 @@ public class Messages {
     /***
      * Metodo que publica Tweets de texto simple
      * @param Tweet String con el Tweet a publicar
-     * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
      */
 
 

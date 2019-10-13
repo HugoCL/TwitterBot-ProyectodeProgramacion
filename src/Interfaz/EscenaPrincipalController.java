@@ -43,6 +43,7 @@ public class EscenaPrincipalController {
 
     private static ArrayList<Tweet> listaTweets;
 
+    @FXML
     private static VBox vbox;
     private static ArrayList<Node> aux;
     private static boolean inicioCarga, finCarga;

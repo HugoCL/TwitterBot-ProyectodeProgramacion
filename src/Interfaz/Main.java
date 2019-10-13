@@ -18,12 +18,7 @@ public class Main extends Application {
         primaryStage.setTitle("Twitter Bot - Ramos Overflow");
         primaryStage.getIcons().add(new Image("/Imagenes/Icono.png"));
         primaryStage.resizableProperty().setValue(Boolean.FALSE);
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.exit(0);
-            }
-        });
+        primaryStage.setOnCloseRequest(event -> System.exit(0));
         primaryStage.show();
     }
 

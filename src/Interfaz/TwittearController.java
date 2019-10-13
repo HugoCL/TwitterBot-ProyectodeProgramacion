@@ -89,7 +89,7 @@ public class TwittearController {
 
     }
 
-    public void caracteres() {
+    private void caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
             if (tweet_TA.getText().length() > 280){
                 caracteres_LB.setTextFill(Color.web("#ff0000"));

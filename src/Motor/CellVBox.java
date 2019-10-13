@@ -3,8 +3,6 @@ package Motor;
 import Interfaz.EscenaPrincipalController;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -27,18 +25,15 @@ public class CellVBox extends Thread{
         JFXButton like_BT = new JFXButton();
         like_BT.setGraphic(new ImageView(new Image("Imagenes/heart.png", 20,20,false,true)));
         like_BT.getStyleClass().add("GrayHeart-buttton");
-        like_BT.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String respuesta = feed.like(item.getId());
-                if(respuesta.equals("Like exitoso")){
-                    like_BT.getStyleClass().set(2, "RedHeart-buttton");
-                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
-                }
-                else{
-                    like_BT.getStyleClass().set(2, "GrayHeart-buttton");
-                    Dialog.getInstance().info(like_BT,respuesta,mainAP);
-                }
+        like_BT.setOnAction(event -> {
+            String respuesta = feed.like(item.getId());
+            if(respuesta.equals("Like exitoso")){
+                like_BT.getStyleClass().set(2, "RedHeart-buttton");
+                Dialog.getInstance().info(like_BT,respuesta,mainAP);
+            }
+            else{
+                like_BT.getStyleClass().set(2, "GrayHeart-buttton");
+                Dialog.getInstance().info(like_BT,respuesta,mainAP);
             }
         });
 
@@ -46,18 +41,15 @@ public class CellVBox extends Thread{
         retweet_BT.setGraphic(new ImageView(new Image("Imagenes/retweet.png", 20,20,false, true)));
         retweet_BT.getStyleClass().add("RetweetGray-button");
 
-        retweet_BT.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String respuesta = feed.retweet(item.getId());
-                if (respuesta.equals("Retweet exitoso")){
-                    retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
-                    Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
-                }
-                else{
-                    retweet_BT.getStyleClass().set(2, "RetweetGray-button");
-                    Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
-                }
+        retweet_BT.setOnAction(event -> {
+            String respuesta = feed.retweet(item.getId());
+            if (respuesta.equals("Retweet exitoso")){
+                retweet_BT.getStyleClass().set(2, "RetweetGreen-button");
+                Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
+            }
+            else{
+                retweet_BT.getStyleClass().set(2, "RetweetGray-button");
+                Dialog.getInstance().info(retweet_BT,respuesta,mainAP);
             }
         });
 
@@ -71,16 +63,11 @@ public class CellVBox extends Thread{
         } catch (TwitterException e) {
             e.printStackTrace();
         }
-        delete.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String respuesta = new Messages().deleteTweet(item.getId());
-                Dialog.getInstance().info(delete, respuesta, mainAP);
-                VBox vbox = EscenaPrincipalController.getVbox();
-                System.out.println("vbox->"+vbox.getChildren().size());
-                if (respuesta.equals("Mensaje Eliminado"))
-                    vbox.getChildren().remove(pane);
-            }
+        delete.setOnAction(event -> {
+            String respuesta = new Messages().deleteTweet(item.getId());
+            Dialog.getInstance().info(delete, respuesta, mainAP);
+            if (respuesta.equals("Mensaje Eliminado"))
+                vbox.getChildren().remove(pane);
         });
 
 
