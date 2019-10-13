@@ -1,6 +1,7 @@
 package Motor;
 
 import twitter4j.*;
+import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
@@ -46,10 +47,14 @@ public class TwitterBot implements Serializable {
      */
     private Twitter twitter;
 
+    public AccessToken getAccessToken() {
+        return accessToken;
+    }
+
     /***
      * Atributo que permite usar un listener para captar ciertos Tweets
      */
-    private TwitterStream twitterStream;
+    private AccessToken accessToken;
     /**
      * Métodos para guardar y obtener si la sesión está iniciada.
      */
@@ -89,7 +94,6 @@ public class TwitterBot implements Serializable {
         cb.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
 
         TwitterFactory tf = new TwitterFactory(cb.build());
-        twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
         twitter = tf.getInstance();
     }
 
@@ -122,7 +126,7 @@ public class TwitterBot implements Serializable {
         // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
         try {
             if (PIN.length() > 0) {
-                twitter.getOAuthAccessToken(rtoken, PIN);
+                accessToken = twitter.getOAuthAccessToken(rtoken, PIN);
             } else {
                 return "PIN no ingresado\nVuelva a copiar el enlace de autentificación";
             }
@@ -134,11 +138,11 @@ public class TwitterBot implements Serializable {
         return "PIN Correcto";
     }
 
-    public Twitter getTwitter() {
-        return twitter;
+    private void almacenarAccessToken(long id, AccessToken accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public TwitterStream getTwitterStream() {
-        return twitterStream;
+    public Twitter getTwitter() {
+        return twitter;
     }
 }
