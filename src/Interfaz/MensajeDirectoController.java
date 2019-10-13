@@ -20,27 +20,31 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import twitter4j.DirectMessage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MensajeDirectoController {
 
     private ArrayList<String> followers;
-    private ObservableList<String> listView;
+    private ObservableList<Label> listView;
     private VBox chatBox;
 
     @FXML private JFXButton regresarBT;
-    @FXML private JFXListView<String> followersLV;
+    @FXML private JFXListView<Label> followersLV;
     @FXML private JFXTextArea messageTA;
     @FXML private JFXTextField seguidorTA;
     @FXML private JFXButton enviar_mensajeBT;
     @FXML private ScrollPane container = new ScrollPane();
 
     @FXML private AnchorPane directMessageAP;
-
+    private String anterior;
     private Timeline timeline;
     private MensajesDirectos md;
 
@@ -60,32 +64,42 @@ public class MensajeDirectoController {
         }
     }
 
-    public void busqueda() {
+    private void busqueda() {
         listView = FXCollections.observableArrayList();
         String busqueda = seguidorTA.getText();
         boolean tf;
-        for (String comparar: followers) {
-            tf = true;
-            for (int i = 0; tf && busqueda.length() > i; i++) {
-                if (comparar.length() < busqueda.length() || busqueda.toLowerCase().charAt(i) != comparar.toLowerCase().charAt(i))
-                    tf = false;
+        if (!busqueda.equalsIgnoreCase(anterior)){
+            for (String comparar: followers) {
+                tf = true;
+                for (int i = 0; busqueda.length() > i; i++)
+                    if (comparar.length() < busqueda.length() || busqueda.toLowerCase().charAt(i) != comparar.toLowerCase().charAt(i)) {
+                        tf = false;
+                        break;
+                    }
+                if (tf && busqueda.length() != 0){
+                    Circle circle = new Circle(10);
+                    circle.setFill(new ImagePattern(new Image(Usuario.getUser(comparar).getMiniProfileImageURL())));
+                    anterior = busqueda;
+                    Label lbl = new Label(comparar);
+                    lbl.setGraphic(circle);
+                    listView.add(lbl);
+                }
+                if (listView.size() == 10) break;
             }
-            if (tf && busqueda.length() != 0) listView.add(comparar);
-            if (listView.size() == 10) break;
+            followersLV.setItems(listView);
         }
-        followersLV.setItems(listView);
     }
 
-    public void caracteres(){
+    private void caracteres(){
         if (!messageTA.getText().isEmpty()) {enviar_mensajeBT.setDisable(false);}
         else {enviar_mensajeBT.setDisable(true);}
     }
 
     @FXML public void obtenerUsuario() {
-        String usuario;
+        Label usuario;
         if (followersLV.getSelectionModel().getSelectedItem() != null) {
             usuario = followersLV.getSelectionModel().getSelectedItem();
-            seguidorTA.setText(usuario);
+            seguidorTA.setText(usuario.getText());
             listView = FXCollections.observableArrayList();
             listView.add(usuario);
             followersLV.setItems(listView);
@@ -93,7 +107,8 @@ public class MensajeDirectoController {
     }
 
     @FXML public void enviarMensaje(){
-        String arroba = followersLV.getSelectionModel().getSelectedItem();
+        Label usuario = followersLV.getSelectionModel().getSelectedItem();
+        String arroba = usuario.getText();
         String mensaje = messageTA.getText();
         Messages mensajes = new Messages();
         String respuesta = mensajes.EnviarMD(arroba,mensaje);
@@ -114,6 +129,7 @@ public class MensajeDirectoController {
         chatBox = new VBox(5);
         chatBox.setMinWidth(430);
         container.setContent(chatBox);
+        container.setVvalue(1);
         Chat chat = md.getChats().get(indice);
         ArrayList<DirectMessage> mensajes = chat.getConversacion();
         for (int i = mensajes.size()-1; i >= 0; i--) {

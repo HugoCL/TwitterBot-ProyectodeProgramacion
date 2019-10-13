@@ -3,6 +3,7 @@ package Motor;
 import twitter4j.IDs;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.User;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,14 @@ public class Usuario {
             return twitter.showUser(name).getId();
         } catch (TwitterException e) {
             return -1;
+        }
+    }
+
+    public static User getUser(String name) {
+        try {
+            return twitter.showUser(name);
+        } catch (TwitterException e) {
+            return null;
         }
     }
 

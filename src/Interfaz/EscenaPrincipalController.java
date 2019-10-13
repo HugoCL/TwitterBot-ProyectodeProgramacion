@@ -181,6 +181,7 @@ public class EscenaPrincipalController {
             }
             reloadTimeline = true;
             finCarga = true;
+            System.out.println("Termino");
             for (int i = 0; ejecutar && i < 300000;i++){
                 try {
                     Thread.sleep(1 );
