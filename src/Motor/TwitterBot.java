@@ -1,8 +1,6 @@
 package Motor;
 
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
+import twitter4j.*;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
@@ -48,6 +46,10 @@ public class TwitterBot implements Serializable {
      */
     private Twitter twitter;
 
+    /***
+     * Atributo que permite usar un listener para captar ciertos Tweets
+     */
+    private TwitterStream twitterStream;
     /**
      * Métodos para guardar y obtener si la sesión está iniciada.
      */
@@ -87,6 +89,7 @@ public class TwitterBot implements Serializable {
         cb.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
 
         TwitterFactory tf = new TwitterFactory(cb.build());
+        twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
         twitter = tf.getInstance();
     }
 
@@ -133,5 +136,9 @@ public class TwitterBot implements Serializable {
 
     public Twitter getTwitter() {
         return twitter;
+    }
+
+    public TwitterStream getTwitterStream() {
+        return twitterStream;
     }
 }
