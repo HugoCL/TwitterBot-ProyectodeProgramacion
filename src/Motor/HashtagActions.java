@@ -137,6 +137,7 @@ public class HashtagActions {
                 } else if (hashtagEntity.getText().equalsIgnoreCase("darlike")) {
                     try {
                         if (!twitter.showStatus(status.getId()).isFavorited()) {
+                            twitter.createFavorite(status.getId());
                             actions[1] = 1;
                         }
                         else {
@@ -148,6 +149,7 @@ public class HashtagActions {
                 } else if (hashtagEntity.getText().equalsIgnoreCase("retwittear")) {
                     try {
                         if (!twitter.showStatus(status.getId()).isRetweetedByMe()) {
+                            twitter.retweetStatus(status.getId());
                             actions[2] = 1;
                         } else {
                             actions[2] = -2;
@@ -192,21 +194,21 @@ public class HashtagActions {
                 continuedAction = true;
             }
             if (actions[1] == 1){
-                currentReply = "le dimos like al Tweet que nos enviaste";
+                currentReply = " le dimos like al Tweet que nos enviaste";
                 if (!continuedAction){
                     currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
                 }
                 actionReply = actionReply.concat(currentReply);
             }
             else if (actions[1] == -1){
-                currentReply = "intentamos darte like, pero ocurrió un error con la API de Twitter";
+                currentReply = " intentamos darte like, pero ocurrió un error con la API de Twitter";
                 if (!continuedAction){
                     currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
                 }
                 actionReply = actionReply.concat(currentReply);
             }
             else{
-                currentReply = "intentamos darte like, pero ya le habiamos dado like anteriormente";
+                currentReply = " intentamos darte like, pero ya le habiamos dado like anteriormente";
                 if (!continuedAction){
                     currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
                 }
@@ -216,25 +218,25 @@ public class HashtagActions {
         continuedAction = false;
         if (actions[2] != 0){
             if (actions[1] != 0){
-                actionReply = actionReply.concat("y además");
+                actionReply = actionReply.concat(" y además");
                 continuedAction = true;
             }
             if (actions[2] == 1){
-                currentReply = "hemos retwitteado tu Tweet";
+                currentReply = " hemos retwitteado tu Tweet";
                 if (!continuedAction){
                     currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
                 }
                 actionReply = actionReply.concat(currentReply);
             }
             else if(actions[2] == -1){
-                currentReply = "hemos intentado retwittear tu Tweet, pero tuvimos un problema con la API de Twitter";
+                currentReply = " hemos intentado retwittear tu Tweet, pero tuvimos un problema con la API de Twitter";
                 if (!continuedAction){
                     currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
                 }
                 actionReply = actionReply.concat(currentReply);
             }
             else {
-                currentReply = "hemos intentado retwittear tu Tweet";
+                currentReply = " hemos intentado retwittear tu Tweet";
                 if (!continuedAction){
                     currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
                 }
