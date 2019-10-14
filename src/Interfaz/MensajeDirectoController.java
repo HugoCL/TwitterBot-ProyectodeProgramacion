@@ -44,6 +44,7 @@ public class MensajeDirectoController {
     @FXML private ScrollPane container = new ScrollPane();
 
     @FXML private AnchorPane directMessageAP;
+    private boolean enviar;
     private String anterior;
     private Timeline timeline;
     private MensajesDirectos md;
@@ -91,8 +92,8 @@ public class MensajeDirectoController {
     }
 
     private void caracteres(){
-        if (!messageTA.getText().isEmpty()) {enviar_mensajeBT.setDisable(false);}
-        else {enviar_mensajeBT.setDisable(true);}
+        if (!messageTA.getText().isEmpty() && enviar) enviar_mensajeBT.setDisable(false);
+        else enviar_mensajeBT.setDisable(true);
     }
 
     @FXML public void obtenerUsuario() {
@@ -107,9 +108,8 @@ public class MensajeDirectoController {
     }
 
     @FXML public void enviarMensaje(){
-        Label usuario = followersLV.getSelectionModel().getSelectedItem();
-        if (usuario != null){
-            String arroba = usuario.getText();
+        String arroba = seguidorTA.getText();
+        if (arroba != null){
             String mensaje = messageTA.getText();
             Messages mensajes = new Messages();
             String respuesta = mensajes.EnviarMD(arroba,mensaje);
@@ -162,6 +162,7 @@ public class MensajeDirectoController {
     @FXML public void mostrarChat() {
         long id = Usuario.getIDUsuario(seguidorTA.getText());
         if (id != -1){
+            enviar = true;
             int i = md.idCoversation(id);
             makeChat(i);
             return;

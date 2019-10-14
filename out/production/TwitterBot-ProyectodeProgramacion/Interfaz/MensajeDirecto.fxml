@@ -41,6 +41,6 @@
          </font></JFXTextField>
       <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#obtenerUsuario" prefHeight="241.0" prefWidth="150.0" />
       <ScrollPane fx:id="container" layoutX="206.0" layoutY="123.0" prefHeight="227.0" prefWidth="450.0" />
-      <JFXButton fx:id="mostrar" layoutX="25.0" layoutY="415.0" onAction="#mostrarChat" prefHeight="31.0" prefWidth="150.0" text="Mostrar Chat" />
+      <JFXButton fx:id="mostrarBT" layoutX="25.0" layoutY="415.0" onAction="#mostrarChat" prefHeight="31.0" prefWidth="150.0" text="Mostrar Chat" />
    </children>
 </AnchorPane>
