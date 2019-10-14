@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import twitter4j.*;
@@ -38,6 +40,10 @@ public class InicioSesionController {
     @FXML private StackPane parentContainer;
 
     public void initialize() throws TwitterException {
+        cerrarBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",25,25,false, true)));
+        copyBT.setGraphic(new ImageView(new Image("/Imagenes/copy.png",35,35,false, true)));
+
+
         AdminSesion adm = AdminSesion.getInstance();
         pinPF.setText("");
         TwitterBot botSerializado = adm.desSerializar();
