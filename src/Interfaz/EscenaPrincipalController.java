@@ -64,7 +64,7 @@ public class EscenaPrincipalController {
         timelineBT.setGraphic(new ImageView(new Image("/Imagenes/home.png",50,50,false, true)));
         followBT.setGraphic(new ImageView(new Image("/Imagenes/follow.png",50,50,false, true)));
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
-        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
+        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",25,25,false, true)));
         scroll.getStyleClass().add("scroll");
         visivilidades = new Thread(()->{
             while (excuteV){

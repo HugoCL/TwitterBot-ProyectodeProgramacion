@@ -96,7 +96,7 @@ public class TwittearController {
                 publicar_tweetBT.setDisable(true);
             }
             else {
-                caracteres_LB.setTextFill(Color.web("#000000"));
+                caracteres_LB.setTextFill(Color.web("#3e85c3"));
                 publicar_tweetBT.setDisable(false);
             }
             caracteres_LB.setText(tweet_TA.getText().length()+"/280");
@@ -104,10 +104,10 @@ public class TwittearController {
         else {
             if (!nameFile_LB.getText().equals("")){
                 publicar_tweetBT.setDisable(false);
-                caracteres_LB.setTextFill(Color.web("#000000"));
             }else {
                 publicar_tweetBT.setDisable(true);
             }
+            caracteres_LB.setTextFill(Color.web("#3e85c3"));
             caracteres_LB.setText("0/280");
         }
     }

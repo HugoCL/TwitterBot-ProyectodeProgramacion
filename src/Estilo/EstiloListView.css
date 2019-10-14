@@ -1,4 +1,5 @@
 .text {
+    -fx-font-family: Arial;
     -fx-font-size: 13;
     -fx-background-insets: 0;
     -fx-background-color: transparent, white, transparent, white;

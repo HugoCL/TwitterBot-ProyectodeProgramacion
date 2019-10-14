@@ -21,11 +21,13 @@ import twitter4j.HashtagEntity;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
+    private static TextFlow mensaje = new TextFlow();
 
     public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
         GridPane pane = new GridPane();
@@ -93,8 +95,8 @@ public class CellVBox extends Thread{
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
 
-        TextFlow mensaje = new TextFlow();
-        destacarHashtag(item,mensaje);
+
+        destacarHashtag(item);
         //mensaje.setEditable(false);
         mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
         //mensaje.setWrapText(true);
@@ -131,22 +133,24 @@ public class CellVBox extends Thread{
         }
     }
 
-    private static void destacarHashtag(Tweet item, TextFlow mensaje){
+    private static void destacarHashtag(Tweet item){
         StringTokenizer Tok = new StringTokenizer (item.getMensaje());
         Text token = new Text();
+        ArrayList<Text> texts = new ArrayList<>();
         while (Tok.hasMoreElements()) {
             String palabra = Tok.nextToken();
             if (palabra.equalsIgnoreCase("#seguir") || palabra.equalsIgnoreCase("#darlike") ||
                     palabra.equalsIgnoreCase("#retwittear")){
                 token.setText(palabra);
                 token.setFill(Color.LIGHTBLUE);
-                System.out.println("Blue: "+token.getText());
+                texts.add(token);
             }
             else{
                 token.setText(palabra);
                 token.setFill(Color.BLACK);
-                System.out.println("Black: "+token.getText());
+                texts.add(token);
             }
         }
+        System.out.println(texts);
     }
 }

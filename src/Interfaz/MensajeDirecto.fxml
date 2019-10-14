@@ -25,14 +25,14 @@
             <Font name="Segoe UI Bold" size="38.0" />
          </font>
       </Text>
-      <JFXButton fx:id="regresarBT" layoutX="490.0" layoutY="420.0" onAction="#regresar" prefHeight="51.0" prefWidth="183.0" style="-fx-background-color: #3e85c3;" text="Regresar" textFill="WHITE">
+      <JFXButton fx:id="regresarBT" layoutX="490.0" layoutY="420.0" onAction="#regresar" prefHeight="51.0" prefWidth="183.0" style="-fx-border-color: lightgray; -fx-border-radius: 5;" text="Regresar" textFill="#3e85c3">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </JFXButton>
       <JFXTextField fx:id="seguidorTA" focusColor="#3e85c3" labelFloat="true" layoutX="25.0" layoutY="123.0" prefHeight="25.0" prefWidth="150.0" promptText="Ingrese Usuario" unFocusColor="#3e85c3">
          <font>
-            <Font name="Segoe UI" size="14.0" />
+            <Font name="Arial" size="14.0" />
          </font></JFXTextField>
       <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#obtenerUsuario" prefHeight="241.0" prefWidth="150.0" />
       <ScrollPane layoutX="206.0" layoutY="123.0" prefHeight="227.0" prefWidth="450.0">
