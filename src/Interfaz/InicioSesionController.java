@@ -1,9 +1,6 @@
 package Interfaz;
 
-import Motor.AdminBackup;
-import Motor.AdminSesion;
-import Motor.TwitterBot;
-import Motor.Usuario;
+import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -30,6 +27,7 @@ import java.util.logging.Filter;
 public class InicioSesionController {
 
     private TwitterBot bot;
+    private HashtagActions hashtagActions;
 
     @FXML private JFXPasswordField pinPF;
     @FXML private JFXCheckBox no_cierre_sesionCB;
@@ -112,7 +110,11 @@ public class InicioSesionController {
         twitterStream.addListener(new StatusListener() {
             @Override
             public void onStatus(Status status) {
-                System.out.println(status.getText());
+                try {
+                    hashtagActions.analizarHashtagActions(status);
+                } catch (TwitterException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
