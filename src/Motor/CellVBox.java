@@ -14,7 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import twitter4j.HashtagEntity;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -91,11 +93,11 @@ public class CellVBox extends Thread{
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
 
-        destacarHashtag(item);
-        TextArea mensaje = new TextArea();
-        mensaje.setEditable(false);
+        TextFlow mensaje = new TextFlow();
+        destacarHashtag(item,mensaje);
+        //mensaje.setEditable(false);
         mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
-        mensaje.setWrapText(true);
+        //mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
 
         ImageView imagen = new ImageView(new Image(item.getImagen()));
@@ -129,12 +131,22 @@ public class CellVBox extends Thread{
         }
     }
 
-    private static String destacarHashtag(Tweet item){
+    private static void destacarHashtag(Tweet item, TextFlow mensaje){
         StringTokenizer Tok = new StringTokenizer (item.getMensaje());
-        int n = 0;
-        while (Tok.hasMoreElements())
-            System.out.println ("" + ++ n + ":" + Tok.nextElement ());
-
-        return null;
+        Text token = new Text();
+        while (Tok.hasMoreElements()) {
+            String palabra = Tok.nextToken();
+            if (palabra.equalsIgnoreCase("#seguir") || palabra.equalsIgnoreCase("#darlike") ||
+                    palabra.equalsIgnoreCase("#retwittear")){
+                token.setText(palabra);
+                token.setFill(Color.LIGHTBLUE);
+                System.out.println("Blue: "+token.getText());
+            }
+            else{
+                token.setText(palabra);
+                token.setFill(Color.BLACK);
+                System.out.println("Black: "+token.getText());
+            }
+        }
     }
 }
