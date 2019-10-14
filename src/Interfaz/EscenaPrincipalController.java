@@ -34,10 +34,6 @@ public class EscenaPrincipalController {
 
     @FXML private JFXSpinner spinner;
 
-    private static ArrayList<Tweet> serializados;
-    private static boolean isSerializado;
-
-    private static ArrayList<Tweet> listaTweets;
 
     @FXML
     private static VBox vbox;
@@ -104,10 +100,7 @@ public class EscenaPrincipalController {
         }
     }
 
-    @FXML public void cerrarTimeline() throws IOException {
-        if (isSerializado){
-            AdminBackup.getInstance().serializar(serializados);
-        }
+    @FXML public void cerrarTimeline(){
         botonesMain(false);
         secondAP.setVisible(false);
     }
@@ -153,24 +146,20 @@ public class EscenaPrincipalController {
         vbox = new VBox(4);
         while(ejecutar){
             aux = new ArrayList<>();
-            listaTweets = new ArrayList<>();
             reloadTimeline = false;
             aux = new ArrayList<>();
-            ArrayList<Tweet> listaTweets = new ArrayList<>();
             try {
-                listaTweets = feed.ObtenerTweets();
-                hash.HashTagActions(listaTweets);
+                ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
-                    isSerializado = false;
-                    for (int i = 0; ejecutar && i < listaTweets.size(); i++) {
-                        //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
+                    hash.HashTagActions(listaTweets);
+                    AdminBackup.getInstance().serializar(listaTweets);
+                    for (int i = 0; ejecutar && i < listaTweets.size(); i++){
                         aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
                     }
                 }
                 else{
-                    serializados = AdminBackup.getInstance().deserializar();
-                    isSerializado = true;
+                    ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
                             if (Messages.getTweet(serializados.get(i).getId()) != null)

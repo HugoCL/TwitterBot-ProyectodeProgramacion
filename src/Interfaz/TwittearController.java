@@ -1,4 +1,5 @@
 package Interfaz;
+
 import Motor.Messages;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;

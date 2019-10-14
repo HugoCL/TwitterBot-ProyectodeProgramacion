@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.List;
 
 /***
  * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
@@ -14,27 +13,6 @@ import java.util.List;
 public class Messages {
 
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
-
-    public void screenNameRespuesta(String user, long id) {
-        try {
-            Query query = new Query("to:" + user);
-            query.setSinceId(id);
-            QueryResult results;
-
-            do {
-                results = twitter.search(query);
-                List<Status> tweets = results.getTweets();
-                for (Status tweet : tweets)
-                    if (tweet.getInReplyToStatusId() == id) {
-                        //hacerAlgo
-                    }
-            } while ((query = results.nextQuery()) != null);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
 
     String deleteTweet(long id) {
         try{

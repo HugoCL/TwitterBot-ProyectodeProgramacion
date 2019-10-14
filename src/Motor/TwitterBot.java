@@ -137,10 +137,6 @@ public class TwitterBot implements Serializable {
         return "PIN Correcto";
     }
 
-    private void almacenarAccessToken(long id, AccessToken accessToken) {
-        this.accessToken = accessToken;
-    }
-
     public Twitter getTwitter() {
         return twitter;
     }

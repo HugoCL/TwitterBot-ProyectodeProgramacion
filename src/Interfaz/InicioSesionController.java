@@ -15,14 +15,9 @@ import twitter4j.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import twitter4j.conf.ConfigurationBuilder;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import twitter4j.*;
-import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Filter;
 
 public class InicioSesionController {
 
