@@ -4,9 +4,8 @@ import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,12 +33,8 @@ public class EscenaPrincipalController {
 
     @FXML private JFXSpinner spinner;
 
-    private Thread hilo;
-    private Thread visivilidades;
     private static ArrayList<Tweet> serializados;
     private static boolean isSerializado;
-
-    private static ArrayList<Tweet> listaTweets;
 
     private static VBox vbox;
     private static VBox aux;
@@ -66,12 +61,12 @@ public class EscenaPrincipalController {
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
         cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
         scroll.getStyleClass().add("scroll");
-        visivilidades = new Thread(()->{
-            while (excuteV){
-                if (!finCarga){
+        Thread visivilidades = new Thread(() -> {
+            while (excuteV) {
+                if (!finCarga) {
                     spinner.setVisible(true);
                     timelineBT.setDisable(true);
-                }else{
+                } else {
                     spinner.setVisible(false);
                     timelineBT.setDisable(false);
                 }
@@ -79,7 +74,7 @@ public class EscenaPrincipalController {
         });
         visivilidades.start();
         if(!inicioCarga){
-            hilo = new Thread(this::cargarScroll);
+            Thread hilo = new Thread(this::cargarScroll);
             hilo.start();
         }
     }
@@ -146,7 +141,7 @@ public class EscenaPrincipalController {
         vbox = new VBox(4);
         while(ejecutar){
             aux = new VBox();
-            listaTweets = new ArrayList<>();
+            ArrayList<Tweet> listaTweets = new ArrayList<>();
             try {
                 listaTweets = feed.ObtenerTweets();
                 hash.HashTagActions(listaTweets);
