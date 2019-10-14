@@ -4,10 +4,10 @@ import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -36,8 +36,6 @@ public class EscenaPrincipalController {
 
     @FXML private JFXSpinner spinner;
 
-    private Thread hilo;
-    private Thread visivilidades;
     private static ArrayList<Tweet> serializados;
     private static boolean isSerializado;
 
@@ -67,12 +65,12 @@ public class EscenaPrincipalController {
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
         cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
         scroll.getStyleClass().add("scroll");
-        visivilidades = new Thread(()->{
-            while (excuteV){
-                if (!finCarga){
+        Thread visivilidades = new Thread(() -> {
+            while (excuteV) {
+                if (!finCarga) {
                     spinner.setVisible(true);
                     timelineBT.setDisable(true);
-                }else{
+                } else {
                     spinner.setVisible(false);
                     timelineBT.setDisable(false);
                 }
@@ -80,7 +78,7 @@ public class EscenaPrincipalController {
         });
         visivilidades.start();
         if(!inicioCarga){
-            hilo = new Thread(this::cargarScroll);
+            Thread hilo = new Thread(this::cargarScroll);
             hilo.start();
         }
     }
@@ -152,6 +150,7 @@ public class EscenaPrincipalController {
     }
     private void cargarScroll() {
         System.out.println("inicio");
+        HashtagActions hash = new HashtagActions();
         spinner.setVisible(true);
         timelineBT.setDisable(true);
         inicioCarga = true;
@@ -160,8 +159,11 @@ public class EscenaPrincipalController {
             aux = new ArrayList<>();
             listaTweets = new ArrayList<>();
             reloadTimeline = false;
+            aux = new VBox();
+            ArrayList<Tweet> listaTweets = new ArrayList<>();
             try {
                 listaTweets = feed.ObtenerTweets();
+                hash.HashTagActions(listaTweets);
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
                     isSerializado = false;
@@ -172,6 +174,7 @@ public class EscenaPrincipalController {
                 }
                 else{
                     serializados = AdminBackup.getInstance().deserializar();
+                    hash.HashTagActions(serializados);
                     isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {

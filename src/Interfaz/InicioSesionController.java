@@ -10,8 +10,12 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import twitter4j.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import twitter4j.conf.ConfigurationBuilder;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import twitter4j.*;
@@ -19,6 +23,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Filter;
 
 public class InicioSesionController {
 
@@ -91,8 +96,52 @@ public class InicioSesionController {
                 TwitterBot.getInstance().setBOT(bot);
             }
         }
+        ConfigurationBuilder cbTS = new ConfigurationBuilder();
+        cbTS.setDebugEnabled(true);
+        cbTS.setOAuthConsumerKey("y3rodATEKk9OopeZb3bJ49k7L");
+        cbTS.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
+        cbTS.setOAuthAccessToken(bot.getAccessToken().getToken());
+        cbTS.setOAuthAccessTokenSecret(bot.getAccessToken().getTokenSecret());
+        TwitterStream twitterStream = new TwitterStreamFactory(cbTS.build()).getInstance();
+        twitterStream.addListener(new StatusListener() {
+            @Override
+            public void onStatus(Status status) {
+                System.out.println(status.getText());
+            }
+
+            @Override
+            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+                System.out.println("On deletion status");
+            }
+
+            @Override
+            public void onTrackLimitationNotice(int i) {
+                System.out.println("Limite alcanzado: +i");
+            }
+
+            @Override
+            public void onScrubGeo(long l, long l1) {
+                System.out.println("Scrub geo detectado");
+            }
+
+            @Override
+            public void onStallWarning(StallWarning stallWarning) {
+                System.out.println("Stall warning");
+            }
+
+            @Override
+            public void onException(Exception e) {
+                e.printStackTrace();
+            }
+        }).filter(setFilterTS());
         //Transición de escenas
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
+    }
+
+    private FilterQuery setFilterTS() throws TwitterException {
+        FilterQuery filterQuery = new FilterQuery();
+        filterQuery.track("@"+bot.getTwitter().getScreenName());
+        return filterQuery;
     }
 
     @FXML public void copiar() {
