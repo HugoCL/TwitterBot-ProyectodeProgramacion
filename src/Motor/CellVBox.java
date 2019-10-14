@@ -14,8 +14,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import twitter4j.HashtagEntity;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+
+import java.util.StringTokenizer;
 
 public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
@@ -87,7 +91,8 @@ public class CellVBox extends Thread{
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
 
-        TextArea mensaje = new TextArea(item.getMensaje());
+        destacarHashtag(item);
+        TextArea mensaje = new TextArea();
         mensaje.setEditable(false);
         mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
         mensaje.setWrapText(true);
@@ -122,5 +127,14 @@ public class CellVBox extends Thread{
         } catch (TwitterException e) {
             System.out.println("No se encuentra tweet");
         }
+    }
+
+    private static String destacarHashtag(Tweet item){
+        StringTokenizer Tok = new StringTokenizer (item.getMensaje());
+        int n = 0;
+        while (Tok.hasMoreElements())
+            System.out.println ("" + ++ n + ":" + Tok.nextElement ());
+
+        return null;
     }
 }
