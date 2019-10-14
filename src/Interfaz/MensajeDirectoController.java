@@ -108,20 +108,25 @@ public class MensajeDirectoController {
 
     @FXML public void enviarMensaje(){
         Label usuario = followersLV.getSelectionModel().getSelectedItem();
-        String arroba = usuario.getText();
-        String mensaje = messageTA.getText();
-        Messages mensajes = new Messages();
-        String respuesta = mensajes.EnviarMD(arroba,mensaje);
-        if (respuesta.equals("Mensaje enviado correctamente")){
-            Label aux = makeLabel(mensaje);
-            aux.setAlignment(Pos.CENTER_RIGHT);
-            Label espacio = new Label();
-            espacio.setMinWidth(100);
-            HBox hbox = new HBox(5, espacio, aux);
-            hbox.setAlignment(Pos.CENTER_RIGHT);
+        if (usuario != null){
+            String arroba = usuario.getText();
+            String mensaje = messageTA.getText();
+            Messages mensajes = new Messages();
+            String respuesta = mensajes.EnviarMD(arroba,mensaje);
+            if (respuesta.equals("Mensaje enviado correctamente")){
+                Label aux = makeLabel(mensaje);
+                aux.setAlignment(Pos.CENTER_RIGHT);
+                Label espacio = new Label();
+                espacio.setMinWidth(100);
+                HBox hbox = new HBox(5, espacio, aux);
+                hbox.setAlignment(Pos.CENTER_RIGHT);
+            }
+            Dialog.getInstance().info(enviar_mensajeBT,respuesta,directMessageAP);
+            messageTA.setText("");
         }
-        Dialog.getInstance().info(enviar_mensajeBT,respuesta,directMessageAP);
-        messageTA.setText("");
+        else {
+            Dialog.getInstance().info(enviar_mensajeBT,"Seleccione usuario a enviar mensaje",directMessageAP);
+        }
     }
 
     private void makeChat(int indice) {
