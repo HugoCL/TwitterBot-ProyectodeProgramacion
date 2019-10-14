@@ -28,8 +28,9 @@ public class Feed implements Serializable {
                 for (Status status : twitter.getHomeTimeline(page)) {
                     tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(), status.getUser().getScreenName(),
                             status.getUser().getMiniProfileImageURL()));
+                    if(tweets.size() >= 100) break;
                 }
-                if (tweets.size() == size){
+                if (tweets.size() == size || tweets.size() >= 100){
                     break;
                 }
             } catch (TwitterException e) {

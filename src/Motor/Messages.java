@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Messages {
 
-    private Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
+    private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
 
     public void screenNameRespuesta(String user, long id) {
         try {
@@ -114,6 +114,14 @@ public class Messages {
             return "Mensaje enviado correctamente";
         }catch (Exception e){
             return "Usuario no encontrado o no seleccionado";
+        }
+    }
+
+    public static Status getTweet(long id) {
+        try {
+            return twitter.showStatus(id);
+        } catch (TwitterException e) {
+            return null;
         }
     }
 }

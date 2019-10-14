@@ -116,7 +116,7 @@ public class CellVBox extends Thread{
             if(twitter.showStatus(id).isFavorited())
                 like_BT.getStyleClass().set(2, "RedHeart-buttton");
         } catch (TwitterException e) {
-            //System.out.println("No se encuentra tweet");
+            System.out.println("No se encuentra tweet");
         }
     }
 

@@ -170,11 +170,11 @@ public class EscenaPrincipalController {
                 }
                 else{
                     serializados = AdminBackup.getInstance().deserializar();
-                    hash.HashTagActions(serializados);
                     isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
-                            aux.add(CellVBox.crearGridPane(serializados.get(i), mainAP, scroll));
+                            if (Messages.getTweet(serializados.get(i).getId()) != null)
+                                aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
                         }
                     }
                 }
