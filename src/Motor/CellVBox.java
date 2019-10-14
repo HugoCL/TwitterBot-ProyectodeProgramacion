@@ -12,8 +12,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import twitter4j.HashtagEntity;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
@@ -74,10 +81,11 @@ public class CellVBox extends Thread{
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
 
-        TextArea mensaje = new TextArea(item.getMensaje());
-        mensaje.setEditable(false);
+        TextFlow mensaje = new TextFlow();
+        destacarHashtag(item,mensaje);
+        //mensaje.setEditable(false);
         mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
-        mensaje.setWrapText(true);
+        //mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
 
         ImageView imagen = new ImageView(new Image(item.getImagen()));
@@ -108,6 +116,22 @@ public class CellVBox extends Thread{
                 like_BT.getStyleClass().set(2, "RedHeart-buttton");
         } catch (TwitterException e) {
             System.out.println("No se encuentra tweet");
+        }
+    }
+
+    private static void destacarHashtag(Tweet item, TextFlow mensaje){
+        StringTokenizer Tok = new StringTokenizer (item.getMensaje());
+        while (Tok.hasMoreElements()) {
+            Text token = new Text();
+            String palabra = Tok.nextToken();
+            token.setText(palabra+" ");
+            if (palabra.charAt(0) == '#' || palabra.charAt(0) == '@'){
+                token.setFill(Color.web("#3e85c3"));
+            }
+            else{
+                token.setFill(Color.BLACK);
+            }
+            mensaje.getChildren().add(token);
         }
     }
 }

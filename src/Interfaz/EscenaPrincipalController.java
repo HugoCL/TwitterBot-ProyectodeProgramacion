@@ -63,7 +63,7 @@ public class EscenaPrincipalController {
         timelineBT.setGraphic(new ImageView(new Image("/Imagenes/home.png",50,50,false, true)));
         followBT.setGraphic(new ImageView(new Image("/Imagenes/follow.png",50,50,false, true)));
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
-        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
+        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",25,25,false, true)));
         scroll.getStyleClass().add("scroll");
         Thread visivilidades = new Thread(() -> {
             while (excuteV) {
@@ -95,8 +95,6 @@ public class EscenaPrincipalController {
                 vbox.getChildren().addAll(nodo);
             aux.clear();
         }
-        System.out.println("aux->>"+aux.size());
-        System.out.println(vbox.getChildren().size());
         if (vbox.getChildren().size() != 0){
             scroll.setContent(vbox);
             scroll.setVisible(true);
@@ -187,7 +185,8 @@ public class EscenaPrincipalController {
             }
             reloadTimeline = true;
             finCarga = true;
-            for (int i = 0; ejecutar && i < 300000;i++){
+            System.out.println("Termino");
+            for (int i = 0; ejecutar && i < 120000 ;i++){
                 try {
                     Thread.sleep(1 );
                 } catch (InterruptedException e) {

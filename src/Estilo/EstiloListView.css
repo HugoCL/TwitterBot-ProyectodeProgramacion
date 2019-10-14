@@ -1,9 +1,11 @@
 .text {
+    -fx-font-family: Arial;
     -fx-font-size: 13;
     -fx-background-insets: 0;
     -fx-background-color: transparent, white, transparent, white;
     -fx-border-color: lightgray;
     -fx-border-radius: 5px;
+    -fx-padding: 4;
 }
 
 .text .content {
@@ -31,7 +33,8 @@
 
 .grid{
     -fx-background-color: white;
-    -fx-border-color: gray;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
     -fx-padding: 10;
 }
 

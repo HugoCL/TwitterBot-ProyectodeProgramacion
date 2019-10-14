@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/HashtagActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/HashtagActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Estilo/EstiloListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Estilo/EstiloListView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Estilo/EstiloListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estilo/EstiloListView.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +21,8 @@
       <list>
         <option value="FxmlFile" />
         <option value="XSLT Stylesheet" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,7 +71,7 @@
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8.0_111" />
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Interfaz.Main" />
       <module name="TwitterBot-ProyectodeProgramacion" />
@@ -146,6 +151,9 @@
       <workItem from="1570638877741" duration="1544000" />
       <workItem from="1570643402669" duration="623000" />
       <workItem from="1570708099210" duration="51000" />
+      <workItem from="1571070553850" duration="783000" />
+      <workItem from="1571082469040" duration="901000" />
+      <workItem from="1571083665267" duration="689000" />
     </task>
     <servers />
   </component>

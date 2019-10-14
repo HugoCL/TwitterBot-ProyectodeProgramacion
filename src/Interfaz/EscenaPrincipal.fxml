@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane fx:id="mainAP" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="mainAP" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
    <children>
       <AnchorPane fx:id="secondAP" layoutX="192.0" layoutY="38.0" prefHeight="449.0" prefWidth="482.0">
          <children>
-            <JFXButton fx:id="cerrarTimelineBT" layoutX="358.0" layoutY="401.0" onAction="#cerrarTimeline" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #3e85c3;" text="Cerrar" textFill="WHITE">
+            <JFXButton fx:id="cerrarTimelineBT" layoutX="358.0" layoutY="401.0" onAction="#cerrarTimeline" prefHeight="30.0" prefWidth="110.0" style="-fx-border-color: lightgray; -fx-border-radius: 5;" text="Cerrar" textFill="#3e85c3">
                <font>
                   <Font name="Segoe UI Bold" size="17.0" />
                </font>
