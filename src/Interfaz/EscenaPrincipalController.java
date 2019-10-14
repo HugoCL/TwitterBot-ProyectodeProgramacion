@@ -183,7 +183,7 @@ public class EscenaPrincipalController {
             }
             reloadTimeline = true;
             finCarga = true;
-            for (int i = 0; ejecutar && i < 300000;i++){
+            for (int i = 0; ejecutar && i < 120000 ;i++){
                 try {
                     Thread.sleep(1 );
                 } catch (InterruptedException e) {

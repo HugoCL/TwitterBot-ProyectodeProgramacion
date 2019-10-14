@@ -27,7 +27,6 @@ import java.util.StringTokenizer;
 public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
-    private static TextFlow mensaje = new TextFlow();
 
     public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
         GridPane pane = new GridPane();
@@ -95,8 +94,8 @@ public class CellVBox extends Thread{
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
 
-
-        destacarHashtag(item);
+        TextFlow mensaje = new TextFlow();
+        destacarHashtag(item,mensaje);
         //mensaje.setEditable(false);
         mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
         //mensaje.setWrapText(true);
@@ -133,24 +132,19 @@ public class CellVBox extends Thread{
         }
     }
 
-    private static void destacarHashtag(Tweet item){
+    private static void destacarHashtag(Tweet item, TextFlow mensaje){
         StringTokenizer Tok = new StringTokenizer (item.getMensaje());
-        Text token = new Text();
-        ArrayList<Text> texts = new ArrayList<>();
         while (Tok.hasMoreElements()) {
+            Text token = new Text();
             String palabra = Tok.nextToken();
-            if (palabra.equalsIgnoreCase("#seguir") || palabra.equalsIgnoreCase("#darlike") ||
-                    palabra.equalsIgnoreCase("#retwittear")){
-                token.setText(palabra);
-                token.setFill(Color.LIGHTBLUE);
-                texts.add(token);
+            token.setText(palabra+" ");
+            if (palabra.charAt(0) == '#' || palabra.charAt(0) == '@'){
+                token.setFill(Color.web("#3e85c3"));
             }
             else{
-                token.setText(palabra);
                 token.setFill(Color.BLACK);
-                texts.add(token);
             }
+            mensaje.getChildren().add(token);
         }
-        System.out.println(texts);
     }
 }
