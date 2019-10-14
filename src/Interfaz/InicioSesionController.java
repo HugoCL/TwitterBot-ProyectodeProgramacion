@@ -100,12 +100,15 @@ public class InicioSesionController {
                 TwitterBot.getInstance().setBOT(bot);
             }
         }
+
+
         ConfigurationBuilder cbTS = new ConfigurationBuilder();
         cbTS.setDebugEnabled(true);
         cbTS.setOAuthConsumerKey("y3rodATEKk9OopeZb3bJ49k7L");
         cbTS.setOAuthConsumerSecret("eCkLQgglSpvdD7nUiU6hoH2hoWYEWASAAMRWkfuTyqnhUxLfr0");
         cbTS.setOAuthAccessToken(bot.getAccessToken().getToken());
         cbTS.setOAuthAccessTokenSecret(bot.getAccessToken().getTokenSecret());
+        hashtagActions = new HashtagActions();
         TwitterStream twitterStream = new TwitterStreamFactory(cbTS.build()).getInstance();
         twitterStream.addListener(new StatusListener() {
             @Override
@@ -142,6 +145,7 @@ public class InicioSesionController {
                 e.printStackTrace();
             }
         }).filter(setFilterTS());
+
         //Transición de escenas
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }

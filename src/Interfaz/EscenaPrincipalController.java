@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,7 +16,6 @@ import twitter4j.TwitterException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class EscenaPrincipalController {
 
@@ -157,7 +155,7 @@ public class EscenaPrincipalController {
             aux = new ArrayList<>();
             listaTweets = new ArrayList<>();
             reloadTimeline = false;
-            aux = new VBox();
+            aux = new ArrayList<>();
             ArrayList<Tweet> listaTweets = new ArrayList<>();
             try {
                 listaTweets = feed.ObtenerTweets();

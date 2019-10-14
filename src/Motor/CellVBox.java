@@ -4,22 +4,21 @@ import Interfaz.EscenaPrincipalController;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import twitter4j.HashtagEntity;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class CellVBox extends Thread{
@@ -29,6 +28,7 @@ public class CellVBox extends Thread{
     public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
         GridPane pane = new GridPane();
         pane.setPrefWidth(scroll.getPrefWidth()-16);
+        pane.setAlignment(Pos.CENTER);
         JFXButton like_BT = new JFXButton();
         like_BT.setGraphic(new ImageView(new Image("Imagenes/heart.png", 20,20,false,true)));
         like_BT.getStyleClass().add("GrayHeart-buttton");
@@ -74,7 +74,7 @@ public class CellVBox extends Thread{
             String respuesta = new Messages().deleteTweet(item.getId());
             Dialog.getInstance().info(delete, respuesta, mainAP);
             if (respuesta.equals("Mensaje Eliminado"))
-                vbox.getChildren().remove(pane);
+                EscenaPrincipalController.getVbox().getChildren().remove(pane);
         });
 
 
@@ -88,7 +88,8 @@ public class CellVBox extends Thread{
         //mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
 
-        ImageView imagen = new ImageView(new Image(item.getImagen()));
+        Circle imagen = new Circle(15);
+        imagen.setFill(new ImagePattern(new Image(item.getImagen())));
         imagen.getStyleClass().add("imagen");
 
         Label separador = new Label();
@@ -99,8 +100,8 @@ public class CellVBox extends Thread{
         pane.add(separador, 0, 1, 3, 1);
         pane.add(mensaje, 0, 2, 3, 1);
         pane.add(separador2, 0, 3, 3, 1);
-        pane.add(retweet_BT, 0, 4);
-        pane.add(like_BT, 1, 4);
+        pane.add(like_BT, 0, 4);
+        pane.add(retweet_BT, 1, 4);
         pane.add(delete, 2, 4);
         GridPane.setHalignment(delete, HPos.RIGHT);
 
