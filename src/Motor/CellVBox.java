@@ -75,6 +75,7 @@ public class CellVBox extends Thread{
             Dialog.getInstance().info(delete, respuesta, mainAP);
             if (respuesta.equals("Mensaje Eliminado"))
                 EscenaPrincipalController.getVbox().getChildren().remove(pane);
+                EscenaPrincipalController.getVbox().getChildren().remove(pane);
         });
 
 

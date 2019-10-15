@@ -149,7 +149,8 @@ public class EscenaPrincipalController {
             reloadTimeline = false;
             aux = new ArrayList<>();
             try {
-                ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
+                listaTweets = feed.ObtenerTweets();
+                //hash.HashTagActions(listaTweets);
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
                     hash.HashTagActions(listaTweets);
@@ -159,7 +160,9 @@ public class EscenaPrincipalController {
                     }
                 }
                 else{
-                    ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
+                    serializados = AdminBackup.getInstance().deserializar();
+                    //hash.HashTagActions(serializados);
+                    isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
                             if (Messages.getTweet(serializados.get(i).getId()) != null)
