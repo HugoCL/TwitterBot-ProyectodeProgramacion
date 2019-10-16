@@ -84,9 +84,11 @@ public class EscenaPrincipalController {
     @FXML public void timeline() {
         if(reloadTimeline && !aux.isEmpty()){
             vbox = new VBox(4);
+            reloadTimeline = false;
             for (Node nodo: aux)
                 vbox.getChildren().addAll(nodo);
             aux.clear();
+            System.out.println("aux->"+aux.size());
         }
         if (vbox.getChildren().size() != 0){
             scroll.setContent(vbox);
