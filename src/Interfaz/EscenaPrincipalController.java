@@ -153,7 +153,7 @@ public class EscenaPrincipalController {
                 //hash.HashTagActions(listaTweets);
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
-                    hash.HashTagActions(listaTweets);
+                    //hash.HashTagActions(listaTweets);
                     AdminBackup.getInstance().serializar(listaTweets);
                     for (int i = 0; ejecutar && i < listaTweets.size(); i++){
                         aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
