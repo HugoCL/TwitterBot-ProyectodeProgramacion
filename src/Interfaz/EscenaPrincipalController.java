@@ -34,7 +34,6 @@ public class EscenaPrincipalController {
 
     @FXML private JFXSpinner spinner;
 
-
     @FXML
     private static VBox vbox;
     private static ArrayList<Node> aux;
@@ -145,12 +144,10 @@ public class EscenaPrincipalController {
         inicioCarga = true;
         vbox = new VBox(4);
         while(ejecutar){
-            aux = new ArrayList<>();
             reloadTimeline = false;
             aux = new ArrayList<>();
             try {
-                listaTweets = feed.ObtenerTweets();
-                //hash.HashTagActions(listaTweets);
+                ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
                     hash.HashTagActions(listaTweets);
@@ -160,9 +157,7 @@ public class EscenaPrincipalController {
                     }
                 }
                 else{
-                    serializados = AdminBackup.getInstance().deserializar();
-                    //hash.HashTagActions(serializados);
-                    isSerializado = true;
+                    ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
                             if (Messages.getTweet(serializados.get(i).getId()) != null)

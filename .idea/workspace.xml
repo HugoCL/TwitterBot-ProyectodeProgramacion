@@ -5,12 +5,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" afterPath="$PROJECT_DIR$/Sesion.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimeStamp#Actions.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStamp#Actions.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/CellVBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Feed.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Feed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Tweet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Tweet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/EscenaPrincipalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/CellVBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/CellVBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/HashtagActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/HashtagActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/Feed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Feed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/Tweet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Tweet.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,6 +159,8 @@
       <workItem from="1571070553850" duration="783000" />
       <workItem from="1571082469040" duration="901000" />
       <workItem from="1571083665267" duration="689000" />
+      <workItem from="1571105462616" duration="295000" />
+      <workItem from="1571177773535" duration="6774000" />
     </task>
     <servers />
   </component>
