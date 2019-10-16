@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -82,12 +83,20 @@ public class CellVBox extends Thread{
         Label name = new Label(item.getNombre());
         name.getStyleClass().add("label");
 
+        GridPane cuerpo = new GridPane();
+        if (item.getImagenes()[0] != null){
+            cuerpo.setPrefSize(scroll.getPrefWidth()-35, 150);
+        }else cuerpo.setPrefSize(scroll.getPrefWidth()-35, 70);
+
         TextFlow mensaje = new TextFlow();
         destacarHashtag(item,mensaje);
-        //mensaje.setEditable(false);
         mensaje.setPrefSize(scroll.getPrefWidth()-35, 70);
-        //mensaje.setWrapText(true);
         mensaje.getStyleClass().add("text");
+
+        HBox visualizador = new HBox();
+        obtenerImagenes(item,visualizador);
+        cuerpo.add(mensaje,0,0);
+        cuerpo.add(visualizador,0,1);
 
         Circle imagen = new Circle(15);
         imagen.setFill(new ImagePattern(new Image(item.getImagen())));
@@ -99,7 +108,7 @@ public class CellVBox extends Thread{
         pane.add(imagen, 0, 0);
         pane.add(name, 1, 0);
         pane.add(separador, 0, 1, 3, 1);
-        pane.add(mensaje, 0, 2, 3, 1);
+        pane.add(cuerpo, 0, 2, 3, 1);
         pane.add(separador2, 0, 3, 3, 1);
         pane.add(like_BT, 0, 4);
         pane.add(retweet_BT, 1, 4);
@@ -132,6 +141,34 @@ public class CellVBox extends Thread{
             else
                 token.setFill(Color.BLACK);
             mensaje.getChildren().add(token);
+        }
+    }
+    private static void obtenerImagenes(Tweet item, HBox visualizador){
+        if (item.getImagenes() != null){
+            ImageView img1 = new ImageView();
+            ImageView img2 = new ImageView();
+            ImageView img3 = new ImageView();
+            ImageView img4 = new ImageView();
+            if (item.getImagenes()[0] != null){
+                Image image1 = new Image(item.getImagenes()[0], 80,80,false, true);
+                img1.setImage(image1);
+            }
+            if (item.getImagenes()[1] != null){
+                Image image2 = new Image(item.getImagenes()[1], 80,80,false, true);
+                img2.setImage(image2);
+            }
+            if (item.getImagenes()[2] != null){
+                Image image3 = new Image(item.getImagenes()[2], 80,80,false, true);
+                img3.setImage(image3);
+            }
+            if (item.getImagenes()[3] != null){
+                Image image4 = new Image(item.getImagenes()[3], 80,80,false, true);
+                img4.setImage(image4);
+            }
+            visualizador.getChildren().add(img1);
+            visualizador.getChildren().add(img2);
+            visualizador.getChildren().add(img3);
+            visualizador.getChildren().add(img4);
         }
     }
 }

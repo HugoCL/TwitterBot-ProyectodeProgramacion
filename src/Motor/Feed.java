@@ -1,9 +1,6 @@
 package Motor;
 
-import twitter4j.Paging;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
+import twitter4j.*;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -26,8 +23,16 @@ public class Feed implements Serializable {
                 if (pageno == 2) tweets.clear();
 
                 for (Status status : twitter.getHomeTimeline(page)) {
+                    String[] imagenesTweet = new String[4];
+                    int i=0;
+                    if (status.getMediaEntities() != null){
+                        for (MediaEntity urlImagen : status.getMediaEntities()){
+                            imagenesTweet[i++] = urlImagen.getMediaURL();
+                        }
+                    }else imagenesTweet = new String[0];
+
                     tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(), status.getUser().getScreenName(),
-                            status.getUser().getMiniProfileImageURL()));
+                            status.getUser().getMiniProfileImageURL(),imagenesTweet));
                     if(tweets.size() >= 100) break;
                 }
                 if (tweets.size() == size || tweets.size() >= 100){
