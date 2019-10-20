@@ -88,8 +88,9 @@ public class FollowController {
 
         if (Usuario.getUser(usuario).isProtected()) {
             if (Usuario.getUser(usuario).isFollowRequestSent()){
-                seguirBT.setText("Solicitud Enviada");
                 seguirBT.setDisable(true);
+                if (seguirBT.getText().compareTo("Follow") == 0) seguirBT.setText("Solicitud Enviada");
+                else seguirBT.setDisable(false);
             }
             isProtected.setVisible(true);
         }
