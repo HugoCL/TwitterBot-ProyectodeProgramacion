@@ -1,11 +1,9 @@
 package Motor;
 
-import twitter4j.IDs;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.User;
+import twitter4j.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /***
  * Clase que se encarga de las funcionalidades referentes a los usuarios
@@ -66,6 +64,24 @@ public class Usuario {
             return twitter.showUser(name).getId();
         } catch (TwitterException e) {
             return -1;
+        }
+    }
+
+    public static ResponseList<User> searchUsers(String name) {
+        try {
+            return twitter.searchUsers(name, 1);
+        } catch (TwitterException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean isFollowing(String name) {
+        try {
+            return twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget();
+        } catch (TwitterException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

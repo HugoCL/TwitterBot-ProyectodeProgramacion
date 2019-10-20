@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import twitter4j.TwitterException;
+import twitter4j.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -166,7 +167,7 @@ public class EscenaPrincipalController {
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
                             if (Messages.getTweet(serializados.get(i).getId()) != null)
-                                aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
+                                aux.add(CellVBox.crearGridPane(serializados.get(i), mainAP, scroll));
                         }
                     }
                 }
