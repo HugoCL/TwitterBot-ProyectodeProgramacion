@@ -40,6 +40,7 @@ public class Usuario {
         try {
             if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
                 twitter.createFriendship(name);
+                if (twitter.showUser(name).isProtected()) return "Espere que se acepte solicitud";
                 return "Se sigue correctamente a @"+name;
             }
             else  {
