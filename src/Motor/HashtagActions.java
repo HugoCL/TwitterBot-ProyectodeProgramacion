@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HashtagActions {
 
@@ -119,9 +121,8 @@ public class HashtagActions {
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No se encontró el archivo serializado");
         }
-        System.out.println("PASE POR EL ANALISIS, "+status.getText());
-        if (fechaAnalisis == null || fechaAnalisis.compareTo(status.getCreatedAt()) < 0){
-            System.out.println("Me voy a analizar, "+status.getText());
+
+        if ((fechaAnalisis == null || fechaAnalisis.compareTo(status.getCreatedAt()) < 0)){
             int[] actions = {0,0,0};
             try{
                 for (HashtagEntity hashtagEntity : twitter.showStatus(status.getId()).getHashtagEntities()) {
@@ -150,18 +151,48 @@ public class HashtagActions {
                             }
                         }
                     } else if (hashtagEntity.getText().equalsIgnoreCase("darlike")) {
+                        boolean tweetIDDisponible = false;
+                        System.out.println("No entro aún al if");
+                        Pattern pattern = Pattern.compile("(?i)#DarLike\\s[0-9]+");
+                        Matcher matcher = pattern.matcher(status.getText());
+                        String stringParsed = "TEXTEREGEXTESTING";
+                        while(matcher.find()){
+                            stringParsed = matcher.group(0);
+                        }
+                        if(status.getText().contains(stringParsed)){
+                            tweetIDDisponible = true;
+                        }
                         try {
-                            if (!twitter.showStatus(status.getId()).isFavorited()) {
-                                twitter.createFavorite(status.getId());
-                                actions[1] = 1;
+                            if (!tweetIDDisponible){
+                                if (!twitter.showStatus(status.getId()).isFavorited()) {
+                                    twitter.createFavorite(status.getId());
+                                    actions[1] = 1;
+                                }
+                                else {
+                                    actions[1] = -2;
+                                }
                             }
-                            else {
-                                actions[1] = -2;
+                            else{
+                                Pattern pattern2 = Pattern.compile("\\d+");
+                                Matcher matcher2 = pattern2.matcher(stringParsed);
+                                String IDTarget = "9999999999999999";
+                                while(matcher2.find()){
+                                    IDTarget = matcher2.group(0);
+                                    System.out.println(IDTarget);
+                                }
+                                if (!twitter.showStatus(Long.parseLong(IDTarget)).isFavorited()) {
+                                    twitter.createFavorite(Long.parseLong(IDTarget));
+                                    System.out.println("LE DI LIKE");
+                                    actions[1] = 1;
+                                }
+                                else {
+                                    actions[1] = -2;
+                                }
                             }
                         } catch (TwitterException e) {
                             actions[1] = -1;
                         }
-                    } else if (hashtagEntity.getText().equalsIgnoreCase("retwittear")) {
+                    } else if (hashtagEntity.getText().equalsIgnoreCase("difundir")) {
                         try {
                             if (!twitter.showStatus(status.getId()).isRetweetedByMe()) {
                                 twitter.retweetStatus(status.getId());
@@ -198,7 +229,7 @@ public class HashtagActions {
                     actionReply = actionReply.concat(currentReply);
                 }
                 else {
-                    currentReply = "Cuando intentamos seguirte, nos encontramos con que no existes (UPS!)";
+                    currentReply = "Cuando intentamos seguirte, nos encontramos con que la cuenta no existe (UPS!)";
                     actionReply = actionReply.concat(currentReply);
                 }
             }
@@ -258,10 +289,10 @@ public class HashtagActions {
                     actionReply = actionReply.concat(currentReply);
                 }
             }
-            if (!actionReply.equals("")){
+            if (!actionReply.equals("") && (actions[0] != 0 || actions[1] != 0 || actions[2] != 0)){
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm:ss");
                 Date date2 = new Date();
-                actionReply = actionReply.concat(" "+dateFormat.format(date2));
+                actionReply = actionReply.concat(". Acción realizada con fecha: "+dateFormat.format(date2));
                 StatusUpdate statusUpdate = new StatusUpdate(actionReply);
                 statusUpdate.setInReplyToStatusId(status.getId());
                 twitter.updateStatus(statusUpdate);
@@ -269,7 +300,7 @@ public class HashtagActions {
                 try {
                     FileOutputStream fileOutputStream = new FileOutputStream("TimeStamp#Actions.out");
                     ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                    objectOutputStream.writeObject(date2);
+                    objectOutputStream.writeObject(fechaAnalisis2);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
