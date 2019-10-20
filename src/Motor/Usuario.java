@@ -40,23 +40,16 @@ public class Usuario {
         try {
             if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
                 twitter.createFriendship(name);
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
-                    return "Espere respuesta de @"+name;
                 return "Se sigue correctamente a @"+name;
             }
-            else if(twitter.getScreenName().equals(name))
-                return "ERROR: No puedes seguirte a ti mismo";
-            else  return "ERROR: Ya sigue al usuario: @"+name;
+            else  {
+                twitter.destroyFriendship(name);
+                return "Dejas de seguir correctamente al usuario: @"+name;
+            }
 
         } catch (TwitterException e) {
-            try {
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
-                    return "Espere respuesta de @"+name;
-            } catch (TwitterException ex) {
-                return "No se encuentra al usuario: @"+name;
-            }
+            return "No se encuentra al usuario: @"+name;
         }
-        return "";
     }
 
     public static long getIDUsuario(String name) {

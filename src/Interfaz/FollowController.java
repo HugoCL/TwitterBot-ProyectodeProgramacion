@@ -22,7 +22,6 @@ import java.io.IOException;
 
 public class FollowController {
 
-    @FXML private JFXButton followBT;
     @FXML private JFXButton closeBT;
     @FXML private JFXTextField nicknameTF;
 
@@ -45,7 +44,7 @@ public class FollowController {
         users_OL = FXCollections.observableArrayList();
         if (nicknameTF.getText().isEmpty()){
             System.out.println("Ingrese algún nombre de usuario.");
-            Dialog.getInstance().info(followBT,"Ingrese algún nombre de usuario.",followAP);
+            Dialog.getInstance().info(seguirBT,"Ingrese algún nombre de usuario.",followAP);
         }
         else {
             ResponseList<User> users = Usuario.searchUsers(nicknameTF.getText());
@@ -59,7 +58,7 @@ public class FollowController {
                 }
                 users_LV.setItems(users_OL);
             } else
-                Dialog.getInstance().info(followBT,"No se encontro ningun usuario",followAP);
+                Dialog.getInstance().info(seguirBT,"No se encontro ningun usuario",followAP);
         }
     }
 
@@ -70,42 +69,46 @@ public class FollowController {
             circle.setFill(new ImagePattern(new Image(Usuario.getUser(usuario.getText()).getOriginalProfileImageURL())));
             seguirBT.setDisable(false);
             seguirBT.setVisible(true);
-            try {
-                if (new Usuario().getNombreUsuario().compareTo(usuario.getText()) == 0)
-                    seguirBT.setVisible(false);
-                else if (Usuario.isFollowing(usuario.getText()))
-                    seguirBT.setText("UnFollow");
-                else
-                    seguirBT.setText("Follow");
-            } catch (TwitterException e) {
-                e.printStackTrace();
-            }
-
-            if (Usuario.getUser(usuario.getText()).isProtected()) {
-                if (Usuario.getUser(usuario.getText()).isFollowRequestSent()){
-                    seguirBT.setText("Solicitud Enviada");
-                    seguirBT.setDisable(true);
-                }
-                isProtected.setVisible(true);
-            }
-            else isProtected.setVisible(false);
-            screenName.setText("@"+usuario.getText());
-            userName.setText(Usuario.getUser(usuario.getText()).getName());
+            cambioTextoButton(usuario.getText());
         } else
-            Dialog.getInstance().info(followBT,"No se ha seleccionado usuario",followAP);
+            Dialog.getInstance().info(seguirBT,"No se ha seleccionado usuario",followAP);
+    }
+
+    private void cambioTextoButton(String usuario) {
+        try {
+            if (new Usuario().getNombreUsuario().compareTo(usuario) == 0)
+                seguirBT.setVisible(false);
+            else if (Usuario.isFollowing(usuario))
+                seguirBT.setText("UnFollow");
+            else
+                seguirBT.setText("Follow");
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
+
+        if (Usuario.getUser(usuario).isProtected()) {
+            if (Usuario.getUser(usuario).isFollowRequestSent()){
+                seguirBT.setText("Solicitud Enviada");
+                seguirBT.setDisable(true);
+            }
+            isProtected.setVisible(true);
+        }
+        else isProtected.setVisible(false);
+        screenName.setText("@"+usuario);
+        userName.setText(Usuario.getUser(usuario).getName());
     }
 
     public void seguir(){
         String respuesta;
-        if (nicknameTF.getText().isEmpty()){
+        if (screenName.getText().isEmpty()){
             System.out.println("Ingrese algún nombre de usuario.");
-            Dialog.getInstance().info(followBT,"Ingrese algún nombre de usuario.",followAP);
+            Dialog.getInstance().info(seguirBT,"Ingrese algún nombre de usuario.",followAP);
         }
         else {
             Usuario usuario = new Usuario();
-            respuesta = usuario.follow(nicknameTF.getText());
-            Dialog.getInstance().info(followBT,respuesta,followAP);
-            nicknameTF.setText("");
+            respuesta = usuario.follow(screenName.getText().substring(1));
+            Dialog.getInstance().info(seguirBT,respuesta,followAP);
+            cambioTextoButton(screenName.getText().substring(1));
         }
     }
     public void cerrarVentana() throws IOException {
