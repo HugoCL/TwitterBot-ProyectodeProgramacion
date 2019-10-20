@@ -21,10 +21,12 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 public class CellVBox extends Thread{
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
     private static Feed feed = new Feed();
+    private static Pattern patron = Pattern.compile("^[#|@][^#@]+");
 
     public static GridPane crearGridPane(Tweet item, AnchorPane mainAP, ScrollPane scroll) {
         GridPane pane = new GridPane();
@@ -136,8 +138,9 @@ public class CellVBox extends Thread{
             Text token = new Text();
             String palabra = Tok.nextToken();
             token.setText(palabra+" ");
-            if ((palabra.charAt(0) == '#' && palabra.length() > 1) || (palabra.charAt(0) == '@' && Usuario.getUser(palabra.substring(1)) != null))
-                token.setFill(Color.web("#3e85c3"));
+            if (patron.matcher(token.getText()).matches())
+                if (palabra.charAt(0) == '#' || (palabra.charAt(0) == '@' && Usuario.getUser(palabra.substring(1)) != null))
+                    token.setFill(Color.web("#3e85c3"));
             else
                 token.setFill(Color.BLACK);
             mensaje.getChildren().add(token);
