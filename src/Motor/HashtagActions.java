@@ -128,31 +128,73 @@ public class HashtagActions {
                 for (HashtagEntity hashtagEntity : twitter.showStatus(status.getId()).getHashtagEntities()) {
                     if (hashtagEntity.getText().equalsIgnoreCase("seguir")) {
                         String name = status.getUser().getScreenName();
-                        try {
-                            if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)) {
-                                twitter.createFriendship(name);
-                                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()) {
-                                    actions[0] = 2;
-                                } else {
-                                    actions[0] = 1;
-                                }
-                            } else if (twitter.getScreenName().equals(name)) {
-                                actions[0] = -1;
-                            } else {
-                                actions[0] = -2;
-                            }
-                        } catch (TwitterException e) {
+                        boolean tweetIDDisponible = false;
+                        Pattern pattern = Pattern.compile("(?i)#Seguir\\s@([0-9]|[A-Z])+");
+                        Matcher matcher = pattern.matcher(status.getText());
+                        String stringParsed = "TEXTEREGEXTESTING";
+                        while(matcher.find()){
+                            stringParsed = matcher.group(0);
+                        }
+                        if(status.getText().contains(stringParsed)){
+                            tweetIDDisponible = true;
+                        }
+                        if (!tweetIDDisponible){
                             try {
-                                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()) {
-                                    actions[0] = 2;
+                                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)) {
+                                    twitter.createFriendship(name);
+                                    if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()) {
+                                        actions[0] = 2;
+                                    } else {
+                                        actions[0] = 1;
+                                    }
+                                } else if (twitter.getScreenName().equals(name)) {
+                                    actions[0] = -1;
+                                } else {
+                                    actions[0] = -2;
                                 }
-                            } catch (TwitterException ex) {
-                                actions[0] = -3;
+                            } catch (TwitterException e) {
+                                try {
+                                    if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget()) {
+                                        actions[0] = 2;
+                                    }
+                                } catch (TwitterException ex) {
+                                    actions[0] = -3;
+                                }
+                            }
+                        }
+                        else{
+                            Pattern pattern2 = Pattern.compile("(?i)([A-Z]|[0-9])+");
+                            Matcher matcher2 = pattern2.matcher(stringParsed);
+                            String userTarget = "ELUSUARIOCALIFRAGILISTICOESPIALIDOSO";
+                            while(matcher2.find()){
+                                userTarget = matcher2.group(0);
+                                System.out.println(userTarget);
+                            }
+                            try {
+                                if (!twitter.showFriendship(twitter.getScreenName(), userTarget).isSourceFollowingTarget() && !twitter.getScreenName().equals(userTarget)) {
+                                    twitter.createFriendship(userTarget);
+                                    if (!twitter.showFriendship(twitter.getScreenName(), userTarget).isSourceFollowingTarget()) {
+                                        actions[0] = 2;
+                                    } else {
+                                        actions[0] = 1;
+                                    }
+                                } else if (twitter.getScreenName().equals(userTarget)) {
+                                    actions[0] = -1;
+                                } else {
+                                    actions[0] = -2;
+                                }
+                            } catch (TwitterException e) {
+                                try {
+                                    if (!twitter.showFriendship(twitter.getScreenName(), userTarget).isSourceFollowingTarget()) {
+                                        actions[0] = 2;
+                                    }
+                                } catch (TwitterException ex) {
+                                    actions[0] = -3;
+                                }
                             }
                         }
                     } else if (hashtagEntity.getText().equalsIgnoreCase("darlike")) {
                         boolean tweetIDDisponible = false;
-                        System.out.println("No entro aún al if");
                         Pattern pattern = Pattern.compile("(?i)#DarLike\\s[0-9]+");
                         Matcher matcher = pattern.matcher(status.getText());
                         String stringParsed = "TEXTEREGEXTESTING";
@@ -182,7 +224,6 @@ public class HashtagActions {
                                 }
                                 if (!twitter.showStatus(Long.parseLong(IDTarget)).isFavorited()) {
                                     twitter.createFavorite(Long.parseLong(IDTarget));
-                                    System.out.println("LE DI LIKE");
                                     actions[1] = 1;
                                 }
                                 else {
@@ -193,15 +234,46 @@ public class HashtagActions {
                             actions[1] = -1;
                         }
                     } else if (hashtagEntity.getText().equalsIgnoreCase("difundir")) {
-                        try {
-                            if (!twitter.showStatus(status.getId()).isRetweetedByMe()) {
-                                twitter.retweetStatus(status.getId());
-                                actions[2] = 1;
-                            } else {
-                                actions[2] = -2;
+                        boolean tweetIDDisponible = false;
+                        Pattern pattern = Pattern.compile("(?i)#difundir\\s[0-9]+");
+                        Matcher matcher = pattern.matcher(status.getText());
+                        String stringParsed = "TEXTEREGEXTESTING";
+                        while(matcher.find()){
+                            stringParsed = matcher.group(0);
+                        }
+                        if(status.getText().contains(stringParsed)){
+                            tweetIDDisponible = true;
+                        }
+                        if (!tweetIDDisponible){
+                            try {
+                                if (!twitter.showStatus(status.getId()).isRetweetedByMe()) {
+                                    twitter.retweetStatus(status.getId());
+                                    actions[2] = 1;
+                                } else {
+                                    actions[2] = -2;
+                                }
+                            } catch (TwitterException e) {
+                                actions[2] = -1;
                             }
-                        } catch (TwitterException e) {
-                            actions[2] = -1;
+                        }
+                        else{
+                            Pattern pattern2 = Pattern.compile("\\d+");
+                            Matcher matcher2 = pattern2.matcher(stringParsed);
+                            String IDTarget = "9999999999999";
+                            while(matcher2.find()){
+                                IDTarget = matcher2.group(0);
+                                System.out.println(IDTarget);
+                            }
+                            try {
+                                if (!twitter.showStatus(Long.parseLong(IDTarget)).isRetweetedByMe()) {
+                                    twitter.retweetStatus(Long.parseLong(IDTarget));
+                                    actions[2] = 1;
+                                } else {
+                                    actions[2] = -2;
+                                }
+                            } catch (TwitterException e) {
+                                actions[2] = -1;
+                            }
                         }
                     }
                 }

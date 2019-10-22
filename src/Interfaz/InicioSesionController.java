@@ -16,8 +16,11 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.ObjectInputStream;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class InicioSesionController {
 
@@ -104,6 +107,45 @@ public class InicioSesionController {
         cbTS.setOAuthAccessToken(bot.getAccessToken().getToken());
         cbTS.setOAuthAccessTokenSecret(bot.getAccessToken().getTokenSecret());
         hashtagActions = new HashtagActions();
+        Date fechaAnalisis = null;
+        try {
+            FileInputStream fileInputStream = new FileInputStream("TimeStamp#Actions.out");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            fechaAnalisis = (Date) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("No se encontró el archivo serializado");
+        }
+
+        Query query = new Query("@"+bot.getTwitter().getScreenName());
+        if (fechaAnalisis == null) {
+            Calendar fecha = new GregorianCalendar();
+            fecha.add(Calendar.DAY_OF_MONTH, -14);
+            int anio = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            System.out.println(anio+"-"+(mes+1)+"-"+dia);
+            query.setSince(anio+"-"+(mes+1)+"-"+(dia));
+        } else {
+            System.out.println(fechaAnalisis.toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println("--------------------------");
+            System.out.println(sdf.format(fechaAnalisis));
+            query.setSince(sdf.format(fechaAnalisis));
+        }
+
+        QueryResult result;
+        Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
+        int count = 0;
+        do {
+            result = twitter.search(query);
+            List<Status> tweets = result.getTweets();
+
+            for (int i = 0;count <= 300 && i < tweets.size();i++) {
+                hashtagActions.analizarHashtagActions(tweets.get(i));
+                count++;
+            }
+        } while (count <= 300 && (query = result.nextQuery()) != null);
+
         TwitterStream twitterStream = new TwitterStreamFactory(cbTS.build()).getInstance();
         twitterStream.addListener(new StatusListener() {
             @Override

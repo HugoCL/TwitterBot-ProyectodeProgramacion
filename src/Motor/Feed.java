@@ -94,4 +94,12 @@ public class Feed implements Serializable {
             return "ERROR: No se encontro Tweet";
         }
     }
+
+    public Status showStatus(long id) {
+        try {
+            return twitter.showStatus(id);
+        } catch (TwitterException e) {
+            return null;
+        }
+    }
 }
