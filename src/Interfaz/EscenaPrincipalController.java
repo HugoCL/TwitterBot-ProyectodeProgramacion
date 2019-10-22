@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import twitter4j.Status;
 import twitter4j.TwitterException;
 
 import java.io.IOException;
