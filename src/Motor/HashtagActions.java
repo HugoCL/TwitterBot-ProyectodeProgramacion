@@ -152,7 +152,6 @@ public class HashtagActions {
                         }
                     } else if (hashtagEntity.getText().equalsIgnoreCase("darlike")) {
                         boolean tweetIDDisponible = false;
-                        System.out.println("No entro aún al if");
                         Pattern pattern = Pattern.compile("(?i)#DarLike\\s[0-9]+");
                         Matcher matcher = pattern.matcher(status.getText());
                         String stringParsed = "TEXTEREGEXTESTING";
@@ -182,7 +181,6 @@ public class HashtagActions {
                                 }
                                 if (!twitter.showStatus(Long.parseLong(IDTarget)).isFavorited()) {
                                     twitter.createFavorite(Long.parseLong(IDTarget));
-                                    System.out.println("LE DI LIKE");
                                     actions[1] = 1;
                                 }
                                 else {
@@ -193,15 +191,46 @@ public class HashtagActions {
                             actions[1] = -1;
                         }
                     } else if (hashtagEntity.getText().equalsIgnoreCase("difundir")) {
-                        try {
-                            if (!twitter.showStatus(status.getId()).isRetweetedByMe()) {
-                                twitter.retweetStatus(status.getId());
-                                actions[2] = 1;
-                            } else {
-                                actions[2] = -2;
+                        boolean tweetIDDisponible = false;
+                        Pattern pattern = Pattern.compile("(?i)#difundir\\s[0-9]+");
+                        Matcher matcher = pattern.matcher(status.getText());
+                        String stringParsed = "TEXTEREGEXTESTING";
+                        while(matcher.find()){
+                            stringParsed = matcher.group(0);
+                        }
+                        if(status.getText().contains(stringParsed)){
+                            tweetIDDisponible = true;
+                        }
+                        if (!tweetIDDisponible){
+                            try {
+                                if (!twitter.showStatus(status.getId()).isRetweetedByMe()) {
+                                    twitter.retweetStatus(status.getId());
+                                    actions[2] = 1;
+                                } else {
+                                    actions[2] = -2;
+                                }
+                            } catch (TwitterException e) {
+                                actions[2] = -1;
                             }
-                        } catch (TwitterException e) {
-                            actions[2] = -1;
+                        }
+                        else{
+                            Pattern pattern2 = Pattern.compile("\\d+");
+                            Matcher matcher2 = pattern2.matcher(stringParsed);
+                            String IDTarget = "9999999999999";
+                            while(matcher2.find()){
+                                IDTarget = matcher2.group(0);
+                                System.out.println(IDTarget);
+                            }
+                            try {
+                                if (!twitter.showStatus(Long.parseLong(IDTarget)).isRetweetedByMe()) {
+                                    twitter.retweetStatus(Long.parseLong(IDTarget));
+                                    actions[2] = 1;
+                                } else {
+                                    actions[2] = -2;
+                                }
+                            } catch (TwitterException e) {
+                                actions[2] = -1;
+                            }
                         }
                     }
                 }

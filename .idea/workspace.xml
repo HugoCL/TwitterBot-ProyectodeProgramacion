@@ -4,10 +4,7 @@
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sesion.out" beforeDir="false" afterPath="$PROJECT_DIR$/Sesion.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TimeStamp#Actions.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStamp#Actions.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/EscenaPrincipalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/HashtagActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/HashtagActions.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -157,6 +154,7 @@
       <workItem from="1571105462616" duration="295000" />
       <workItem from="1571177773535" duration="6774000" />
       <workItem from="1571195110908" duration="1519000" />
+      <workItem from="1571592319678" duration="30000" />
     </task>
     <servers />
   </component>
@@ -209,10 +207,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1570642040299" />
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1570708099529">
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1571592345016">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1570708099529" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1571592345016" />
     <state x="65" y="0" key="new project wizard" timestamp="1570708149492">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
