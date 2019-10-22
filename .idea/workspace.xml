@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TimeStamp#Actions.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStamp#Actions.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/HashtagActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/HashtagActions.java" afterDir="false" />
     </list>
@@ -40,7 +39,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last.edited.regexp" value="#darlike 214" />
+    <property name="last.edited.regexp" value="@Hola" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
