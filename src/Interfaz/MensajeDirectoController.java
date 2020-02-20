@@ -132,18 +132,21 @@ public class MensajeDirectoController {
         chatBox.setMinWidth(430);
         container.setContent(chatBox);
         container.setVvalue(1);
-        Chat chat = md.getChats().get(indice);
-        ArrayList<DirectMessage> mensajes = chat.getConversacion();
-        for (int i = mensajes.size()-1; i >= 0; i--) {
-            HBox hbox;
-            Label espacio = new Label();
-            espacio.setMinWidth(100);
-            Label aux = makeLabel(mensajes.get(i).getText());
-            if (chat.getUser() == mensajes.get(i).getSenderId()) { aux.setAlignment(Pos.CENTER_LEFT); hbox = new HBox(5, aux, espacio); hbox.setAlignment(Pos.CENTER_LEFT);}
-            else            { aux.setAlignment(Pos.CENTER_RIGHT); hbox = new HBox(5, espacio, aux); hbox.setAlignment(Pos.CENTER_RIGHT);}
-            messages.add(hbox);
-        }
-        chatBox.getChildren().addAll(messages);
+        if (!md.getChats().isEmpty()) {
+            Chat chat = md.getChats().get(indice);
+            ArrayList<DirectMessage> mensajes = chat.getConversacion();
+            for (int i = mensajes.size()-1; i >= 0; i--) {
+                HBox hbox;
+                Label espacio = new Label();
+                espacio.setMinWidth(100);
+                Label aux = makeLabel(mensajes.get(i).getText());
+                if (chat.getUser() == mensajes.get(i).getSenderId()) { aux.setAlignment(Pos.CENTER_LEFT); hbox = new HBox(5, aux, espacio); hbox.setAlignment(Pos.CENTER_LEFT);}
+                else            { aux.setAlignment(Pos.CENTER_RIGHT); hbox = new HBox(5, espacio, aux); hbox.setAlignment(Pos.CENTER_RIGHT);}
+                messages.add(hbox);
+            }
+            chatBox.getChildren().addAll(messages);
+        } else
+            System.out.println("No hay chat");
     }
 
     private Label makeLabel(String i) {
