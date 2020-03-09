@@ -142,7 +142,6 @@ public class EscenaPrincipalController {
     }
     private void cargarScroll() {
         System.out.println("inicio");
-        HashtagActions hash = new HashtagActions();
         spinner.setVisible(true);
         timelineBT.setDisable(true);
         inicioCarga = true;
@@ -152,19 +151,17 @@ public class EscenaPrincipalController {
             aux = new ArrayList<>();
             try {
                 ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
-                //hash.HashTagActions(listaTweets);
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
-                    //hash.HashTagActions(listaTweets);
                     AdminBackup.getInstance().serializar(listaTweets);
                     for (int i = 0; ejecutar && i < listaTweets.size(); i++){
+                        System.out.println("i->"+i);
+                        Messages.isSpam(listaTweets.get(i).getId());
                         aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
                     }
                 }
                 else{
                     ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
-                    //hash.HashTagActions(serializados);
-                    boolean isSerializado = true;
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
                             if (Messages.getTweet(serializados.get(i).getId()) != null)
