@@ -118,7 +118,6 @@ public class Messages {
                 FileInputStream fileInputStream = new FileInputStream("TimeStampSpam.out");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 fechaAnalisis = (Date) objectInputStream.readObject();
-                System.out.println("existe");
             }
 
             if (fechaAnalisis == null){
@@ -135,11 +134,7 @@ public class Messages {
             // Lectura del fichero
             String linea;
             Status tweet = twitter.showStatus(id);
-            System.out.println("Status no match->"+tweet.getText());
-            System.out.println("fecha->" + tweet.getCreatedAt());
-            System.out.println("fechaAnalisis->"+fechaAnalisis);
             while((linea=br.readLine()) != null && tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
-                //System.out.println("Linea->"+ linea);
                 Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                 Matcher matcher = pattern.matcher(tweet.getText());
                 if(matcher.find()){

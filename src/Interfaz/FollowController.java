@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -23,6 +24,7 @@ import java.io.IOException;
 public class FollowController {
 
     @FXML private JFXButton closeBT;
+    @FXML private JFXButton buscarBT;
     @FXML private JFXTextField nicknameTF;
 
     @FXML private AnchorPane followAP;
@@ -37,6 +39,7 @@ public class FollowController {
     @FXML private AnchorPane userAP;
 
     public void initialize(){
+        buscarBT.setGraphic(new ImageView(new Image("Imagenes/lupa.png", 20,20,false,true)));
         userAP.setVisible(false);
     }
 

@@ -155,7 +155,6 @@ public class EscenaPrincipalController {
                 if (listaTweets.size() != 0){
                     AdminBackup.getInstance().serializar(listaTweets);
                     for (int i = 0; ejecutar && i < listaTweets.size(); i++){
-                        System.out.println("i->"+i);
                         Messages.isSpam(listaTweets.get(i).getId());
                         aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
                     }
