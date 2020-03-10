@@ -34,6 +34,7 @@ public class MensajeDirectoController {
     private VBox chatBox;
 
     @FXML private JFXButton regresarBT;
+    @FXML private JFXButton mostrarBT;
     @FXML private JFXListView<Label> followersLV;
     @FXML private JFXTextArea messageTA;
     @FXML private JFXTextField seguidorTA;
@@ -146,7 +147,7 @@ public class MensajeDirectoController {
             }
             chatBox.getChildren().addAll(messages);
         } else
-            System.out.println("No hay chat");
+            Dialog.getInstance().info(mostrarBT,"No hay chat reciente",directMessageAP);
     }
 
     private Label makeLabel(String i) {
@@ -167,7 +168,7 @@ public class MensajeDirectoController {
             makeChat(i);
             return;
         }
-        System.out.println("No existe usuario");
+        Dialog.getInstance().info(mostrarBT,"Seleccione algún usuario",directMessageAP);
     }
 
     @FXML public void regresar() throws IOException {

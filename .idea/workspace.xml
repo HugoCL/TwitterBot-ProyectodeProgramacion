@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TimeStamp#Actions.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStamp#Actions.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/HashtagActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/HashtagActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Follow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/Follow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirecto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirecto.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/Follow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Follow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/MensajeDirecto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/MensajeDirecto.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -154,6 +158,7 @@
       <workItem from="1571177773535" duration="6774000" />
       <workItem from="1571195110908" duration="1519000" />
       <workItem from="1571592319678" duration="30000" />
+      <workItem from="1583800352974" duration="4234000" />
     </task>
     <servers />
   </component>
