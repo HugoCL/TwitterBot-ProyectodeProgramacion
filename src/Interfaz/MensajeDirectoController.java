@@ -133,7 +133,9 @@ public class MensajeDirectoController {
         chatBox.setMinWidth(430);
         container.setContent(chatBox);
         container.setVvalue(1);
-        if (!md.getChats().isEmpty()) {
+        if (!md.getChats().isEmpty() && indice != -1) {
+            System.out.println("Indice dado->"+indice);
+            System.out.println("Maximo indice->"+md.getChats().size());
             Chat chat = md.getChats().get(indice);
             ArrayList<DirectMessage> mensajes = chat.getConversacion();
             for (int i = mensajes.size()-1; i >= 0; i--) {
