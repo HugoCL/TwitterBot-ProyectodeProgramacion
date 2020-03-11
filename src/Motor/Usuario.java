@@ -1,11 +1,9 @@
 package Motor;
 
-import twitter4j.IDs;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.User;
+import twitter4j.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /***
  * Clase que se encarga de las funcionalidades referentes a los usuarios
@@ -42,23 +40,17 @@ public class Usuario {
         try {
             if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget() && !twitter.getScreenName().equals(name)){
                 twitter.createFriendship(name);
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
-                    return "Espere respuesta de @"+name;
+                if (twitter.showUser(name).isProtected()) return "Espere que se acepte solicitud";
                 return "Se sigue correctamente a @"+name;
             }
-            else if(twitter.getScreenName().equals(name))
-                return "ERROR: No puedes seguirte a ti mismo";
-            else  return "ERROR: Ya sigue al usuario: @"+name;
+            else  {
+                twitter.destroyFriendship(name);
+                return "Dejas de seguir correctamente al usuario: @"+name;
+            }
 
         } catch (TwitterException e) {
-            try {
-                if (!twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget())
-                    return "Espere respuesta de @"+name;
-            } catch (TwitterException ex) {
-                return "No se encuentra al usuario: @"+name;
-            }
+            return "No se encuentra al usuario: @"+name;
         }
-        return "";
     }
 
     public static long getIDUsuario(String name) {
@@ -66,6 +58,24 @@ public class Usuario {
             return twitter.showUser(name).getId();
         } catch (TwitterException e) {
             return -1;
+        }
+    }
+
+    public static ResponseList<User> searchUsers(String name) {
+        try {
+            return twitter.searchUsers(name, 1);
+        } catch (TwitterException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean isFollowing(String name) {
+        try {
+            return twitter.showFriendship(twitter.getScreenName(), name).isSourceFollowingTarget();
+        } catch (TwitterException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

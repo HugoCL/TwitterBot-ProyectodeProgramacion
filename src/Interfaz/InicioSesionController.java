@@ -42,8 +42,6 @@ public class InicioSesionController {
     public void initialize() throws TwitterException {
         cerrarBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",25,25,false, true)));
         copyBT.setGraphic(new ImageView(new Image("/Imagenes/copy.png",35,35,false, true)));
-
-
         AdminSesion adm = AdminSesion.getInstance();
         pinPF.setText("");
         TwitterBot botSerializado = adm.desSerializar();
@@ -99,7 +97,6 @@ public class InicioSesionController {
             }
         }
 
-
         ConfigurationBuilder cbTS = new ConfigurationBuilder();
         cbTS.setDebugEnabled(true);
         cbTS.setOAuthConsumerKey("y3rodATEKk9OopeZb3bJ49k7L");
@@ -127,7 +124,7 @@ public class InicioSesionController {
             query.setSince(anio+"-"+(mes+1)+"-"+(dia));
         } else {
             System.out.println(fechaAnalisis.toString());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             System.out.println("--------------------------");
             System.out.println(sdf.format(fechaAnalisis));
             query.setSince(sdf.format(fechaAnalisis));
@@ -142,6 +139,7 @@ public class InicioSesionController {
 
             for (int i = 0;count <= 300 && i < tweets.size();i++) {
                 hashtagActions.analizarHashtagActions(tweets.get(i));
+                System.out.println(tweets.get(i).getText());
                 count++;
             }
         } while (count <= 300 && (query = result.nextQuery()) != null);

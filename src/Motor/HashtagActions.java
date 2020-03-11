@@ -1,7 +1,6 @@
 package Motor;
 
 import twitter4j.*;
-
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -335,7 +334,7 @@ public class HashtagActions {
             }
             continuedAction = false;
             if (actions[2] != 0){
-                if (actions[1] != 0){
+                if (actions[1] != 0 || actions[0] != 0){
                     actionReply = actionReply.concat(" y además");
                     continuedAction = true;
                 }
@@ -379,5 +378,9 @@ public class HashtagActions {
             }
         }
 
+    }
+
+    public void analizarHashtagActionsMD (){
+        MDs = MensajesDirectos.getInstance(); //Singleton
     }
 }
