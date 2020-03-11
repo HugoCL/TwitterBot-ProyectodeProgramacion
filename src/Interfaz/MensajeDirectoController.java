@@ -53,7 +53,7 @@ public class MensajeDirectoController {
         timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        md = new MensajesDirectos();
+        md = MensajesDirectos.getInstance();
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
         if (followers.isEmpty()) {
