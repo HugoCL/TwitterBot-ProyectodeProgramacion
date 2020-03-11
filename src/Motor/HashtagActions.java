@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import twitter4j.DirectMessage;
 
 public class HashtagActions {
 
@@ -389,7 +390,32 @@ public class HashtagActions {
 
     }
 
-    public void analizarHashtagActionsMD (){
-        MDs = MensajesDirectos.getInstance(); //Singleton
+    public void analizarHashtagActionsMD () throws TwitterException {
+        MensajesDirectos MD = MensajesDirectos.getInstance(); //Singleton
+        ArrayList<Chat> MDs = MD.getChats();
+        for (Chat chat : MDs){
+           ArrayList<DirectMessage> MensajesConversacion =  chat.getConversacion();
+           boolean isAnswered = false;
+           int traverseDM = 0;
+           while (!isAnswered){
+               if (MensajesConversacion.get(traverseDM).getSenderId() == twitter.getId()){
+                   HashtagEntity[] hashtagsPresentes = MensajesConversacion.get(traverseDM).getHashtagEntities();
+                   Pattern pattern = Pattern.compile("(?i)#Respondido");
+                   if (hashtagsPresentes.length != 0){
+                       for (HashtagEntity hashtag : hashtagsPresentes){
+                           Matcher matcher = pattern.matcher(hashtag.getText());
+                            if (matcher.find()){
+                                isAnswered = true;
+                                break;
+                            }
+                       }
+                   }
+               }
+               else{
+                   HashtagEntity[] hashtagsPresentes = MensajesConversacion.get(traverseDM).getHashtagEntities();
+                   Pattern pattern = Pattern.compile("(?i)#Respondido");
+               }
+           }
+        }
     }
 }
