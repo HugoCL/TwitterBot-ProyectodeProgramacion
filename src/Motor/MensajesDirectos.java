@@ -8,13 +8,40 @@ import twitter4j.TwitterException;
 import java.util.ArrayList;
 
 public class MensajesDirectos {
+    /**
+     * Inicio patrón de diseño Singleton
+     */
+    private static MensajesDirectos INSTANCE = null;
+
+    /**
+     * Constructor privado
+     */
+    private MensajesDirectos(){construirConversacion();}
+
+    /**
+     * Método para evitar multi-hilos
+     */
+    private synchronized static void createInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new MensajesDirectos();
+        }
+    }
+
+    /**
+     * Obtener la instancia única de la clase.
+     * @return devuelve la instancia única de la clase TwitterBot
+     */
+    public static MensajesDirectos getInstance() {
+        if (INSTANCE == null) createInstance();
+        return INSTANCE;
+    }
     private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
 
     private static ArrayList<Chat> chats;
 
-    public MensajesDirectos () {
-        construirConversacion();
-    }
+    /*public MensajesDirectos () {
+
+    }*/
 
     private void construirConversacion() {
         DirectMessageList list;
