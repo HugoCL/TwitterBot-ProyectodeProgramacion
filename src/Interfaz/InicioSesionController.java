@@ -124,7 +124,7 @@ public class InicioSesionController {
             query.setSince(anio+"-"+(mes+1)+"-"+(dia));
         } else {
             System.out.println(fechaAnalisis.toString());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             System.out.println("--------------------------");
             System.out.println(sdf.format(fechaAnalisis));
             query.setSince(sdf.format(fechaAnalisis));

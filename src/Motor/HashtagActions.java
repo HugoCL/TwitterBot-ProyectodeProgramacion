@@ -211,7 +211,7 @@ public class HashtagActions {
                                     actions[1] = 1;
                                 }
                                 else {
-                                    actions[1] = -2;
+                                    actions[1] = -3;
                                 }
                             }
                             else{
@@ -225,9 +225,11 @@ public class HashtagActions {
                                 if (!twitter.showStatus(Long.parseLong(IDTarget)).isFavorited()) {
                                     twitter.createFavorite(Long.parseLong(IDTarget));
                                     actions[1] = 1;
+                                    if (twitter.showStatus(Long.parseLong(IDTarget)).getUser().getScreenName().equals(twitter.getScreenName()))
+                                        actions[1] = -2;
                                 }
                                 else {
-                                    actions[1] = -2;
+                                    actions[1] = -3;
                                 }
                             }
                         } catch (TwitterException e) {
@@ -293,7 +295,7 @@ public class HashtagActions {
                     actionReply = actionReply.concat(currentReply);
                 }
                 else if (actions[0] == -1){
-                    currentReply = "Problemas de la API al intentar seguirte";
+                    currentReply = "Gracias, pero no puedo seguirme a mi mismo";
                     actionReply = actionReply.concat(currentReply);
                 }
                 else if (actions[0] == -2){
@@ -320,6 +322,13 @@ public class HashtagActions {
                 }
                 else if (actions[1] == -1){
                     currentReply = " intentamos darte like, pero ocurrió un error con la API de Twitter";
+                    if (!continuedAction){
+                        currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
+                    }
+                    actionReply = actionReply.concat(currentReply);
+                }
+                else if (actions[1] == -2) {
+                    currentReply = " Gracias por quere dar like a nuestro tweet";
                     if (!continuedAction){
                         currentReply = currentReply.substring(0, 1).toUpperCase() + currentReply.substring(1);
                     }
