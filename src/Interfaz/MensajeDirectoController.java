@@ -17,8 +17,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -61,6 +63,7 @@ public class MensajeDirectoController {
             seguidorTA.setText("NO TIENES SEGUIDORES");
             messageTA.setDisable(true);
         }
+        container.getStyleClass().add(0,"container-style");
     }
 
     private void busqueda() {
@@ -131,6 +134,7 @@ public class MensajeDirectoController {
         ArrayList<HBox> messages = new ArrayList<>();
         chatBox = new VBox(5);
         chatBox.setMinWidth(430);
+        chatBox.getStyleClass().add("chat-style");
         container.setContent(chatBox);
         container.setVvalue(1);
         if (!md.getChats().isEmpty() && indice != -1) {
@@ -143,8 +147,18 @@ public class MensajeDirectoController {
                 Label espacio = new Label();
                 espacio.setMinWidth(100);
                 Label aux = makeLabel(mensajes.get(i).getText());
-                if (chat.getUser() == mensajes.get(i).getSenderId()) { aux.setAlignment(Pos.CENTER_LEFT); hbox = new HBox(5, aux, espacio); hbox.setAlignment(Pos.CENTER_LEFT);}
-                else            { aux.setAlignment(Pos.CENTER_RIGHT); hbox = new HBox(5, espacio, aux); hbox.setAlignment(Pos.CENTER_RIGHT);}
+                if (chat.getUser() == mensajes.get(i).getSenderId()) {
+                    aux.setAlignment(Pos.CENTER_LEFT);
+                    aux.getStyleClass().add("message");
+                    hbox = new HBox(5, aux, espacio);
+                    hbox.setAlignment(Pos.CENTER_LEFT);
+                }
+                else{
+                    aux.setAlignment(Pos.CENTER_RIGHT);
+                    aux.getStyleClass().add("message");
+                    hbox = new HBox(5, espacio, aux);
+                    hbox.setAlignment(Pos.CENTER_RIGHT);
+                }
                 messages.add(hbox);
             }
             chatBox.getChildren().addAll(messages);

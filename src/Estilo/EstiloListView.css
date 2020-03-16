@@ -4,7 +4,7 @@
     -fx-background-insets: 0;
     -fx-background-color: transparent, white, transparent, white;
     -fx-border-color: lightgray;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 5;
     -fx-padding: 4;
 }
 
@@ -130,4 +130,21 @@
     -fx-background-color :derive(#4D4C4F,10.0%);
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
+}
+
+.message{
+    -fx-padding: 8;
+    -fx-border-radius: 6;
+    -fx-background-color: #E8F4FF;
+}
+.chat-style{
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-padding: 5;
+}
+.container-style{
+    -fx-background-color: white;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-alignment: center;
 }
