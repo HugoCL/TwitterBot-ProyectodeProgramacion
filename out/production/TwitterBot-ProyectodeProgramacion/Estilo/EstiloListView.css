@@ -132,9 +132,18 @@
     -fx-background-radius : 2.0em;
 }
 
-.message{
+.right-message{
     -fx-padding: 8;
-    -fx-border-radius: 6;
+    -fx-border-radius: 3;
+    -fx-border-width: 1,5;
+    -fx-border-color: #3e85c3;
+    -fx-background-color: #9cc9fe;
+}
+.left-message{
+    -fx-padding: 8;
+    -fx-border-radius: 3;
+    -fx-border-width: 1,5;
+    -fx-border-color: #9cc9fe;
     -fx-background-color: #E8F4FF;
 }
 .chat-style{

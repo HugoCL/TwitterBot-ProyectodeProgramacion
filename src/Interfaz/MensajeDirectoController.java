@@ -149,13 +149,13 @@ public class MensajeDirectoController {
                 Label aux = makeLabel(mensajes.get(i).getText());
                 if (chat.getUser() == mensajes.get(i).getSenderId()) {
                     aux.setAlignment(Pos.CENTER_LEFT);
-                    aux.getStyleClass().add("message");
+                    aux.getStyleClass().add("left-message");
                     hbox = new HBox(5, aux, espacio);
                     hbox.setAlignment(Pos.CENTER_LEFT);
                 }
                 else{
                     aux.setAlignment(Pos.CENTER_RIGHT);
-                    aux.getStyleClass().add("message");
+                    aux.getStyleClass().add("right-message");
                     hbox = new HBox(5, espacio, aux);
                     hbox.setAlignment(Pos.CENTER_RIGHT);
                 }

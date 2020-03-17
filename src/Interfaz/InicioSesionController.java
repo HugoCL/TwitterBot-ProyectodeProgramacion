@@ -58,7 +58,12 @@ public class InicioSesionController {
             pinPF.setText(bot.getPin());
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
-            infoLB.setText("Sesión iniciada con: \n"+new Usuario().getNombreUsuario());
+            try{
+                infoLB.setText("Sesión iniciada con: \n"+new Usuario().getNombreUsuario());
+            }catch (Exception e){
+                System.err.print("ERROR: ");System.out.print("Se necesita conexión a internet.");
+                System.exit(0);
+            }
             infoLB.setVisible(true);
             cerrarBT.setVisible(true);
             copyBT.setVisible(false);
