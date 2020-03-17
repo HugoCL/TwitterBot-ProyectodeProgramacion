@@ -139,7 +139,6 @@ public class InicioSesionController {
 
             for (int i = 0;count <= 300 && i < tweets.size();i++) {
                 hashtagActions.analizarHashtagActions(tweets.get(i));
-                System.out.println(tweets.get(i).getText());
                 count++;
             }
         } while (count <= 300 && (query = result.nextQuery()) != null);
