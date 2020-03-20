@@ -135,12 +135,18 @@ public class Messages {
             String linea;
             Status tweet = twitter.showStatus(id);
             while((linea=br.readLine()) != null && tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
+                char[] chars = linea.toCharArray();
+                linea = "";
+                for (int i = 0; i < chars.length; i++) {
+                    chars[i]-=3;
+                    linea += chars[i]+"";
+                }
                 Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                 Matcher matcher = pattern.matcher(tweet.getText());
                 if(matcher.find()){
-                    System.out.println("STATUS match->"+tweet.getText());
+                    System.out.println("STATUS match->"+id + "//" + tweet.getId());
                     StatusUpdate statusUpdate = new StatusUpdate("Eres Spam");
-                    statusUpdate.setInReplyToStatusId(id);
+                    statusUpdate.setInReplyToStatusId(tweet.getId());
                     twitter.updateStatus(statusUpdate);
                     try {
                         FileOutputStream fileOutputStream = new FileOutputStream("TimeStampSpam.out");
