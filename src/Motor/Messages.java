@@ -1,5 +1,8 @@
 package Motor;
 
+import Transiciones.Dialog;
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.layout.AnchorPane;
 import twitter4j.*;
 
 import java.io.*;
@@ -111,6 +114,41 @@ public class Messages {
         }
     }
 
+    public boolean isSpam(String mensaje){
+        try {
+            archivo = new File ("spam.in");
+            fr = new FileReader (archivo);
+            br = new BufferedReader(fr);
+
+            // Lectura del fichero
+            String linea;
+            while((linea=br.readLine()) != null){
+                char[] chars = linea.toCharArray();
+                linea = "";
+                for (int i = 0; i < chars.length; i++) {
+                    chars[i]-=3;
+                    linea += chars[i]+"";
+                }
+                Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
+                Matcher matcher = pattern.matcher(mensaje);
+                if(matcher.find()){
+                    return true;
+                }
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if( null != fr ){
+                    fr.close();
+                }
+            }catch (Exception e2){
+                e2.printStackTrace();
+            }
+        }
+        return false;
+    }
     public static void isSpam(long id) {
         Date fechaAnalisis = null;
         try {
