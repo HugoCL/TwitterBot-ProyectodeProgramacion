@@ -394,27 +394,27 @@ public class HashtagActions {
         try {
             MensajesDirectos MD = MensajesDirectos.getInstance(); //Singleton
             ArrayList<Chat> MDs = MD.getChats();
-            int[] actionsMD = {0,0,0};
             for (Chat chat : MDs){
                ArrayList<DirectMessage> MensajesConversacion =  chat.getConversacion();
                boolean isAnswered = false;
                int traverseDM = 0;
                int limiteLista = MensajesConversacion.size();
-               while (!isAnswered && traverseDM < limiteLista-1){
+               while (traverseDM < limiteLista - 1 && !isAnswered){
                    HashtagEntity[] hashtagsPresentes = MensajesConversacion.get(traverseDM).getHashtagEntities();
                    if (MensajesConversacion.get(traverseDM).getSenderId() == twitter.getId()){
-                       Pattern pattern = Pattern.compile("(?i)#Respondido");
+                       Pattern pattern = Pattern.compile("(?i)Respondido");
                        if (hashtagsPresentes.length != 0){
                            for (HashtagEntity hashtag : hashtagsPresentes){
                                Matcher matcher = pattern.matcher(hashtag.getText());
                                 if (matcher.find()){
                                     isAnswered = true;
-                                    break;
                                 }
                            }
                         }
                     }
-                   else{
+                   else if (MensajesConversacion.get(traverseDM).getSenderId() != twitter.getId()){
+                       int[] actionsMD = {0,0,0};
+                       hashtagsPresentes = MensajesConversacion.get(traverseDM).getHashtagEntities();
                        for (HashtagEntity hashtagActual: hashtagsPresentes){
                            if (hashtagActual.getText().equalsIgnoreCase("seguir")) {
                                String name = twitter.showUser(MensajesConversacion.get(traverseDM).getSenderId()).getScreenName();
@@ -465,7 +465,8 @@ public class HashtagActions {
                                            twitter.createFriendship(userTarget);
                                            if (!twitter.showFriendship(twitter.getScreenName(), userTarget).isSourceFollowingTarget()) {
                                                actionsMD[0] = 2;
-                                           } else {
+                                           }
+                                           else {
                                                actionsMD[0] = 1;
                                            }
                                        } else if (twitter.getScreenName().equals(userTarget)) {
@@ -484,7 +485,7 @@ public class HashtagActions {
                                    }
                                }
                            }
-                           else if (hashtagActual.getText().equalsIgnoreCase("darlike")) {
+                           if (hashtagActual.getText().equalsIgnoreCase("darlike")) {
                                boolean tweetIDDisponible = false;
                                Pattern pattern4 = Pattern.compile("(?i)#DarLike\\s[0-9]+");
                                Matcher matcher4 = pattern4.matcher(MensajesConversacion.get(traverseDM).getText());
@@ -527,7 +528,7 @@ public class HashtagActions {
                                    actionsMD[1] = -1;
                                }
                            }
-                           else if (hashtagActual.getText().equalsIgnoreCase("difundir")) {
+                           if (hashtagActual.getText().equalsIgnoreCase("difundir")) {
                                boolean tweetIDDisponible = false;
                                Pattern pattern6 = Pattern.compile("(?i)#difundir\\s[0-9]+");
                                Matcher matcher6 = pattern6.matcher(MensajesConversacion.get(traverseDM).getText());
@@ -575,11 +576,11 @@ public class HashtagActions {
                        String currentReply;
                        if (actionsMD[0]!= 0){
                            if (actionsMD[0] == 1){
-                               currentReply = "Te hemos seguido";
+                               currentReply = "Hemos seguido la cuenta que nos has indicado";
                                actionReply = actionReply.concat(currentReply);
                            }
                            else if (actionsMD[0] == 2){
-                               currentReply = "Hemos realizado la acción de seguirte, ahora solo debes esperar la respuesta";
+                               currentReply = "Hemos realizado la acción de seguir, ahora solo debes esperar la respuesta de la cuenta";
                                actionReply = actionReply.concat(currentReply);
                            }
                            else if (actionsMD[0] == -1){
@@ -587,11 +588,11 @@ public class HashtagActions {
                                actionReply = actionReply.concat(currentReply);
                            }
                            else if (actionsMD[0] == -2){
-                               currentReply = "Intentamos seguirte, pero ya te seguiamos anteriormente";
+                               currentReply = "Intentamos seguir la cuenta que nos indicaste, pero ya la seguiamos anteriormente";
                                actionReply = actionReply.concat(currentReply);
                            }
                            else {
-                               currentReply = "Cuando intentamos seguirte, nos encontramos con que la cuenta no existe (UPS!)";
+                               currentReply = "Cuando intentamos seguir la cuenta que nos indicaste, nos encontramos con que la cuenta no existe (UPS!)";
                                actionReply = actionReply.concat(currentReply);
                            }
                        }
@@ -661,15 +662,18 @@ public class HashtagActions {
                        if (!actionReply.equals("") && (actionsMD[0] != 0 || actionsMD[1] != 0 || actionsMD[2] != 0)){
                            DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm:ss");
                            Date date2 = new Date();
-                           actionReply = actionReply.concat(". Acción realizada con fecha: "+dateFormat.format(date2));
+                           actionReply = actionReply.concat(". #Respondido Acción realizada con fecha: "+dateFormat.format(date2));
                            twitter.sendDirectMessage(MensajesConversacion.get(traverseDM).getSenderId(), actionReply);
                        }
                    }
                    traverseDM++;
-                   }
                }
-        } catch (TwitterException | IllegalStateException | NumberFormatException e) {
-            System.out.println(e.getMessage());
+               if (isAnswered){
+                   break;
+               }
+            }
+        } catch (TwitterException e) {
+            System.out.println(e.getErrorMessage());
         }
     }
 }

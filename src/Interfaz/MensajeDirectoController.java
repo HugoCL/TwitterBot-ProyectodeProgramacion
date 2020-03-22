@@ -23,6 +23,7 @@ import twitter4j.DirectMessage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MensajeDirectoController {
 
@@ -46,7 +47,19 @@ public class MensajeDirectoController {
 
     public void initialize(){
         try{
-            new HashtagActions().analizarHashtagActionsMD();
+            Date fechaConsulta = new Date();
+            Date fechaAccion = null;
+            if (fechaAccion == null){
+                new HashtagActions().analizarHashtagActionsMD();
+                fechaAccion = new Date();
+            }
+            else if(fechaConsulta.getTime() - fechaAccion.getTime() >= 2 * 60 * 1000){
+                new HashtagActions().analizarHashtagActionsMD();
+                fechaAccion = new Date();
+            }
+            else{
+                System.out.println("Debes esperar para analizar más Tweets");
+            }
         }catch(Exception e){
             System.out.println("Error con twitter.");
         }
