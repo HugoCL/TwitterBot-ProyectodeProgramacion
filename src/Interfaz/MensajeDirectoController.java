@@ -1,9 +1,6 @@
 package Interfaz;
 
-import Motor.Chat;
-import Motor.MensajesDirectos;
-import Motor.Messages;
-import Motor.Usuario;
+import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.*;
 import javafx.animation.KeyFrame;
@@ -48,6 +45,11 @@ public class MensajeDirectoController {
     private MensajesDirectos md;
 
     public void initialize(){
+        try{
+            new HashtagActions().analizarHashtagActionsMD();
+        }catch(Exception e){
+            System.out.println("Error con twitter.");
+        }
         followers = new Usuario().getFollowers();
         enviar_mensajeBT.setGraphic(new ImageView(new Image("/Imagenes/sendMessage.png",20,20,false, true)));
         timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
