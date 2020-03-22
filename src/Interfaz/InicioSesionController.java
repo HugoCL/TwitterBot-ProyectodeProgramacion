@@ -185,6 +185,8 @@ public class InicioSesionController {
             }
         }).filter(setFilterTS());
 
+        //Analizar Hashtags DM
+        //hashtagActions.analizarHashtagActionsMD();
         //Transición de escenas
         Transiciones.Slide.getInstance().left("/Interfaz/EscenaPrincipal.fxml",iniciar_sesionBT, inicioSesionAP);
     }

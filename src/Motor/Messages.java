@@ -6,8 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import twitter4j.*;
 
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -182,9 +180,9 @@ public class Messages {
                 Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                 Matcher matcher = pattern.matcher(tweet.getText());
                 if(matcher.find()){
-                    System.out.println("STATUS match->"+id + "//" + tweet.getId());
-                    StatusUpdate statusUpdate = new StatusUpdate("Eres Spam");
-                    statusUpdate.setInReplyToStatusId(tweet.getId());
+                    System.out.println("STATUS match->"+tweet.getText());
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    statusUpdate.setInReplyToStatusId(id);
                     twitter.updateStatus(statusUpdate);
                     try {
                         FileOutputStream fileOutputStream = new FileOutputStream("TimeStampSpam.out");

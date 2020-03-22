@@ -1,9 +1,6 @@
 package Interfaz;
 
-import Motor.Chat;
-import Motor.MensajesDirectos;
-import Motor.Messages;
-import Motor.Usuario;
+import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.*;
 import javafx.animation.KeyFrame;
@@ -28,6 +25,7 @@ import twitter4j.DirectMessage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MensajeDirectoController {
 
@@ -50,12 +48,30 @@ public class MensajeDirectoController {
     private MensajesDirectos md;
 
     public void initialize(){
+        try{
+            md = MensajesDirectos.getInstance();
+            Date fechaConsulta = new Date();
+
+            if (md.getFechaAccion() == null){
+                new HashtagActions().analizarHashtagActionsMD();
+                md.setFechaAccion(new Date());
+            }
+            else if((fechaConsulta.getTime() - md.getFechaAccion().getTime()) >= 2 * 60 * 1000){
+                new HashtagActions().analizarHashtagActionsMD();
+                md.setFechaAccion(new Date());
+            }
+            else{
+                System.out.println("Debes esperar para analizar más Tweets");
+            }
+        }catch(Exception e){
+            System.out.println("Error con twitter.");
+        }
         followers = new Usuario().getFollowers();
         enviar_mensajeBT.setGraphic(new ImageView(new Image("/Imagenes/sendMessage.png",20,20,false, true)));
         timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        md = MensajesDirectos.getInstance();
+
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
         if (followers.isEmpty()) {
