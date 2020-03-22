@@ -2,6 +2,11 @@ package Interfaz;
 
 import Motor.*;
 import Transiciones.Dialog;
+import com.ghawk1ns.perspective.PerspectiveAPI;
+import com.ghawk1ns.perspective.PerspectiveAPIBuilder;
+import com.ghawk1ns.perspective.model.Attribute;
+import com.ghawk1ns.perspective.response.AnalyzeCommentResponse;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -21,6 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class InicioSesionController {
 
@@ -73,7 +79,7 @@ public class InicioSesionController {
 
     }
 
-    @FXML public void iniciarSesion() throws IOException, TwitterException {
+    @FXML public void iniciarSesion() throws IOException, TwitterException, ExecutionException, InterruptedException {
         String respuesta;
         if (!bot.getSesion()){
             String pin = pinPF.getText();
@@ -144,6 +150,21 @@ public class InicioSesionController {
             }
         } while (count <= 300 && (query = result.nextQuery()) != null);
 
+        // INICIO PERSPECTIVE
+        PerspectiveAPI api = new PerspectiveAPIBuilder()
+                .setApiKey("AIzaSyDIg046U0g7-Q4jEjtigdsrYYNJdjxd_FQ")
+                .build();
+
+        ListenableFuture<AnalyzeCommentResponse> future = api.analyze()
+                .setComment("HIJO DE PUTA")
+                .addLanguage("es")
+                .addAttribute(Attribute.ofType(Attribute.TOXICITY))
+                .postAsync();
+
+        AnalyzeCommentResponse response = future.get();
+        float puntajeRespuesta = response.getAttributeSummaryScore(Attribute.TOXICITY);
+        // FIN PERSPECTIVE
+        System.out.println(puntajeRespuesta);
         TwitterStream twitterStream = new TwitterStreamFactory(cbTS.build()).getInstance();
         twitterStream.addListener(new StatusListener() {
             @Override

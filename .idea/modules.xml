@@ -10,6 +10,9 @@
       <module fileurl="file://$PROJECT_DIR$/twitter4j-core/src/internal-util/internal-util.iml" filepath="$PROJECT_DIR$/twitter4j-core/src/internal-util/internal-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/twitter4j-core/src/jmx/jmx.iml" filepath="$PROJECT_DIR$/twitter4j-core/src/jmx/jmx.iml" />
       <module fileurl="file://$PROJECT_DIR$/twitter4j-core/src/main/main.iml" filepath="$PROJECT_DIR$/twitter4j-core/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.main.iml" filepath="$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.test.iml" filepath="$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/twitter4j-core/src/test/test.iml" filepath="$PROJECT_DIR$/twitter4j-core/src/test/test.iml" />
     </modules>
   </component>
