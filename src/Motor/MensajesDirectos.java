@@ -39,10 +39,6 @@ public class MensajesDirectos {
 
     private static ArrayList<Chat> chats;
 
-    /*public MensajesDirectos () {
-
-    }*/
-
     private void construirConversacion() {
         DirectMessageList list;
         chats = new ArrayList<>();

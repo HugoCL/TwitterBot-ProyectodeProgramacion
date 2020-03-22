@@ -3,7 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimeStamp#Actions.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStamp#Actions.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimeStampSpam.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStampSpam.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insultos.in" beforeDir="false" afterPath="$PROJECT_DIR$/insultos.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/MensajesDirectos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/MensajesDirectos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Messages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/HashtagActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/HashtagActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/MensajesDirectos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/MensajesDirectos.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +59,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
