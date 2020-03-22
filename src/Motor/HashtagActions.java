@@ -393,6 +393,7 @@ public class HashtagActions {
     public void analizarHashtagActionsMD () throws TwitterException {
         try {
             MensajesDirectos MD = MensajesDirectos.getInstance(); //Singleton
+            MD.construirConversacion();
             ArrayList<Chat> MDs = MD.getChats();
             for (Chat chat : MDs){
                ArrayList<DirectMessage> MensajesConversacion =  chat.getConversacion();

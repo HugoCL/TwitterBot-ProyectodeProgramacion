@@ -3,8 +3,6 @@ package Motor;
 import twitter4j.*;
 
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -139,7 +137,7 @@ public class Messages {
                 Matcher matcher = pattern.matcher(tweet.getText());
                 if(matcher.find()){
                     System.out.println("STATUS match->"+tweet.getText());
-                    StatusUpdate statusUpdate = new StatusUpdate("Eres Spam");
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
                     statusUpdate.setInReplyToStatusId(id);
                     twitter.updateStatus(statusUpdate);
                     try {

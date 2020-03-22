@@ -47,15 +47,16 @@ public class MensajeDirectoController {
 
     public void initialize(){
         try{
+            md = MensajesDirectos.getInstance();
             Date fechaConsulta = new Date();
-            Date fechaAccion = null;
-            if (fechaAccion == null){
+
+            if (md.getFechaAccion() == null){
                 new HashtagActions().analizarHashtagActionsMD();
-                fechaAccion = new Date();
+                md.setFechaAccion(new Date());
             }
-            else if(fechaConsulta.getTime() - fechaAccion.getTime() >= 2 * 60 * 1000){
+            else if((fechaConsulta.getTime() - md.getFechaAccion().getTime()) >= 2 * 60 * 1000){
                 new HashtagActions().analizarHashtagActionsMD();
-                fechaAccion = new Date();
+                md.setFechaAccion(new Date());
             }
             else{
                 System.out.println("Debes esperar para analizar más Tweets");
@@ -68,7 +69,7 @@ public class MensajeDirectoController {
         timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        md = MensajesDirectos.getInstance();
+
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
         if (followers.isEmpty()) {

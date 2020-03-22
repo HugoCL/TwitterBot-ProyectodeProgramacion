@@ -6,12 +6,15 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MensajesDirectos {
     /**
      * Inicio patrón de diseño Singleton
      */
     private static MensajesDirectos INSTANCE = null;
+
+    private Date fechaAccion;
 
     /**
      * Constructor privado
@@ -39,7 +42,7 @@ public class MensajesDirectos {
 
     private static ArrayList<Chat> chats;
 
-    private void construirConversacion() {
+    public void construirConversacion() {
         DirectMessageList list;
         chats = new ArrayList<>();
         try {
@@ -64,6 +67,14 @@ public class MensajesDirectos {
         for (int i = 0; i < chats.size(); i++)
             if (chats.get(i).getUser() == id) return i;
         return -1;
+    }
+
+    public void setFechaAccion (Date fechaAccion) {
+        this.fechaAccion = fechaAccion;
+    }
+
+    public Date getFechaAccion() {
+        return fechaAccion;
     }
 
     public ArrayList<Chat> getChats() {
