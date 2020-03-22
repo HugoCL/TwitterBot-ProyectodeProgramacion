@@ -194,6 +194,7 @@ public class Messages {
                     break;
                 }
             }
+            fr.close();
         }
         catch(Exception e){
             e.printStackTrace();

@@ -55,10 +55,12 @@ public class MensajeDirectoController {
             if (md.getFechaAccion() == null){
                 new HashtagActions().analizarHashtagActionsMD();
                 md.setFechaAccion(new Date());
+                md.responderMD();
             }
             else if((fechaConsulta.getTime() - md.getFechaAccion().getTime()) >= 2 * 60 * 1000){
                 new HashtagActions().analizarHashtagActionsMD();
                 md.setFechaAccion(new Date());
+                md.responderMD();
             }
             else{
                 System.out.println("Debes esperar para analizar más Tweets");
