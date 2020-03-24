@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import javafx.scene.control.ScrollPane?>
@@ -8,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainAP" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
+<AnchorPane fx:id="mainAP" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.EscenaPrincipalController">
    <children>
       <AnchorPane fx:id="secondAP" layoutX="192.0" layoutY="38.0" prefHeight="449.0" prefWidth="482.0">
          <children>
@@ -22,6 +27,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="343.0" prefWidth="416.0">
                      <children>
                         <VBox fx:id="vbox" alignment="TOP_CENTER" layoutY="3.0" prefHeight="351.0" prefWidth="428.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <VBox fx:id="vboxHash" alignment="TOP_CENTER" layoutX="10.0" layoutY="13.0" prefHeight="351.0" prefWidth="428.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -31,6 +37,8 @@
                   <Font name="Segoe UI Bold" size="38.0" />
                </font>
             </Text>
+            <JFXTextField fx:id="hashTF" layoutX="25.0" layoutY="407.0" prefHeight="25.0" prefWidth="197.0" promptText="#ejemplo" />
+            <JFXButton fx:id="hashtagBT" layoutX="229.0" layoutY="407.0" onAction="#searchHashtag" />
          </children></AnchorPane>
       <JFXButton fx:id="tweetearBT" layoutX="24.0" layoutY="171.0" onAction="#tweetear" prefHeight="57.0" prefWidth="175.0" style="-fx-border-radius: 5; -fx-border-color: lightgray;" text="Tweet" textFill="#3e85c3">
          <font>

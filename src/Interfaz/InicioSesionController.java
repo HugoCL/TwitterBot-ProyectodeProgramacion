@@ -64,7 +64,12 @@ public class InicioSesionController {
             pinPF.setText(bot.getPin());
             no_cierre_sesionCB.setSelected(true);
             TwitterBot.getInstance().setBOT(bot);
-            infoLB.setText("Sesión iniciada con: \n"+new Usuario().getNombreUsuario());
+            try{
+                infoLB.setText("Sesión iniciada con: \n"+new Usuario().getNombreUsuario());
+            }catch (Exception e){
+                System.err.print("ERROR: ");System.out.print("Se necesita conexión a internet.");
+                System.exit(0);
+            }
             infoLB.setVisible(true);
             cerrarBT.setVisible(true);
             copyBT.setVisible(false);
@@ -129,9 +134,7 @@ public class InicioSesionController {
             System.out.println(anio+"-"+(mes+1)+"-"+dia);
             query.setSince(anio+"-"+(mes+1)+"-"+(dia));
         } else {
-            System.out.println(fechaAnalisis.toString());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            System.out.println("--------------------------");
             System.out.println(sdf.format(fechaAnalisis));
             query.setSince(sdf.format(fechaAnalisis));
         }
@@ -145,26 +148,10 @@ public class InicioSesionController {
 
             for (int i = 0;count <= 300 && i < tweets.size();i++) {
                 hashtagActions.analizarHashtagActions(tweets.get(i));
-                System.out.println(tweets.get(i).getText());
                 count++;
             }
         } while (count <= 300 && (query = result.nextQuery()) != null);
 
-        // INICIO PERSPECTIVE
-        PerspectiveAPI api = new PerspectiveAPIBuilder()
-                .setApiKey("AIzaSyDIg046U0g7-Q4jEjtigdsrYYNJdjxd_FQ")
-                .build();
-
-        ListenableFuture<AnalyzeCommentResponse> future = api.analyze()
-                .setComment("HIJO DE PUTA")
-                .addLanguage("es")
-                .addAttribute(Attribute.ofType(Attribute.TOXICITY))
-                .postAsync();
-
-        AnalyzeCommentResponse response = future.get();
-        float puntajeRespuesta = response.getAttributeSummaryScore(Attribute.TOXICITY);
-        // FIN PERSPECTIVE
-        System.out.println(puntajeRespuesta);
         TwitterStream twitterStream = new TwitterStreamFactory(cbTS.build()).getInstance();
         twitterStream.addListener(new StatusListener() {
             @Override

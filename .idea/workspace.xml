@@ -7,10 +7,13 @@
       <change beforePath="$PROJECT_DIR$/TimeStampSpam.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStampSpam.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Messages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Motor/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Messages.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +48,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last.edited.regexp" value="#Seguir " />
+    <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -161,6 +164,9 @@
       <workItem from="1571195110908" duration="1519000" />
       <workItem from="1571592319678" duration="30000" />
       <workItem from="1583800352974" duration="4234000" />
+      <workItem from="1584468153378" duration="1175000" />
+      <workItem from="1584724346880" duration="642000" />
+      <workItem from="1584725534673" duration="690000" />
     </task>
     <servers />
   </component>
@@ -181,46 +187,26 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="22" key="#Project_Structure" timestamp="1570638790939">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1570638790939" />
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1570638844884">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1570638844884" />
-    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1570638669793">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1570638669793" />
-    <state x="463" y="90" key="FileChooserDialogImpl" timestamp="1571195332850">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="463" y="90" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1571195332850" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1570642040299">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1570642040299" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1570642040299">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1570642040299" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1570642040299">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1570642040299" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1570642040299">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1570642040299" />
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1571592345016">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1571592345016" />
-    <state x="65" y="0" key="new project wizard" timestamp="1570708149492">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1570708149492" />
+    <state x="275" y="22" key="#Project_Structure" />
+    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" />
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" />
+    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
+    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" />
+    <state x="463" y="90" key="FileChooserDialogImpl" />
+    <state x="463" y="90" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" />
+    <state x="65" y="0" key="new project wizard" />
+    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TwitterBot_ProyectodeProgramacion$Main.ic" NAME="Main Coverage Results" MODIFIED="1567383217241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

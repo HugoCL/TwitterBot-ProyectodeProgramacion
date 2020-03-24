@@ -118,23 +118,28 @@ public class TwittearController {
         Pattern patronVideo = Pattern.compile("^.+\\.(mp4|MP4)$");
 
         String respuesta;
-        String tweet = tweet_TA.getText();
         Messages mensajes = new Messages();
-        if (nameFile_LB.getText().equals("")){
-            respuesta = mensajes.PublicarTweet(tweet);
+        String tweet = tweet_TA.getText();
+        if (mensajes.isSpam(tweet)){
+            Dialog.getInstance().info(publicar_tweetBT,"Su tweet puede ser ofensivo\nPor favor revise antes de " +
+                    "publicar.", tweetearAP);
+        }else {
+            if (nameFile_LB.getText().equals("")){
+                respuesta = mensajes.PublicarTweet(tweet);
+            }
+            else if(patronImage.matcher(selectedFile.getName()).find()){
+                respuesta = mensajes.PublicarTweetImagen(tweet, selectedFile);
+            }else if(patronVideo.matcher(selectedFile.getName()).find())
+                respuesta = mensajes.PublicarTweetVideo(tweet, selectedFile);
+            else
+                respuesta = "ERROR: Revise el tipo de archivo";
+            Dialog.getInstance().info(addFileBT,respuesta,tweetearAP);
+            imagenTweet.setImage(null);
+            tweet_TA.setText("");
+            publicar_tweetBT.setDisable(true);
+            nameFile_LB.setText("");
+            caracteres_LB.setText("0/280");
         }
-        else if(patronImage.matcher(selectedFile.getName()).find()){
-            respuesta = mensajes.PublicarTweetImagen(tweet, selectedFile);
-        }else if(patronVideo.matcher(selectedFile.getName()).find())
-            respuesta = mensajes.PublicarTweetVideo(tweet, selectedFile);
-        else
-            respuesta = "ERROR: Revise el tipo de archivo";
-        Dialog.getInstance().info(addFileBT,respuesta,tweetearAP);
-        imagenTweet.setImage(null);
-        tweet_TA.setText("");
-        publicar_tweetBT.setDisable(true);
-        nameFile_LB.setText("");
-        caracteres_LB.setText("0/280");
     }
 
     @FXML public void regresar() throws IOException {

@@ -138,9 +138,13 @@ public class CellVBox extends Thread{
             Text token = new Text();
             String palabra = Tok.nextToken();
             token.setText(palabra+" ");
-            if (patron.matcher(token.getText()).matches())
+            if (patron.matcher(token.getText()).matches()){
+                if (palabra.charAt(palabra.length()-1) == ':'){
+                    palabra = palabra.substring(0, palabra.length()-1);
+                }
                 if (palabra.charAt(0) == '#' || (palabra.charAt(0) == '@' && Usuario.getUser(palabra.substring(1)) != null))
                     token.setFill(Color.web("#3e85c3"));
+            }
             else
                 token.setFill(Color.BLACK);
             mensaje.getChildren().add(token);
