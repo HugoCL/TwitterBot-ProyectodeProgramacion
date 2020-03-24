@@ -14,8 +14,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -47,15 +49,18 @@ public class MensajeDirectoController {
 
     public void initialize(){
         try{
+            md = MensajesDirectos.getInstance();
             Date fechaConsulta = new Date();
-            Date fechaAccion = null;
-            if (fechaAccion == null){
+
+            if (md.getFechaAccion() == null){
                 new HashtagActions().analizarHashtagActionsMD();
-                fechaAccion = new Date();
+                md.setFechaAccion(new Date());
+                md.responderMD();
             }
-            else if(fechaConsulta.getTime() - fechaAccion.getTime() >= 2 * 60 * 1000){
+            else if((fechaConsulta.getTime() - md.getFechaAccion().getTime()) >= 2 * 60 * 1000){
                 new HashtagActions().analizarHashtagActionsMD();
-                fechaAccion = new Date();
+                md.setFechaAccion(new Date());
+                md.responderMD();
             }
             else{
                 System.out.println("Debes esperar para analizar más Tweets");
@@ -68,7 +73,7 @@ public class MensajeDirectoController {
         timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> caracteres()), new KeyFrame(Duration.millis(100), e -> busqueda()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        md = MensajesDirectos.getInstance();
+
         //Caracteres de mensaje
         enviar_mensajeBT.setDisable(true);
         if (followers.isEmpty()) {
@@ -76,6 +81,7 @@ public class MensajeDirectoController {
             seguidorTA.setText("NO TIENES SEGUIDORES");
             messageTA.setDisable(true);
         }
+        container.getStyleClass().add(0,"container-style");
     }
 
     private void busqueda() {
@@ -146,6 +152,7 @@ public class MensajeDirectoController {
         ArrayList<HBox> messages = new ArrayList<>();
         chatBox = new VBox(5);
         chatBox.setMinWidth(430);
+        chatBox.getStyleClass().add("chat-style");
         container.setContent(chatBox);
         container.setVvalue(1);
         if (!md.getChats().isEmpty() && indice != -1) {
@@ -158,8 +165,18 @@ public class MensajeDirectoController {
                 Label espacio = new Label();
                 espacio.setMinWidth(100);
                 Label aux = makeLabel(mensajes.get(i).getText());
-                if (chat.getUser() == mensajes.get(i).getSenderId()) { aux.setAlignment(Pos.CENTER_LEFT); hbox = new HBox(5, aux, espacio); hbox.setAlignment(Pos.CENTER_LEFT);}
-                else            { aux.setAlignment(Pos.CENTER_RIGHT); hbox = new HBox(5, espacio, aux); hbox.setAlignment(Pos.CENTER_RIGHT);}
+                if (chat.getUser() == mensajes.get(i).getSenderId()) {
+                    aux.setAlignment(Pos.CENTER_LEFT);
+                    aux.getStyleClass().add("left-message");
+                    hbox = new HBox(5, aux, espacio);
+                    hbox.setAlignment(Pos.CENTER_LEFT);
+                }
+                else{
+                    aux.setAlignment(Pos.CENTER_RIGHT);
+                    aux.getStyleClass().add("right-message");
+                    hbox = new HBox(5, espacio, aux);
+                    hbox.setAlignment(Pos.CENTER_RIGHT);
+                }
                 messages.add(hbox);
             }
             chatBox.getChildren().addAll(messages);

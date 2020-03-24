@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -35,7 +36,10 @@
             <Font name="Arial" size="14.0" />
          </font></JFXTextField>
       <JFXListView fx:id="followersLV" layoutX="27.0" layoutY="160.0" onMouseReleased="#obtenerUsuario" prefHeight="241.0" prefWidth="150.0" />
-      <ScrollPane fx:id="container" layoutX="206.0" layoutY="123.0" prefHeight="227.0" prefWidth="450.0" />
+      <ScrollPane fx:id="container" layoutX="206.0" layoutY="123.0" prefHeight="227.0" prefWidth="450.0">
+         <opaqueInsets>
+            <Insets right="5.0" />
+         </opaqueInsets></ScrollPane>
       <JFXButton fx:id="mostrarBT" layoutX="25.0" layoutY="415.0" onAction="#mostrarChat" prefHeight="31.0" prefWidth="150.0" style="-fx-border-color: lightgray; -fx-border-radius: 5;" text="Mostrar Chat" textFill="#3e85c3" />
    </children>
 </AnchorPane>
