@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Transiciones</OriginalElement>
+  <nodes>
+    <node x="906.8541666666665" y="808.0">Transiciones.Slide</node>
+    <node x="2030.0503205128205" y="808.0">Transiciones.Fade</node>
+    <node x="1462.109524926293" y="1353.0">Interfaz.InicioSesionController</node>
+    <node x="2393.505678772447" y="787.0">Motor.Feed</node>
+    <node x="1213.7942609220045" y="1968.0">Motor.CellVBox</node>
+    <node x="1868.4609275886712" y="1221.0">Interfaz.EscenaPrincipalController</node>
+    <node x="82.5" y="798.0">Motor.MensajesDirectos</node>
+    <node x="703.8541666666665" y="787.0">Motor.Usuario</node>
+    <node x="316.4999999999998" y="1276.0">Interfaz.MensajeDirectoController</node>
+    <node x="1195.8541666666665" y="786.0">Transiciones.Dialog</node>
+    <node x="385.25556932904465" y="786.0">Motor.Messages</node>
+    <node x="554.4999999999998" y="1331.0">Interfaz.TwittearController</node>
+    <node x="1537.0503205128205" y="808.0">Motor.AdminSesion</node>
+    <node x="2280.0503205128207" y="0.0">Motor.Tweet</node>
+    <node x="890.2555693290446" y="1452.0">Interfaz.FollowController</node>
+    <node x="2132.0503205128207" y="448.0">Motor.AdminBackup</node>
+    <node x="10.5" y="491.0">Motor.Chat</node>
+    <node x="1748.0503205128205" y="830.0">Motor.HashtagActions</node>
+    <node x="1383.8541666666665" y="361.0">Motor.TwitterBot</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Interfaz.InicioSesionController" target="Motor.TwitterBot">
+      <point x="-11.150000000000091" y="-201.5" />
+      <point x="1562.459524926293" y="1091.0" />
+      <point x="1482.3541666666665" y="1091.0" />
+      <point x="1482.3541666666665" y="766.0" />
+      <point x="1486.1541666666665" y="766.0" />
+      <point x="9.299999999999955" y="167.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Transiciones.Slide">
+      <point x="-68.61538461538464" y="-333.5" />
+      <point x="1911.3455429732867" y="1041.0" />
+      <point x="1148.9541666666667" y="1041.0" />
+      <point x="107.60000000000014" y="80.5" />
+    </edge>
+    <edge source="Motor.AdminBackup" target="Motor.Tweet">
+      <point x="0.0" y="-80.5" />
+      <point x="2242.5503205128207" y="341.0" />
+      <point x="2339.6931776556776" y="341.0" />
+      <point x="-23.857142857142875" y="145.5" />
+    </edge>
+    <edge source="Interfaz.MensajeDirectoController" target="Motor.Messages">
+      <point x="-24.111111111111313" y="-278.5" />
+      <point x="400.88888888888846" y="1111.0" />
+      <point x="450.25556932904465" y="1111.0" />
+      <point x="-65.0" y="102.5" />
+    </edge>
+    <edge source="Interfaz.InicioSesionController" target="Motor.Usuario">
+      <point x="-100.35000000000014" y="-201.5" />
+      <point x="1473.2595249262931" y="1131.0" />
+      <point x="847.639880952381" y="1131.0" />
+      <point x="52.28571428571445" y="101.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.HashtagActions">
+      <point x="-17.15384615384619" y="-333.5" />
+      <point x="1962.807081434825" y="1011.0" />
+      <point x="1911.8003205128205" y="1011.0" />
+      <point x="32.75" y="58.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.AdminSesion">
+      <point x="-34.307692307692264" y="-333.5" />
+      <point x="1945.653235280979" y="1021.0" />
+      <point x="1680.3003205128205" y="1021.0" />
+      <point x="47.75" y="80.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.Tweet">
+      <point x="68.61538461538464" y="-333.5" />
+      <point x="2048.5763122040557" y="1181.0" />
+      <point x="2383.005678772447" y="1181.0" />
+      <point x="2383.005678772447" y="341.0" />
+      <point x="2363.5503205128207" y="341.0" />
+      <point x="0.0" y="145.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.Usuario">
+      <point x="-85.76923076923072" y="-333.5" />
+      <point x="1894.1916968194405" y="1051.0" />
+      <point x="873.7827380952378" y="1051.0" />
+      <point x="78.42857142857133" y="101.5" />
+    </edge>
+    <edge source="Interfaz.InicioSesionController" target="Transiciones.Slide">
+      <point x="-78.05000000000018" y="-201.5" />
+      <point x="1495.5595249262929" y="1121.0" />
+      <point x="1095.1541666666665" y="1121.0" />
+      <point x="53.799999999999955" y="80.5" />
+    </edge>
+    <edge source="Motor.CellVBox" target="Interfaz.EscenaPrincipalController">
+      <point x="38.333333333333314" y="-91.5" />
+      <point x="1424.6275942553377" y="1918.0" />
+      <point x="1924.2109275886712" y="1918.0" />
+      <point x="-55.75" y="333.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.Feed">
+      <point x="102.9230769230769" y="-333.5" />
+      <point x="2082.884004511748" y="1201.0" />
+      <point x="2480.505678772447" y="1201.0" />
+      <point x="-29.0" y="101.5" />
+    </edge>
+    <edge source="Interfaz.FollowController" target="Transiciones.Slide">
+      <point x="22.5" y="-102.5" />
+      <point x="1002.7555693290446" y="1171.0" />
+      <point x="1041.3541666666665" y="1171.0" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="Interfaz.MensajeDirectoController" target="Transiciones.Dialog">
+      <point x="96.44444444444434" y="-278.5" />
+      <point x="521.4444444444441" y="1181.0" />
+      <point x="1217.9374999999998" y="1181.0" />
+      <point x="-110.41666666666674" y="102.5" />
+    </edge>
+    <edge source="Interfaz.TwittearController" target="Transiciones.Dialog">
+      <point x="73.125" y="-223.5" />
+      <point x="725.1249999999998" y="1191.0" />
+      <point x="1262.1041666666665" y="1191.0" />
+      <point x="-66.25" y="102.5" />
+    </edge>
+    <edge source="Motor.AdminSesion" target="Motor.TwitterBot">
+      <point x="0.0" y="-80.5" />
+      <point x="1632.5503205128205" y="756.0" />
+      <point x="1504.7541666666664" y="756.0" />
+      <point x="27.899999999999864" y="167.5" />
+    </edge>
+    <edge source="Motor.MensajesDirectos" target="Motor.Chat">
+      <point x="-25.25" y="-90.5" />
+      <point x="158.25" y="766.0" />
+      <point x="163.625" y="766.0" />
+      <point x="30.625" y="37.5" />
+    </edge>
+    <edge source="Motor.CellVBox" target="Motor.Usuario">
+      <point x="-38.33333333333337" y="-91.5" />
+      <point x="1347.960927588671" y="1918.0" />
+      <point x="543.9999999999998" y="1918.0" />
+      <point x="543.9999999999998" y="1151.0" />
+      <point x="769.2113095238094" y="1151.0" />
+      <point x="-26.14285714285711" y="101.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Transiciones.Fade">
+      <point x="17.15384615384619" y="-333.5" />
+      <point x="1997.1147737425174" y="1151.0" />
+      <point x="2173.3003205128207" y="1151.0" />
+      <point x="47.75" y="80.5" />
+    </edge>
+    <edge source="Interfaz.InicioSesionController" target="Motor.AdminSesion">
+      <point x="33.450000000000045" y="-201.5" />
+      <point x="1607.0595249262933" y="1071.0" />
+      <point x="1584.8003205128205" y="1071.0" />
+      <point x="-47.75" y="80.5" />
+    </edge>
+    <edge source="Interfaz.InicioSesionController" target="Motor.AdminBackup">
+      <point x="11.150000000000091" y="-201.5" />
+      <point x="1584.7595249262931" y="1081.0" />
+      <point x="1493.3541666666665" y="1081.0" />
+      <point x="1493.3541666666665" y="766.0" />
+      <point x="2168.8836538461537" y="766.0" />
+      <point x="-73.66666666666674" y="80.5" />
+    </edge>
+    <edge source="Interfaz.FollowController" target="Transiciones.Dialog">
+      <point x="67.5" y="-102.5" />
+      <point x="1047.7555693290446" y="1201.0" />
+      <point x="1306.2708333333333" y="1201.0" />
+      <point x="-22.083333333333258" y="102.5" />
+    </edge>
+    <edge source="Motor.CellVBox" target="Motor.Tweet">
+      <point x="-153.33333333333337" y="-91.5" />
+      <point x="1232.960927588671" y="1948.0" />
+      <point x="0.0" y="1948.0" />
+      <point x="0.0" y="321.0" />
+      <point x="2291.978891941392" y="321.0" />
+      <point x="-71.57142857142856" y="145.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.TwitterBot">
+      <point x="34.30769230769238" y="-333.5" />
+      <point x="2014.2686198963636" y="1161.0" />
+      <point x="2231.5503205128207" y="1161.0" />
+      <point x="2231.5503205128207" y="736.0" />
+      <point x="1541.9541666666664" y="736.0" />
+      <point x="65.09999999999991" y="167.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.Messages">
+      <point x="-102.9230769230769" y="-333.5" />
+      <point x="1877.0378506655943" y="1061.0" />
+      <point x="623.5889026623781" y="1061.0" />
+      <point x="108.33333333333348" y="102.5" />
+    </edge>
+    <edge source="Interfaz.FollowController" target="Motor.Usuario">
+      <point x="-22.5" y="-102.5" />
+      <point x="957.7555693290446" y="1141.0" />
+      <point x="821.4970238095236" y="1141.0" />
+      <point x="26.14285714285711" y="101.5" />
+    </edge>
+    <edge source="Motor.HashtagActions" target="Motor.TwitterBot">
+      <point x="-65.5" y="-58.5" />
+      <point x="1813.5503205128205" y="746.0" />
+      <point x="1523.3541666666665" y="746.0" />
+      <point x="46.5" y="167.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.CellVBox">
+      <point x="55.75" y="333.5" />
+      <point x="2035.7109275886712" y="1928.0" />
+      <point x="1462.960927588671" y="1928.0" />
+      <point x="76.66666666666663" y="-91.5" />
+    </edge>
+    <edge source="Motor.Feed" target="Motor.AdminBackup">
+      <point x="-46.400000000000034" y="-101.5" />
+      <point x="2463.105678772447" y="716.0" />
+      <point x="2316.216987179487" y="716.0" />
+      <point x="73.66666666666669" y="80.5" />
+    </edge>
+    <edge source="Motor.Usuario" target="Motor.TwitterBot">
+      <point x="2.2737367544323206E-13" y="-101.5" />
+      <point x="795.3541666666667" y="766.0" />
+      <point x="1448.9541666666664" y="766.0" />
+      <point x="-27.90000000000009" y="167.5" />
+    </edge>
+    <edge source="Motor.HashtagActions" target="Motor.Tweet">
+      <point x="65.50000000000006" y="-58.5" />
+      <point x="1944.5503205128205" y="331.0" />
+      <point x="2315.8360347985345" y="331.0" />
+      <point x="-47.71428571428578" y="145.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Transiciones.Dialog">
+      <point x="-51.46153846153845" y="-333.5" />
+      <point x="1928.4993891271329" y="1031.0" />
+      <point x="1438.770833333333" y="1031.0" />
+      <point x="110.41666666666652" y="102.5" />
+    </edge>
+    <edge source="Motor.CellVBox" target="Motor.Messages">
+      <point x="-76.66666666666674" y="-91.5" />
+      <point x="1309.6275942553377" y="1928.0" />
+      <point x="306.0" y="1928.0" />
+      <point x="306.0" y="1101.0" />
+      <point x="406.92223599571116" y="1101.0" />
+      <point x="-108.33333333333348" y="102.5" />
+    </edge>
+    <edge source="Interfaz.MensajeDirectoController" target="Motor.Chat">
+      <point x="-96.44444444444434" y="-278.5" />
+      <point x="328.55555555555543" y="1091.0" />
+      <point x="44.1875" y="1091.0" />
+      <point x="44.1875" y="766.0" />
+      <point x="41.125" y="766.0" />
+      <point x="-91.875" y="37.5" />
+    </edge>
+    <edge source="Interfaz.InicioSesionController" target="Transiciones.Dialog">
+      <point x="-55.75" y="-201.5" />
+      <point x="1517.859524926293" y="1111.0" />
+      <point x="1394.6041666666665" y="1111.0" />
+      <point x="66.25" y="102.5" />
+    </edge>
+    <edge source="Motor.CellVBox" target="Motor.Feed">
+      <point x="153.33333333333337" y="-91.5" />
+      <point x="1539.627594255338" y="1948.0" />
+      <point x="2549.505678772447" y="1948.0" />
+      <point x="2549.505678772447" y="1201.0" />
+      <point x="2596.505678772447" y="1201.0" />
+      <point x="87.0" y="101.5" />
+    </edge>
+    <edge source="Motor.Feed" target="Motor.Tweet">
+      <point x="46.40000000000009" y="-101.5" />
+      <point x="2555.905678772447" y="766.0" />
+      <point x="2536.4503205128203" y="766.0" />
+      <point x="2536.4503205128203" y="321.0" />
+      <point x="2411.264606227106" y="321.0" />
+      <point x="47.71428571428555" y="145.5" />
+    </edge>
+    <edge source="Interfaz.TwittearController" target="Motor.Messages">
+      <point x="-73.125" y="-223.5" />
+      <point x="578.8749999999998" y="1121.0" />
+      <point x="536.9222359957112" y="1121.0" />
+      <point x="21.666666666666515" y="102.5" />
+    </edge>
+    <edge source="Interfaz.MensajeDirectoController" target="Motor.MensajesDirectos">
+      <point x="-72.33333333333348" y="-278.5" />
+      <point x="352.6666666666663" y="1081.0" />
+      <point x="133.0" y="1081.0" />
+      <point x="-50.5" y="90.5" />
+    </edge>
+    <edge source="Motor.Messages" target="Motor.TwitterBot">
+      <point x="0.0" y="-102.5" />
+      <point x="515.2555693290446" y="756.0" />
+      <point x="1430.3541666666665" y="756.0" />
+      <point x="-46.5" y="167.5" />
+    </edge>
+    <edge source="Interfaz.MensajeDirectoController" target="Motor.Usuario">
+      <point x="24.111111111111313" y="-278.5" />
+      <point x="449.1111111111111" y="1131.0" />
+      <point x="716.9255952380952" y="1131.0" />
+      <point x="-78.42857142857133" y="101.5" />
+    </edge>
+    <edge source="Motor.MensajesDirectos" target="Motor.TwitterBot">
+      <point x="75.75" y="-90.5" />
+      <point x="259.25" y="736.0" />
+      <point x="1393.1541666666665" y="736.0" />
+      <point x="-83.70000000000005" y="167.5" />
+    </edge>
+    <edge source="Motor.CellVBox" target="Transiciones.Dialog">
+      <point x="0.0" y="-91.5" />
+      <point x="1386.2942609220045" y="1908.0" />
+      <point x="1350.4374999999998" y="1908.0" />
+      <point x="22.083333333333258" y="102.5" />
+    </edge>
+    <edge source="Interfaz.TwittearController" target="Transiciones.Slide">
+      <point x="24.375" y="-223.5" />
+      <point x="676.3749999999998" y="1171.0" />
+      <point x="987.5541666666666" y="1171.0" />
+      <point x="-53.799999999999955" y="80.5" />
+    </edge>
+    <edge source="Interfaz.InicioSesionController" target="Motor.HashtagActions">
+      <point x="78.04999999999995" y="-201.5" />
+      <point x="1651.6595249262932" y="1131.0" />
+      <point x="1846.3003205128205" y="1131.0" />
+      <point x="-32.75" y="58.5" />
+    </edge>
+    <edge source="Motor.CellVBox" target="Motor.TwitterBot">
+      <point x="-115.00000000000006" y="-91.5" />
+      <point x="1271.2942609220045" y="1938.0" />
+      <point x="295.0" y="1938.0" />
+      <point x="295.0" y="746.0" />
+      <point x="1411.7541666666666" y="746.0" />
+      <point x="-65.09999999999991" y="167.5" />
+    </edge>
+    <edge source="Interfaz.EscenaPrincipalController" target="Motor.AdminBackup">
+      <point x="51.46153846153845" y="-333.5" />
+      <point x="2031.4224660502096" y="1171.0" />
+      <point x="2308.265434870008" y="1171.0" />
+      <point x="2308.265434870008" y="766.0" />
+      <point x="2242.5503205128207" y="766.0" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="Interfaz.InicioSesionController" target="Transiciones.Fade">
+      <point x="100.34999999999991" y="-201.5" />
+      <point x="1673.959524926293" y="1141.0" />
+      <point x="2077.8003205128207" y="1141.0" />
+      <point x="-47.75" y="80.5" />
+    </edge>
+    <edge source="Interfaz.MensajeDirectoController" target="Transiciones.Slide">
+      <point x="72.33333333333348" y="-278.5" />
+      <point x="497.33333333333326" y="1161.0" />
+      <point x="933.7541666666666" y="1161.0" />
+      <point x="-107.59999999999991" y="80.5" />
+    </edge>
+    <edge source="Motor.Feed" target="Motor.TwitterBot">
+      <point x="-92.80000000000004" y="-101.5" />
+      <point x="2416.705678772447" y="726.0" />
+      <point x="1560.5541666666666" y="726.0" />
+      <point x="83.70000000000005" y="167.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="597.5" y="1728.0" />
+  <SelectedNodes>
+    <node>Interfaz.EscenaPrincipalController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,42 +1,30 @@
 package Motor;
 
+import Transiciones.Dialog;
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.layout.AnchorPane;
 import twitter4j.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.List;
+import java.io.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /***
  * Clase interna que posee los metodos que realizan las funciones de mensajeria: Tweets y Mensajes Directos
  */
 public class Messages {
 
-    private Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
+    private static Twitter twitter = TwitterBot.getInstance().getBOT().getTwitter();
+    private static File archivo = null;
+    private static FileReader fr = null;
+    private static BufferedReader br = null;
 
-    public void screenNameRespuesta(String user, long id) {
-        try {
-            Query query = new Query("to:" + user);
-            query.setSinceId(id);
-            QueryResult results;
 
-            do {
-                results = twitter.search(query);
-                List<Status> tweets = results.getTweets();
-                for (Status tweet : tweets)
-                    if (tweet.getInReplyToStatusId() == id) {
-                        //hacerAlgo
-                    }
-            } while ((query = results.nextQuery()) != null);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    public String deleteTweet(long id) {
+    String deleteTweet(long id) {
         try{
             twitter.destroyStatus(id);
             return "Mensaje Eliminado";
@@ -48,7 +36,6 @@ public class Messages {
     /***
      * Metodo que publica Tweets de texto simple
      * @param Tweet String con el Tweet a publicar
-     * @throws TwitterException Excepcion por si ocurre un problema interno con Twitter
      */
 
 
@@ -116,5 +103,150 @@ public class Messages {
         }catch (Exception e){
             return "Usuario no encontrado o no seleccionado";
         }
+    }
+
+    public static Status getTweet(long id) {
+        try {
+            return twitter.showStatus(id);
+        } catch (TwitterException e) {
+            return null;
+        }
+    }
+
+    public boolean isSpam(String mensaje){
+        float tox = 100;
+        try {
+            tox *= TwitterBot.getInstance().getToxicity(mensaje);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("tox-> "+tox);
+        try {
+            if (tox < 70.0) {
+                archivo = new File ("spam.in");
+                fr = new FileReader (archivo);
+                br = new BufferedReader(fr);
+
+                // Lectura del fichero
+                String linea;
+                while((linea=br.readLine()) != null){
+                    char[] chars = linea.toCharArray();
+                    linea = "";
+                    for (int i = 0; i < chars.length; i++) {
+                        chars[i]-=3;
+                        linea += chars[i]+"";
+                    }
+                    Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
+                    Matcher matcher = pattern.matcher(mensaje);
+                    if(matcher.find()){
+                        return true;
+                    }
+                }
+            } else {
+                return true;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if( null != fr ){
+                    fr.close();
+                }
+            }catch (Exception e2){
+                e2.printStackTrace();
+            }
+        }
+        return false;
+    }
+    public static void isSpam(long id) {
+        Date fechaAnalisis = null;
+
+        float tox = 100;
+        Status tweet ;
+
+        try {
+            tweet = twitter.showStatus(id);
+
+            if (Exists("TimeStampSpam.out")) {
+                FileInputStream fileInputStream = new FileInputStream("TimeStampSpam.out");
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                fechaAnalisis = (Date) objectInputStream.readObject();
+            }
+
+            if (fechaAnalisis == null){
+                System.out.println("null");
+                Calendar fecha = new GregorianCalendar();
+                fecha.add(Calendar.DAY_OF_MONTH, -14);
+                fechaAnalisis = fecha.getTime();
+            }
+
+            if (tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
+                System.out.println(tweet.getText());
+                tox *= TwitterBot.getInstance().getToxicity(tweet.getText());
+                System.out.println("tox-> " + tox);
+                if (tox >= 70.0) {
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    statusUpdate.setInReplyToStatusId(id);
+                    twitter.updateStatus(statusUpdate);
+                    try {
+                        FileOutputStream fileOutputStream = new FileOutputStream("TimeStampSpam.out");
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                        objectOutputStream.writeObject(tweet.getCreatedAt());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+            }
+
+            archivo = new File ("spam.in");
+            fr = new FileReader (archivo);
+            br = new BufferedReader(fr);
+
+            // Lectura del fichero
+            String linea;
+            while((linea=br.readLine()) != null && tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
+                char[] chars = linea.toCharArray();
+                linea = "";
+                for (int i = 0; i < chars.length; i++) {
+                    chars[i]-=3;
+                    linea += chars[i]+"";
+                }
+                Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
+                Matcher matcher = pattern.matcher(tweet.getText());
+                if(matcher.find()){
+                    System.out.println("STATUS match->"+tweet.getText());
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    statusUpdate.setInReplyToStatusId(id);
+                    twitter.updateStatus(statusUpdate);
+                    try {
+                        FileOutputStream fileOutputStream = new FileOutputStream("TimeStampSpam.out");
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                        objectOutputStream.writeObject(tweet.getCreatedAt());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+            }
+            fr.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if( null != fr ){
+                    fr.close();
+                }
+            }catch (Exception e2){
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    private static boolean Exists(String timeStampSpam) {
+        File file = new File(timeStampSpam);
+        return file.exists();
     }
 }

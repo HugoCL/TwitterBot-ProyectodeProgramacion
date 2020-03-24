@@ -12,14 +12,16 @@ public class Tweet implements Serializable {
     private String nombre;
     private String screenName;
     private String imagen;
+    private String[] imagenes;
     private long id;
 
-    public Tweet(String mensaje, long id, String nombre, String screenName, String imagen) {
+    public Tweet(String mensaje, long id, String nombre, String screenName, String imagen,String[] imagenes) {
         this.mensaje = mensaje;
         this.id = id;
         this.nombre = nombre;
         this.screenName = screenName;
         this.imagen = imagen;
+        this.imagenes = imagenes;
     }
 
     public String getScreenName() {
@@ -41,4 +43,6 @@ public class Tweet implements Serializable {
     public String getImagen() {
         return imagen;
     }
+
+    public String[] getImagenes(){return imagenes;}
 }

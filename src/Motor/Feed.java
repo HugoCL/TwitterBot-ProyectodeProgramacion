@@ -1,9 +1,6 @@
 package Motor;
 
-import twitter4j.Paging;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
+import twitter4j.*;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -19,19 +16,26 @@ public class Feed implements Serializable {
      */
     public ArrayList<Tweet> ObtenerTweets() throws IOException {
         int pageno = 1;
-        boolean exito = false;
         while (true) {
             try {
                 int size = tweets.size();
-                Paging page = new Paging(pageno++, 100);
+                Paging page = new Paging(pageno++, 50);
                 if (pageno == 2) tweets.clear();
 
                 for (Status status : twitter.getHomeTimeline(page)) {
+                    String[] imagenesTweet = new String[4];
+                    int i=0;
+                    if (status.getMediaEntities() != null){
+                        for (MediaEntity urlImagen : status.getMediaEntities()){
+                            imagenesTweet[i++] = urlImagen.getMediaURL();
+                        }
+                    }else imagenesTweet = new String[0];
+
                     tweets.add(new Tweet(status.getText(), status.getId(), status.getUser().getName(), status.getUser().getScreenName(),
-                            status.getUser().getMiniProfileImageURL()));
+                            status.getUser().getMiniProfileImageURL(),imagenesTweet));
+                    if(tweets.size() >= 100) break;
                 }
-                if (tweets.size() == size){
-                    exito = true;
+                if (tweets.size() == size || tweets.size() >= 100){
                     break;
                 }
             } catch (TwitterException e) {
@@ -58,7 +62,6 @@ public class Feed implements Serializable {
     /***
      * Permite agregar a favoritos todos los tweets del timeline de la cuenta asociada
      * @param like contiene el tweet a dar like
-     * @throws TwitterException
      */
     public String like(long like){
         try {
@@ -77,7 +80,6 @@ public class Feed implements Serializable {
     /***
      * Permite retweetear todos los tweets en el timline de la cuenta ingresada
      * @param tweet contiene el tweet a dar retweet
-     * @throws TwitterException
      */
     public String retweet(long tweet){
         try {
@@ -90,6 +92,14 @@ public class Feed implements Serializable {
             }
         } catch (TwitterException e) {
             return "ERROR: No se encontro Tweet";
+        }
+    }
+
+    public Status showStatus(long id) {
+        try {
+            return twitter.showStatus(id);
+        } catch (TwitterException e) {
+            return null;
         }
     }
 }

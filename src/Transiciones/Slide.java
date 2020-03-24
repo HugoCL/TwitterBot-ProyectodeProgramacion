@@ -19,8 +19,7 @@ public class Slide {
      * Inicio patrón de diseño Singleton
      */
     private static Slide INSTANCE = null;
-    private static Scene scene;
-    private  static Parent root;
+
     // Constructor privado
     private Slide(){}
     // Método para evitar multi-hilos
@@ -48,14 +47,12 @@ public class Slide {
         KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
         timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(anchorPane);
-        });
+        timeline.setOnFinished(event -> parentContainer.getChildren().remove(anchorPane));
         timeline.play();
     }
     public void left(String ruta, JFXButton boton, AnchorPane anchorPane) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(ruta));
-        scene = boton.getScene();
+        Parent root = FXMLLoader.load(getClass().getResource(ruta));
+        Scene scene = boton.getScene();
         scene.getStylesheets().add(getClass().getResource("/Estilo/EstiloListView.css").toExternalForm());
 
         root.translateXProperty().set(scene.getWidth());
@@ -66,9 +63,7 @@ public class Slide {
         KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.seconds(0.5),kv);
         timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parentContainer.getChildren().remove(anchorPane);
-        });
+        timeline.setOnFinished(event -> parentContainer.getChildren().remove(anchorPane));
         timeline.play();
     }
 }

@@ -1,4 +1,5 @@
 package Interfaz;
+
 import Motor.Messages;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
@@ -89,14 +90,14 @@ public class TwittearController {
 
     }
 
-    public void caracteres() {
+    private void caracteres() {
         if (!tweet_TA.getText().isEmpty()) {
             if (tweet_TA.getText().length() > 280){
                 caracteres_LB.setTextFill(Color.web("#ff0000"));
                 publicar_tweetBT.setDisable(true);
             }
             else {
-                caracteres_LB.setTextFill(Color.web("#000000"));
+                caracteres_LB.setTextFill(Color.web("#3e85c3"));
                 publicar_tweetBT.setDisable(false);
             }
             caracteres_LB.setText(tweet_TA.getText().length()+"/280");
@@ -104,10 +105,10 @@ public class TwittearController {
         else {
             if (!nameFile_LB.getText().equals("")){
                 publicar_tweetBT.setDisable(false);
-                caracteres_LB.setTextFill(Color.web("#000000"));
             }else {
                 publicar_tweetBT.setDisable(true);
             }
+            caracteres_LB.setTextFill(Color.web("#3e85c3"));
             caracteres_LB.setText("0/280");
         }
     }
@@ -117,23 +118,28 @@ public class TwittearController {
         Pattern patronVideo = Pattern.compile("^.+\\.(mp4|MP4)$");
 
         String respuesta;
-        String tweet = tweet_TA.getText();
         Messages mensajes = new Messages();
-        if (nameFile_LB.getText().equals("")){
-            respuesta = mensajes.PublicarTweet(tweet);
+        String tweet = tweet_TA.getText();
+        if (mensajes.isSpam(tweet)){
+            Dialog.getInstance().info(publicar_tweetBT,"Su tweet puede ser ofensivo\nPor favor revise antes de " +
+                    "publicar.", tweetearAP);
+        }else {
+            if (nameFile_LB.getText().equals("")){
+                respuesta = mensajes.PublicarTweet(tweet);
+            }
+            else if(patronImage.matcher(selectedFile.getName()).find()){
+                respuesta = mensajes.PublicarTweetImagen(tweet, selectedFile);
+            }else if(patronVideo.matcher(selectedFile.getName()).find())
+                respuesta = mensajes.PublicarTweetVideo(tweet, selectedFile);
+            else
+                respuesta = "ERROR: Revise el tipo de archivo";
+            Dialog.getInstance().info(addFileBT,respuesta,tweetearAP);
+            imagenTweet.setImage(null);
+            tweet_TA.setText("");
+            publicar_tweetBT.setDisable(true);
+            nameFile_LB.setText("");
+            caracteres_LB.setText("0/280");
         }
-        else if(patronImage.matcher(selectedFile.getName()).find()){
-            respuesta = mensajes.PublicarTweetImagen(tweet, selectedFile);
-        }else if(patronVideo.matcher(selectedFile.getName()).find())
-            respuesta = mensajes.PublicarTweetVideo(tweet, selectedFile);
-        else
-            respuesta = "ERROR: Revise el tipo de archivo";
-        Dialog.getInstance().info(addFileBT,respuesta,tweetearAP);
-        imagenTweet.setImage(null);
-        tweet_TA.setText("");
-        publicar_tweetBT.setDisable(true);
-        nameFile_LB.setText("");
-        caracteres_LB.setText("0/280");
     }
 
     @FXML public void regresar() throws IOException {

@@ -2,26 +2,106 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc8b76a3-1d4a-4cb4-a9da-263d5bb1a491" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_core_2_9_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_databind_2_9_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_1_3_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_errorprone_error_prone_annotations_2_0_18.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_guava_guava_23_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_j2objc_j2objc_annotations_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_typesafe_netty_netty_reactive_streams_1_0_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_buffer_4_0_51_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_codec_4_0_51_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_codec_http_4_0_51_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_common_4_0_51_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_handler_4_0_51_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_transport_4_0_51_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_transport_native_epoll_linux_x86_64_4_0_51_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_asynchttpclient_async_http_client_2_0_35.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_asynchttpclient_async_http_client_extras_guava_2_0_35.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_asynchttpclient_async_http_client_netty_utils_2_0_35.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_asynchttpclient_netty_codec_dns_2_0_35.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_asynchttpclient_netty_resolver_2_0_35.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_asynchttpclient_netty_resolver_dns_2_0_35.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_codehaus_mojo_animal_sniffer_annotations_1_14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_reactivestreams_reactive_streams_1_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/perspective-api-wrapper-master.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/perspective-api-wrapper.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/CellVBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/CellVBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/Feed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Feed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/HashtagActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/HashtagActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
+<<<<<<< Updated upstream
+      <change beforePath="$PROJECT_DIR$/TimeStampSpam.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStampSpam.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/HashtagActions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Motor/Messages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Messages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Motor/TwitterBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/TwitterBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Transiciones/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transiciones/Dialog.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/TwitterBot-ProyectodeProgramacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TwitterBot-ProyectodeProgramacion.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/.gradle/3.3/taskArtifacts/taskArtifacts.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/PerspectiveAPI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/PerspectiveAPIBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/model/AnalyzeCommentBody$Context.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/model/AnalyzeCommentBody.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/model/Attribute.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/model/Comment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/request/AnalyzeCommentRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/request/BaseRequest$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/request/BaseRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/request/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/AnalyzeCommentResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/AttributeScores.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/BaseResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/Error.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/ProbabilityScore.class" beforeDir="false" />
+>>>>>>> Stashed changes
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/src/perspective-api-wrapper">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/src/perspective-api-wrapper-master">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
         <option value="XSLT Stylesheet" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -33,12 +113,26 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< Updated upstream
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Universidad/Semestre 4/Algoritmos/Tarea 1 - Primos Relativos/PrimosRelativos" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last.edited.regexp" value="#Seguir @Hugo_CL" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/perspective-api-wrapper-master/settings.gradle" />
+>>>>>>> Stashed changes
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -46,10 +140,10 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -65,6 +159,8 @@
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Interfaz.Main" />
       <module name="TwitterBot-ProyectodeProgramacion" />
       <extension name="coverage">
@@ -139,6 +235,21 @@
       <workItem from="1569963685999" duration="3489000" />
       <workItem from="1570483183881" duration="8967000" />
       <workItem from="1570495169780" duration="953000" />
+      <workItem from="1570638649239" duration="196000" />
+      <workItem from="1570638877741" duration="1544000" />
+      <workItem from="1570643402669" duration="623000" />
+      <workItem from="1570708099210" duration="51000" />
+      <workItem from="1571070553850" duration="783000" />
+      <workItem from="1571082469040" duration="901000" />
+      <workItem from="1571083665267" duration="689000" />
+      <workItem from="1571105462616" duration="295000" />
+      <workItem from="1571177773535" duration="6774000" />
+      <workItem from="1571195110908" duration="1519000" />
+      <workItem from="1571592319678" duration="30000" />
+      <workItem from="1583800352974" duration="4234000" />
+      <workItem from="1584468153378" duration="1175000" />
+      <workItem from="1584724346880" duration="642000" />
+      <workItem from="1584725534673" duration="690000" />
     </task>
     <servers />
   </component>
@@ -159,10 +270,37 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1570598493177">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1570598493177" />
+    <state x="275" y="22" key="#Project_Structure" />
+    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" />
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" />
+    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
+    <state x="531" y="252" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" />
+    <state x="463" y="90" key="FileChooserDialogImpl" />
+    <state x="463" y="90" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog" />
+    <state x="379" y="187" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" />
+    <state x="65" y="0" key="new project wizard" />
+    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Interfaz/InicioSesionController.java</url>
+          <line>205</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TwitterBot_ProyectodeProgramacion$Main.ic" NAME="Main Coverage Results" MODIFIED="1567383217241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

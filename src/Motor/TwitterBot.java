@@ -1,17 +1,26 @@
 package Motor;
 
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
+import com.ghawk1ns.perspective.PerspectiveAPI;
+import com.ghawk1ns.perspective.PerspectiveAPIBuilder;
+import com.ghawk1ns.perspective.model.Attribute;
+import com.ghawk1ns.perspective.response.AnalyzeCommentResponse;
+import com.google.common.util.concurrent.ListenableFuture;
+import twitter4j.*;
+import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
  */
 public class TwitterBot implements Serializable {
+
+    private static PerspectiveAPI api = new PerspectiveAPIBuilder()
+            .setApiKey("AIzaSyDIg046U0g7-Q4jEjtigdsrYYNJdjxd_FQ")
+            .build();
 
     /**
      * Inicio patrón de diseño Singleton
@@ -48,6 +57,14 @@ public class TwitterBot implements Serializable {
      */
     private Twitter twitter;
 
+    public AccessToken getAccessToken() {
+        return accessToken;
+    }
+
+    /***
+     * Atributo que permite usar un listener para captar ciertos Tweets
+     */
+    private AccessToken accessToken;
     /**
      * Métodos para guardar y obtener si la sesión está iniciada.
      */
@@ -92,7 +109,6 @@ public class TwitterBot implements Serializable {
 
     /***
      * Metodo que permite iniciar sesion con cualquier cuenta de Twitter gracias a la autorizacion mediante OAuth.
-     * @throws TwitterException Excepcion por problemas tecnicos de Twitter
      */
     public String OAuthURL() {
         try {
@@ -119,7 +135,7 @@ public class TwitterBot implements Serializable {
         // Bloque try-catch en el que se comprueba si el PIN es correcto, para luego obtener el Token de OAuth
         try {
             if (PIN.length() > 0) {
-                twitter.getOAuthAccessToken(rtoken, PIN);
+                accessToken = twitter.getOAuthAccessToken(rtoken, PIN);
             } else {
                 return "PIN no ingresado\nVuelva a copiar el enlace de autentificación";
             }
@@ -129,6 +145,16 @@ public class TwitterBot implements Serializable {
             }
         }
         return "PIN Correcto";
+    }
+
+    public float getToxicity(String mensaje) throws ExecutionException, InterruptedException {
+        ListenableFuture<AnalyzeCommentResponse> future = api.analyze()
+                .setComment(mensaje)
+                .addLanguage("es")
+                .addAttribute(Attribute.ofType(Attribute.TOXICITY))
+                .postAsync();
+        AnalyzeCommentResponse response = future.get();
+        return response.getAttributeSummaryScore(Attribute.TOXICITY);
     }
 
     public Twitter getTwitter() {

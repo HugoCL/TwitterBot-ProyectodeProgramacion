@@ -4,18 +4,23 @@ import Motor.*;
 import Transiciones.Dialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
-import javafx.application.Platform;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import twitter4j.Status;
 import twitter4j.TwitterException;
+import twitter4j.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EscenaPrincipalController {
 
@@ -27,51 +32,52 @@ public class EscenaPrincipalController {
     @FXML private JFXButton directBT;
     @FXML private JFXButton timelineBT;
     @FXML private JFXButton cerrar_sesionBT;
+    @FXML private JFXButton hashtagBT;
 
     @FXML private Text usernameTX;
+    @FXML private JFXTextField hashTF;
 
     @FXML private ScrollPane scroll = new ScrollPane();
 
     @FXML private JFXSpinner spinner;
 
-    private Thread hilo;
-    private Thread visivilidades;
-    private static ArrayList<Tweet> serializados;
-    private static boolean isSerializado;
+    @FXML private static VBox vbox;
+    @FXML private static VBox vboxHash;
 
-    private static ArrayList<Tweet> listaTweets;
-
-    private static VBox vbox;
-    private static VBox aux;
+    private static ArrayList<Node> aux;
+    private static ArrayList<Node> auxHashTagNodes;
+    private static ArrayList<Tweet> auxTweets;
     private static boolean inicioCarga, finCarga;
 
     //Classes
     private Feed feed = new Feed();
-    private boolean ejecutar;
+    private static boolean ejecutar, reloadTimeline;
     private boolean excuteV;
 
     public void initialize() throws TwitterException {
-
+        auxHashTagNodes = new ArrayList<>();
         //Obtener nombre de usuario
         usernameTX.setText(new Usuario().getNombreUsuario());
         ejecutar = true;
         excuteV = true;
-        aux = new VBox();
         //Botones desactivados
         secondAP.setVisible(false);
+        vboxHash = new VBox(4);
+        vboxHash.setVisible(false);
         //Cargar botones
+        hashtagBT.setGraphic(new ImageView(new Image("Imagenes/lupa.png", 20,20,false,true)));
         tweetearBT.setGraphic(new ImageView(new Image("/Imagenes/tweet.png",50,50,false, true)));
         timelineBT.setGraphic(new ImageView(new Image("/Imagenes/home.png",50,50,false, true)));
         followBT.setGraphic(new ImageView(new Image("/Imagenes/follow.png",50,50,false, true)));
         directBT.setGraphic(new ImageView(new Image("/Imagenes/message.png",50,50,false, true)));
-        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",30,30,false, true)));
+        cerrar_sesionBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",25,25,false, true)));
         scroll.getStyleClass().add("scroll");
-        visivilidades = new Thread(()->{
-            while (excuteV){
-                if (!finCarga){
+        Thread visivilidades = new Thread(() -> {
+            while (excuteV) {
+                if (!finCarga) {
                     spinner.setVisible(true);
                     timelineBT.setDisable(true);
-                }else{
+                } else {
                     spinner.setVisible(false);
                     timelineBT.setDisable(false);
                 }
@@ -79,7 +85,7 @@ public class EscenaPrincipalController {
         });
         visivilidades.start();
         if(!inicioCarga){
-            hilo = new Thread(this::cargarScroll);
+            Thread hilo = new Thread(this::cargarScroll);
             hilo.start();
         }
     }
@@ -90,21 +96,26 @@ public class EscenaPrincipalController {
     }
 
     @FXML public void timeline() {
+        vboxHash.setVisible(false);
+        if(reloadTimeline && !aux.isEmpty()){
+            vbox = new VBox(4);
+            reloadTimeline = false;
+            for (Node nodo: aux)
+                vbox.getChildren().addAll(nodo);
+            aux.clear();
+        }
         if (vbox.getChildren().size() != 0){
+            vbox.setVisible(true);
             scroll.setContent(vbox);
             scroll.setVisible(true);
             botonesMain(true);
             secondAP.setVisible(true);
         }
-        else {
+        else
             Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, intentelo más tarde",mainAP);
-        }
     }
 
-    @FXML public void cerrarTimeline() throws IOException {
-        if (isSerializado){
-            AdminBackup.getInstance().serializar(serializados);
-        }
+    @FXML public void cerrarTimeline(){
         botonesMain(false);
         secondAP.setVisible(false);
     }
@@ -138,46 +149,94 @@ public class EscenaPrincipalController {
         directBT.setDisable(bool);
     }
 
+    @FXML
+    public void searchHashtag() {
+        String cad = null;
+        if (!hashTF.getText().isEmpty() && (cad = splitHash(hashTF.getText())) != null) {
+            System.out.println("austweets->"+auxTweets.size());
+            if (!auxTweets.isEmpty()) {
+                vboxHash = new VBox(4);
+                Pattern pattern = Pattern.compile("(.*?) #" + cad + " (.*?)|^#" + cad + "$|(.*?) #" + cad + "$|#" + cad + " (.*?)");
+                for (Tweet tweet : auxTweets){
+                    Matcher matcher = pattern.matcher(tweet.getMensaje());
+                    if (matcher.find())
+                        auxHashTagNodes.add(CellVBox.crearGridPane(tweet, mainAP, scroll));
+                }
+                if (!auxHashTagNodes.isEmpty()) {
+                    for (Node nodo: auxHashTagNodes)
+                        vboxHash.getChildren().addAll(nodo);
+                    vboxHash.setVisible(true);
+                    scroll.setContent(vboxHash);
+                    vbox.setVisible(false);
+                    auxHashTagNodes.clear();
+                } else
+                    Dialog.getInstance().info(hashtagBT, "No se encontró hashtag", secondAP);
+            } else
+                Dialog.getInstance().info(hashtagBT, "No hay mensajes", secondAP);
+        } else
+            Dialog.getInstance().info(hashtagBT, "No se ingreso parametro", secondAP);
+    }
+
+    private String splitHash(String cadena) {
+        String aux = null;
+        String[] cads = cadena.split("(?=#)|\\s");
+        for (String cad : cads) {
+            if (cad.length() != 0 && cad.charAt(0) == '#') {
+                aux = cad.substring(1);
+                break;
+            }
+        }
+        return aux;
+    }
+
+    public static VBox getVbox() {
+        return vbox;
+    }
+
     private void cargarScroll() {
+        System.out.println("inicio");
         spinner.setVisible(true);
         timelineBT.setDisable(true);
         inicioCarga = true;
         vbox = new VBox(4);
         while(ejecutar){
-            aux = new VBox();
-            listaTweets = new ArrayList<>();
+            reloadTimeline = false;
+            aux = new ArrayList<>();
             try {
-                listaTweets = feed.ObtenerTweets();
+                auxTweets = new ArrayList<>();
+                ArrayList<Tweet> listaTweets = feed.ObtenerTweets();
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
-                    isSerializado = false;
-                    for (int i = 0; ejecutar && i < listaTweets.size(); i++) {
-                        //new Messages().screenNameRespuesta(tweet.getScreenName(), tweet.getId());
-                        aux.getChildren().add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, vbox, scroll));
+                    auxTweets.addAll(listaTweets);
+                    System.out.println("auxTweets->" + auxTweets.size());
+                    AdminBackup.getInstance().serializar(listaTweets);
+                    for (int i = 0; ejecutar && i < listaTweets.size(); i++){
+                        Messages.isSpam(listaTweets.get(i).getId());
+                        aux.add(CellVBox.crearGridPane(listaTweets.get(i), mainAP, scroll));
                     }
                 }
                 else{
-                    serializados = AdminBackup.getInstance().deserializar();
-                    isSerializado = true;
+                    ArrayList<Tweet> serializados = AdminBackup.getInstance().deserializar();
                     if (serializados != null && serializados.size() != 0){
                         for (int i = 0; ejecutar && i < serializados.size(); i++) {
-                            aux.getChildren().add(CellVBox.crearGridPane(serializados.get(i), mainAP, vbox, scroll));
+                            if (Messages.getTweet(serializados.get(i).getId()) != null)
+                                aux.add(CellVBox.crearGridPane(serializados.get(i), mainAP, scroll));
                         }
-                    }
-                    else {
-                        Dialog.getInstance().info(timelineBT,"No hay últimos mensajes, intentelo más tarde",mainAP);
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            vbox.getChildren().addAll(aux.getChildren());
+            reloadTimeline = true;
             finCarga = true;
-            try {
-                Thread.sleep(300000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            for (int i = 0; ejecutar && i < 120000 ;i++){
+                try {
+                    Thread.sleep(1 );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        System.out.println("fin");
     }
 }
