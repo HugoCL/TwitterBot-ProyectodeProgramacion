@@ -58,6 +58,7 @@ public class MensajeDirectoController {
                 md.responderMD();
             }
             else if((fechaConsulta.getTime() - md.getFechaAccion().getTime()) >= 2 * 60 * 1000){
+                md.construirConversacion();
                 new HashtagActions().analizarHashtagActionsMD();
                 md.setFechaAccion(new Date());
                 md.responderMD();

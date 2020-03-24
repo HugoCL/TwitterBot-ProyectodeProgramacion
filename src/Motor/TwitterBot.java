@@ -1,16 +1,26 @@
 package Motor;
 
+import com.ghawk1ns.perspective.PerspectiveAPI;
+import com.ghawk1ns.perspective.PerspectiveAPIBuilder;
+import com.ghawk1ns.perspective.model.Attribute;
+import com.ghawk1ns.perspective.response.AnalyzeCommentResponse;
+import com.google.common.util.concurrent.ListenableFuture;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 /***
  * Clase motor del Bot. Contiene todos los metodos que cumplen las funcionalidades del enunciado
  */
 public class TwitterBot implements Serializable {
+
+    private static PerspectiveAPI api = new PerspectiveAPIBuilder()
+            .setApiKey("AIzaSyDIg046U0g7-Q4jEjtigdsrYYNJdjxd_FQ")
+            .build();
 
     /**
      * Inicio patrón de diseño Singleton
@@ -135,6 +145,16 @@ public class TwitterBot implements Serializable {
             }
         }
         return "PIN Correcto";
+    }
+
+    public float getToxicity(String mensaje) throws ExecutionException, InterruptedException {
+        ListenableFuture<AnalyzeCommentResponse> future = api.analyze()
+                .setComment(mensaje)
+                .addLanguage("es")
+                .addAttribute(Attribute.ofType(Attribute.TOXICITY))
+                .postAsync();
+        AnalyzeCommentResponse response = future.get();
+        return response.getAttributeSummaryScore(Attribute.TOXICITY);
     }
 
     public Twitter getTwitter() {

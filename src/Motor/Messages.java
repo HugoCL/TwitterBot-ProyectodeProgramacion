@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -113,25 +114,36 @@ public class Messages {
     }
 
     public boolean isSpam(String mensaje){
+        float tox = 100;
         try {
-            archivo = new File ("spam.in");
-            fr = new FileReader (archivo);
-            br = new BufferedReader(fr);
+            tox *= TwitterBot.getInstance().getToxicity(mensaje);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("tox-> "+tox);
+        try {
+            if (tox < 70.0) {
+                archivo = new File ("spam.in");
+                fr = new FileReader (archivo);
+                br = new BufferedReader(fr);
 
-            // Lectura del fichero
-            String linea;
-            while((linea=br.readLine()) != null){
-                char[] chars = linea.toCharArray();
-                linea = "";
-                for (int i = 0; i < chars.length; i++) {
-                    chars[i]-=3;
-                    linea += chars[i]+"";
+                // Lectura del fichero
+                String linea;
+                while((linea=br.readLine()) != null){
+                    char[] chars = linea.toCharArray();
+                    linea = "";
+                    for (int i = 0; i < chars.length; i++) {
+                        chars[i]-=3;
+                        linea += chars[i]+"";
+                    }
+                    Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
+                    Matcher matcher = pattern.matcher(mensaje);
+                    if(matcher.find()){
+                        return true;
+                    }
                 }
-                Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
-                Matcher matcher = pattern.matcher(mensaje);
-                if(matcher.find()){
-                    return true;
-                }
+            } else {
+                return true;
             }
         }
         catch(Exception e){
@@ -149,7 +161,13 @@ public class Messages {
     }
     public static void isSpam(long id) {
         Date fechaAnalisis = null;
+
+        float tox = 100;
+        Status tweet ;
+
         try {
+            tweet = twitter.showStatus(id);
+
             if (Exists("TimeStampSpam.out")) {
                 FileInputStream fileInputStream = new FileInputStream("TimeStampSpam.out");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -162,14 +180,32 @@ public class Messages {
                 fecha.add(Calendar.DAY_OF_MONTH, -14);
                 fechaAnalisis = fecha.getTime();
             }
+
+            if (tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
+                System.out.println(tweet.getText());
+                tox *= TwitterBot.getInstance().getToxicity(tweet.getText());
+                System.out.println("tox-> " + tox);
+                if (tox >= 70.0) {
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    statusUpdate.setInReplyToStatusId(id);
+                    twitter.updateStatus(statusUpdate);
+                    try {
+                        FileOutputStream fileOutputStream = new FileOutputStream("TimeStampSpam.out");
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                        objectOutputStream.writeObject(tweet.getCreatedAt());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+            }
+
             archivo = new File ("spam.in");
             fr = new FileReader (archivo);
             br = new BufferedReader(fr);
 
-
             // Lectura del fichero
             String linea;
-            Status tweet = twitter.showStatus(id);
             while((linea=br.readLine()) != null && tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
                 char[] chars = linea.toCharArray();
                 linea = "";

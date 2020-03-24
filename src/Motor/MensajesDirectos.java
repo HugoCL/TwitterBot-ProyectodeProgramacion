@@ -22,8 +22,6 @@ public class MensajesDirectos {
 
     private Date fechaAccion;
 
-    private FileReader insultos;
-
     private FileReader saludos;
 
     /**
@@ -36,11 +34,9 @@ public class MensajesDirectos {
     }
 
     private void cargarData() {
-        File archivo = new File ("insultos.in");
-        File archivo2 = new File("saludos.in");
+        File archivo = new File("saludos.in");
         try {
-            insultos = new FileReader (archivo);
-            saludos = new FileReader(archivo2);
+            saludos = new FileReader(archivo);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -72,23 +68,26 @@ public class MensajesDirectos {
         Messages mensajes = new Messages();
         for (Chat chat: chats) {
             try {
-                DirectMessage lastMessage = chat.getConversacion().get(chat.getConversacion().size());
-                if (!twitter.showUser(lastMessage.getSenderId()).getScreenName().equals(twitter.getScreenName()))
-                    if (respuesta(lastMessage, insultos))
+                DirectMessage lastMessage = chat.getConversacion().get(0);
+                System.out.println("mensaje-> " + lastMessage.getText());
+                if (lastMessage.getSenderId() != twitter.getId()) {
+                    System.out.println("toxicity-> " + TwitterBot.getInstance().getToxicity(lastMessage.getText()) * 100);
+                    if ((TwitterBot.getInstance().getToxicity(lastMessage.getText()) * 100) >= 70.0)
                         mensajes.EnviarMD(twitter.showUser(lastMessage.getSenderId()).getScreenName(), "Chupalo");
-                    else if (respuesta(lastMessage, saludos))
+                    else if (respuesta(lastMessage))
                         mensajes.EnviarMD(twitter.showUser(lastMessage.getSenderId()).getScreenName(), "Hola");
                     else
                         mensajes.EnviarMD(twitter.showUser(lastMessage.getSenderId()).getScreenName(), "Recibido");
+                }
             } catch (Exception e) {
                 System.out.println("error");
             }
         }
     }
 
-    private boolean respuesta(DirectMessage lastMessage, FileReader archivo) {
+    private boolean respuesta(DirectMessage lastMessage) {
         try {
-            BufferedReader br = new BufferedReader(archivo);
+            BufferedReader br = new BufferedReader(saludos);
             String linea;
             while((linea=br.readLine()) != null){
                 char[] chars = linea.toCharArray();
