@@ -37,8 +37,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backup.out" beforeDir="false" afterPath="$PROJECT_DIR$/Backup.out" afterDir="false" />
-<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/TimeStampSpam.out" beforeDir="false" afterPath="$PROJECT_DIR$/TimeStampSpam.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TwitterBot-ProyectodeProgramacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TwitterBot-ProyectodeProgramacion.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/InicioSesionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/MensajeDirectoController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterBot-ProyectodeProgramacion/Interfaz/TwittearController.class" afterDir="false" />
@@ -48,9 +48,6 @@
       <change beforePath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/MensajeDirectoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/TwittearController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Motor/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Motor/Messages.java" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/TwitterBot-ProyectodeProgramacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TwitterBot-ProyectodeProgramacion.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/InicioSesionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/.gradle/3.3/taskArtifacts/taskArtifacts.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/PerspectiveAPI.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/PerspectiveAPIBuilder.class" beforeDir="false" />
@@ -67,7 +64,6 @@
       <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/BaseResponse.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/Error.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/perspective-api-wrapper/build/classes/main/com/ghawk1ns/perspective/response/ProbabilityScore.class" beforeDir="false" />
->>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -126,13 +122,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-<<<<<<< Updated upstream
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-=======
     <property name="last.edited.regexp" value="#Seguir @Hugo_CL" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/perspective-api-wrapper-master/settings.gradle" />
->>>>>>> Stashed changes
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />

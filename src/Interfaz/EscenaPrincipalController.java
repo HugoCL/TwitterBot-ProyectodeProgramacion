@@ -140,7 +140,7 @@ public class EscenaPrincipalController {
         excuteV = false;
         inicioCarga = false;
         finCarga = false;
-        Transiciones.Fade.getInstance().out("/Interfaz/InicioSesion.fxml", cerrar_sesionBT);
+        System.exit(0);
     }
 
     private void botonesMain(boolean bool){
