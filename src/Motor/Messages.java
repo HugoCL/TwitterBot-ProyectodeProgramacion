@@ -6,6 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import twitter4j.*;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -120,7 +122,6 @@ public class Messages {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("tox-> "+tox);
         try {
             if (tox < 70.0) {
                 archivo = new File ("spam.in");
@@ -182,11 +183,11 @@ public class Messages {
             }
 
             if (tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
-                System.out.println(tweet.getText());
                 tox *= TwitterBot.getInstance().getToxicity(tweet.getText());
-                System.out.println("tox-> " + tox);
                 if (tox >= 70.0) {
-                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm:ss");
+                    Date date2 = new Date();
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam. Acción realizada con fecha: "+dateFormat.format(date2));
                     statusUpdate.setInReplyToStatusId(id);
                     twitter.updateStatus(statusUpdate);
                     try {
@@ -216,8 +217,9 @@ public class Messages {
                 Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                 Matcher matcher = pattern.matcher(tweet.getText());
                 if(matcher.find()){
-                    System.out.println("STATUS match->"+tweet.getText());
-                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm:ss");
+                    Date date2 = new Date();
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam. Acción realizada con fecha: "+dateFormat.format(date2));
                     statusUpdate.setInReplyToStatusId(id);
                     twitter.updateStatus(statusUpdate);
                     try {

@@ -138,6 +138,7 @@ public class CellVBox extends Thread{
             Text token = new Text();
             String palabra = Tok.nextToken();
             token.setText(palabra+" ");
+            //System.out.println("palabraaa->"+palabra);
             if (patron.matcher(token.getText()).matches()){
                 if (palabra.charAt(palabra.length()-1) == ':'){
                     palabra = palabra.substring(0, palabra.length()-1);

@@ -153,7 +153,6 @@ public class EscenaPrincipalController {
     public void searchHashtag() {
         String cad = null;
         if (!hashTF.getText().isEmpty() && (cad = splitHash(hashTF.getText())) != null) {
-            System.out.println("austweets->"+auxTweets.size());
             if (!auxTweets.isEmpty()) {
                 vboxHash = new VBox(4);
                 Pattern pattern = Pattern.compile("(.*?) #" + cad + " (.*?)|^#" + cad + "$|(.*?) #" + cad + "$|#" + cad + " (.*?)");
@@ -208,7 +207,6 @@ public class EscenaPrincipalController {
                 System.out.println(listaTweets.size());
                 if (listaTweets.size() != 0){
                     auxTweets.addAll(listaTweets);
-                    System.out.println("auxTweets->" + auxTweets.size());
                     AdminBackup.getInstance().serializar(listaTweets);
                     for (int i = 0; ejecutar && i < listaTweets.size(); i++){
                         Messages.isSpam(listaTweets.get(i).getId());
