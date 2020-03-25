@@ -217,7 +217,9 @@ public class Messages {
                 Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                 Matcher matcher = pattern.matcher(tweet.getText());
                 if(matcher.find()){
-                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm:ss");
+                    Date date2 = new Date();
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam. Acción realizada con fecha: "+dateFormat.format(date2));
                     statusUpdate.setInReplyToStatusId(id);
                     twitter.updateStatus(statusUpdate);
                     try {
