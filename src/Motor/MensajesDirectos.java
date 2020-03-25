@@ -69,9 +69,7 @@ public class MensajesDirectos {
         for (Chat chat: chats) {
             try {
                 DirectMessage lastMessage = chat.getConversacion().get(0);
-                System.out.println("mensaje-> " + lastMessage.getText());
                 if (lastMessage.getSenderId() != twitter.getId()) {
-                    System.out.println("toxicity-> " + TwitterBot.getInstance().getToxicity(lastMessage.getText()) * 100);
                     if ((TwitterBot.getInstance().getToxicity(lastMessage.getText()) * 100) >= 70.0)
                         mensajes.EnviarMD(twitter.showUser(lastMessage.getSenderId()).getScreenName(), "Chupalo");
                     else if (respuesta(lastMessage))

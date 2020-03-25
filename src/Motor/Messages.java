@@ -120,7 +120,6 @@ public class Messages {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("tox-> "+tox);
         try {
             if (tox < 70.0) {
                 archivo = new File ("spam.in");
@@ -182,9 +181,7 @@ public class Messages {
             }
 
             if (tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
-                System.out.println(tweet.getText());
                 tox *= TwitterBot.getInstance().getToxicity(tweet.getText());
-                System.out.println("tox-> " + tox);
                 if (tox >= 70.0) {
                     StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
                     statusUpdate.setInReplyToStatusId(id);
@@ -216,7 +213,6 @@ public class Messages {
                 Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                 Matcher matcher = pattern.matcher(tweet.getText());
                 if(matcher.find()){
-                    System.out.println("STATUS match->"+tweet.getText());
                     StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
                     statusUpdate.setInReplyToStatusId(id);
                     twitter.updateStatus(statusUpdate);
