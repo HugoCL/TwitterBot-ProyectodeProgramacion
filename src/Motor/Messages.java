@@ -1,5 +1,8 @@
 package Motor;
 
+import Transiciones.Dialog;
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.layout.AnchorPane;
 import twitter4j.*;
 
 import java.io.*;
@@ -125,13 +128,13 @@ public class Messages {
                 br = new BufferedReader(fr);
 
                 // Lectura del fichero
-                StringBuilder linea;
-                while((linea = new StringBuilder(br.readLine())) != null){
-                    char[] chars = linea.toString().toCharArray();
-                    linea = new StringBuilder();
+                String linea;
+                while((linea=br.readLine()) != null){
+                    char[] chars = linea.toCharArray();
+                    linea = "";
                     for (int i = 0; i < chars.length; i++) {
                         chars[i]-=3;
-                        linea.append(chars[i]);
+                        linea += chars[i]+"";
                     }
                     Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                     Matcher matcher = pattern.matcher(mensaje);
@@ -165,7 +168,7 @@ public class Messages {
         try {
             tweet = twitter.showStatus(id);
 
-            if (Exists()) {
+            if (Exists("TimeStampSpam.out")) {
                 FileInputStream fileInputStream = new FileInputStream("TimeStampSpam.out");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 fechaAnalisis = (Date) objectInputStream.readObject();
@@ -202,13 +205,13 @@ public class Messages {
             br = new BufferedReader(fr);
 
             // Lectura del fichero
-            StringBuilder linea;
-            while((linea = new StringBuilder(br.readLine())) != null && tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
-                char[] chars = linea.toString().toCharArray();
-                linea = new StringBuilder();
+            String linea;
+            while((linea=br.readLine()) != null && tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
+                char[] chars = linea.toCharArray();
+                linea = "";
                 for (int i = 0; i < chars.length; i++) {
                     chars[i]-=3;
-                    linea.append(chars[i]);
+                    linea += chars[i]+"";
                 }
                 Pattern pattern = Pattern.compile("(.*)(?i)"+ linea + "(.*)");
                 Matcher matcher = pattern.matcher(tweet.getText());
@@ -242,8 +245,8 @@ public class Messages {
         }
     }
 
-    private static boolean Exists() {
-        File file = new File("TimeStampSpam.out");
+    private static boolean Exists(String timeStampSpam) {
+        File file = new File(timeStampSpam);
         return file.exists();
     }
 }

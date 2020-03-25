@@ -2,10 +2,7 @@ package Interfaz;
 
 import Motor.*;
 import Transiciones.Dialog;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -17,8 +14,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -27,12 +26,12 @@ import twitter4j.DirectMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 public class MensajeDirectoController {
 
     private ArrayList<String> followers;
     private ObservableList<Label> listView;
+    private VBox chatBox;
 
     @FXML private JFXButton regresarBT;
     @FXML private JFXButton mostrarBT;
@@ -100,7 +99,7 @@ public class MensajeDirectoController {
                     }
                 if (tf && busqueda.length() != 0){
                     Circle circle = new Circle(10);
-                    circle.setFill(new ImagePattern(new Image(Objects.requireNonNull(Usuario.getUser(comparar)).getMiniProfileImageURL())));
+                    circle.setFill(new ImagePattern(new Image(Usuario.getUser(comparar).getMiniProfileImageURL())));
                     anterior = busqueda;
                     Label lbl = new Label(comparar);
                     lbl.setGraphic(circle);
@@ -152,7 +151,7 @@ public class MensajeDirectoController {
 
     private void makeChat(int indice) {
         ArrayList<HBox> messages = new ArrayList<>();
-        VBox chatBox = new VBox(5);
+        chatBox = new VBox(5);
         chatBox.setMinWidth(430);
         chatBox.getStyleClass().add("chat-style");
         container.setContent(chatBox);

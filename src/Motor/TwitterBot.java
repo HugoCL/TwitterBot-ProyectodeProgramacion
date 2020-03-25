@@ -147,7 +147,7 @@ public class TwitterBot implements Serializable {
         return "PIN Correcto";
     }
 
-    float getToxicity(String mensaje) throws ExecutionException, InterruptedException {
+    public float getToxicity(String mensaje) throws ExecutionException, InterruptedException {
         ListenableFuture<AnalyzeCommentResponse> future = api.analyze()
                 .setComment(mensaje)
                 .addLanguage("es")

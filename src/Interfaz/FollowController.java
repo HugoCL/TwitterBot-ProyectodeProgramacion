@@ -20,7 +20,6 @@ import twitter4j.TwitterException;
 import twitter4j.User;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class FollowController {
 
@@ -70,7 +69,7 @@ public class FollowController {
         Label usuario = users_LV.getSelectionModel().getSelectedItem();
         if (usuario != null){
             userAP.setVisible(true);
-            circle.setFill(new ImagePattern(new Image(Objects.requireNonNull(Usuario.getUser(usuario.getText())).getOriginalProfileImageURL())));
+            circle.setFill(new ImagePattern(new Image(Usuario.getUser(usuario.getText()).getOriginalProfileImageURL())));
             seguirBT.setDisable(false);
             seguirBT.setVisible(true);
             cambioTextoButton(usuario.getText());
@@ -90,8 +89,8 @@ public class FollowController {
             e.printStackTrace();
         }
 
-        if (Objects.requireNonNull(Usuario.getUser(usuario)).isProtected()) {
-            if (Objects.requireNonNull(Usuario.getUser(usuario)).isFollowRequestSent()){
+        if (Usuario.getUser(usuario).isProtected()) {
+            if (Usuario.getUser(usuario).isFollowRequestSent()){
                 seguirBT.setDisable(true);
                 if (seguirBT.getText().compareTo("Follow") == 0) seguirBT.setText("Solicitud Enviada");
                 else seguirBT.setDisable(false);
@@ -100,7 +99,7 @@ public class FollowController {
         }
         else isProtected.setVisible(false);
         screenName.setText("@"+usuario);
-        userName.setText(Objects.requireNonNull(Usuario.getUser(usuario)).getName());
+        userName.setText(Usuario.getUser(usuario).getName());
     }
 
     public void seguir(){
