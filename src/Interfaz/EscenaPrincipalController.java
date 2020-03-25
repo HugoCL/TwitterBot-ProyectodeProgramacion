@@ -13,9 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import twitter4j.Status;
 import twitter4j.TwitterException;
-import twitter4j.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -151,7 +149,7 @@ public class EscenaPrincipalController {
 
     @FXML
     public void searchHashtag() {
-        String cad = null;
+        String cad;
         if (!hashTF.getText().isEmpty() && (cad = splitHash(hashTF.getText())) != null) {
             System.out.println("austweets->"+auxTweets.size());
             if (!auxTweets.isEmpty()) {

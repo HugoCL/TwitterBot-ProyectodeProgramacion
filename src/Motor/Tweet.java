@@ -36,11 +36,11 @@ public class Tweet implements Serializable {
         return id;
     }
 
-    public String getNombre() {
+    String getNombre() {
         return nombre;
     }
 
-    public String getImagen() {
+    String getImagen() {
         return imagen;
     }
 

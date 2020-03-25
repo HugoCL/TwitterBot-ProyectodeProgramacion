@@ -3,7 +3,6 @@ package Motor;
 import twitter4j.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /***
  * Clase que se encarga de las funcionalidades referentes a los usuarios

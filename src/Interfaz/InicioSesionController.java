@@ -2,11 +2,6 @@ package Interfaz;
 
 import Motor.*;
 import Transiciones.Dialog;
-import com.ghawk1ns.perspective.PerspectiveAPI;
-import com.ghawk1ns.perspective.PerspectiveAPIBuilder;
-import com.ghawk1ns.perspective.model.Attribute;
-import com.ghawk1ns.perspective.response.AnalyzeCommentResponse;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -14,11 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import twitter4j.*;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.FileInputStream;
@@ -45,7 +40,7 @@ public class InicioSesionController {
 
     @FXML private StackPane parentContainer;
 
-    public void initialize() throws TwitterException {
+    public void initialize() {
         cerrarBT.setGraphic(new ImageView(new Image("/Imagenes/logout.png",25,25,false, true)));
         copyBT.setGraphic(new ImageView(new Image("/Imagenes/copy.png",35,35,false, true)));
         AdminSesion adm = AdminSesion.getInstance();
@@ -84,7 +79,7 @@ public class InicioSesionController {
 
     }
 
-    @FXML public void iniciarSesion() throws IOException, TwitterException, ExecutionException, InterruptedException {
+    @FXML public void iniciarSesion() throws IOException, TwitterException {
         String respuesta;
         if (!bot.getSesion()){
             String pin = pinPF.getText();
