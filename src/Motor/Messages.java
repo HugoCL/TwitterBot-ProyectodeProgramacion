@@ -6,6 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import twitter4j.*;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -183,7 +185,9 @@ public class Messages {
             if (tweet.getCreatedAt().compareTo(fechaAnalisis) > 0){
                 tox *= TwitterBot.getInstance().getToxicity(tweet.getText());
                 if (tox >= 70.0) {
-                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam");
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm:ss");
+                    Date date2 = new Date();
+                    StatusUpdate statusUpdate = new StatusUpdate("@" + tweet.getUser().getScreenName() + " Eres Spam. Acción realizada con fecha: "+dateFormat.format(date2));
                     statusUpdate.setInReplyToStatusId(id);
                     twitter.updateStatus(statusUpdate);
                     try {
